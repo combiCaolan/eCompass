@@ -1,0 +1,1196 @@
+#115,1
+Distances displayed in the main screen can be shown using metric or imperial units.
+#115,2
+Speeds displayed in the main screen can be shown using metric or imperial units.
+#115,3
+Weight displayed in the main screen can be shown using metric or imperial units.
+#115,4
+Temperatures displayed in the main screen can be shown using metric or imperial units.
+#117,1
+Enable/Disable audible feedback in Height Assist module.
+#117,2
+Enable/Disable audible feedback in Tilt Assist module.
+#130,1
+Operator must be in the seat (floor) to validate Driver Presence Mode.
+#130,2
+Operator must have the seatbelt fastened (door) to validate Driver Presence Mode.
+#130,3
+Seatbelt (door) input can only be activated after seat (floor) input to validate Driver Presence Mode.
+#130,4
+If Off, on the first check after key switch it will test if both seat and seatbelt are active to validate Driver Presence Mode without checking for sequence.<BR>
+If On, it will always check for correct sequence for seat and seatbelt to validate Driver Presence Mode.<BR>
+Has no effect if "Sequence required" parameter is Off.
+#130,5
+Operator must have this input enabled to validate Driver Presence Mode and allow traction operation.
+#130,6
+Operator must have this input enabled to validate Driver Presence Mode and allow the hydraulics operation.
+#130,7
+If Off, to use the hydraulic functions Driver Presence Mode must be validated.<BR>
+If On, allows to use the hydraulic functions from the truck if seat (floor) input is active.
+#135,1
+Work Lights on forks side will turn ON with any hydraulic function.
+#135,2
+Work Lights will turn ON when Active Drive Mode is Carousel.
+#135,3
+Work Lights will turn ON when Active Drive Mode is Crab.
+#135,4
+Work Lights will turn ON (selected mode) on key switch ON.
+#138,1
+Safety Warning Lights on forks side will turn ON with any hydraulic function.
+#138,2
+Safety Warning Lights will turn ON when Active Drive Mode is Carousel.
+#138,3
+Safety Warning Lights will turn ON when Active Drive Mode is Crab.
+#141,1
+Not defined
+#143,1
+An audible Motion Alarm will turn ON when Active Drive Mode is Forks direction.
+#143,2
+An audible Motion Alarm will turn ON when Active Drive Mode is Reverse Forks direction.
+#143,3
+An audible Motion Alarm will turn ON when Active Drive Mode is Left of Forks direction.
+#143,4
+An audible Motion Alarm will turn ON when Active Drive Mode is Right of Forks direction.
+#143,5
+An audible Motion Alarm will turn ON when Offset Mode is active.
+#143,6
+An audible Motion Alarm will turn ON when Carousel or Crab Mode is active.
+#143,7
+An audible Motion Alarm will turn ON when any hydraulic function is active.
+#143,8
+An audible Motion Alarm will turn ON when hydraulic function Lower is active.
+#160,1
+ON - wheel is present<BR>
+OFF - wheel is not present
+#160,2
+ON - traction wheel<BR>
+OFF - free wheel
+#160,3
+ON - steer wheel<BR>
+OFF - dummy wheel
+#160,4
+ON - steer feedback present<BR>
+OFF - steer feedback not present
+#160,5
+ON - Angular Sensor present<BR>
+OFF - Linear Sensor present
+#160,6
+ON - Sensor is CAN<BR>
+OFF - Sensor is analog
+#160,7
+ON - Cylinder extend moves wheel Clockwise<BR>
+OFF - Cylinder extend moves wheel CounterClockwise
+#175,1
+ON - wheel is present<BR>
+OFF - wheel is not present
+#175,2
+ON - traction wheel<BR>
+OFF - free wheel
+#175,3
+ON - steer wheel<BR>
+OFF - dummy wheel
+#175,4
+ON - steer feedback present<BR>
+OFF - steer feedback not present
+#175,5
+ON - Angular Sensor present<BR>
+OFF - Linear Sensor present
+#175,6
+ON - Sensor is CAN<BR>
+OFF - Sensor is analog
+#175,7
+ON - Cylinder extend moves wheel Clockwise<BR>
+OFF - Cylinder extend moves wheel CounterClockwise
+#190,1
+ON - wheel is present<BR>
+OFF - wheel is not present
+#190,2
+ON - traction wheel<BR>
+OFF - free wheel
+#190,3
+ON - steer wheel<BR>
+OFF - dummy wheel
+#190,4
+ON - steer feedback present<BR>
+OFF - steer feedback not present
+#190,5
+ON - Angular Sensor present<BR>
+OFF - Linear Sensor present
+#190,6
+ON - Sensor is CAN<BR>
+OFF - Sensor is analog
+#190,7
+ON - Cylinder extend moves wheel Clockwise<BR>
+OFF - Cylinder extend moves wheel CounterClockwise
+#205,1
+ON - wheel is present<BR>
+OFF - wheel is not present
+#205,2
+ON - traction wheel<BR>
+OFF - free wheel
+#205,3
+ON - steer wheel<BR>
+OFF - dummy wheel
+#205,4
+ON - steer feedback present<BR>
+OFF - steer feedback not present
+#205,5
+ON - Angular Sensor present<BR>
+OFF - Linear Sensor present
+#205,6
+ON - Sensor is CAN<BR>
+OFF - Sensor is analog
+#205,7
+ON - Cylinder extend moves wheel Clockwise<BR>
+OFF - Cylinder extend moves wheel CounterClockwise
+#220,1
+Hydraulic Function that will be used<BR>
+#220,2
+Enable if the 6-port 1 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#220,3
+ON - 6-port 1 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 1 needs to be OFF to enable the selected Hydraulic Function
+#220,4
+Enable if the 6-port 2 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#220,5
+ON - 6-port 2 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 2 needs to be OFF to enable the selected Hydraulic Function
+#220,6
+Enable if the 6-port 3 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#220,7
+ON - 6-port 3 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 3 needs to be OFF to enable the selected Hydraulic Function
+#221,1
+Depending on the truck, different types of hydraulic command input devices can be fitted:<BR>
+- Manual levers without any feedback<BR>
+- Manual levers with switch feedback<BR>
+- Joystick. Joystick might also have buttons for sellecting active hydraulic function.<BR>
+- Fingertip control.
+#221,2
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction A detection.
+#221,3
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction B detection.
+#221,4
+When hydraulic input command is set for joystick this parameter identifies which axix to use for the hydraulic function.
+#221,5
+When hydraulic input command is set for joystick this parameter identifies which button is associated to the hydraulic function.
+#221,6
+When hydraulic input command is set for fingertip this parameter identifies which fingertip is associated to the hydraulic function.
+#222,1
+Depending on the truck, different types of hydraulic output command devices can be fitted:<BR>
+- Manual Hydraulic control without any feedback<BR>
+- PWM output with ON/OFF control<BR>
+- PWM output with proportional control<BR>
+- PVG output with proportional control
+#222,2
+When hydraulic output command is set for PWM output with ON/OFF control this parameter identifies which valve section to use for that hydraulic function.
+#222,3
+When hydraulic output command is set for PWM output with proportional control this parameter identifies which valve section to use for that hydraulic function.
+#222,4
+When hydraulic output command is set for PVG output this parameter identifies which valve section to use for that hydraulic function.
+#222,5
+Identifies the type of feedback from output.
+#222,6
+Used to indicate if there is feedback available from that output.
+#222,7
+Used to set priority when requested speed from the function is lower than the other active functions.
+#222,8
+Used to indicate if the input command must return to neutral when multiple functions are active simultaneously.
+#222,9
+Used to invert the direction of the hydraulic function.
+#222,10
+Used to invert the icon direction on screen without changing direction of the hydraulic function.
+#238,1
+Hydraulic Function that will be used
+#238,2
+Enable if the 6-port 1 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#238,3
+ON - 6-port 1 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 1 needs to be OFF to enable the selected Hydraulic Function
+#238,4
+Enable if the 6-port 2 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#238,5
+ON - 6-port 2 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 2 needs to be OFF to enable the selected Hydraulic Function
+#238,6
+Enable if the 6-port 3 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#238,7
+ON - 6-port 3 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 3 needs to be OFF to enable the selected Hydraulic Function
+#239,1
+Depending on the truck, different types of hydraulic command input devices can be fitted:<BR>
+- Manual levers without any feedback<BR>
+- Manual levers with switch feedback<BR>
+- Joystick. Joystick might also have buttons for sellecting active hydraulic function.<BR>
+- Fingertip control.
+#239,2
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction A detection.
+#239,3
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction B detection.
+#239,4
+When hydraulic input command is set for joystick this parameter identifies which axix to use for the hydraulic function.
+#239,5
+When hydraulic input command is set for joystick this parameter identifies which button is associated to the hydraulic function.
+#239,6
+When hydraulic input command is set for fingertip this parameter identifies which fingertip is associated to the hydraulic function.
+#240,1
+Depending on the truck, different types of hydraulic output command devices can be fitted:<BR>
+- Manual Hydraulic control without any feedback<BR>
+- PWM output with ON/OFF control<BR>
+- PWM output with proportional control<BR>
+- PVG output with proportional control
+#240,2
+When hydraulic output command is set for PWM output with ON/OFF control this parameter identifies which valve section to use for that hydraulic function.
+#240,3
+When hydraulic output command is set for PWM output with proportional control this parameter identifies which valve section to use for that hydraulic function.
+#240,4
+When hydraulic output command is set for PVG output this parameter identifies which valve section to use for that hydraulic function.
+#240,5
+Identifies the type of feedback from output.
+#240,6
+Used to indicate if there is feedback available from that output.
+#240,7
+Used to set priority when requested speed from the function is lower than the other active functions.
+#240,8
+Used to indicate if the input command must return to neutral when multiple functions are active simultaneously.
+#240,9
+Used to invert the direction of the hydraulic function.
+#240,10
+Used to invert the icon direction on screen without changing direction of the hydraulic function.
+#256,1
+Hydraulic Function that will be used
+#256,2
+Enable if the 6-port 1 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#256,3
+ON - 6-port 1 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 1 needs to be OFF to enable the selected Hydraulic Function
+#256,4
+Enable if the 6-port 2 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#256,5
+ON - 6-port 2 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 2 needs to be OFF to enable the selected Hydraulic Function
+#256,6
+Enable if the 6-port 3 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#256,7
+ON - 6-port 3 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 3 needs to be OFF to enable the selected Hydraulic Function
+#257,1
+Depending on the truck, different types of hydraulic command input devices can be fitted:<BR>
+- Manual levers without any feedback<BR>
+- Manual levers with switch feedback<BR>
+- Joystick. Joystick might also have buttons for sellecting active hydraulic function.<BR>
+- Fingertip control.
+#257,2
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction A detection.
+#257,3
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction B detection.
+#257,4
+When hydraulic input command is set for joystick this parameter identifies which axix to use for the hydraulic function.
+#257,5
+When hydraulic input command is set for joystick this parameter identifies which button is associated to the hydraulic function.
+#257,6
+When hydraulic input command is set for fingertip this parameter identifies which fingertip is associated to the hydraulic function.
+#258,1
+Depending on the truck, different types of hydraulic output command devices can be fitted:<BR>
+- Manual Hydraulic control without any feedback<BR>
+- PWM output with ON/OFF control<BR>
+- PWM output with proportional control<BR>
+- PVG output with proportional control
+#258,2
+When hydraulic output command is set for PWM output with ON/OFF control this parameter identifies which valve section to use for that hydraulic function.
+#258,3
+When hydraulic output command is set for PWM output with proportional control this parameter identifies which valve section to use for that hydraulic function.
+#258,4
+When hydraulic output command is set for PVG output this parameter identifies which valve section to use for that hydraulic function.
+#258,5
+Identifies the type of feedback from output.
+#258,6
+Used to indicate if there is feedback available from that output.
+#258,7
+Used to set priority when requested speed from the function is lower than the other active functions.
+#258,8
+Used to indicate if the input command must return to neutral when multiple functions are active simultaneously.
+#258,9
+Used to invert the direction of the hydraulic function.
+#258,10
+Used to invert the icon direction on screen without changing direction of the hydraulic function.
+#274,1
+Hydraulic Function that will be used
+#274,2
+Enable if the 6-port 1 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#274,3
+ON - 6-port 1 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 1 needs to be OFF to enable the selected Hydraulic Function
+#274,4
+Enable if the 6-port 2 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#274,5
+ON - 6-port 2 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 2 needs to be OFF to enable the selected Hydraulic Function
+#274,6
+Enable if the 6-port 3 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#274,7
+ON - 6-port 3 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 3 needs to be OFF to enable the selected Hydraulic Function
+#275,1
+Depending on the truck, different types of hydraulic command input devices can be fitted:<BR>
+- Manual levers without any feedback<BR>
+- Manual levers with switch feedback<BR>
+- Joystick. Joystick might also have buttons for sellecting active hydraulic function.<BR>
+- Fingertip control.
+#275,2
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction A detection.
+#275,3
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction B detection.
+#275,4
+When hydraulic input command is set for joystick this parameter identifies which axix to use for the hydraulic function.
+#275,5
+When hydraulic input command is set for joystick this parameter identifies which button is associated to the hydraulic function.
+#275,6
+When hydraulic input command is set for fingertip this parameter identifies which fingertip is associated to the hydraulic function.
+#276,1
+Depending on the truck, different types of hydraulic output command devices can be fitted:<BR>
+- Manual Hydraulic control without any feedback<BR>
+- PWM output with ON/OFF control<BR>
+- PWM output with proportional control<BR>
+- PVG output with proportional control
+#276,2
+When hydraulic output command is set for PWM output with ON/OFF control this parameter identifies which valve section to use for that hydraulic function.
+#276,3
+When hydraulic output command is set for PWM output with proportional control this parameter identifies which valve section to use for that hydraulic function.
+#276,4
+When hydraulic output command is set for PVG output this parameter identifies which valve section to use for that hydraulic function.
+#276,5
+Identifies the type of feedback from output.
+#276,6
+Used to indicate if there is feedback available from that output.
+#276,7
+Used to set priority when requested speed from the function is lower than the other active functions.
+#276,8
+Used to indicate if the input command must return to neutral when multiple functions are active simultaneously.
+#276,9
+Used to invert the direction of the hydraulic function.
+#276,10
+Used to invert the icon direction on screen without changing direction of the hydraulic function.
+#292,1
+Hydraulic Function that will be used
+#292,2
+Enable if the 6-port 1 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#292,3
+ON - 6-port 1 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 1 needs to be OFF to enable the selected Hydraulic Function
+#292,4
+Enable if the 6-port 2 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#292,5
+ON - 6-port 2 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 2 needs to be OFF to enable the selected Hydraulic Function
+#292,6
+Enable if the 6-port 3 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#292,7
+ON - 6-port 3 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 3 needs to be OFF to enable the selected Hydraulic Function
+#293,1
+Depending on the truck, different types of hydraulic command input devices can be fitted:<BR>
+- Manual levers without any feedback<BR>
+- Manual levers with switch feedback<BR>
+- Joystick. Joystick might also have buttons for sellecting active hydraulic function.<BR>
+- Fingertip control.
+#293,2
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction A detection.
+#293,3
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction B detection.
+#293,4
+When hydraulic input command is set for joystick this parameter identifies which axix to use for the hydraulic function.
+#293,5
+When hydraulic input command is set for joystick this parameter identifies which button is associated to the hydraulic function.
+#293,6
+When hydraulic input command is set for fingertip this parameter identifies which fingertip is associated to the hydraulic function.
+#294,1
+Depending on the truck, different types of hydraulic output command devices can be fitted:<BR>
+- Manual Hydraulic control without any feedback<BR>
+- PWM output with ON/OFF control<BR>
+- PWM output with proportional control<BR>
+- PVG output with proportional control
+#294,2
+When hydraulic output command is set for PWM output with ON/OFF control this parameter identifies which valve section to use for that hydraulic function.
+#294,3
+When hydraulic output command is set for PWM output with proportional control this parameter identifies which valve section to use for that hydraulic function.
+#294,4
+When hydraulic output command is set for PVG output this parameter identifies which valve section to use for that hydraulic function.
+#294,5
+Identifies the type of feedback from output.
+#294,6
+Used to indicate if there is feedback available from that output.
+#294,7
+Used to set priority when requested speed from the function is lower than the other active functions.
+#294,8
+Used to indicate if the input command must return to neutral when multiple functions are active simultaneously.
+#294,9
+Used to invert the direction of the hydraulic function.
+#294,10
+Used to invert the icon direction on screen without changing direction of the hydraulic function.
+#310,1
+Hydraulic Function that will be used
+#310,2
+Enable if the 6-port 1 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#310,3
+ON - 6-port 1 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 1 needs to be OFF to enable the selected Hydraulic Function
+#310,4
+Enable if the 6-port 2 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#310,5
+ON - 6-port 2 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 2 needs to be OFF to enable the selected Hydraulic Function
+#310,6
+Enable if the 6-port 3 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#310,7
+ON - 6-port 3 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 3 needs to be OFF to enable the selected Hydraulic Function
+#311,1
+Depending on the truck, different types of hydraulic command input devices can be fitted:<BR>
+- Manual levers without any feedback<BR>
+- Manual levers with switch feedback<BR>
+- Joystick. Joystick might also have buttons for sellecting active hydraulic function.<BR>
+- Fingertip control.
+#311,2
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction A detection.
+#311,3
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction B detection.
+#311,4
+When hydraulic input command is set for joystick this parameter identifies which axix to use for the hydraulic function.
+#311,5
+When hydraulic input command is set for joystick this parameter identifies which button is associated to the hydraulic function.
+#311,6
+When hydraulic input command is set for fingertip this parameter identifies which fingertip is associated to the hydraulic function.
+#312,1
+Depending on the truck, different types of hydraulic output command devices can be fitted:<BR>
+- Manual Hydraulic control without any feedback<BR>
+- PWM output with ON/OFF control<BR>
+- PWM output with proportional control<BR>
+- PVG output with proportional control
+#312,2
+When hydraulic output command is set for PWM output with ON/OFF control this parameter identifies which valve section to use for that hydraulic function.
+#312,3
+When hydraulic output command is set for PWM output with proportional control this parameter identifies which valve section to use for that hydraulic function.
+#312,4
+When hydraulic output command is set for PVG output this parameter identifies which valve section to use for that hydraulic function.
+#312,5
+Identifies the type of feedback from output.
+#312,6
+Used to indicate if there is feedback available from that output.
+#312,7
+Used to set priority when requested speed from the function is lower than the other active functions.
+#312,8
+Used to indicate if the input command must return to neutral when multiple functions are active simultaneously.
+#312,9
+Used to invert the direction of the hydraulic function.
+#312,10
+Used to invert the icon direction on screen without changing direction of the hydraulic function.
+#328,1
+Hydraulic Function that will be used
+#328,2
+Enable if the 6-port 1 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#328,3
+ON - 6-port 1 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 1 needs to be OFF to enable the selected Hydraulic Function
+#328,4
+Enable if the 6-port 2 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#328,5
+ON - 6-port 2 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 2 needs to be OFF to enable the selected Hydraulic Function
+#328,6
+Enable if the 6-port 3 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#328,7
+ON - 6-port 3 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 3 needs to be OFF to enable the selected Hydraulic Function
+#329,1
+Depending on the truck, different types of hydraulic command input devices can be fitted:<BR>
+- Manual levers without any feedback<BR>
+- Manual levers with switch feedback<BR>
+- Joystick. Joystick might also have buttons for sellecting active hydraulic function.<BR>
+- Fingertip control.
+#329,2
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction A detection.
+#329,3
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction B detection.
+#329,4
+When hydraulic input command is set for joystick this parameter identifies which axix to use for the hydraulic function.
+#329,5
+When hydraulic input command is set for joystick this parameter identifies which button is associated to the hydraulic function.
+#329,6
+When hydraulic input command is set for fingertip this parameter identifies which fingertip is associated to the hydraulic function.
+#330,1
+Depending on the truck, different types of hydraulic output command devices can be fitted:<BR>
+- Manual Hydraulic control without any feedback<BR>
+- PWM output with ON/OFF control<BR>
+- PWM output with proportional control<BR>
+- PVG output with proportional control
+#330,2
+When hydraulic output command is set for PWM output with ON/OFF control this parameter identifies which valve section to use for that hydraulic function.
+#330,3
+When hydraulic output command is set for PWM output with proportional control this parameter identifies which valve section to use for that hydraulic function.
+#330,4
+When hydraulic output command is set for PVG output this parameter identifies which valve section to use for that hydraulic function.
+#330,5
+Identifies the type of feedback from output.
+#330,6
+Used to indicate if there is feedback available from that output.
+#330,7
+Used to set priority when requested speed from the function is lower than the other active functions.
+#330,8
+Used to indicate if the input command must return to neutral when multiple functions are active simultaneously.
+#330,9
+Used to invert the direction of the hydraulic function.
+#330,10
+Used to invert the icon direction on screen without changing direction of the hydraulic function.
+#346,1
+Hydraulic Function that will be used
+#346,2
+Enable if the 6-port 1 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#346,3
+ON - 6-port 1 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 1 needs to be OFF to enable the selected Hydraulic Function
+#346,4
+Enable if the 6-port 2 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#346,5
+ON - 6-port 2 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 2 needs to be OFF to enable the selected Hydraulic Function
+#346,6
+Enable if the 6-port 3 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#346,7
+ON - 6-port 3 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 3 needs to be OFF to enable the selected Hydraulic Function
+#347,1
+Depending on the truck, different types of hydraulic command input devices can be fitted:<BR>
+- Manual levers without any feedback<BR>
+- Manual levers with switch feedback<BR>
+- Joystick. Joystick might also have buttons for sellecting active hydraulic function.<BR>
+- Fingertip control.
+#347,2
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction A detection.
+#347,3
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction B detection.
+#347,4
+When hydraulic input command is set for joystick this parameter identifies which axix to use for the hydraulic function.
+#347,5
+When hydraulic input command is set for joystick this parameter identifies which button is associated to the hydraulic function.
+#347,6
+When hydraulic input command is set for fingertip this parameter identifies which fingertip is associated to the hydraulic function.
+#348,1
+Depending on the truck, different types of hydraulic output command devices can be fitted:<BR>
+- Manual Hydraulic control without any feedback<BR>
+- PWM output with ON/OFF control<BR>
+- PWM output with proportional control<BR>
+- PVG output with proportional control
+#348,2
+When hydraulic output command is set for PWM output with ON/OFF control this parameter identifies which valve section to use for that hydraulic function.
+#348,3
+When hydraulic output command is set for PWM output with proportional control this parameter identifies which valve section to use for that hydraulic function.
+#348,4
+When hydraulic output command is set for PVG output this parameter identifies which valve section to use for that hydraulic function.
+#348,5
+Identifies the type of feedback from output.
+#348,6
+Used to indicate if there is feedback available from that output.
+#348,7
+Used to set priority when requested speed from the function is lower than the other active functions.
+#348,8
+Used to indicate if the input command must return to neutral when multiple functions are active simultaneously.
+#348,9
+Used to invert the direction of the hydraulic function.
+#348,10
+Used to invert the icon direction on screen without changing direction of the hydraulic function.
+#364,1
+Hydraulic Function that will be used
+#364,2
+Enable if the 6-port 1 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#364,3
+ON - 6-port 1 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 1 needs to be OFF to enable the selected Hydraulic Function
+#364,4
+Enable if the 6-port 2 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#364,5
+ON - 6-port 2 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 2 needs to be OFF to enable the selected Hydraulic Function
+#364,6
+Enable if the 6-port 3 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#364,7
+ON - 6-port 3 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 3 needs to be OFF to enable the selected Hydraulic Function
+#365,1
+Depending on the truck, different types of hydraulic command input devices can be fitted:<BR>
+- Manual levers without any feedback<BR>
+- Manual levers with switch feedback<BR>
+- Joystick. Joystick might also have buttons for sellecting active hydraulic function.<BR>
+- Fingertip control.
+#365,2
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction A detection.
+#365,3
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction B detection.
+#365,4
+When hydraulic input command is set for joystick this parameter identifies which axix to use for the hydraulic function.
+#365,5
+When hydraulic input command is set for joystick this parameter identifies which button is associated to the hydraulic function.
+#365,6
+When hydraulic input command is set for fingertip this parameter identifies which fingertip is associated to the hydraulic function.
+#366,1
+Depending on the truck, different types of hydraulic output command devices can be fitted:<BR>
+- Manual Hydraulic control without any feedback<BR>
+- PWM output with ON/OFF control<BR>
+- PWM output with proportional control<BR>
+- PVG output with proportional control
+#366,2
+When hydraulic output command is set for PWM output with ON/OFF control this parameter identifies which valve section to use for that hydraulic function.
+#366,3
+When hydraulic output command is set for PWM output with proportional control this parameter identifies which valve section to use for that hydraulic function.
+#366,4
+When hydraulic output command is set for PVG output this parameter identifies which valve section to use for that hydraulic function.
+#366,5
+Identifies the type of feedback from output.
+#366,6
+Used to indicate if there is feedback available from that output.
+#366,7
+Used to set priority when requested speed from the function is lower than the other active functions.
+#366,8
+Used to indicate if the input command must return to neutral when multiple functions are active simultaneously.
+#366,9
+Used to invert the direction of the hydraulic function.
+#366,10
+Used to invert the icon direction on screen without changing direction of the hydraulic function.
+#382,1
+Hydraulic Function that will be used
+#382,2
+Enable if the 6-port 1 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#382,3
+ON - 6-port 1 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 1 needs to be OFF to enable the selected Hydraulic Function
+#382,4
+Enable if the 6-port 2 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#382,5
+ON - 6-port 2 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 2 needs to be OFF to enable the selected Hydraulic Function
+#382,6
+Enable if the 6-port 3 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#382,7
+ON - 6-port 3 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 3 needs to be OFF to enable the selected Hydraulic Function
+#383,1
+Depending on the truck, different types of hydraulic command input devices can be fitted:<BR>
+- Manual levers without any feedback<BR>
+- Manual levers with switch feedback<BR>
+- Joystick. Joystick might also have buttons for sellecting active hydraulic function.<BR>
+- Fingertip control.
+#383,2
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction A detection.
+#383,3
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction B detection.
+#383,4
+When hydraulic input command is set for joystick this parameter identifies which axix to use for the hydraulic function.
+#383,5
+When hydraulic input command is set for joystick this parameter identifies which button is associated to the hydraulic function.
+#383,6
+When hydraulic input command is set for fingertip this parameter identifies which fingertip is associated to the hydraulic function.
+#384,1
+Depending on the truck, different types of hydraulic output command devices can be fitted:<BR>
+- Manual Hydraulic control without any feedback<BR>
+- PWM output with ON/OFF control<BR>
+- PWM output with proportional control<BR>
+- PVG output with proportional control
+#384,2
+When hydraulic output command is set for PWM output with ON/OFF control this parameter identifies which valve section to use for that hydraulic function.
+#384,3
+When hydraulic output command is set for PWM output with proportional control this parameter identifies which valve section to use for that hydraulic function.
+#384,4
+When hydraulic output command is set for PVG output this parameter identifies which valve section to use for that hydraulic function.
+#384,5
+Identifies the type of feedback from output.
+#384,6
+Used to indicate if there is feedback available from that output.
+#384,7
+Used to set priority when requested speed from the function is lower than the other active functions.
+#384,8
+Used to indicate if the input command must return to neutral when multiple functions are active simultaneously.
+#384,9
+Used to invert the direction of the hydraulic function.
+#384,10
+Used to invert the icon direction on screen without changing direction of the hydraulic function.
+#400,1
+Hydraulic Function that will be used
+#400,2
+Enable if the 6-port 1 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#400,3
+ON - 6-port 1 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 1 needs to be OFF to enable the selected Hydraulic Function
+#400,4
+Enable if the 6-port 2 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#400,5
+ON - 6-port 2 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 2 needs to be OFF to enable the selected Hydraulic Function
+#400,6
+Enable if the 6-port 3 is needed for the selected Hydraulic Function.<BR>
+If the state of the 6-port does not affect the selected Hydraulic Function it should be set to disabled.
+#400,7
+ON - 6-port 3 needs to be ON to enable the selected Hydraulic Function<BR>
+OFF - 6-port 3 needs to be OFF to enable the selected Hydraulic Function
+#401,1
+Depending on the truck, different types of hydraulic command input devices can be fitted:<BR>
+- Manual levers without any feedback<BR>
+- Manual levers with switch feedback<BR>
+- Joystick. Joystick might also have buttons for sellecting active hydraulic function.<BR>
+- Fingertip control.
+#401,2
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction A detection.
+#401,3
+When hydraulic input command is set for manual levers with switch feedback this parameter identifies which switch to use for direction B detection.
+#401,4
+When hydraulic input command is set for joystick this parameter identifies which axix to use for the hydraulic function.
+#401,5
+When hydraulic input command is set for joystick this parameter identifies which button is associated to the hydraulic function.
+#401,6
+When hydraulic input command is set for fingertip this parameter identifies which fingertip is associated to the hydraulic function.
+#402,1
+Depending on the truck, different types of hydraulic output command devices can be fitted:<BR>
+- Manual Hydraulic control without any feedback<BR>
+- PWM output with ON/OFF control<BR>
+- PWM output with proportional control<BR>
+- PVG output with proportional control
+#402,2
+When hydraulic output command is set for PWM output with ON/OFF control this parameter identifies which valve section to use for that hydraulic function.
+#402,3
+When hydraulic output command is set for PWM output with proportional control this parameter identifies which valve section to use for that hydraulic function.
+#402,4
+When hydraulic output command is set for PVG output this parameter identifies which valve section to use for that hydraulic function.
+#402,5
+Identifies the type of feedback from output.
+#402,6
+Used to indicate if there is feedback available from that output.
+#402,7
+Used to set priority when requested speed from the function is lower than the other active functions.
+#402,8
+Used to indicate if the input command must return to neutral when multiple functions are active simultaneously.
+#402,9
+Used to invert the direction of the hydraulic function.
+#402,10
+Used to invert the icon direction on screen without changing direction of the hydraulic function.
+#420,1
+Disable/Enable the use of proximity switch DAP point H1.
+#420,2
+Disable/Enable the use of proximity switch DAP point H2.
+#420,3
+Disable/Enable the use of proximity switch DAP point H3.
+#420,4
+Disable/Enable the use of proximity switch DAP point H4.
+#420,5
+Disable/Enable the use of proximity switch DAP point R1.
+#420,6
+Disable/Enable the use of proximity switch DAP point R2.
+#420,7
+Disable/Enable the use of proximity switch DAP point R3.
+#420,8
+Disable/Enable the use of proximity switch DAP point R4.
+#421,1
+Disable/Enable the use of analog value for DAP point H1.<BR>
+If enabled, the use of proximity switch for that point must be disabled.
+#421,2
+Disable/Enable the use of analog value for DAP point H2.<BR>
+If enabled, the use of proximity switch for that point must be disabled.
+#421,3
+Disable/Enable the use of analog value for DAP point H3.<BR>
+If enabled, the use of proximity switch for that point must be disabled.
+#421,4
+Disable/Enable the use of analog value for DAP point H4.<BR>
+If enabled, the use of proximity switch for that point must be disabled.
+#421,5
+Disable/Enable the use of analog value for DAP point R1.<BR>
+If enabled, the use of proximity switch for that point must be disabled.
+#421,6
+Disable/Enable the use of analog value for DAP point R2.<BR>
+If enabled, the use of proximity switch for that point must be disabled.
+#421,7
+Disable/Enable the use of analog value for DAP point R3.<BR>
+If enabled, the use of proximity switch for that point must be disabled.
+#421,8
+Disable/Enable the use of analog value for DAP point R4.<BR>
+If enabled, the use of proximity switch for that point must be disabled.
+#422,1
+ON - Active Level set to High<BR>
+OFF - Active Level set to Low
+#422,2
+ON - Active Level set to High<BR>
+OFF - Active Level set to Low
+#422,3
+ON - Active Level set to High<BR>
+OFF - Active Level set to Low
+#422,4
+ON - Active Level set to High<BR>
+OFF - Active Level set to Low
+#422,5
+ON - Active Level set to High<BR>
+OFF - Active Level set to Low
+#422,6
+ON - Active Level set to High<BR>
+OFF - Active Level set to Low
+#422,7
+ON - Active Level set to High<BR>
+OFF - Active Level set to Low
+#422,8
+ON - Active Level set to High<BR>
+OFF - Active Level set to Low
+#423,1
+Disable/Enable the use of override functionality for DAP point H1.
+#423,2
+Disable/Enable the use of override functionality for DAP point H2.
+#423,3
+Disable/Enable the use of override functionality for DAP point H3.
+#423,4
+Disable/Enable the use of override functionality for DAP point H4.
+#423,5
+Disable/Enable the use of override functionality for DAP point R1.
+#423,6
+Disable/Enable the use of override functionality for DAP point R2.
+#423,7
+Disable/Enable the use of override functionality for DAP point R3.
+#423,8
+Disable/Enable the use of override functionality for DAP point R4.
+#472,1
+Disable/Enable the use of Slow Down and Stop at the defined Low Stop point.
+#472,2
+Disable/Enable the use of Slow Down and Stop at the defined High Stop point.
+#472,3
+Disable/Enable the use of Slow Down on mast transition point defined as Stage 1.
+#472,4
+Disable/Enable the use of Slow Down on mast transition point defined as Stage 2.
+#472,5
+Disable/Enable the use of Slow Down on mast transition point defined as Stage 3.
+#487,1
+Disable/Enable the use of Slow Down and Stop at the defined Back Stop point.
+#487,2
+Disable/Enable the use of Slow Down and Stop at the defined Front Stop point.
+#502,1
+Disable/Enable globally the use of OSCam1.
+#502,2
+Disable/Enable the use of OSCam1 when driving in Forks direction.
+#502,3
+Disable/Enable the use of OSCam1 when driving in Reverse of Forks direction.
+#502,4
+Disable/Enable the use of OSCam1 when driving in Left of Forks direction.
+#502,5
+Disable/Enable the use of OSCam1 when driving in Right of Forks direction.
+#502,6
+Disable/Enable the use of OSCam1 when using any hydraulic function.
+#502,7
+Disable/Enable the use of OSCam1 when using any hydraulic function above pre-defined height.
+#502,8
+Disable/Enable the use of OSCam1 when using any the Assist modules.
+#502,9
+Disable/Enable the display of an horizontal line in OSCam1 image.
+#503,1
+Disable/Enable globally the use of OSCam2.
+#503,2
+Disable/Enable the use of OSCam2 when driving in Forks direction.
+#503,3
+Disable/Enable the use of OSCam2 when driving in Reverse of Forks direction.
+#503,4
+Disable/Enable the use of OSCam2 when driving in Left of Forks direction.
+#503,5
+Disable/Enable the use of OSCam2 when driving in Right of Forks direction.
+#503,6
+Disable/Enable the use of OSCam2 when using any hydraulic function.
+#503,7
+Disable/Enable the use of OSCam2 when using any hydraulic function above pre-defined height.
+#503,8
+Disable/Enable the use of OSCam2 when using any the Assist modules.
+#503,9
+Disable/Enable the display of an horizontal line in OSCam2 image.
+#504,1
+Disable/Enable globally the use of OSCam3.
+#504,2
+Disable/Enable the use of OSCam3 when driving in Forks direction.
+#504,3
+Disable/Enable the use of OSCam3 when driving in Reverse of Forks direction.
+#504,4
+Disable/Enable the use of OSCam3 when driving in Left of Forks direction.
+#504,5
+Disable/Enable the use of OSCam3 when driving in Right of Forks direction.
+#504,6
+Disable/Enable the use of OSCam3 when using any hydraulic function.
+#504,7
+Disable/Enable the use of OSCam3 when using any hydraulic function above pre-defined height.
+#504,8
+Disable/Enable the use of OSCam3 when using any the Assist modules.
+#504,9
+Disable/Enable the display of an horizontal line in OSCam3 image.
+#505,1
+ON - Pump Controller temperature can trigger Fan 1 if it exceeds the defined max temperature.<BR>
+OFF - Pump Controller temperature has no effect on Fan 1.
+#505,2
+ON - Pump Motor temperature can trigger Fan 1 if it exceeds the defined max temperature.<BR>
+OFF - Pump Motor temperature has no effect on Fan 1.
+#505,3
+ON - TRR Controller temperature can trigger Fan 1 if it exceeds the defined max temperature.<BR>
+OFF - TRR Controller temperature has no effect on Fan 1.
+#505,4
+ON - TRR Motor temperature can trigger Fan 1 if it exceeds the defined max temperature.<BR>
+OFF - TRR Motor temperature has no effect on Fan 1.
+#505,5
+ON - TRL Controller temperature can trigger Fan 1 if it exceeds the defined max temperature.<BR>
+OFF - TRL Controller temperature has no effect on Fan 1.
+#505,6
+ON - TRL Motor temperature can trigger Fan 1 if it exceeds the defined max temperature.<BR>
+OFF - TRL Motor temperature has no effect on Fan 1.
+#505,7
+ON - TFR Controller temperature can trigger Fan 1 if it exceeds the defined max temperature.<BR>
+OFF - TFR Controller temperature has no effect on Fan 1.
+#505,8
+ON - TFR Motor temperature can trigger Fan 1 if it exceeds the defined max temperature.<BR>
+OFF - TFR Motor temperature has no effect on Fan 1.
+#505,9
+ON - TFL Controller temperature can trigger Fan 1 if it exceeds the defined max temperature.<BR>
+OFF - TFL Controller temperature has no effect on Fan 1.
+#505,10
+ON - TFL Motor temperature can trigger Fan 1 if it exceeds the defined max temperature.<BR>
+OFF - TFL Motor temperature has no effect on Fan 1.
+#506,1
+ON - Pump Controller temperature can trigger Fan 2 if it exceeds the defined max temperature.<BR>
+OFF - Pump Controller temperature has no effect on Fan 2.
+#506,2
+ON - Pump Motor temperature can trigger Fan 2 if it exceeds the defined max temperature.<BR>
+OFF - Pump Motor temperature has no effect on Fan 2.
+#506,3
+ON - TRR Controller temperature can trigger Fan 2 if it exceeds the defined max temperature.<BR>
+OFF - TRR Controller temperature has no effect on Fan 2.
+#506,4
+ON - TRR Motor temperature can trigger Fan 2 if it exceeds the defined max temperature.<BR>
+OFF - TRR Motor temperature has no effect on Fan 2.
+#506,5
+ON - TRL Controller temperature can trigger Fan 2 if it exceeds the defined max temperature.<BR>
+OFF - TRL Controller temperature has no effect on Fan 2.
+#506,6
+ON - TRL Motor temperature can trigger Fan 2 if it exceeds the defined max temperature.<BR>
+OFF - TRL Motor temperature has no effect on Fan 2.
+#506,7
+ON - TFR Controller temperature can trigger Fan 2 if it exceeds the defined max temperature.<BR>
+OFF - TFR Controller temperature has no effect on Fan 2.
+#506,8
+ON - TFR Motor temperature can trigger Fan 2 if it exceeds the defined max temperature.<BR>
+OFF - TFR Motor temperature has no effect on Fan 2.
+#506,9
+ON - TFL Controller temperature can trigger Fan 2 if it exceeds the defined max temperature.<BR>
+OFF - TFL Controller temperature has no effect on Fan 2.
+#506,10
+ON - TFL Motor temperature can trigger Fan 2 if it exceeds the defined max temperature.<BR>
+OFF - TFL Motor temperature has no effect on Fan 2.
+#553,1
+ON - Multidirectional travel is enabled.<BR>
+OFF - Single direction enabled.
+#553,2
+ON - Truck must be stopped before direction change takes place.<BR>
+OFF - Direction change can take place even if the truck is moving.
+#553,3
+ON - Truck must be stopped before mode change to another axis takes place.<BR>
+OFF - Mode change into another axis can take place even if the truck is moving.
+#553,4
+ON - Wheels will re-align if same direction is selected.<BR>
+OFF - Selecting the same direction does not change wheel positions.
+#553,5
+ON - Throttle needs to be in neutral before restarting movement, after a direction change.<BR>
+OFF - Throttle does not need to be in neutral before restarting movement, after a direction change.
+#553,6
+ON - Inverted throttle increases the braking rate.<BR>
+OFF - Inverted throttle does not change the braking rate.
+#553,7
+ON - Reflex Steering is enabled.<BR>
+OFF - Reflex Steering is disabled.
+#553,8
+ON - Reflex active on rear wheel.<BR>
+OFF - Reflex active on front wheels.
+#941,1
+ON - Height Assist is enabled.<BR>
+OFF - Height Assist is disabled.
+#941,2
+ON - input from screen.<BR>
+OFF - input from external module.
+#941,4
+ON - lock tilt in level position when in target height.<BR>
+OFF - do not lock tilt.
+#941,5
+ON - use Height Assist Stop Speed rpm.<BR>
+OFF - use Height Assist Stop Speed value.
+#941,6
+ON - Zone A is enabled.<BR>
+OFF - Zone A is disabled.
+#941,7
+ON - Zone B is enabled.<BR>
+OFF - Zone B is disabled.
+#941,8
+ON - Zone B is enabled.<BR>
+OFF - Zone B is disabled.
+#941,9
+ON - use the Travel position setting to stop lift or lower.<BR>
+OFF - do not use Travel position.
+#941,10
+ON - use the Load position setting to stop lift or lower.<BR>
+OFF - do not use Load position.
+#941,11
+ON - use the Platform position setting to stop lift or lower.<BR>
+OFF - do not use Platform position.
+#1013,1
+ON - Forks Tilt Sensor is enabled.<BR>
+OFF - Forks Tilt Sensor is disabled.
+#1013,2
+ON - Forks Tilt Sensor Invert Direction is enabled.<BR>
+OFF - Forks Tilt Sensor Invert Direction is disabled.
+#1013,3
+ON - Truck Tilt Sensor is enabled.<BR>
+OFF - Truck Tilt Sensor is disabled.
+#1013,4
+ON - Truck Tilt Sensor is enabled.<BR>
+OFF - Truck Tilt Sensor is disabled.
+#1016,1
+ON - Platform is enabled.<BR>
+OFF - Platform is disabled.
+#1016,2
+ON - Arms is enabled.<BR>
+OFF - Arms is disabled.
+#1082,1
+ON - Tilt Assist is enabled.<BR>
+OFF - Tilt Assist is disabled.
+#1082,2
+ON - input from screen.<BR>
+OFF - input from external module.
+#1082,3
+ON - automatic control of tilt function.<BR>
+OFF - manual control of tilt function.
+#1082,4
+ON - use the Tilt 1 angle setting to stop tilt.<BR>
+OFF - do not use the Tilt 1 angle.
+#1082,5
+ON - use the Tilt 2 angle setting to stop tilt.<BR>
+OFF - do not use the Tilt 2 angle.
+#1082,6
+ON - Slow Down is inverted.<BR>
+OFF - Slow Down is not inverted.
+#1087,1
+ON - CINAS is enabled.<BR>
+OFF - CINAS is disabled.
+#1087,2
+ON - Aisle Detection sensors are analog.<BR>
+OFF - Aisle Detection sensors are digital.
+#1087,3
+ON - Slow Down Detection sensors are analog.<BR>
+OFF - Slow Down Detection sensors are digital.
+#1087,4
+ON - Object Detection sensors are analog.<BR>
+OFF - Object Detection sensors are digital.
+#1087,5
+ON - Stop sensors are analog.<BR>
+OFF - Stop sensors are digital.
+#1087,6
+ON - Guidance sensors are analog.<BR>
+OFF - Guidance sensors are digital.
+#1087,7
+ON - Outside alarm is enabled.<BR>
+OFF - Outside alarm is disabled.
+#1087,8
+ON - Inside alarm is enabled.<BR>
+OFF - Inside alarm is disabled.
+#1087,9
+ON - Override is enabled.<BR>
+OFF - Override is disabled.
+#1087,10
+ON - Acknowlege input is enabled.<BR>
+OFF - Acknowlege input is disabled.
+#1087,11
+ON - Acknowlege output is enabled.<BR>
+OFF - Acknowlege output is disabled.
+#1087,12
+ON - Right light is enabled.<BR>
+OFF - Right light is disabled.
+#1087,13
+ON - Left light is enabled.<BR>
+OFF - Left light is disabled.
+#1087,14
+ON - Axis light is enabled.<BR>
+OFF - Axis light is disabled.
+#1087,15
+ON - Changeover type is AUTO.<BR>
+OFF - Changeover type is MANUAL.
+#1088,1
+ON - Aisle Detection sensor in Rear Right is enabled.<BR>
+OFF - Aisle Detection sensor in Rear Right is disabled.
+#1088,2
+ON - Aisle Detection sensor in Rear Left is enabled.<BR>
+OFF - Aisle Detection sensor in Rear Left is disabled.
+#1088,3
+ON - Aisle Detection sensor in Front Right is enabled.<BR>
+OFF - Aisle Detection sensor in Front Right is disabled.
+#1088,4
+ON - Aisle Detection sensor in Front Left is enabled.<BR>
+OFF - Aisle Detection sensor in Front Left is disabled.
+#1088,5
+ON - Slow Down Detection sensor in Rear Right is enabled.<BR>
+OFF - Slow Down Detection sensor in Rear Right is disabled.
+#1088,6
+ON - Slow Down Detection sensor in Rear Left is enabled.<BR>
+OFF - Slow Down Detection sensor in Rear Left is disabled.
+#1088,7
+ON - Slow Down Detection sensor in Front Right is enabled.<BR>
+OFF - Slow Down Detection sensor in Front Right is disabled.
+#1088,8
+ON - Slow Down Detection sensor in Front Left is enabled.<BR>
+OFF - Slow Down Detection sensor in Front Left is disabled.
+#1088,9
+ON - Object Detection sensor in the Right is enabled.<BR>
+OFF - Object Detection sensor in the Right is disabled.
+#1088,10
+ON - Object Detection sensor in the Left is enabled.<BR>
+OFF - Object Detection sensor in the Left is disabled.
+#1088,11
+ON - Stop sensor in the Right is enabled.<BR>
+OFF - Stop sensor in the Right is disabled.
+#1088,12
+ON - Stop sensor in the Left is enabled.<BR>
+OFF - Stop sensor in the Left is disabled.
+#1088,13
+ON - Guidance sensor in Rear Right is enabled.<BR>
+OFF - Guidance sensor in Rear Right is disabled.
+#1088,14
+ON - Guidance sensor in Rear Left is enabled.<BR>
+OFF - Guidance sensor in Rear Left is disabled.
+#1088,15
+ON - Guidance sensor in Front Right is enabled.<BR>
+OFF - Guidance sensor in Front Right is disabled.
+#1088,16
+ON - Guidance sensor in Front Left is enabled.<BR>
+OFF - Guidance sensor in Front Left is disabled.

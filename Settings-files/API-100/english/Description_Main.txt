@@ -1,0 +1,2331 @@
+#1
+Information about the type of update that will be done when loading the file.
+#2
+Model of the truck.
+#3
+Version of the truck.
+#4
+Serial Number of the truck.
+#5
+Date when the truck was built
+#6
+Version of the CLP API present in the truck.
+#7
+Info about the truck status when the last cloning of parameters was made.
+#8
+Info about the truck status when the last export of parameters was made.
+#9
+Info about the truck status when the first service was made.
+#10
+Info about the truck status when the last standard service was made.
+#11
+Info about the truck status when the last full service was made.
+#12
+Info about the Pump Motor Controller.
+#13
+Info about the Traction Rear Right (TRR) Motor Controller.
+#14
+Info about the Traction Rear Left (TRL) Motor Controller.
+#15
+Info about the Traction Front Right (TFR) Motor Controller.
+#16
+Info about the Traction Front Left (TFL) Motor Controller.
+#17
+Info about the Steer Rear Right (SRR) Motor Controller.
+#18
+Info about the Steer Rear Left (SRL) Motor Controller.s
+#19
+Info about the Steer Front Right (SFR) Motor Controller.
+#20
+Info about the Steer Front Left (SFL) Motor Controller.
+#21
+Info about the PLC software version.
+#22
+Info about the Screen software version.
+#32
+Keyswitch hourmeter set. A MoCAS code will be asked for this action when loading the file.
+#33
+Interlock hourmeter set. A MoCAS code will be asked for this action when loading the file.
+#34
+Traction hourmeter set. A MoCAS code will be asked for this action when loading the file.
+#35
+Hydraulics hourmeter set. A MoCAS code will be asked for this action when loading the file.
+#36
+Engine hourmeter set. A MoCAS code will be asked for this action when loading the file.
+#37
+Work Lights module activation.<BR>A MoCAS code is needed to activate the module.
+#38
+Safety Warning Lights module activation.<BR>A MoCAS code is needed to activate the module.
+#39
+Road Lights module activation.<BR>A MoCAS code is needed to activate the module.
+#40
+Dynamic Active Points module activation.<BR>A MoCAS code is needed to activate the module.
+#41
+Mast Slow Down module activation.<BR>A MoCAS code is needed to activate the module.
+#42
+Carriage Slow Down module activation.<BR>A MoCAS code is needed to activate the module.
+#43
+Load/Weight module activation.<BR>A MoCAS code is needed to activate the module.
+#44
+Load Assist module activation.<BR>A MoCAS code is needed to activate the module.
+#45
+Height Assist module activation.<BR>A MoCAS code is needed to activate the module.
+#46
+Multi User module activation.<BR>A MoCAS code is needed to activate the module.
+#47
+Pre Operation Check module activation.<BR>A MoCAS code is needed to activate the module.
+#48
+Tilt Assist module activation.<BR>A MoCAS code is needed to activate the module.
+#49
+MoCAS module activation.<BR>A MoCAS code is needed to activate the module.
+#50
+MoCAS module activation.<BR>A MoCAS code is needed to activate the module.
+#51
+MoCAS module activation.<BR>A MoCAS code is needed to activate the module.
+#52
+MoCAS module activation.<BR>A MoCAS code is needed to activate the module.
+#53
+MoCAS module activation.<BR>A MoCAS code is needed to activate the module.
+#54
+MoCAS module activation.<BR>A MoCAS code is needed to activate the module.
+#55
+MoCAS module activation.<BR>A MoCAS code is needed to activate the module.
+#56
+MoCAS module activation.<BR>A MoCAS code is needed to activate the module.
+#57
+MoCAS module activation.<BR>A MoCAS code is needed to activate the module.
+#58
+MoCAS module activation.<BR>A MoCAS code is needed to activate the module.
+#59
+MoCAS module activation.<BR>A MoCAS code is needed to activate the module.
+#60
+MoCAS module activation.<BR>A MoCAS code is needed to activate the module.
+#61
+MoCAS module activation.<BR>A MoCAS code is needed to activate the module.
+#62
+MoCAS module activation.<BR>A MoCAS code is needed to activate the module.
+#63
+Not assigned
+#64
+Not assigned
+#65
+Not assigned
+#66
+Not assigned
+#67
+Not assigned
+#68
+Not assigned
+#69
+Not assigned
+#70
+Not assigned
+#71
+Not assigned
+#72
+Not assigned
+#73
+Not assigned
+#74
+Not assigned
+#75
+Not assigned
+#76
+Not assigned
+#77
+Not assigned
+#78
+Not assigned
+#79
+Not assigned
+#80
+Not assigned
+#81
+Not assigned
+#82
+Not assigned
+#83
+Not assigned
+#84
+Not assigned
+#85
+Not assigned
+#86
+Not assigned
+#87
+Not assigned
+#88
+Not assigned
+#89
+System config for DAP override.
+#90
+System config for Pump CAN write enable.
+#91
+System config for TRR CAN write enable.
+#92
+System config for TRL CAN write enable.
+#93
+System config for TFR CAN write enable.
+#94
+System config for TFL CAN write enable.
+#95
+System config for SRR CAN write enable.
+#96
+System config for SRL CAN write enable.
+#97
+System config for SFR CAN write enable.
+#98
+System config for SFL CAN write enable.
+#99
+System config for EXP CAN write enable.
+#100
+Type of login to be used in the machine.
+#101
+Default user level to be used when no login is requested.
+#102
+Defines if user is logged out if no activitiy is detected for a certain amount of time.
+#103
+Time to be used in the Logout if no activitiy is detected.
+#104
+User 1 access password.<BR>User 1 is at Operator Level.
+#105
+User 2 access password.<BR>User 2 is at Operator Level.
+#106
+User 3 access password.<BR>User 3 is at Operator Level.
+#107
+User 4 access password.<BR>User 4 is at Service Level.
+#108
+User 5 access password.<BR>User 5 is at Manager Level.
+#109
+User 6 access password.<BR>User 6 is at Dealer Level.
+#110
+User 7 access password.<BR>User 7 is at Combilift Level.
+#111
+User 8 access password.<BR>User 8 is at Developer Level.
+#112
+Type of Pre-Operation Check to be used in the machine.
+#113
+Time interval between Pre-Operation Checks.
+#114
+Reserved for future modules.
+#115
+Choose if displayed values use metric or imperial units.
+#116
+Reserved for future modules.
+#117
+Reserved for future modules.
+#118
+Reserved for future modules.
+#119
+Reserved for future modules.
+#120
+Choose what hourmeter is displayed in the Main Screen from the truck.
+#121
+Reserved for future modules.
+#122
+Reserved for future modules.
+#123
+Time interval for the first service of the truck.
+#124
+Time interval for the Standard Service of the truck.
+#125
+Time interval for the Full Service of the truck.
+#126
+Choose what Hourmeter to be used in calculations for Service hours from the truck.
+#127
+Time interval until next Service to display the Service warning.
+#128
+Reserved for future modules.
+#129
+Reserved for future modules.
+#130
+Configuration of Driver Presence Mode.
+#131
+Time delay for Seat (Floor) input action.
+#132
+Time delay for Seatbelt (Door) input action.
+#133
+Reserved for future modules.
+#134
+Reserved for future modules.
+#135
+Work Light Settings.
+#136
+Time delay for Work Lights to switch off.
+#137
+Default working mode for Work Lights.
+#138
+Safety Warning Lights settings.
+#139
+Time delay for Safety Warning Lights to switch off.
+#140
+Default working mode for Safety Warning Lights.
+#141
+Road Lights settings.
+#142
+Default working mode for Road Lights.
+#143
+Motion Alarm settings.
+#144
+Default working mode for Motion Alarm.
+#145
+Steer Rear Right(SRR) setup.
+#146
+Steer Rear Left(SRL) setup.
+#147
+Steer Front Right(SFR) setup.
+#148
+Steer Front Left(SFL) setup.
+#149
+Reserved for future modules.
+#150
+Motor ID used to drive the pump.
+#151
+Motor ID used to drive the Traction Rear Right(TRR) wheel.
+#152
+Motor ID used to drive the Traction Rear Left(TRL) wheel.
+#153
+Motor ID used to drive the Traction Front Right(TFR) wheel.
+#154
+Motor ID used to drive the Traction Front Left(TFL) wheel.
+#155
+Motor ID used to steer the Steer Rear Right(SRR) wheel.
+#156
+Motor ID sued to steer the Steer Rear Left(SRL) wheel.
+#157
+Motor ID used to steer the Steer Front Right(SFR) wheel.
+#158
+Motor ID used to steer the Steer Front LEFT(SFL) wheel.
+#159
+Enables the use of the Pump (P) controller.
+#160
+Rear Right wheel configuration.
+#161
+x Position of the centre of rotation of the axle.
+#162
+y Position of the centre of rotation of the axle.
+#163
+x offset from centre of wheel to the centre of rotation of the axle.
+#164
+y offset from centre of wheel to the centre of rotation of the axle.
+#165
+Gear Ratio from the gearbox and transmission.
+#166
+Tyre rolling circumference from the axle.
+#167
+Reserved to future use.
+#168
+Swivel Distance between centers.
+#169
+Swivel Trunnion Radius.
+#170
+Swivel Closed Centre Distance.
+#171
+Swivel Opened Centre Distance.
+#172
+Swivel Closed Centre Raw.
+#173
+Swivel Opened Centre Raw.
+#174
+Swivel Angle Offset.
+#175
+Rear Left wheel configuration.
+#176
+x Position of the centre of rotation of the axle.
+#177
+y Position of the centre of rotation of the axle.
+#178
+x offset from centre of wheel to the centre of rotation of the axle.
+#179
+y offset from centre of wheel to the centre of rotation of the axle.
+#180
+Gear Ratio from the gearbox and transmission.
+#181
+Tyre rolling circumference from the axle.
+#182
+Reserved to future use.
+#183
+Swivel Distance between centers.
+#184
+Swivel Trunnion Radius.
+#185
+Swivel Closed Centre Distance.
+#186
+Swivel Opened Centre Distance.
+#187
+Swivel Closed Centre Raw.
+#188
+Swivel Opened Centre Raw.
+#189
+Swivel Angle Offset.
+#190
+Front Right wheel configuration.
+#191
+x Position of the centre of rotation of the axle.
+#192
+y Position of the centre of rotation of the axle.
+#193
+x offset from centre of wheel to the centre of rotation of the axle.
+#194
+y offset from centre of wheel to the centre of rotation of the axle.
+#195
+Gear Ratio from the gearbox and transmission.
+#196
+Tyre rolling circumference from that axle.
+#197
+Reserved to future use.
+#198
+Swivel Distance between centers.
+#199
+Swivel Trunnion Radius.
+#200
+Swivel Closed Centre Distance.
+#201
+Swivel Opened Centre Distance.
+#202
+Swivel Closed Centre Raw.
+#203
+Swivel Opened Centre Raw.
+#204
+Swivel Angle Offset.
+#205
+Front Left wheel configuration.
+#206
+x Position of the centre of rotation of the axle.
+#207
+y Position of the centre of rotation of the axle.
+#208
+x offset from centre of wheel to the centre of rotation of the axle.
+#209
+y offset from centre of wheel to the centre of rotation of the axle.
+#210
+Gear Ratio from the gearbox and transmission.
+#211
+Tyre rolling circumference from that axle.
+#212
+Reserved to future use.
+#213
+Swivel Distance between centers.
+#214
+Swivel Trunnion Radius.
+#215
+Swivel Closed Centre Distance.
+#216
+Swivel Opened Centre Distance.
+#217
+Swivel Closed Centre Raw.
+#218
+Swivel Opened Centre Raw.
+#219
+Swivel Angle Offset.
+#220
+Hydraulic Function settings A.
+#221
+Hydraulic Function settings B.
+#222
+Hydraulic Function settings C.
+#223
+Reserved to future use.
+#224
+Reserved to future use.
+#225
+Reserved to future use.
+#226
+Reserved to future use.
+#227
+Pump motor start rpm value for direction A movement of the selected function.
+#228
+Pump motor middle rpm value for direction A movement of the selected function.
+#229
+Pump motor maximum rpm value for direction A movement of the selected function.
+#230
+Minimum current feedback value for direction A movement of the selected function.
+#231
+Maximum current feedback value for direction A movement of the selected function.
+#232
+Minimum current feedback value for direction B movement of the selected function.
+#233
+Maximum current feedback value for direction B movement of the selected function
+#234
+Minimum PVG command value for direction A movement of the selected function.
+#235
+Maximum PVG command value for direction A movement of the selected function.
+#236
+Minimum PVG command value for direction B movement of the selected function.
+#237
+Maximum PVG command value for direction B movement of the selected function.
+#238
+Hydraulic Function settings A.
+#239
+Hydraulic Function settings B.
+#240
+Hydraulic Function settings C.
+#241
+Reserved to future use.
+#242
+Reserved to future use.
+#243
+Reserved to future use.
+#244
+Reserved to future use.
+#245
+Pump motor start rpm value for direction A movement of the selected function.
+#246
+Pump motor middle rpm value for direction A movement of the selected function.
+#247
+Pump motor maximum rpm value for direction A movement of the selected function.
+#248
+Minimum current feedback value for direction A movement of the selected function.
+#249
+Maximum current feedback value for direction A movement of the selected function.
+#250
+Minimum current feedback value for direction B movement of the selected function.
+#251
+Maximum current feedback value for direction B movement of the selected function
+#252
+Minimum PVG command value for direction A movement of the selected function.
+#253
+Maximum PVG command value for direction A movement of the selected function.
+#254
+Minimum PVG command value for direction B movement of the selected function.
+#255
+Maximum PVG command value for direction B movement of the selected function.
+#256
+Hydraulic Function settings A.
+#257
+Hydraulic Function settings B.
+#258
+Hydraulic Function settings C.
+#259
+Reserved to future use.
+#260
+Reserved to future use.
+#261
+Reserved to future use.
+#262
+Reserved to future use.
+#263
+Pump motor start rpm value for direction A movement of the selected function.
+#264
+Pump motor middle rpm value for direction A movement of the selected function.
+#265
+Pump motor maximum rpm value for direction A movement of the selected function.
+#266
+Minimum current feedback value for direction A movement of the selected function.
+#267
+Maximum current feedback value for direction A movement of the selected function.
+#268
+Minimum current feedback value for direction B movement of the selected function.
+#269
+Maximum current feedback value for direction B movement of the selected function
+#270
+Minimum PVG command value for direction A movement of the selected function.
+#271
+Maximum PVG command value for direction A movement of the selected function.
+#272
+Minimum PVG command value for direction B movement of the selected function.
+#273
+Maximum PVG command value for direction B movement of the selected function.
+#274
+Hydraulic Function settings A.
+#275
+Hydraulic Function settings B.
+#276
+Hydraulic Function settings C.
+#277
+Reserved to future use.
+#278
+Reserved to future use.
+#279
+Reserved to future use.
+#280
+Reserved to future use.
+#281
+Pump motor start rpm value for direction A movement of the selected function.
+#282
+Pump motor middle rpm value for direction A movement of the selected function.
+#283
+Pump motor maximum rpm value for direction A movement of the selected function.
+#284
+Minimum current feedback value for direction A movement of the selected function.
+#285
+Maximum current feedback value for direction A movement of the selected function.
+#286
+Minimum current feedback value for direction B movement of the selected function.
+#287
+Maximum current feedback value for direction B movement of the selected function
+#288
+Minimum PVG command value for direction A movement of the selected function.
+#289
+Maximum PVG command value for direction A movement of the selected function.
+#290
+Minimum PVG command value for direction B movement of the selected function.
+#291
+Maximum PVG command value for direction B movement of the selected function.
+#292
+Hydraulic Function settings A.
+#293
+Hydraulic Function settings B.
+#294
+Hydraulic Function settings C.
+#295
+Reserved to future use.
+#296
+Reserved to future use.
+#297
+Reserved to future use.
+#298
+Reserved to future use.
+#299
+Pump motor start rpm value for direction A movement of the selected function.
+#300
+Pump motor middle rpm value for direction A movement of the selected function.
+#301
+Pump motor maximum rpm value for direction A movement of the selected function.
+#302
+Minimum current feedback value for direction A movement of the selected function.
+#303
+Maximum current feedback value for direction A movement of the selected function.
+#304
+Minimum current feedback value for direction B movement of the selected function.
+#305
+Maximum current feedback value for direction B movement of the selected function
+#306
+Minimum PVG command value for direction A movement of the selected function.
+#307
+Maximum PVG command value for direction A movement of the selected function.
+#308
+Minimum PVG command value for direction B movement of the selected function.
+#309
+Maximum PVG command value for direction B movement of the selected function.
+#310
+Hydraulic Function settings A.
+#311
+Hydraulic Function settings B.
+#312
+Hydraulic Function settings C.
+#313
+Reserved to future use.
+#314
+Reserved to future use.
+#315
+Reserved to future use.
+#316
+Reserved to future use.
+#317
+Pump motor start rpm value for direction A movement of the selected function.
+#318
+Pump motor middle rpm value for direction A movement of the selected function.
+#319
+Pump motor maximum rpm value for direction A movement of the selected function.
+#320
+Minimum current feedback value for direction A movement of the selected function.
+#321
+Maximum current feedback value for direction A movement of the selected function.
+#322
+Minimum current feedback value for direction B movement of the selected function.
+#323
+Maximum current feedback value for direction B movement of the selected function
+#324
+Minimum PVG command value for direction A movement of the selected function.
+#325
+Maximum PVG command value for direction A movement of the selected function.
+#326
+Minimum PVG command value for direction B movement of the selected function.
+#327
+Maximum PVG command value for direction B movement of the selected function.
+#328
+Hydraulic Function settings A.
+#329
+Hydraulic Function settings B.
+#330
+Hydraulic Function settings C.
+#331
+Reserved to future use.
+#332
+Reserved to future use.
+#333
+Reserved to future use.
+#334
+Reserved to future use.
+#335
+Pump motor start rpm value for direction A movement of the selected function.
+#336
+Pump motor middle rpm value for direction A movement of the selected function.
+#337
+Pump motor maximum rpm value for direction A movement of the selected function.
+#338
+Minimum current feedback value for direction A movement of the selected function.
+#339
+Maximum current feedback value for direction A movement of the selected function.
+#340
+Minimum current feedback value for direction B movement of the selected function.
+#341
+Maximum current feedback value for direction B movement of the selected function
+#342
+Minimum PVG command value for direction A movement of the selected function.
+#343
+Maximum PVG command value for direction A movement of the selected function.
+#344
+Minimum PVG command value for direction B movement of the selected function.
+#345
+Maximum PVG command value for direction B movement of the selected function.
+#346
+Hydraulic Function settings A.
+#347
+Hydraulic Function settings B. 
+#348
+Hydraulic Function settings C.
+#349
+Reserved to future use.
+#350
+Reserved to future use.
+#351
+Reserved to future use.
+#352
+Reserved to future use.
+#353
+Pump motor start rpm value for direction A movement of the selected function.
+#354
+Pump motor middle rpm value for direction A movement of the selected function.
+#355
+Pump motor maximum rpm value for direction A movement of the selected function.
+#356
+Minimum current feedback value for direction A movement of the selected function.
+#357
+Maximum current feedback value for direction A movement of the selected function.
+#358
+Minimum current feedback value for direction B movement of the selected function.
+#359
+Maximum current feedback value for direction B movement of the selected function
+#360
+Minimum PVG command value for direction A movement of the selected function.
+#361
+Maximum PVG command value for direction A movement of the selected function.
+#362
+Minimum PVG command value for direction B movement of the selected function.
+#363
+Maximum PVG command value for direction B movement of the selected function.
+#364
+Hydraulic Function settings A.
+#365
+Hydraulic Function settings B.
+#366
+Hydraulic Function settings C.
+#367
+Reserved to future use.
+#368
+Reserved to future use.
+#369
+Reserved to future use.
+#370
+Reserved to future use.
+#371
+Pump motor start rpm value for direction A movement of the selected function.
+#372
+Pump motor middle rpm value for direction A movement of the selected function.
+#373
+Pump motor maximum rpm value for direction A movement of the selected function.
+#374
+Minimum current feedback value for direction A movement of the selected function.
+#375
+Maximum current feedback value for direction A movement of the selected function.
+#376
+Minimum current feedback value for direction B movement of the selected function.
+#377
+Maximum current feedback value for direction B movement of the selected function
+#378
+Minimum PVG command value for direction A movement of the selected function.
+#379
+Maximum PVG command value for direction A movement of the selected function.
+#380
+Minimum PVG command value for direction B movement of the selected function.
+#381
+Maximum PVG command value for direction B movement of the selected function.
+#382
+Hydraulic Function settings A.
+#383
+Hydraulic Function settings B.
+#384
+Hydraulic Function settings C.
+#385
+Reserved to future use.
+#386
+Reserved to future use.
+#387
+Reserved to future use.
+#388
+Reserved to future use.
+#389
+Pump motor start rpm value for direction A movement of the selected function.
+#390
+Pump motor middle rpm value for direction A movement of the selected function.
+#391
+Pump motor maximum rpm value for direction A movement of the selected function.
+#392
+Minimum current feedback value for direction A movement of the selected function.
+#393
+Maximum current feedback value for direction A movement of the selected function.
+#394
+Minimum current feedback value for direction B movement of the selected function.
+#395
+Maximum current feedback value for direction B movement of the selected function
+#396
+Minimum PVG command value for direction A movement of the selected function.
+#397
+Maximum PVG command value for direction A movement of the selected function.
+#398
+Minimum PVG command value for direction B movement of the selected function.
+#399
+Maximum PVG command value for direction B movement of the selected function.
+#400
+Hydraulic Function settings A.
+#401
+Hydraulic Function settings B.
+#402
+Hydraulic Function settings C.
+#403
+Reserved to future use.
+#404
+Reserved to future use.
+#405
+Reserved to future use.
+#406
+Reserved to future use.
+#407
+Pump motor start rpm value for direction A movement of the selected function.
+#408
+Pump motor middle rpm value for direction A movement of the selected function.
+#409
+Pump motor maximum rpm value for direction A movement of the selected function.
+#410
+Minimum current feedback value for direction A movement of the selected function.
+#411
+Maximum current feedback value for direction A movement of the selected function.
+#412
+Minimum current feedback value for direction B movement of the selected function.
+#413
+Maximum current feedback value for direction B movement of the selected function
+#414
+Minimum PVG command value for direction A movement of the selected function.
+#415
+Maximum PVG command value for direction A movement of the selected function.
+#416
+Minimum PVG command value for direction B movement of the selected function.
+#417
+Maximum PVG command value for direction B movement of the selected function.
+#418
+Reserved to future use.
+#419
+Reserved to future use.
+#420
+Disable/Enable the use of proximity switch for each DAP point.
+#421
+Disable/Enable the use of analog value for DAP points.
+#422
+Choose if input is to be interpreted as High or Low for each DAP point.
+#424
+Height value for active DAPs.
+#423
+Disable/Enable the use of overrides for each DAP point.
+#425
+Truck Speed value for active DAPs.
+#426
+Lift Speed Speed Value for active DAPs.
+#427
+Lower Speed Value for active DAPs.
+#428
+Reach Speed value for active DAPs.
+#429
+Retract Speed value for active DAPs.
+#430
+Height value for active DAPs.
+#431
+Truck Speed value for active DAPs.
+#432
+Lift Speed Speed Value for active DAPs.
+#433
+Lower Speed Value for active DAPs.
+#434
+Reach Speed value for active DAPs.
+#435
+Retract Speed value for active DAPs.
+#436
+Height value for active DAPs.
+#437
+Truck Speed value for active DAPs.
+#438
+Lift Speed Speed Value for active DAPs.
+#439
+Lower Speed Value for active DAPs.
+#440
+Reach Speed value for active DAPs.
+#441
+Retract Speed value for active DAPs.
+#442
+Height value for active DAPs.
+#443
+Truck Speed value for active DAPs.
+#444
+Lift Speed Speed Value for active DAPs.
+#445
+Lower Speed Value for active DAPs.
+#446
+Reach Speed value for active DAPs.
+#447
+Retract Speed value for active DAPs.
+#448
+Height Value for active DAPs.
+#449
+Truck Speed value for active DAPs.
+#450
+Lift speed value for active DAPs.
+#451
+Lower Speed value for active DAPs.
+#452
+Reach Speed value for active DAPs.
+#453
+Retract Speed value for active DAPs.
+#454
+Height Value for active DAPs.
+#455
+Truck Speed value for active DAPs.
+#456
+Lift speed value for active DAPs.
+#457
+Lower Speed value for active DAPs.
+#458
+Reach Speed value for active DAPs.
+#459
+Retract Speed value for active DAPs.
+#460
+Height Value for active DAPs.
+#461
+Truck Speed value for active DAPs.
+#462
+Lift speed value for active DAPs.
+#463
+Lower Speed value for active DAPs.
+#464
+Reach Speed value for active DAPs.
+#465
+Retract Speed value for active DAPs.
+#466
+Height Value for active DAPs.
+#467
+Truck Speed value for active DAPs.
+#468
+Lift speed value for active DAPs.
+#469
+Lower Speed value for active DAPs.
+#470
+Reach Speed value for active DAPs.
+#471
+Retract Speed value for active DAPs.
+#472
+Dynamic Mast Lift Slow Down settings.
+#473
+Minimum position for the forks.
+#474
+Maximum position for the forks.
+#475
+Distance to start slow down before reaching the minimum position for the forks.
+#476
+Distance to start slow down before reaching the maximum position for the forks.
+#477
+Position for stage 1 transition.
+#478
+Position for stage 2 transition.
+#479
+Position for stage 3 transition.
+#481
+Distance to start slow down before a stage when lowering.
+#482
+Distance to start slow down before a stage when lifting.
+#483
+Speed when reaching the minimum position for the forks.
+#484
+Speed when reaching the maximum position for the forks.
+#485
+Speed when reaching the stage position when lowering.
+#486
+Speed when reaching the stage position when lifting.
+#487
+Dynamic Mast Reach Slow Down settings.
+#488
+Back position for the carriage.
+#489
+Front position for the carriage.
+#490
+Distance to start slow down before reaching the back position for the carriage.
+#491
+Distance to start slow down before reaching the maximum position for the carriage.
+#492
+Defines the position for stage 1 (NOT USED)
+#493
+Defines the position for stage 2 (NOT USED)
+#494
+Defines the position for stage 3 (NOT USED)
+#496
+Distance to start slow down before a stage when retracting. (NOT USED)
+#496
+Distance to start slow down before a stage.
+#497
+Distance to start slow down before a stage when reaching. (NOT USED)
+#498
+Speed when reaching the back position for the carriage.
+#499
+Speed when reaching the front position for the carriage.
+#500
+Speed when reaching the stage position when retracting.
+#501
+Speed when reaching the stage position when reaching.
+#502
+Reserved to future use.
+#503
+Reserved to future use.
+#504
+Reserved to future use.
+#505
+Cooling Fans setup A.
+#506
+Cooling Fans setup B.
+#507
+Pump - controller temperature to switch the Cooling Fan ON.
+#508
+Pump - motor temperature to switch the Cooling Fan ON.
+#509
+Pump - temperature delta to switch the Cooling Fan OFF.
+#510
+TRR - controller temperature to switch the Cooling Fan ON.
+#511
+TRR - motor temperature to switch the Cooling Fan ON.
+#512
+TRR - temperature delta to switch the Cooling Fan OFF.
+#513
+TRL - controller temperature to switch the Cooling Fan ON.
+#514
+TRL - motor temperature to switch the Cooling Fan ON.
+#515
+TRL - temperature delta to switch the Cooling Fan OFF.
+#516
+TFR - controller temperature to switch the Cooling Fan ON.
+#517
+TFR - motor temperature to switch the Cooling Fan ON.
+#518
+TFR - temperature delta to switch the Cooling Fan OFF.
+#519
+TFL - controller temperature to switch the Cooling Fan ON.
+#520
+TFL - motor temperature to switch the Cooling Fan ON.
+#521
+TFL - temperature delta to switch the Cooling Fan OFF.
+#522
+Type of distance measuring device fitted in the truck to measure the heigh.
+#523
+Raw minimum input value from the height sensor.
+#524
+Raw maximum input value from the height sensor.
+#525
+Minimum position value from the height sensor.
+#526
+Maximum position value from the height sensor.
+#527
+Type of distance measuring device fitted in the truck to measure the reach.
+#528
+Raw minimum input value form the reach sensor.
+#529
+Raw maximum input value from the reach sensor.
+#530
+Minimum position value from the reach sensor.
+#531
+Maximum position value form the reach sensor.
+#532
+TRR - Wheel Angle value when the wheel is on its CW limit.
+#536
+TRL - Wheel Angle value when the wheel is on its CW limit.
+#540
+TFR - Wheel Angle value when the wheel is on its CW limit.
+#544
+TFL - Wheel Angle value when the wheel is on its CW limit.
+#533
+TRR - Wheel Angle value when the wheel is on its CCW limit.
+#537
+TRL - Wheel Angle value when the wheel is on its CCW limit.
+#541
+TFR - Wheel Angle value when the wheel is on its CCW limit.
+#545
+TFL - Wheel Angle value when the wheel is on its CCW limit.
+#534
+TRR - Wheel Angle value when the wheel is on its CW limit.
+#538
+TRL - Wheel Angle value when the wheel is on its CW limit.
+#542
+TFR - Wheel Angle value when the wheel is on its CW limit.
+#546
+TFL - Wheel Angle value when the wheel is on its CW limit.
+#535
+TRR - Wheel Angle value when the wheel is on its CCW limit.
+#539
+TRL - Wheel Angle value when the wheel is on its CCW limit.
+#543
+TFR - Wheel Angle value when the wheel is on its CCW limit.
+#547
+TFL - Wheel Angle value when the wheel is on its CCW limit.
+#548
+Curve Control Speed settings.
+#549
+Angle used to start limiting speed because truck is turning and driving in FR direction.
+#550
+Angle when limiting speed is max because truck is turning and driving in FR direction.
+#551
+Maximum speed reduction to be applied to the truck when turning and driving in FR direction.
+#552
+Drive Mode Settings.
+#553
+Conditions to do a mode change.
+#554
+Traction Motor rpm value below which it's considered to be zero.
+#555
+Max time allowed for Front/Rear Wheels to change mode before issuing a fault.
+#556
+Pump motor rpm to execute a Mode Change.
+#557
+Angle to enable Slow Down during Mode Change to Forks Direction with wheel rotating clockwise.
+#558
+Speed Reduction percentage when Slow Down is enabled during Mode Change to Forks Direction with wheel rotating clockwise.
+#559
+Angle to enable Slow Down during Mode Change to Forks Direction with wheel rotating counter clockwise.
+#560
+Speed Reduction percentage when Slow Down is enabled during Mode Change to Forks Direction with wheel rotating counter clockwise.
+#561
+Angle to enable Slow Down during Mode Change to Perpendicular to Forks Direction with wheel rotating clockwise.
+#562
+Speed Reduction percentage when Slow Down is enabled during Mode Change to Perpendicular to Forks Direction with wheel rotating clockwise.
+#563
+Angle to enable Slow Down during Mode Change to Perpendicular to Forks Direction with wheel rotating counter clockwise.
+#564
+Speed Reduction percentage when Slow Down is enabled during Mode Change to Perpendicular to Forks Direction with wheel rotating counter clockwise.
+#565
+Hydraulic command device type used in the truck.
+#566
+Pump motor start rpm value for direction B movement of the selected function.
+#567
+Pump motor middle rpm value for direction B movement of the selected function.
+#568
+Pump motor maximum rpm value for direction B movement of the selected function.
+#569
+Pump motor start rpm value for direction B movement of the selected function.
+#570
+Pump motor middle rpm value for direction B movement of the selected function.
+#571
+Pump motor maximum rpm value for direction B movement of the selected function.
+#572
+Pump motor start rpm value for direction B movement of the selected function.
+#573
+Pump motor middle rpm value for direction B movement of the selected function.
+#574
+Pump motor maximum rpm value for direction B movement of the selected function.
+#575
+Pump motor start rpm value for direction B movement of the selected function.
+#576
+Pump motor middle rpm value for direction B movement of the selected function.
+#577
+Pump motor maximum rpm value for direction B movement of the selected function.
+#578
+Pump motor start rpm value for direction B movement of the selected function.
+#579
+Pump motor middle rpm value for direction B movement of the selected function.
+#580
+Pump motor maximum rpm value for direction B movement of the selected function.
+#581
+Pump motor start rpm value for direction B movement of the selected function.
+#582
+Pump motor middle rpm value for direction B movement of the selected function.
+#583
+Pump motor maximum rpm value for direction B movement of the selected function.
+#584
+Pump motor start rpm value for direction B movement of the selected function.
+#585
+Pump motor middle rpm value for direction B movement of the selected function.
+#586
+Pump motor maximum rpm value for direction B movement of the selected function.
+#587
+Pump motor start rpm value for direction B movement of the selected function.
+#588
+Pump motor middle rpm value for direction B movement of the selected function.
+#589
+Pump motor maximum rpm value for direction B movement of the selected function.
+#590
+Pump motor start rpm value for direction B movement of the selected function.
+#591
+Pump motor middle rpm value for direction B movement of the selected function.
+#592
+Pump motor maximum rpm value for direction B movement of the selected function.
+#593
+Pump motor start rpm value for direction B movement of the selected function.
+#594
+Pump motor middle rpm value for direction B movement of the selected function.
+#595
+Pump motor maximum rpm value for direction B movement of the selected function.
+#596
+Pump motor start rpm value for direction B movement of the selected function.
+#597
+Pump motor middle rpm value for direction B movement of the selected function.
+#598
+Pump motor maximum rpm value for direction B movement of the selected function.
+#599
+Reserved to future use.
+#600
+Dynamic Speed Control Setup.
+#601
+Default Max Truck Speed.
+#602
+Default Slow Speed.
+#603
+Default Limited Operating Strategy Speed.
+#604
+Default Economy Mode Speed.
+#605
+Default Fault Mode Speed.
+#606
+Default Low Battery Speed.
+#607
+Default Forks Direction Speed.
+#608
+Default Reverse Forks Direction Speed.
+#609
+Default Left Forks Direction Speed.
+#610
+Default Right Forks Direction Speed.
+#611
+Default Forward/Reverse Direction Low Speed.
+#612
+Default Left/Right Direction Low Speed.
+#613
+Default Forward/Reverse Direction Ride-On Speed.
+#614
+Default Left/Right Direction Ride-On Speed.
+#615
+BMS type used in the truck.
+#616
+Percentage of State of Charge from the battery below which it's considered to be in Low Battery Mode.
+#617
+ECO Mode setup.
+#618
+Percentage of State of Charge from the battery below which it's considered to be in ECO Mode.
+#619
+Active mode for overspeed protection on PED.
+#620
+Max time for interlock protection on PED. 
+#621
+Voltage threshold for regen voltage protection on PED.
+#622
+Input Values for forward/Reverse steer map points P1.
+#623
+Input Values for forward/Reverse steer map points P2.
+#624
+Input Values for forward/Reverse steer map points P3.
+#625
+Input Values for forward/Reverse steer map points P4.
+#626
+Input Values for forward/Reverse steer map points P5.
+#627
+Output Values for forward/reverse steer map poins P1.
+#628
+Output Values for forward/reverse steer map poins P2.
+#629
+Output Values for forward/reverse steer map poins P3.
+#630
+Output Values for forward/reverse steer map poins P4.
+#631
+Output Values for forward/reverse steer map poins P5.
+#632
+Input Values for left/right steer map points P1.
+#633
+Input Values for left/right steer map points P2.
+#634
+Input Values for left/right steer map points P3.
+#635
+Input Values for left/right steer map points P4.
+#636
+Input Values for left/right steer map points P5.
+#637
+Input Values for left/right steer map points P6.
+#638
+Output Values for left/right steer map points P1.
+#639
+Output Values for left/right steer map points P2.
+#640
+Output Values for left/right steer map points P3.
+#641
+Output Values for left/right steer map points P4.
+#642
+Output Values for left/right steer map points P5.
+#643
+Output Values for left/right steer map points P6.
+#644
+Scale factor for the steer map when in forward/reverse.
+#645
+Scale factor for the steer map when in left/right.
+#646
+Type of wheel Position Feedback that is used in the Machine (PED).
+#647
+Wheel angle when the proximity sensor 1 detects the wheel.
+#648
+Wheel angle when the proximity sensor 2 detects the wheel.
+#649
+Angle measured by the sensor when the proximity sensor 1 detects the wheel.
+#650
+Angle measured by the sensor when the proximity sensor 2 detects the wheel.
+#651
+Wheel angle displacement for a full turn of the sensor.
+#652
+Maximum raw value from the wheel position sensor.
+#653
+Minimum raw value from the wheel position sensor.
+#654
+Steer Command type (PED)
+#655
+Channel 1 Raw Value of the Steer Command Sensor when the tiller arm is in centre position.
+#656
+Channel 1 Raw Value of the Steer Command Sensor when the tiller arm is rotated 90 clockwise from the centre position.
+#657
+Channel 1 Raw Value of the Steer Command Sensor when the tiller arm is rotated 90 counter clockwise from the centre position.
+#658
+Channel 2 Raq Value of the Steer Command Sensor when the tiller arm is in centre position.
+#659
+Channel 2 Raw Value of the Steer Command Sensor when the tiller arm is rotated 90 clockwise from the centre position.
+#660
+Channel 2 Raw Value of the Steer Command Sensor when the tiller arm is roated 90 counter clockwise from the centre position.
+#661
+Redundancy interval Value used for checking the values from both channels.
+#662
+Time interval used to check redundancy between the values from both channels.
+#663
+Offset Mode type.
+#664
+Tiller Arm Angle used to reset offset mode.
+#665
+On - Weight Sensor enable is enabled.<BR>
+Off - Weight Sensor enable is disabled.
+#666	
+Raw weight sensor values for calibration - P1.
+#667
+Raw weight sensor values for calibration - P2.
+#668
+Raw weight sensor values for calibration - P3.
+#669
+Raw weight sensor values for calibration - P4.
+#670
+Raw weight sensor values for calibration - P5.
+#671
+Load values for calibration - P1.
+#672
+Load values for calibration - P2.
+#673
+Load values for calibration - P3.
+#674
+Load values for calibration - P4.
+#675
+Load values for calibration - P5.
+#676
+Type 0 - Not defined<BR>
+Type 1 - 2-wire rheostat, 5 kohm - 0 input<BR>
+Type 2 - single-ended 3-wire 1 kohm - 10 kohm potentiometer, or 0 - 5V voltage source<BR>
+Type 3 - 2-wire rheostat, 0 - 5 kohm input<BR>
+Type 4 - wigwag 3-wire 1 kohm - 10 kohm potentiometer, or 0 - 5 V voltage source<BR>
+Type 5 - CAN
+#677
+If throttle Type = 5(CAN), the ID identifies what device is used in the truck.
+#678
+Channel 1 throttle start value for forward direction
+#679
+Channel 1 throttle end value for forward direction.
+#680
+Channel 1 throttle start value for reverse direction.
+#681
+Channel 1 throttle end value for reverse driection.
+#682
+Channel 2 throttle start value for forward direction.
+#683
+Channel 2 throttle end value for forward direction.
+#684
+Channel 2 throttle start value for reverse direction.
+#685
+Channel 2 throttle end value for reverse direction.
+#686
+Map response Input value for the pivot point.
+#687
+Map response Output value for the pivot point.
+#688
+Redundancy Value used for checking the values from both channels.
+#689
+Time interval used in checking redundancy between the values from both channels.
+#690
+Fingertip A settings.
+#691
+Fingertip A Channel 1 start value for forward direction.
+#692
+Fingertip A Channel 1 end value for forward direction.
+#693
+Fingertip A Channel 1 start value for reverse direction.
+#694
+Fingertip A Channel 1 end value for reverse direction.
+#695
+Fingertip A Channel 2 start value for forward direction.
+#696
+Fingertip A Channel 2 end value for forward direction.
+#697
+Fingertip A Channel 2 start value for reverse direction.
+#698
+Fingertip A Channel 2 end value for reverse direction.
+#699
+Fingertip A map response input value for the pivot point.
+#700
+Fingertip A map response output value for the pivot point.
+#701
+Fingertip A Redundancy Value used for checking the values from both channels.
+#702
+Fingertip A Time interval used in checking redundancy between the values from both channels.
+#703
+Fingertip B settings.
+#704
+Fingertip B Channel 1 start value for forward direction.
+#705
+Fingertip B Channel 1 end value for forward direction.
+#706
+Fingertip B Channel 1 start value for reverse direction.
+#707
+Fingertip B Channel 1 end value for reverse direction.
+#708
+Fingertip B Channel 2 start value for forward direction.
+#709
+Fingertip B Channel 2 end value for forward direction.
+#710
+Fingertip B Channel 2 start value for reverse direction.
+#711
+Fingertip B Channel 2 end value for reverse direction.
+#712
+Fingertip B map response input value for the pivot point.
+#713
+Fingertip B map response output value for the pivot point.
+#714
+Fingertip B Redundancy Value used for checking the values from both channels.
+#715
+Fingertip B Time interval used in checking redundancy between the values from both channels.
+#716
+Fingertip C settings.
+#717
+Fingertip C Channel 1 start value for forward direction.
+#718
+Fingertip C Channel 1 end value for forward direction.
+#719
+Fingertip C Channel 1 start value for reverse direction.
+#720
+Fingertip C Channel 1 end value for reverse direction.
+#721
+Fingertip C Channel 2 start value for forward direction.
+#722
+Fingertip C Channel 2 end value for forward direction.
+#723
+Fingertip C Channel 2 start value for reverse direction.
+#724
+Fingertip C Channel 2 end value for reverse direction.
+#725
+Fingertip C map response input value for the pivot point.
+#726
+Fingertip C map response output value for the pivot point.
+#727
+Fingertip C Redundancy Value used for checking the values from both channels.
+#728
+Fingertip C Time interval used in checking redundancy between the values from both channels.
+#729
+Fingertip D settings.
+#730
+Fingertip D Channel 1 start value for forward direction.
+#731
+Fingertip D Channel 1 end value for forward direction.
+#732
+Fingertip D Channel 1 start value for reverse direction.
+#733
+Fingertip D Channel 1 end value for reverse direction.
+#734
+Fingertip D Channel 2 start value for forward direction.
+#735
+Fingertip D Channel 2 end value for forward direction.
+#736
+Fingertip D Channel 2 start value for reverse direction.
+#737
+Fingertip D Channel 2 end value for reverse direction.
+#738
+Fingertip D map response input value for the pivot point.
+#739
+Fingertip D map response output value for the pivot point.
+#740
+Fingertip D Redundancy Value used for checking the values from both channels.
+#741
+Fingertip D Time interval used in checking redundancy between the values from both channels.
+#742
+Fingertip E settings.
+#743
+Fingertip E Channel 1 start value for forward direction.
+#744
+Fingertip E Channel 1 end value for forward direction.
+#745
+Fingertip E Channel 1 start value for reverse direction.
+#746
+Fingertip E Channel 1 end value for reverse direction.
+#747
+Fingertip E Channel 2 start value for forward direction.
+#748
+Fingertip E Channel 2 end value for forward direction.
+#749
+Fingertip E Channel 2 start value for reverse direction.
+#750
+Fingertip E Channel 2 end value for reverse direction.
+#751
+Fingertip E map response input value for the pivot point.
+#752
+Fingertip E map response output value for the pivot point.
+#753
+Fingertip E Redundancy Value used for checking the values from both channels.
+#754
+Fingertip E Time interval used in checking redundancy between the values from both channels.
+#755
+Fingertip F settings.
+#756
+Fingertip F Channel 1 start value for forward direction.
+#757
+Fingertip F Channel 1 end value for forward direction.
+#758
+Fingertip F Channel 1 start value for reverse direction.
+#759
+Fingertip F Channel 1 end value for reverse direction.
+#760
+Fingertip F Channel 2 start value for forward direction.
+#761
+Fingertip F Channel 2 end value for forward direction.
+#762
+Fingertip F Channel 2 start value for reverse direction.
+#763
+Fingertip F Channel 2 end value for reverse direction.
+#764
+Fingertip F map response input value for the pivot point.
+#765
+Fingertip F map response output value for the pivot point.
+#766
+Fingertip F Redundancy Value used for checking the values from both channels.
+#767
+Fingertip F Time interval used in checking redundancy between the values from both channels.
+#768
+Angle for the Directional Joystick (zero degrees reference is forks direction)
+#769
+Angle for the Hydraulics Joystick (zero degrees reference is forks direction)
+#770
+Voltage threshold for overspeed protection on PED.
+#771
+Minimum PWM value for direction A movement of the selected function.
+#772
+Maximum PWM value for direction A movement of the selected function.
+#773
+Minimum PWM value for direction B movement of the selected function.
+#774
+Maximum PWM value for direction B movement of the selected function.
+#775
+Minimum PWM value for direction A movement of the selected function.
+#776
+Maximum PWM value for direction A movement of the selected function.
+#777
+Minimum PWM value for direction B movement of the selected function.
+#778
+Maximum PWM value for direction B movement of the selected function.
+#779
+Minimum PWM value for direction A movement of the selected function.
+#780
+Maximum PWM value for direction A movement of the selected function.
+#781
+Minimum PWM value for direction B movement of the selected function.
+#782
+Maxiumum PWM value for direction B movement of the selected function.
+#783
+Minimum PWM value for direction A movement of the selected function.
+#784
+Maximum PWM value for direction A movement of the selected function.
+#785
+Minimum PWM value for direction B movement of the selected function.
+#786
+Maximum PWM value for direction B movement of the selected function.
+#787
+Minimum PWM value for direction A movement of the selected function.
+#788
+Maximum PWM value for direction A movement of the selected function.
+#789
+Minimum PWM value for direction B movement of the selected function.
+#790
+Maximum PWM value for direction B movement of the selected function.
+#791
+Minimum PWM value for direction A movement of the selected function.
+#792
+Maximum PWM value for direction A movement of the selected function.
+#793
+Minimum PWM value for direction B movement of the selected function.
+#794
+Maximum PWM value for direction B movement of the selected function.
+#795
+Minimum PWM value for direction A movement of the selected function.
+#796
+Maximum PWM value for direction A movement of the selected function.
+#797
+Minimum PWM value for direction B movement of the selected function.
+#798
+Maximum PWM value for direction B movement of the selected function.
+#799
+Minimum PWM value for direction A movement of the selected function.
+#800
+Maximum PWM value for direction A movement of the selected function.
+#801
+Minimum PWM value for direction B movement of the selected function.
+#802
+Maximum PWM value for direction B movement of the selected function.
+#803
+Minimum PWM value for direction A movement of the selected function.
+#804
+Maximum PWM value for direction A movement of the selected function.
+#805
+Minimum PWM value for direction B movement of the selected function.
+#806
+Maximum PWM value for direction B movement of the selected function.
+#807
+Minimum PWM value for direction A movement of the selected function.
+#808
+Maximum PWM value for direction A movement of the selected function.
+#809
+Minimum PWM value for direction B movement of the selected function.
+#810
+Maximum PWM value for direction B movement of the selected function.
+#811
+Minimum PWM value for direction A movement of the selected function.
+#812
+Maximum PWM value for direction A movement of the selected function.
+#813
+Minimum PWM value for direction B movement of the selected function.
+#814
+Maximum PWM value for direction B movement of the selected function.
+#815
+OverRide Speed Value for DAP M1.
+#816
+OverRide Speed Value for DAP M2.
+#817
+OverRide Speed Value for DAP M3.
+#818
+OverRide Speed Value for DAP M4.
+#819
+Override Speed value for DAP R1.
+#820
+Override Speed value for DAP R2.
+#821
+Override Speed value for DAP R3.
+#822
+Override Speed value for DAP R4.
+#823
+Maximum amount of time(ms) we allow the selected function to be active before requesting a go to neutral.<BR>Timeout will prevent damaging cables and controllers due to keeping the function active indefinitely.<BR>If value is set to zero, timeout is disabled.
+#824
+Maximum amount of time(ms) we allow the selected function to be active before requesting a go to neutral.<BR>Timeout will prevent damaging cables and controllers due to keeping the function active indefinitely.<BR>If value is set to zero, timeout is disabled.
+#825
+Maximum amount of time(ms) we allow the selected function to be active before requesting a go to neutral.<BR>Timeout will prevent damaging cables and controllers due to keeping the function active indefinitely.<BR>If value is set to zero, timeout is disabled.
+#826
+Maximum amount of time(ms) we allow the selected function to be active before requesting a go to neutral.<BR>Timeout will prevent damaging cables and controllers due to keeping the function active indefinitely.<BR>If value is set to zero, timeout is disabled.
+#827
+Maximum amount of time(ms) we allow the selected function to be active before requesting a go to neutral.<BR>Timeout will prevent damaging cables and controllers due to keeping the function active indefinitely.<BR>If value is set to zero, timeout is disabled.
+#828
+Maximum amount of time(ms) we allow the selected function to be active before requesting a go to neutral.<BR>Timeout will prevent damaging cables and controllers due to keeping the function active indefinitely.<BR>If value is set to zero, timeout is disabled.
+#829
+Maximum amount of time(ms) we allow the selected function to be active before requesting a go to neutral.<BR>Timeout will prevent damaging cables and controllers due to keeping the function active indefinitely.<BR>If value is set to zero, timeout is disabled.
+#830
+Maximum amount of time(ms) we allow the selected function to be active before requesting a go to neutral.<BR>Timeout will prevent damaging cables and controllers due to keeping the function active indefinitely.<BR>If value is set to zero, timeout is disabled.
+#831
+Maximum amount of time(ms) we allow the selected function to be active before requesting a go to neutral.<BR>Timeout will prevent damaging cables and controllers due to keeping the function active indefinitely.<BR>If value is set to zero, timeout is disabled.
+#832
+Maximum amount of time(ms) we allow the selected function to be active before requesting a go to neutral.<BR>Timeout will prevent damaging cables and controllers due to keeping the function active indefinitely.<BR>If value is set to zero, timeout is disabled.
+#833
+Maximum amount of time(ms) we allow the selected function to be active before requesting a go to neutral.<BR>Timeout will prevent damaging cables and controllers due to keeping the function active indefinitely.<BR>If value is set to zero, timeout is disabled.
+#834
+Maximum amount of time (ms) we allow the pump motor to be active in idle mode before stopping it.<BR>If value is set to zero timeout is disabled.
+#835
+Pump rpm speed when idle.<BR>Idle Speed allows steering with hydraulics.
+#836
+Pump rpm speed when driving in FR direction.
+#837
+Pump rpm speed when driving in LR direction.
+#838
+Pump motor Typical speed.
+#839
+Pump motor Max speed for Speed Mode 1.
+#840
+Traction Rear Right (TRR) motor Typical speed.
+#841
+Traction Rear Right (TRR) motor Max speed for Speed Mode 1.
+#842
+Traction Rear Left (TRL) motor Typical speed.
+#843
+Traction Rear Left (TRL) motor Max speed for Speed Mode 1.
+#844
+Traction Front Right (TFR) motor Typical speed.
+#845
+Traction Front Right (TFR) motor Max speed for Speed Mode 1.
+#846
+Traction Front Left (TFL) motor Typical speed.
+#847
+Traction Rear Left (TFL) motor Max speed for Speed Mode 1.
+#848
+Angle used to start limiting speed because truck is turning and driving in LR direction.
+#849
+Angle when limiting speed is max because truck is turning and driving in LR direction.
+#850
+Maximum speed reduction to be applied to the truck when turning and driving in LR direction.
+#851
+User 1 hydraulic speed limit for Hydraulic Function 1, direction A.
+#852
+User 1 hydraulic speed limit for Hydraulic Function 1, direction B.
+#853
+User 2 hydraulic speed limit for Hydraulic Function 1, direction A.
+#854
+User 2 hydraulic speed limit for Hydraulic Function 1, direction B.
+#855
+User 3 hydraulic speed limit for Hydraulic Function 1, direction A.
+#856
+User 3 hydraulic speed limit for Hydraulic Function 1, direction B.
+#857
+User 1 hydraulic speed limit for Hydraulic Function 2, direction A.
+#858
+User 1 hydraulic speed limit for Hydraulic Function 2, direction B.
+#859
+User 2 hydraulic speed limit for Hydraulic Function 2, direction A.
+#860
+User 2 hydraulic speed limit for Hydraulic Function 2, direction B.
+#861
+User 3 hydraulic speed limit for Hydraulic Function 2, direction A.
+#862
+User 3 hydraulic speed limit for Hydraulic Function 2, direction B.
+#863
+User 1 hydraulic speed limit for Hydraulic Function 3, direction A.
+#864
+User 1 hydraulic speed limit for Hydraulic Function 3, direction B.
+#865
+User 2 hydraulic speed limit for Hydraulic Function 3, direction A.
+#866
+User 2 hydraulic speed limit for Hydraulic Function 3, direction B.
+#867
+User 3 hydraulic speed limit for Hydraulic Function 3, direction A.
+#868
+User 3 hydraulic speed limit for Hydraulic Function 3, direction B.
+#869
+User 1 hydraulic speed limit for Hydraulic Function 4, direction A.
+#870
+User 1 hydraulic speed limit for Hydraulic Function 4, direction B.
+#871
+User 2 hydraulic speed limit for Hydraulic Function 4, direction A.
+#872
+User 2 hydraulic speed limit for Hydraulic Function 4, direction B.
+#873
+User 3 hydraulic speed limit for Hydraulic Function 4, direction A.
+#874
+User 3 hydraulic speed limit for Hydraulic Function 4, direction B.
+#875
+User 1 hydraulic speed limit for Hydraulic Function 5, direction A.
+#876
+User 1 hydraulic speed limit for Hydraulic Function 5, direction B.
+#877
+User 2 hydraulic speed limit for Hydraulic Function 5, direction A.
+#878
+User 2 hydraulic speed limit for Hydraulic Function 5, direction B.
+#879
+User 3 hydraulic speed limit for Hydraulic Function 5, direction A.
+#880
+User 3 hydraulic speed limit for Hydraulic Function 5, direction B.
+#881
+User 1 hydraulic speed limit for Hydraulic Function 6, direction A.
+#882
+User 1 hydraulic speed limit for Hydraulic Function 6, direction B.
+#883
+User 2 hydraulic speed limit for Hydraulic Function 6, direction A.
+#884
+User 2 hydraulic speed limit for Hydraulic Function 6, direction B.
+#885
+User 3 hydraulic speed limit for Hydraulic Function 6, direction A.
+#886
+User 3 hydraulic speed limit for Hydraulic Function 6, direction B.
+#887
+User 1 hydraulic speed limit for Hydraulic Function 7, direction A.
+#888
+User 1 hydraulic speed limit for Hydraulic Function 7, direction B.
+#889
+User 2 hydraulic speed limit for Hydraulic Function 7, direction A.
+#890
+User 2 hydraulic speed limit for Hydraulic Function 7, direction B.
+#891
+User 3 hydraulic speed limit for Hydraulic Function 7, direction A.
+#892
+User 3 hydraulic speed limit for Hydraulic Function 7, direction B.
+#893
+User 1 hydraulic speed limit for Hydraulic Function 8, direction A.
+#894
+User 1 hydraulic speed limit for Hydraulic Function 8, direction B.
+#895
+User 2 hydraulic speed limit for Hydraulic Function 8, direction A.
+#896
+User 2 hydraulic speed limit for Hydraulic Function 8, direction B.
+#897
+User 3 hydraulic speed limit for Hydraulic Function 8, direction A.
+#898
+User 3 hydraulic speed limit for Hydraulic Function 8, direction B.
+#899
+User 1 hydraulic speed limit for Hydraulic Function 9, direction A.
+#900
+User 1 hydraulic speed limit for Hydraulic Function 9, direction B.
+#901
+User 2 hydraulic speed limit for Hydraulic Function 9, direction A.
+#902
+User 2 hydraulic speed limit for Hydraulic Function 9, direction B.
+#903
+User 3 hydraulic speed limit for Hydraulic Function 9, direction A.
+#904
+User 3 hydraulic speed limit for Hydraulic Function 9, direction B.
+#905
+User 1 hydraulic speed limit for Hydraulic Function 10, direction A.
+#906
+User 1 hydraulic speed limit for Hydraulic Function 10, direction B.
+#907
+User 2 hydraulic speed limit for Hydraulic Function 10, direction A.
+#908
+User 2 hydraulic speed limit for Hydraulic Function 10, direction B.
+#909
+User 3 hydraulic speed limit for Hydraulic Function 10, direction A.
+#910
+User 3 hydraulic speed limit for Hydraulic Function 10, direction B.
+#911
+User 1 hydraulic speed limit for Hydraulic Function 11, direction A.
+#912
+User 1 hydraulic speed limit for Hydraulic Function 11, direction B.
+#913
+User 2 hydraulic speed limit for Hydraulic Function 11, direction A.
+#914
+User 2 hydraulic speed limit for Hydraulic Function 11, direction B.
+#915
+User 3 hydraulic speed limit for Hydraulic Function 11, direction A.
+#916
+User 3 hydraulic speed limit for Hydraulic Function 11, direction B.
+#917
+Default Maximum Truck Speed for user 1.
+#918
+Default Maximum Truck Speed for user 2.
+#919
+Default Maximum Truck Speed for user 3.
+#920
+Maximum lift height for user 1.
+#921
+Maximum lift height for user 2.
+#922
+Maximum lift height for user 3.
+#923
+Minimum feedback current for direction A for mode change when that option is available.
+#924
+Maximum feedback current for direction A for mode change when that option is available.
+#925
+Minimum feedback current for direction B for mode change when that option is available.
+#926
+Maximum feedback current for direction B for mode change when that option is available.
+#927
+Minimum PVG values for direction A for mode change when that option is available.
+#928
+Maximum PVG values for direction A for mode change when that option is available.
+#929
+Minimum PVG values for direction B for mode change when that option is available.
+#930
+Maximum PVG values for direction B for mode change when that option is available.
+#931
+Type 0 - Not defined<BR>
+Type 1 - 2-wire rheostat, 5 kohm - 0 input<BR>
+Type 2 - single-ended 3-wire 1 kohm - 10 kohm potentiometer, or 0 - 5V voltage source<BR>
+Type 3 - 2-wire rheostat, 0 - 5 kohm input<BR>
+Type 4 - n.a.<BR>
+Type 5 - CAN
+#932
+If Brake Type = 5(CAN) the ID identifies what device is iused in the truck.
+#933
+Channel 1 brake start value.
+#934
+Channel 1 brake end value.
+#935
+Channel 2 brake start value.
+#936
+Channel 2 brake end value.
+#937
+Map response input value for the pivot point.
+#938
+Map response output value for the pivot point.
+#939
+Redundancy Value used for checking the values from both channels.
+#940
+Time interval used in checking redundancy between the values from both channels.
+#941
+Height Assist will settings.
+#942
+Distance to start the slow down when lowering.
+#943
+Distance to start the slow down when lifting.
+#944
+Target rpm pump motor speed when arriving at target position.
+#945
+Target mast lift/lower linear speed when arriving at target position.
+#946
+Time to wait before releasing lift/lower after target position and going into neutral (lift/lower).
+#947
+Offset distance for zone 1.
+#948
+Offset distance for zone 2.
+#949
+Offset distance for zone 3.
+#950
+Rest position to be used if enabled in setup.
+#951
+Height position for rack 1.
+#952
+Height position for rack 2.
+#953
+Height position for rack 3.
+#954
+Height position for rack 4.
+#955
+Height position for rack 5.
+#956
+Height position for rack 6.
+#957
+Height position for rack 7.
+#958
+Height position for rack 8.
+#959
+Height position for rack 9.
+#960
+Height position for rack 10.
+#961
+Height position for rack 11.
+#962
+Height position for rack 12.
+#963
+Height position for rack 13.
+#964
+Height position for rack 14.
+#965
+Height position for rack 15.
+#966
+Height position for rack 16.
+#967
+Height position for rack 17.
+#968
+Height position for rack 18.
+#969
+Height position for rack 19.
+#970
+Height position for rack 20.
+#971
+Height position for rack 21.
+#972
+Height position for rack 22.
+#973
+Height position for rack 23.
+#974
+Height position for rack 24.
+#975
+Height position for rack 25.
+#976
+Height position for rack 26.
+#977
+Height position for rack 27.
+#978
+Height position for rack 28.
+#979
+Height position for rack 29.
+#980
+Height position for rack 30.
+#981
+Height position for rack 31.
+#982
+Height position for rack 32.
+#983
+Height position for rack 33.
+#984
+Height position for rack 34.
+#985
+Height position for rack 35.
+#986
+Height position for rack 36.
+#987
+Height position for rack 37.
+#989
+Height position for rack 38.
+#990
+Height position for rack 39.
+#991
+Height position for rack 40.
+#992
+Height position for rack 41.
+#993
+Height position for rack 42.
+#994
+Height position for rack 43.
+#995
+Height position for rack 44.
+#996
+Height position for rack 45.
+#997
+Height position for rack 46.
+#998
+Height position for rack 47.
+#999
+Height position for rack 48.
+#1000
+Height position for rack 49.
+#1001
+Height position for rack 50.
+#1002
+Height position for rack 51.
+#1003
+Height position for rack 52.
+#1004
+Height position for rack 53.
+#1005
+Height position for rack 54.
+#1006
+Height position for rack 55.
+#1007
+Height position for rack 56.
+#1008
+Height position for rack 57.
+#1009
+Height position for rack 58.
+#1010
+Height position for rack 59.
+#1011
+Angle for tuck rotation on display.
+#1012
+Brake Light Regen Value.
+#1013
+Tilt Sensors Setup.
+#1014
+Weight Sensor Setup Max Value
+#1015
+Reserved
+#1016
+Reserved
+#1017
+Reserved
+#1018
+Reserved
+#1019
+Reserved
+#1020
+Hydraulic 1 - Ramp Up
+#1021
+Hydraulic 1 - Ramp Down
+#1022
+Hydraulic 1 - RampTime
+#1023
+Hydraulic 1 - Kp
+#1024
+Hydraulic 1 - Ki
+#1025
+Hydraulic 2 - Ramp Up
+#1026
+Hydraulic 2 - RampDown
+#1027
+Hydraulic 2 - Ramp Time
+#1028
+Hydraulic 2 - Kp
+#1029
+Hydraulic 2 - Ki
+#1030
+Hydraulic 3 - Ramp Up
+#1031
+Hydraulic 3 - Ramp Down
+#1032
+Hydraulic 3 - Ramp Time
+#1033
+Hydraulic 3 - Kp
+#1034
+Hydraulic 3 - Ki
+#1035
+Hydraulic 4 - Ramp Up
+#1036
+Hydraulic 4 - Ramp Down
+#1037
+Hydraulic 4 - Ramp Time
+#1038
+Hydraulic 4 - Kp
+#1039
+Hydraulic 4 - Ki
+#1040
+Hydraulic 5 - Ramp Up
+#1041
+Hydraulic 5 - Ramp Down
+#1042
+Hydraulic 5 - Ramp Time
+#1043
+Hydraulic 5 - Kp
+#1044
+Hydraulic 5 - Ki
+#1045
+Hydraulic 6 - Ramp Up
+#1046
+Hydraulic 6 - RampDown
+#1047
+Hydraulic 6 - Ramp Time
+#1048
+Hydraulic 6 - Kp
+#1049
+Hydraulic 6 - Ki
+#1050
+Hydraulic 7 - Ramp Up
+#1051
+Hydraulic 7 - Ramp Down
+#1052
+Hydraulic 7 - Ramp Time
+#1053
+Hydraulic 7 - Kp
+#1054
+Hydraulic 7 - Ki
+#1055
+Hydraulic 8 - Ramp Up
+#1056
+Hydraulic 8 - Ramp Down
+#1057
+Hydraulic 8 - Ramp Time
+#1058
+Hydraulic 8 - Kp
+#1059
+Hydraulic 8 - Ki
+#1060
+Hydraulic 9 - Ramp Up
+#1061
+Hydraulic 9 - Ramp Down
+#1062
+Hydraulic 9 - Ramp Time
+#1063
+Hydraulic 9 - Kp
+#1064
+Hydraulic 9 - Ki
+#1065
+Hydraulic 10 - Ramp Up
+#1066
+Hydraulic 10 - Ramp Down
+#1067
+Hydraulic 10 - Ramp Time
+#1068
+Hydraulic 10 - Kp
+#1069
+Hydraulic 10 - Ki
+#1070
+Hydraulic 11 - Ramp Up
+#1071
+Hydraulic 11 - Ramp Down
+#1072
+Hydraulic 11 - Ramp Time
+#1073
+Hydraulic 11 - Kp
+#1074
+Hydraulic 11 - Ki
+#1075
+Reserved
+#1076
+Reserved
+#1077
+Reserved
+#1078
+Reserved
+#1079
+Reserved
+#1080
+Reserved
+#1081
+Reserved
+#1082
+Reserved
+#1083
+Reserved
+#1084
+Reserved
+#1085
+Reserved
+#1086
+Reserved
+#1087
+Reserved
+#1088
+Reserved
+#1089
+Reserved
+#1090
+Reserved
+#1091
+Reserved
+#1092
+Reserved
+#1093
+Reserved
+#1094
+Reserved
+#1095
+Reserved
+#1096
+Reserved
+#1097
+Reserved
+#1098
+Reserved
+#1099
+Reserved
+#1100
+SRR Sensor min raw
+#1101
+SRR Sensor max raw
+#1102
+SRR Sensor min counts
+#1103
+SRR Sensor max counts
+#1104
+SRL Sensor min raw
+#1105
+SRL Sensor max raw
+#1106
+SRL Sensor min counts
+#1107
+SRL Sensor max counts
+#1108
+SFR Sensor min raw
+#1109
+SFR Sensor max raw
+#1110
+SFR Sensor min counts
+#1111
+SFR Sensor max counts
+#1112
+SFL Sensor min raw
+#1113
+SFL Sensor max raw
+#1114
+SFL Sensor min counts
+#1115
+SFL Sensor max counts
+#1116
+Steer Command A min raw 
+#1117
+Steer Command A max raw  
+#1118
+Steer Command B min raw 
+#1119
+Steer Command B max raw  
+#1120
+Crab Command min raw 
+#1121
+Crab Command max raw  
+#1122
+Steer Counts 01
+#1123
+Steer Counts 12
+#1124
+Steer Counts 23
+#1125
+Steer Counts 34
+#1126
+Steer Counts 45
+#1127
+Steer Counts 56
+#1128
+Steer Counts 66
+#1129
+Steer Sensitivity 13
+#1130
+Speed Sensitivity 13
+#1131
+Crab max step
+#1132
+Crab neutral deadband
+#1133
+P34 x offset
+#1134
+P34 y offset
+#1135
+P45 y offset
+#1136
+P66 y offset
+#1137
+SRR home Counts
+#1138
+SRL home Counts
+#1139
+SFR home Counts
+#1140
+SFL home Counts
+#1141
+Homing Deadband
+#1142
+Homing Correction Method
+#1143
+CAN timeout heartbeat
+#1144
+CAN timeout nmt
+#1145
+CAN timeout PDO critical
+#1146
+CAN timeout PDO normal
+#1147
+Force Feedback 1
+#1148
+Force Feedback 2
+#1149
+Force Feedback 3
+#1150
+SRR prox Counts
+#1151
+SRL prox Counts
+#1152
+SFR prox Counts
+#1153
+SFL prox Counts
+#1154
+Park Brake Mode
+#1155
+Park Brake - ON min
+#1156
+Park Brake - ON max
+#1157
+Park Brake - OFF min
+#1158
+Park Brake - OFF max
+#1159
+Park Brake - Release min delay
+#1160
+Park Brake - Release_max delay
+#1490
+Fixed setting needed to disable the CAN parameter update in the Curtis controller. 
+#1491
+Fixed setting needed to disable the CAN parameter update in the Curtis controller. 
+#1492
+Fixed setting needed to disable the CAN parameter update in the Curtis controller. 
+#1493
+Fixed setting needed to disable the CAN parameter update in the Curtis controller.
+#1494
+Fixed setting needed to disable the CAN parameter update in the Curtis controller.
+#1495
+Fixed setting needed to disable the CAN parameter update in the Curtis controller.
+#1496
+Fixed setting needed to disable the CAN parameter update in the Curtis controller.
+#1497
+Fixed setting needed to disable the CAN parameter update in the Curtis controller.
+#1498
+Fixed setting needed to disable the CAN parameter update in the Curtis controller.
+#1499
+Fixed setting needed to disable the CAN parameter update in the Curtis controller. 
+#1500
+Fixed setting for confirmation of end of parameter file.

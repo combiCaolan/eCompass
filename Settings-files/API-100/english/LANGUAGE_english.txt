@@ -1,0 +1,305 @@
+Message:Message
+ErrorMessage1:Variables Necessary for basic functionality have been messed with.
+ErrorMessage2:There is no api version in this file - please contact combilift regarding this.
+ErrorMessage3:Will have to change api version.Api version of this file is 
+SearchDialog:Parameter Search
+ErrorDialog:Errors on this file updated
+ErrorsDialog:Errors on this file updated
+ErrorAlertDialog:Current Errors
+CloseFileDialog:Close File updated
+OpenNewFileNewTabDialog:Open New File in new tab updated
+NewFileDialog:New File updated
+UserDetailsDialog:User Dialog updated
+AccessLevelDialog:Access Level updated
+AboutUsDialog:About us updated
+ChangeLanguageDialog:Change Language updated
+AdminPageDialog:Admin Page updated
+ContactSupportDialog:Contact Support updated
+CompareDialog:Compare updated
+LogViewerDialog:Log Viewer updated
+ChangeUserDialog:Change User updated
+FileActionsDialog:File Actions updated
+OpenInNewTab:Open in new tab
+File:File
+Tools:Tools 
+Settings:Settings 
+Help:Help 
+WelcomeBack:Welcome Back, 
+PleaseOpenMessage:Please open a combilift parameters file(.clp file) 
+VCLVersion:VCL Version 
+FileExtension:File Extension 
+NotAccepted:Not Accepted 
+PermissionError:You do not have Permission to edit or view this parameter 
+Keyswitch:Keyswitch 
+KeyswitchHourmeter:Keyswitch Hourmeter 
+Hourmeter:Hourmeter 
+EngineHourmeter:Engine Hourmeter 
+OSVersion:OS Version 
+OSBuild:OS Build 
+ModelNumber:Model Number 
+SerialNumber:Serial Number 
+AppInfo:App Info 
+RTSInfo:RTS Info 
+ActiveUser:Active User 
+FileActions:FileActions 
+open:Open 
+new:New 
+Interlock:Interlock 
+InterlockHourmeter:Interlock Hourmeter 
+Traction:Traction 
+TractionHourmeter:Traction Hourmeter 
+HydraulicHourmeter:Hydraulic Hourmeter 
+Timestamp:Timestamp 
+OpenDefaultFile:Open Default File 
+ApiVersion:API Version 
+ClearHistory:Clear History 
+Save:Save (Download) 
+SaveAs:Save As 
+close:Close 
+ReloadToDisk:Reload From Disk 
+Language:Language 
+Exit:Exit 
+ChangeLanguage:Change Language 
+ReadFromPastFiles:Read From Past Files 
+Errors:Errors 
+PerformErrorCheck:Perform Error Check 
+ErrorFoundAgainst:Error Found Against 
+FatalErrors:Fatal Errors 
+LargeParameters:Large Parameters 
+SmallParameters:Small Parameters 
+About:About 
+AccessLevel:Access Level 
+Help:Help 
+ContactSupport:Contact Support 
+CurrentValue:Current Value 
+MinValue:Min Value 
+MaxValue:Max Value 
+DefaultValue:Default Value 
+FactoryValue:Factory Value 
+TruckDetailsText:Truck Details 
+TruckVersion:Truck Version 
+FileDetailsText:File Details  
+SoftwareText:Software 
+ServiceTabText:Service 
+MoCASText:MoCAS 
+ParameterSettingsText:Parameter / Settings 
+FactoryIDText:Factory 
+DeveloperIDText:Developer 
+NotAssignedIDText:Not Assigned 
+SpecialIDText:Special 
+Export:Export  
+ExportSelectedParamters:Export Selected Parameters 
+Close:Close 
+UndoAllChangesAndLoadCurrentFile:Undo All Changes and load Current File 
+Exit:Exit File [x] 
+Compare:Compare Files 
+LogViewer:Log Viewer 
+ChangeUser:Change User 
+SpecialBlocks:Special Blocks 
+ChangeLanguage:Change Language 
+ChangeApi:Change API 
+ContactSupport:Contact Support 
+Manual:Manual 
+KnowledgeBase:Knowledge Base 
+AboutUs:About Us 
+TruckModel:Truck Model 
+TruckVersion:Truck Version 
+TruckSerialNumber:Truck Serial Number 
+TruckBuildDate:Truck Build Date
+TruckDealerDate:Truck Dealer Installation Date 
+TruckCustomerDate:Truck Customer Installation Date 
+UpdateMode:Update Mode 
+FileClonedInformation:File Cloned Info 
+FileExportedInformation:File Exported Info 
+SetKeyswitchHourmeter:Set Keyswitch Hourmeter 
+SetInterlockHourmeter:Set Interlock Hourmeter 
+SetTractionHourmeter:Set Traction Hourmeter 
+TreeWorkLights:Work Lights 
+SetHydraulicHourmeter:Set Hydraulic Hourmeter 
+SetEngineHourmeter:Set Engine Hourmeter 
+Functions:Fucntions 
+ParameterFileVersion:Parameter File Version 
+FirstService:First Service 
+StandardService:Standard Service 
+FullService:Full Service 
+WorkLights:Work Lights 
+WarningLights:Warning Lights 
+RoadLights:Road Lights 
+MastStageSlowDown:Mast Stage Slow Down 
+CarriageSlowdown:Carriage Slowdown 
+LoadMeasurement:Load Measurement 
+OutOfScaleLarge:This Parameter was listed as out of scale on initial Integrity Check - Please Ensure your current Value is within your Min and Max values 
+OutOfScaleSmall:This Parameter was listed as out of scale on initial Integrity Check - Please Ensure your current Value is within your Min and Max values 
+Export:Export 
+CurrentValueString:Current Value 
+MaximumValueString:Max Value of Parameter 
+MinimumValueString:Min Value of Parameter 
+TruckDefaultValueString:Truck Default 
+FactoryDefaultValueString:Factory Default Value 
+ParameterErrorOutOfRangeString:There is a problem with your parameter file - A parameter / Multiple Parameters are out of range 
+ParameterErrorNonNumberCharacterString:There is a non Number character somewhere in this file - this file is corrupted 
+ErrorMessageUpdateIssue:Current value is empty, setting back to previous value 
+ErrorMessageMaxValueIssue:Max Value is empty setting Back to Previous Value 
+ErrorMessageMinValueIssue:Min Value is empty settings back to previous value 
+ErrorMessageDefault:Default Value is empty setting back to previous value 
+ErrorMessageFactory:Factory value is empty setting back to previous value 
+ErrorMessageLargeScale:You cannot make your current value larger than your maximum value 
+ErrorMessageSmallScale:You cannot make your current value smaller than your minimum value 
+ErroMessageDefaultMax:You cannot make your Default value larger than your maximum value 
+ErrorMessageDefaultMin:You cannot make your Default value smaller than your minimum value 
+ErrorMessageFactoryMax:You cannot make your Factory value larger than your maximum value 
+ErrorMessageNonNumberCurrent:A non number has been placed in the current value input 
+ErrorMessageNonNumberMin:A non number has been placed in the min value input 
+ErrorMessageNonNumberMax:A non number has been placed in the max value input 
+ErrorMessageNonNumberDefault:A non number has been placed in the Default value input 
+A:Truck Details 
+B:File Details 
+C:Software 
+D:Service 
+E:MoCAS 
+F:Parameters 
+G:Factory 
+H:Developer 
+I:Not Assigned 
+G1:+ Hourmeters & Service 
+G2:+ Dynamics 
+G28:+ Pump
+G21:+ Drive Speeds 
+G22:+ Curve Control 
+G23:+ Drive Mode
+G231:+ Drive Mode Change Setup 
+G24:+ Dynamic Active Point 
+G240a:+ DAP Sensors
+G240b:+ DAP Distances
+G240c:+ DAP Active Levels
+G240d:+ DAP Overrides
+G241:+ DAP Mast Point 1 
+G242:+ DAP Mast Point 2 
+G243:+ DAP Mast Point 3 
+G244:+ DAP Mast Point 4 
+G245:+ DAP Reach Point 1 
+G246:+ DAP Reach Point 2 
+G247:+ DAP Reach Point 3 
+G248:+ DAP Reach Point 4 
+G25:+ Mast Slow Down Dynamics 
+G251:+ Mast SD Setup
+G26:+ Carriage Slow Down Dynamics 
+G261:+ Carriage SD Setup
+G27:+ APSteer 
+G3:+ Safety 
+G31:+ Driver Presence 
+G32:+ Motion Alarm 
+G33:+ Warning Lights 
+G34:+ Pre Operation Check 
+G4:+ Hydraulics 
+G41:+  
+G41in:+ Input settings 
+G41out:+ Output settings 
+G42:+  
+G42in:+ Input settings 
+G42out:+ Output settings 
+G43:+  
+G43in:+ Input settings 
+G43out:+ Output settings  
+G44:+  
+G44in:+ Input settings 
+G44out:+ Output settings  
+G45:+  
+G45in:+ Input settings 
+G45out:+ Output settings  
+G46:+  
+G46in:+ Input settings 
+G46out:+ Output settings  
+G47:+  
+G47in:+ Input settings 
+G47out:+ Output settings  
+G48:+  
+G48in:+ Input settings 
+G48out:+ Output settings  
+G49:+  
+G49in:+ Input settings 
+G49out:+ Output settings  
+G410:+  
+G410in:+ Input settings 
+G410out:+ Output settings  
+G411:+  
+G411in:+ Input settings 
+G411out:+ Output settings  
+G5:+ Battery 
+G6:+ Users 
+G7:+ Units 
+G8:+ Extra Modules 
+G81:+ Work Lights 
+G82:+ Road Lights 
+G83:+ Fans 
+G831:+ FAN 1 Setup
+G832:+ FAN 2 Setup
+G84:+ Height CombiAssist 
+G9:+ Hardware 
+G91:+ Steer Sensors 
+G911:+ Hydraulic Steer 
+G912:+ Electric Steer 
+G913:+ Steer Command 
+G92:+ Throttle Sensor 
+G93:+ Brake Sensor 
+G94:+ Fingertip Sensor 
+G941:+ Fingertip Sensor A  
+G942:+ Fingertip Sensor B 
+G943:+ Fingertip Sensor C 
+G944:+ Fingertip Sensor D 
+G945:+ Fingertip Sensor E 
+G946:+ Fingertip Sensor F 
+G95:+ Reach Sensor 
+G96:+ Height Sensor 
+G97:+ Tilt Sensors 
+G98:+ Weight Sensor 
+G99:+ Load Sensor 
+G10:+ Pedestrian
+G101:+ Steering Map FR
+G102:+ Steering Map LR
+G103:+ Wheel Position
+G104:+ Steer Position
+G105:+ Offset
+G11:+ Park Brake
+G12:+ Motors and Controllers
+GG1:+ Pump
+GG2:+ TRR > Traction Rear Right
+GG3:+ TRL > Traction Rear Left
+GG4:+ TFR > Traction Front Right
+GG5:+ TFL > Traction Front Left
+GG6:+ SRR > Steer Rear Right
+GG7:+ SRL > Steer Rear Left
+GG8:+ SFR > Steer Front Right
+GG9:+ SFL > Steer Front Left
+GH1:+ CAN
+GH2:+ Layout
+PleaseUploadYourLogFile:Please Upload Your Log File
+CloseFileDialogMessage:Do you want to close this file? You will lose any unsaved parameters.
+0:Generic operator
+1:Operator 1
+2:Operator 2
+3:Operator 3
+4:Service
+5:Manager
+6:Dealer
+7:Combilift
+8:E-Compass Developer
+NoDescription:There is no Description Available For This Parameter
+FileActionsDescription:This Function allows you to set all parameters on your machine back to default or factory settings.
+SpecialBlocksDescription:This Function allows you to add blocks of parameters you may need to add
+FileActions:File Actions
+FileActionsDefaultCheckMsg:This is the message to check if the user really wants to set current values to default - you can change this text in the language file
+FileActionsFactoryCheckMsg:This is the message to check if the user really wants to set current values to default - you can change this text in the language file
+GeneralFileLostWarning:Are you sure? Any unsaved data will be lost.
+EcompassFailure:Variables necessary for basic functionality have been messed with.
+CompareTitle:Compare Combilift Files
+CompareDescription:This Function allows you to compare two different combilift parameter files - it will list the differences between these files on the right hand side and if you click on these listed differences - will open that parameter so you can change it to your preferred state.
+MocasOn:Enabled
+MocasOff:Disabled
+Comments:Comments:
+GetActivationCode:Get Activation Code
+LoadingText:Loading your file <br/> this can take up to one minute
+UsernameFixed:Username
+AccessLevel:Access Level
+ApiVersion: Api Version
+Logout:Logout

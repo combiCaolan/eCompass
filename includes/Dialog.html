@@ -1,0 +1,178 @@
+<div id="PopUpsDiv" style="display:none;">
+
+	<div id="SearchParameterDialog" title="Search For a Parameter">
+		<input type='text' id="SEARCHBAR" placeholder='Type Parameter Name'/>
+		<br/><br/>
+		<div id="ParametersSearchList" style="height:350px; overflow:auto; border:1px solid black">
+		</div>
+	</div>
+	
+	<div id="OpenNewTabDialog" title="- - - - - - - - -">
+		<button onclick="readParameters()" id="OpenFileButton">Open </button>
+	</div>
+
+	 <div id="ParameterChangeError" title="Error">
+		 <p id="ErrorDialogMessage"></p>
+	 
+	</div>
+	
+	<div id="ErrorAlertDialog" title="Errors">
+		<div id="MinErrors">
+			<p id="MinErrorsTitle"> Min Errors</p>
+			<hr>
+			<div id="MinErrorsList">
+			</div>
+		</div>
+		
+		<div id="MaxErrors">
+			<p id="MaxErrorsTitle">Max Errors</p>
+			<hr>
+			<div id="MaxErrorsList">
+			</div>
+		</div>
+		<!--
+		<div id="BigFaults">
+			<p>Big Errors</p>
+			<hr>
+			<div id="BigErrorsList">
+			</div>
+		</div>
+		-->
+	</div>
+
+	<div id="CloseFileDialog" title="Close File?">
+		<input type="submit" value="Close File" onclick="sessionStorage.clear(); location.href=`https://support.combilift.net/ecompass`;"/>
+	  <p>Are you sure you want to close your file? If you have not downloaded a copy of this file, all changes will be lost.</p>
+	  <input type="submit" value="Close Anyway" onclick="location.href='index.php';"/>
+	</div>
+		
+	<div id="OpenInNewTabDefaultFileList" title="Open New File in new tab">
+		<!--<input type="submit" onclick="OpenInNewTab()" />-->
+		<div id="NewTabDefaultFilesDiv" style="background: white; width: 100%;">
+			
+		</div>
+	</div>
+	
+	<div id="DefaultFileList" title="New File">
+		<div id="DefaultFilesDiv" style="background: white; width: 100%;">
+			
+		</div>
+	</div>
+
+	<div id="UsernameDialog" title="User Details">
+	  <p id="UsernameMessage"></p>
+	  <p>This is your username from the Combilift Knowledge-Base Account.</p>
+	<script> document.getElementById('UsernameMessage').innerHTML = localStorage.getItem('loggedinusername');</script>
+	</div>
+
+	<div id="AccessLevelDialog" title="Access Levels">
+	  <p>Depending on your Access Level you are granted different file permissions as listed below:</p>
+	</div>
+
+	<div id="AboutUsDialog" title="About Us">
+	  <p>Information about combilift is here : </p>
+	  <a href="https://combilift.com/en/about-us">About us from combilift.com</a>
+	</div>
+
+	<div id="ChangeLanguageDialog" title="Change Language">
+	  <p>Language options will be here</p>
+	<ul>
+		<li><input type="submit" value="English" onclick="localStorage.setItem('Language','english'); location.href = 'https://support.combilift.net/ecompass/index.php';"/></li>
+		<li><input type="submit" value="German" onclick="localStorage.setItem('Language','german'); location.href = 'https://support.combilift.net/ecompass/index.php';"/></li>
+	</ul>
+	</div>
+
+
+	<div id="AdminPageDialog" title="Admin Page">
+	  <p>Currently supported APIs</p>
+	  <ul>
+		<li>option</li>
+		<li>option</li>
+		<li>option</li>
+	  </ul>
+		<form action="#" method="POST" name="MakeNewApiDirectory">
+			<input type="text" placeholder="API-NAME"/> <br/> <br/>
+			<textarea placeholder="Notes on changes for this API Version"></textarea> <br/> <br/>
+			<br>
+	<div style="height:250px; overflow:auto;">
+	<label>Add Parameter Main File</label><br/><br/>
+	<input type="file" /><br/><br/>
+
+	<label>Add Parameter 1000 File</label><br/><br/>
+	<input type="file" /><br/><br/>
+
+	<label>Add Parameter 999 File</label><br/><br/>
+	<input type="file" /><br/><br/>
+
+	<label>Add Parameter DropDown List File</label><br/><br/>
+	<input type="file" /><br/><br/>
+
+	<label>Add Parameter Special Description File</label><br/><br/>
+	<input type="file" /><br/><br/>
+
+	<label>Add Parameter Main Description File</label><br/><br/>
+	<input type="file" /><br/><br/>
+	</div>
+			<label>Make Api Public?</label><br/><input type="checkbox" /> <br/> <br/>
+			<i id="SubmitLabel">API Submitted under </i>
+			<p>Lowest Acccess: </p> <input type="number" value="5"/>
+			<p>Highest Acccess: </p> <input type="number" value="8"/>
+			<script> document.getElementById('SubmitLabel').innerHTML = document.getElementById('SubmitLabel').innerHTML + ' ' + localStorage.getItem('loggedinusername');</script>
+			 <br/> <br/>
+			<input type="submit" value="Publish API"/>
+		</form>
+	</div>
+
+
+
+	<div id="ContactSupportDialog" title="Contact Support">
+	  <a href="#">Email Support</a>
+	  <a href="#">Call Help Center</a>
+	</div>
+
+	<div id="CompareDialog" title="Compare">
+		<p>Please Upload a file to compare this file with : </p>
+		<input type="submit" onclick="PostCompareFile()" value="Choose File">
+	<div id="ContentDiv" style="display:none;">
+	<h1>Compare Files</h1>
+	<i>Comparing</i>
+	<i id="FirstFileName"></i>
+	<i>with</i>
+	<i id="SecondFileName"></i>
+	<div id="results">
+	</div>
+
+		<input type="submit" value="Compare Files" onclick="Compare()"/>
+		<input type="submit" value="Clear Results" onclick="Clear()"/>
+	<div id="AddParametersQuery">
+	</div>
+	</div>
+	</div>
+	<div id="LogViewerDialog" title="Log Viewer">
+	  <p>Please upload your log file :</p><br/>
+	  <input type="file" />
+	</div>
+
+	<div id="ChangeUserDialog" title="Change Access Level">
+	  <p>User Access Levels will be here.</p>
+	</div>
+
+	<div id="FileActionsDialog" title="File Action">
+		<!--<fieldset>
+		<legend>Add exempt parameter index</legend>
+		<input type="number" id="exemptIndex" placeholder="placeholder"/> <br/>
+		<input type="submit" onclick="alert('will exempt');" /> <br/> 
+		</fieldset>-->
+		<br/>
+		<div id="Wrapper">
+	
+			<input type="submit" value="Default" id="SpecialBlocksDefaultSetButton" style="" onclick="SBSetDefaults()"/> 
+		
+			<input type="submit" value="Factory" id="SpecialBlocksDefaultSetButton" style="" onclick="SBSetFactory()"/> 
+		
+		</div>
+		<div id="right">
+			<!--<div id="SpecialBlockLog" style="display:none;"></div>-->
+		</div>
+	</div>
+</div>

@@ -1,0 +1,1193 @@
+1,H,0,Update Mode
+2,A,500,Machine  Model
+4,A,0,Machine Serial Number
+5,A,0,Machine Build Date
+6,C,0,API version
+7,B,0,CLP Cloned Info
+8,B,0,CLP Exported Info
+9,D,0,First Service Info
+10,D,0,Standard Service Info
+11,D,0,Full Service Info
+12,C,0,Pump (P) Controller Info
+13,C,0,Traction Rear Right (TRR) Controller Info
+14,C,0,Traction Rear Left (TRL) Controller Info
+15,C,0,Traction Front Right (TFR) Controller Info
+16,C,0,Traction Front Left (TFL) Controller Info
+17,C,0,Steer Rear Right (SRR) Controller Info
+18,C,0,Steer Rear Left (SRL) Controller Info
+19,C,0,Steer Front Right (SFR) Controller Info
+20,C,0,Steer Front Left (SFL) Controller Info
+21,C,0,PLC Info
+22,C,0,Screen Info
+32,J,0,Set Keyswitch Hourmeter
+33,J,0,Set Interlock Hourmeter
+34,J,0,Set Traction Hourmeter
+35,J,0,Set Hydraulic Hourmeter
+36,J,0,Set Engine Hourmeter
+37,E,0,Work Lights
+38,E,0,Safety Warning Lights
+39,E,0,Road Lights
+40,E,0,Dynamic Active Points
+41,E,0,Mast Slow Down
+42,E,0,Carriage Slow Down
+43,E,0,Load/Weight
+44,E,0,Load Assist
+45,E,0,Height Assist
+46,E,0,Multi User
+47,E,0,Pre Operation Check
+48,E,0,Tilt Assist
+49,E,0,Combilift In Aisle System
+50,E,0,On Screen Camera
+89,J,0,DAP_Override
+90,J,0,P_PAR_write_enable
+91,J,0,TRR_PAR_write_enable
+92,J,0,TRL_PAR_write_enable
+93,J,0,TFR_PAR_write_enable
+94,J,0,TFL_PAR_write_enable
+95,J,0,SRR_PAR_write_enable
+96,J,0,SRL_PAR_write_enable
+97,J,0,SFR_PAR_write_enable
+98,J,0,SFL_PAR_write_enable
+99,J,0,EXP_PAR_write_enable
+120,F G1,7,Displayed Hourmeter
+123,F G1,0,First Service Interval
+124,F G1,0,Standard Service Interval
+125,F G1,0,Full Service Interval
+126,F G1,8,Service Hourmeter
+127,F G1,0,Service Warning Display Time
+128,F G1,0,Standard Service Days Interval
+129,F G1,0,Full Service Days Interval
+122,F G1,0,Service Warning Display Days
+1015,F G1,4,Hourmeter Access Level
+601,F G2 G21,0,DSC - Max speed
+602,F G2 G21,0,DSC - Slow speed
+603,F G2 G21,0,DSC - LOS speed
+604,F G2 G21,0,DSC - ECO speed
+605,F G2 G21,0,DSC - Fault speed
+606,F G2 G21,0,DSC - Low SoC speed
+607,F G2 G21,0,DSC - Forks direction speed
+608,F G2 G21,0,DSC - Reverse Forks direction speed
+609,F G2 G21,0,DSC - Left Forks direction speed
+610,F G2 G21,0,DSC - Right Forks direction speed
+611,F G2 G21,0,DSC - FR Low speed
+612,F G2 G21,0,DSC - LR Low speed
+613,F G2 G21,0,DSC - FR Ride On speed
+614,F G2 G21,0,DSC - LR Ride On speed
+548,F G2 G22,2,DCC - Setup
+549,F G2 G22,0,DCC - FR Start Reduction Angle
+550,F G2 G22,0,DCC - FR Max Reduction Angle
+551,F G2 G22,0,DCC - FR Speed Reduction
+848,F G2 G22,0,DCC - LR Start Reduction Angle
+849,F G2 G22,0,DCC - LR Max Reduction Angle
+850,F G2 G22,0,DCC - LR Speed Reduction
+553,F G2 G23 G231,999,+ Drive Mode Change Setup
+552,F G2 G23,24,Drive Mode Setup
+554,F G2 G23,0,Motor Zero rpm
+555,F G2 G23,0,Mode Change - Max Time
+556,F G2 G23,0,Mode Change - Speed rpm
+557,F G2 G23,0,Mode Change - Forks CW Angle
+558,F G2 G23,0,Mode Change - Forks CW Reduction %
+559,F G2 G23,0,Mode Change - Forks CCW Angle
+560,F G2 G23,0,Mode Change - Forks CCW Reduction %
+561,F G2 G23,0,Mode Change - Perpend forks CW angle
+562,F G2 G23,0,Mode Change - Perpend forks CW reduction %
+563,F G2 G23,0,Mode Change - Perpend forks CCW angle
+564,F G2 G23,0,Mode Change - Perpend forks CCW reduction %
+923,F G2 G23,0,Mode Change Dir A FC min
+924,F G2 G23,0,Mode Change Dir A FC max
+925,F G2 G23,0,Mode Change Dir B FC min
+926,F G2 G23,0,Mode Change Dir B FC max
+927,F G2 G23,0,Mode Change Dir A PVG min
+928,F G2 G23,0,Mode Change Dir A PVG max
+929,F G2 G23,0,Mode Change Dir B PVG min
+930,F G2 G23,0,Mode Change Dir B PVG max
+420,F G2 G24 G240a,999,+ DAP - Sensors
+421,F G2 G24 G240a,999,+ DAP - Distances
+422,F G2 G24 G240a,999,+ DAP - Active Level
+423,F G2 G24 G240a,999,+ DAP - Overrides
+424,F G2 G24 G241,0,DAP H1 - Position
+425,F G2 G24 G241,0,DAP H1 - Truck Speed
+426,F G2 G24 G241,0,DAP H1 - Lift Speed
+427,F G2 G24 G241,0,DAP H1 - Lower Speed
+428,F G2 G24 G241,0,DAP H1 - Reach Speed
+429,F G2 G24 G241,0,DAP H1 - Retract Speed
+815,F G2 G24 G241,0,DAP H1 - Override Speed
+430,F G2 G24 G242,0,DAP H2 - Position
+431,F G2 G24 G242,0,DAP H2 - Truck Speed
+432,F G2 G24 G242,0,DAP H2 - Lift Speed
+433,F G2 G24 G242,0,DAP H2 - Lower Speed
+434,F G2 G24 G242,0,DAP H2 - Reach Speed
+435,F G2 G24 G242,0,DAP H2 - Retract Speed
+816,F G2 G24 G242,0,DAP H2 - Override Speed
+436,F G2 G24 G243,0,DAP H3 - Position
+437,F G2 G24 G243,0,DAP H3 - Truck Speed
+438,F G2 G24 G243,0,DAP H3 - Lift Speed
+439,F G2 G24 G243,0,DAP H3 - Lower Speed
+440,F G2 G24 G243,0,DAP H3 - Reach Speed
+441,F G2 G24 G243,0,DAP H3 - Retract Speed
+817,F G2 G24 G243,0,DAP H3 - Override Speed
+442,F G2 G24 G244,0,DAP H4 - Position
+443,F G2 G24 G244,0,DAP H4 - Truck Speed
+444,F G2 G24 G244,0,DAP H4 - Lift Speed
+445,F G2 G24 G244,0,DAP H4 - Lower Speed
+446,F G2 G24 G244,0,DAP H4 - Reach Speed
+447,F G2 G24 G244,0,DAP H4 - Retract Speed
+818,F G2 G24 G244,0,DAP H4 - Override Speed
+448,F G2 G24 G245,0,DAP R1 - Position
+449,F G2 G24 G245,0,DAP R1 - Truck Speed
+450,F G2 G24 G245,0,DAP R1 - Lift Speed
+451,F G2 G24 G245,0,DAP R1 - Lower Speed
+452,F G2 G24 G245,0,DAP R1 - Reach Speed
+453,F G2 G24 G245,0,DAP R1 - Retract Speed
+819,F G2 G24 G245,0,DAP R1 - Override Speed
+454,F G2 G24 G246,0,DAP R2 - Position
+455,F G2 G24 G246,0,DAP R2 - Truck Speed
+456,F G2 G24 G246,0,DAP R2 - Lift Speed
+457,F G2 G24 G246,0,DAP R2 - Lower Speed
+458,F G2 G24 G246,0,DAP R2 - Reach Speed
+459,F G2 G24 G246,0,DAP R2 - Retract Speed
+820,F G2 G24 G246,0,DAP R2 - Override Speed
+460,F G2 G24 G247,0,DAP R3 - Position
+461,F G2 G24 G247,0,DAP R3 - Truck Speed
+462,F G2 G24 G247,0,DAP R3 - Lift Speed
+463,F G2 G24 G247,0,DAP R3 - Lower Speed
+464,F G2 G24 G247,0,DAP R3 - Reach Speed
+465,F G2 G24 G247,0,DAP R3 - Retract Speed
+821,F G2 G24 G247,0,DAP R3 - Override Speed
+466,F G2 G24 G248,0,DAP R4 - Position
+467,F G2 G24 G248,0,DAP R4 - Truck Speed
+468,F G2 G24 G248,0,DAP R4 - Lift Speed
+469,F G2 G24 G248,0,DAP R4 - Lower Speed
+470,F G2 G24 G248,0,DAP R4 - Reach Speed
+471,F G2 G24 G248,0,DAP R4 - Retract Speed
+822,F G2 G24 G248,0,DAP R4 - Override Speed
+472,F G2 G25 G251,999,+ Mast SD Setup
+473,F G2 G25,0,Mast SD - Min Stop Position
+474,F G2 G25,0,Mast SD - Max Stop Position
+475,F G2 G25,0,Mast SD - Min SD Distance
+476,F G2 G25,0,Mast SD - Max SD Distance
+483,F G2 G25,0,Mast SD - Min Stop Speed
+484,F G2 G25,0,Mast SD - Max Stop Speed
+477,F G2 G25,0,Mast SD - Stage 1 Position
+478,F G2 G25,0,Mast SD - Stage 2 Position
+479,F G2 G25,0,Mast SD - Stage 3 Position
+480,I,0,Mast SD - Stage 4 Position
+481,F G2 G25,0,Mast SD - Stage SD Top Distance
+482,F G2 G25,0,Mast SD - Stage SD Bottom Distance
+485,F G2 G25,0,Mast SD - Stage SD Top Speed
+486,F G2 G25,0,Mast SD - Stage SD Bottom Speed
+487,F G2 G26 G261,999,+ Carriage SD Setup
+488,F G2 G26,0,Carriage SD - Back Stop Position
+489,F G2 G26,0,Carriage SD - Front Stop Position
+490,F G2 G26,0,Carriage SD - Min SD Distance
+491,F G2 G26,0,Carriage SD - Max SD Distance
+498,F G2 G26,0,Carriage SD - Back Stop Speed
+499,F G2 G26,0,Carriage SD - Front Stop Speed
+492,I,0,Carriage SD - Stage 1 Position
+493,I,0,Carriage SD - Stage 2 Position
+494,I,0,Carriage SD - Stage 3 Position
+495,I,0,Carriage SD - Stage 4 Position
+496,I,0,Carriage SD - Stage SD Back Distance
+497,I,0,Carriage SD - Stage SD Front Distance
+500,I,0,Carriage SD - Stages Back Speed
+501,I,0,Carriage SD - Stages Front Speed
+1120,F G2 G27,0,Crab Command min raw 
+1121,F G2 G27,0,Crab Command max raw  
+1122,F G2 G27,0,Steer Counts 01
+1123,F G2 G27,0,Steer Counts 12
+1124,F G2 G27,0,Steer Counts 23
+1125,F G2 G27,0,Steer Counts 34
+1126,F G2 G27,0,Steer Counts 45
+1127,F G2 G27,0,Steer Counts 56
+1128,F G2 G27,0,Steer Counts 66
+1129,F G2 G27,0,Steer Sensitivity 13
+1130,F G2 G27,0,Speed Sensitivity 13
+1131,F G2 G27,0,Crab max step
+1132,F G2 G27,0,Crab neutral deadband
+1133,F G2 G27,0,P34 x offset
+1134,F G2 G27,0,P34 y offset
+1135,F G2 G27,0,P45 y offset
+1136,F G2 G27,0,P66 y offset
+1137,F G2 G27,0,SRR home Counts
+1138,F G2 G27,0,SRL home Counts
+1139,F G2 G27,0,SFR home Counts
+1140,F G2 G27,0,SFL home Counts
+1141,F G2 G27,0,Homing Deadband
+1142,F G2 G27,0,Homing Correction Method
+130,F G3 G31,999,+ Drivers Presence Setup
+131,F G3 G31,0,Drivers Presence Delay 1
+132,F G3 G31,0,Drivers Presence Delay 2
+144,F G3 G32,10,Motion Alarm Mode
+143,F G3 G32,999,+ Motion Alarm Setup
+140,F G3 G33,9,Warning Lights Mode
+138,F G3 G33,999,+ Warning Lights Setup
+139,F G3 G33,0,Warning Lights Off Delay
+112,F G3 G34,5,Pre-Operation Check Type
+113,F G3 G34,0,Pre-Operation Check Time
+114,F G3 G34,0,Pre-Operation Extra 
+565,F G4,25,Hydraulic Command Type
+221,F G4 G41 G41in,1000,+ Hydraulic 1 - Setup B
+220,F G4 G41 G41out,1000,+ Hydraulic 1 - Setup A
+222,F G4 G41 G41out,1000,+ Hydraulic 1 - Setup C
+223,F G4 G41 G41in,0,Hydraulic 1 - Pot Dir A start
+224,F G4 G41 G41in,0,Hydraulic 1 - Pot Dir A end
+225,F G4 G41 G41in,0,Hydraulic 1 - Pot Dir B start
+226,F G4 G41 G41in,0,Hydraulic 1 - Pot Dir B end
+227,F G4 G41 G41out,0,Hydraulic 1 - Dir A Pump rpm start
+228,F G4 G41 G41out,0,Hydraulic 1 - Dir A Pump rpm mid
+229,F G4 G41 G41out,0,Hydraulic 1 - Dir A Pump rpm max
+230,F G4 G41 G41out,0,Hydraulic 1 - Dir A FC min
+231,F G4 G41 G41out,0,Hydraulic 1 - Dir A FC max
+232,F G4 G41 G41out,0,Hydraulic 1 - Dir B FC min
+233,F G4 G41 G41out,0,Hydraulic 1 - Dir B FC max
+234,F G4 G41 G41out,0,Hydraulic 1 - Dir A PVG min
+235,F G4 G41 G41out,0,Hydraulic 1 - Dir A PVG max
+236,F G4 G41 G41out,0,Hydraulic 1 - Dir B PVG min
+237,F G4 G41 G41out,0,Hydraulic 1 - Dir B PVG max
+566,F G4 G41 G41out,0,Hydraulic 1 - Dir B Pump rpm start
+567,F G4 G41 G41out,0,Hydraulic 1 - Dir B Pump rpm mid
+568,F G4 G41 G41out,0,Hydraulic 1 - Dir B Pump rpm max
+771,F G4 G41 G41out,0,Hydraulic 1 - Dir A PWM min
+772,F G4 G41 G41out,0,Hydraulic 1 - Dir A PWM max
+773,F G4 G41 G41out,0,Hydraulic 1 - Dir B PWM min
+774,F G4 G41 G41out,0,Hydraulic 1 - Dir B PWM max
+823,F G4 G41 G41out,0,Hydraulic 1 - Timeout
+851,F G4 G41 G41out,0,Hydraulic 1 - Dir A Max User 1
+852,F G4 G41 G41out,0,Hydraulic 1 - Dir B Max User 1
+853,F G4 G41 G41out,0,Hydraulic 1 - Dir A Max User 2
+854,F G4 G41 G41out,0,Hydraulic 1 - Dir B Max User 2
+855,F G4 G41 G41out,0,Hydraulic 1 - Dir A Max User 3
+856,F G4 G41 G41out,0,Hydraulic 1 - Dir B Max User 3
+1020,F G4 G41 G41out,0,Hydraulic 1 - Ramp Up
+1021,F G4 G41 G41out,0,Hydraulic 1 - Ramp Down
+1022,F G4 G41 G41out,0,Hydraulic 1 - RampTime
+1023,F G4 G41 G41out,0,Hydraulic 1 - Kp
+1024,F G4 G41 G41out,0,Hydraulic 1 - Ki
+239,F G4 G42 G42in,1000,+ Hydraulic 2 - Setup B
+238,F G4 G42 G42out,1000,+ Hydraulic 2 - Setup A
+240,F G4 G42 G42out,1000,+ Hydraulic 2 - Setup C
+241,F G4 G42 G42in,0,Hydraulic 2 - Pot Dir A start
+242,F G4 G42 G42in,0,Hydraulic 2 - Pot Dir A end
+243,F G4 G42 G42in,0,Hydraulic 2 - Pot Dir B start
+244,F G4 G42 G42in,0,Hydraulic 2 - Pot Dir B end
+245,F G4 G42 G42out,0,Hydraulic 2 - Dir A Pump rpm start
+246,F G4 G42 G42out,0,Hydraulic 2 - Dir A Pump rpm mid
+247,F G4 G42 G42out,0,Hydraulic 2 - Dir A Pump rpm max
+248,F G4 G42 G42out,0,Hydraulic 2 - Dir A FC min
+249,F G4 G42 G42out,0,Hydraulic 2 - Dir A FC max
+250,F G4 G42 G42out,0,Hydraulic 2 - Dir B FC min
+251,F G4 G42 G42out,0,Hydraulic 2 - Dir B FC max
+252,F G4 G42 G42out,0,Hydraulic 2 - Dir A PVG min
+253,F G4 G42 G42out,0,Hydraulic 2 - Dir A PVG max
+254,F G4 G42 G42out,0,Hydraulic 2 - Dir B PVG min
+255,F G4 G42 G42out,0,Hydraulic 2 - Dir B PVG max
+569,F G4 G42 G42out,0,Hydraulic 2 - Dir B Pump rpm start
+570,F G4 G42 G42out,0,Hydraulic 2 - Dir B Pump rpm mid
+571,F G4 G42 G42out,0,Hydraulic 2 - Dir B Pump rpm max
+775,F G4 G42 G42out,0,Hydraulic 2 - Dir A PWM min
+776,F G4 G42 G42out,0,Hydraulic 2 - Dir A PWM max
+777,F G4 G42 G42out,0,Hydraulic 2 - Dir B PWM min
+778,F G4 G42 G42out,0,Hydraulic 2 - Dir B PWM max
+824,F G4 G42 G42out,0,Hydraulic 2 - Timeout
+857,F G4 G42 G42out,0,Hydraulic 2 - Dir A Max User 1
+858,F G4 G42 G42out,0,Hydraulic 2 - Dir B Max User 1
+859,F G4 G42 G42out,0,Hydraulic 2 - Dir A Max User 2
+860,F G4 G42 G42out,0,Hydraulic 2 - Dir B Max User 2
+861,F G4 G42 G42out,0,Hydraulic 2 - Dir A Max User 3
+862,F G4 G42 G42out,0,Hydraulic 2 - Dir B Max User 3
+1025,F G4 G42 G42out,0,Hydraulic 2 - Ramp Up
+1026,F G4 G42 G42out,0,Hydraulic 2 - RampDown
+1027,F G4 G42 G42out,0,Hydraulic 2 - Ramp Time
+1028,F G4 G42 G42out,0,Hydraulic 2 - Kp
+1029,F G4 G42 G42out,0,Hydraulic 2 - Ki
+257,F G4 G43 G43in,1000,+ Hydraulic 3 - Setup B
+256,F G4 G43 G43out,1000,+ Hydraulic 3 - Setup A
+258,F G4 G43 G43out,1000,+ Hydraulic 3 - Setup C
+259,F G4 G43 G43in,0,Hydraulic 3 - Pot Dir A start
+260,F G4 G43 G43in,0,Hydraulic 3 - Pot Dir A end
+261,F G4 G43 G43in,0,Hydraulic 3 - Pot Dir B start
+262,F G4 G43 G43in,0,Hydraulic 3 - Pot Dir B end
+263,F G4 G43 G43out,0,Hydraulic 3 - Dir A Pump rpm start
+264,F G4 G43 G43out,0,Hydraulic 3 - Dir A Pump rpm mid
+265,F G4 G43 G43out,0,Hydraulic 3 - Dir A Pump rpm max
+266,F G4 G43 G43out,0,Hydraulic 3 - Dir A FC min
+267,F G4 G43 G43out,0,Hydraulic 3 - Dir A FC max
+268,F G4 G43 G43out,0,Hydraulic 3 - Dir B FC min
+269,F G4 G43 G43out,0,Hydraulic 3 - Dir B FC max
+270,F G4 G43 G43out,0,Hydraulic 3 - Dir A PVG min
+271,F G4 G43 G43out,0,Hydraulic 3 - Dir A PVG max
+272,F G4 G43 G43out,0,Hydraulic 3 - Dir B PVG min
+273,F G4 G43 G43out,0,Hydraulic 3 - Dir B PVG max
+572,F G4 G43 G43out,0,Hydraulic 3 - Dir B Pump rpm start
+573,F G4 G43 G43out,0,Hydraulic 3 - Dir B Pump rpm mid
+574,F G4 G43 G43out,0,Hydraulic 3 - Dir B Pump rpm max
+779,F G4 G43 G43out,0,Hydraulic 3 - Dir A PWM min
+780,F G4 G43 G43out,0,Hydraulic 3 - Dir A PWM max
+781,F G4 G43 G43out,0,Hydraulic 3 - Dir B PWM min
+782,F G4 G43 G43out,0,Hydraulic 3 - Dir B PWM max
+825,F G4 G43 G43out,0,Hydraulic 3 - Timeout
+863,F G4 G43 G43out,0,Hydraulic 3 - Dir A Max User 1
+864,F G4 G43 G43out,0,Hydraulic 3 - Dir B Max User 1
+865,F G4 G43 G43out,0,Hydraulic 3 - Dir A Max User 2
+866,F G4 G43 G43out,0,Hydraulic 3 - Dir B Max User 2
+867,F G4 G43 G43out,0,Hydraulic 3 - Dir A Max User 3
+868,F G4 G43 G43out,0,Hydraulic 3 - Dir B Max User 3
+1030,F G4 G43 G43out,0,Hydraulic 3 - Ramp Up
+1031,F G4 G43 G43out,0,Hydraulic 3 - Ramp Down
+1032,F G4 G43 G43out,0,Hydraulic 3 - Ramp Time
+1033,F G4 G43 G43out,0,Hydraulic 3 - Kp
+1034,F G4 G43 G43out,0,Hydraulic 3 - Ki
+275,F G4 G44 G44in,1000,+ Hydraulic 4 - Setup B
+274,F G4 G44 G44out,1000,+ Hydraulic 4 - Setup A
+276,F G4 G44 G44out,1000,+ Hydraulic 4 - Setup C
+277,F G4 G44 G44in,0,Hydraulic 4 - Pot Dir A start
+278,F G4 G44 G44in,0,Hydraulic 4 - Pot Dir A end
+279,F G4 G44 G44in,0,Hydraulic 4 - Pot Dir B start
+280,F G4 G44 G44in,0,Hydraulic 4 - Pot Dir B end
+281,F G4 G44 G44out,0,Hydraulic 4 - Dir A Pump rpm start
+282,F G4 G44 G44out,0,Hydraulic 4 - Dir A Pump rpm mid
+283,F G4 G44 G44out,0,Hydraulic 4 - Dir A Pump rpm max
+284,F G4 G44 G44out,0,Hydraulic 4 - Dir A FC min
+285,F G4 G44 G44out,0,Hydraulic 4 - Dir A FC max
+286,F G4 G44 G44out,0,Hydraulic 4 - Dir B FC min
+287,F G4 G44 G44out,0,Hydraulic 4 - Dir B FC max
+288,F G4 G44 G44out,0,Hydraulic 4 - Dir A PVG min
+289,F G4 G44 G44out,0,Hydraulic 4 - Dir A PVG max
+290,F G4 G44 G44out,0,Hydraulic 4 - Dir B PVG min
+291,F G4 G44 G44out,0,Hydraulic 4 - Dir B PVG max
+575,F G4 G44 G44out,0,Hydraulic 4 - Dir B Pump rpm start
+576,F G4 G44 G44out,0,Hydraulic 4 - Dir B Pump rpm mid
+577,F G4 G44 G44out,0,Hydraulic 4 - Dir B Pump rpm max
+783,F G4 G44 G44out,0,Hydraulic 4 - Dir A PWM min
+784,F G4 G44 G44out,0,Hydraulic 4 - Dir A PWM max
+785,F G4 G44 G44out,0,Hydraulic 4 - Dir B PWM min
+786,F G4 G44 G44out,0,Hydraulic 4 - Dir B PWM max
+826,F G4 G44 G44out,0,Hydraulic 4 - Timeout
+869,F G4 G44 G44out,0,Hydraulic 4 - Dir A Max User 1
+870,F G4 G44 G44out,0,Hydraulic 4 - Dir B Max User 1
+871,F G4 G44 G44out,0,Hydraulic 4 - Dir A Max User 2
+872,F G4 G44 G44out,0,Hydraulic 4 - Dir B Max User 2
+873,F G4 G44 G44out,0,Hydraulic 4 - Dir A Max User 3
+874,F G4 G44 G44out,0,Hydraulic 4 - Dir B Max User 3
+1035,F G4 G44 G44out,0,Hydraulic 4 - Ramp Up
+1036,F G4 G44 G44out,0,Hydraulic 4 - Ramp Down
+1037,F G4 G44 G44out,0,Hydraulic 4 - Ramp Time
+1038,F G4 G44 G44out,0,Hydraulic 4 - Kp
+1039,F G4 G44 G44out,0,Hydraulic 4 - Ki
+293,F G4 G45 G45in,1000,+ Hydraulic 5 - Setup B
+292,F G4 G45 G45out,1000,+ Hydraulic 5 - Setup A
+294,F G4 G45 G45out,1000,+ Hydraulic 5 - Setup C
+295,F G4 G45 G45in,0,Hydraulic 5 - Pot Dir A start
+296,F G4 G45 G45in,0,Hydraulic 5 - Pot Dir A end
+297,F G4 G45 G45in,0,Hydraulic 5 - Pot Dir B start
+298,F G4 G45 G45in,0,Hydraulic 5 - Pot Dir B end
+299,F G4 G45 G45out,0,Hydraulic 5 - Dir A Pump rpm start
+300,F G4 G45 G45out,0,Hydraulic 5 - Dir A Pump rpm mid
+301,F G4 G45 G45out,0,Hydraulic 5 - Dir A Pump rpm max
+302,F G4 G45 G45out,0,Hydraulic 5 - Dir A FC min
+303,F G4 G45 G45out,0,Hydraulic 5 - Dir A FC max
+304,F G4 G45 G45out,0,Hydraulic 5 - Dir B FC min
+305,F G4 G45 G45out,0,Hydraulic 5 - Dir B FC max
+306,F G4 G45 G45out,0,Hydraulic 5 - Dir A PVG min
+307,F G4 G45 G45out,0,Hydraulic 5 - Dir A PVG max
+308,F G4 G45 G45out,0,Hydraulic 5 - Dir B PVG min
+309,F G4 G45 G45out,0,Hydraulic 5 - Dir B PVG max
+578,F G4 G45 G45out,0,Hydraulic 5 - Dir B Pump rpm start
+579,F G4 G45 G45out,0,Hydraulic 5 - Dir B Pump rpm mid
+580,F G4 G45 G45out,0,Hydraulic 5 - Dir B Pump rpm max
+787,F G4 G45 G45out,0,Hydraulic 5 - Dir A PWM min
+788,F G4 G45 G45out,0,Hydraulic 5 - Dir A PWM max
+789,F G4 G45 G45out,0,Hydraulic 5 - Dir B PWM min
+790,F G4 G45 G45out,0,Hydraulic 5 - Dir B PWM max
+827,F G4 G45 G45out,0,Hydraulic 5 - Timeout
+875,F G4 G45 G45out,0,Hydraulic 5 - Dir A Max User 1
+876,F G4 G45 G45out,0,Hydraulic 5 - Dir B Max User 1
+877,F G4 G45 G45out,0,Hydraulic 5 - Dir A Max User 2
+878,F G4 G45 G45out,0,Hydraulic 5 - Dir B Max User 2
+879,F G4 G45 G45out,0,Hydraulic 5 - Dir A Max User 3
+880,F G4 G45 G45out,0,Hydraulic 5 - Dir B Max User 3
+1040,F G4 G45 G45out,0,Hydraulic 5 - Ramp Up
+1041,F G4 G45 G45out,0,Hydraulic 5 - Ramp Down
+1042,F G4 G45 G45out,0,Hydraulic 5 - Ramp Time
+1043,F G4 G45 G45out,0,Hydraulic 5 - Kp
+1044,F G4 G45 G45out,0,Hydraulic 5 - Ki
+311,F G4 G46 G46in,1000,+ Hydraulic 6 - Setup B
+310,F G4 G46 G46out,1000,+ Hydraulic 6 - Setup A
+312,F G4 G46 G46out,1000,+ Hydraulic 6 - Setup C
+313,F G4 G46 G46in,0,Hydraulic 6 - Pot Dir A start
+314,F G4 G46 G46in,0,Hydraulic 6 - Pot Dir A end
+315,F G4 G46 G46in,0,Hydraulic 6 - Pot Dir B start
+316,F G4 G46 G46in,0,Hydraulic 6 - Pot Dir B end
+317,F G4 G46 G46out,0,Hydraulic 6 - Dir A Pump rpm start
+318,F G4 G46 G46out,0,Hydraulic 6 - Dir A Pump rpm mid
+319,F G4 G46 G46out,0,Hydraulic 6 - Dir A Pump rpm max
+320,F G4 G46 G46out,0,Hydraulic 6 - Dir A FC min
+321,F G4 G46 G46out,0,Hydraulic 6 - Dir A FC max
+322,F G4 G46 G46out,0,Hydraulic 6 - Dir B FC min
+323,F G4 G46 G46out,0,Hydraulic 6 - Dir B FC max
+324,F G4 G46 G46out,0,Hydraulic 6 - Dir A PVG min
+325,F G4 G46 G46out,0,Hydraulic 6 - Dir A PVG max
+326,F G4 G46 G46out,0,Hydraulic 6 - Dir B PVG min
+327,F G4 G46 G46out,0,Hydraulic 6 - Dir B PVG max
+581,F G4 G46 G46out,0,Hydraulic 6 - Dir B Pump rpm start
+582,F G4 G46 G46out,0,Hydraulic 6 - Dir B Pump rpm mid
+583,F G4 G46 G46out,0,Hydraulic 6 - Dir B Pump rpm max
+791,F G4 G46 G46out,0,Hydraulic 6 - Dir A PWM min
+792,F G4 G46 G46out,0,Hydraulic 6 - Dir A PWM max
+793,F G4 G46 G46out,0,Hydraulic 6 - Dir B PWM min
+794,F G4 G46 G46out,0,Hydraulic 6 - Dir B PWM max
+828,F G4 G46 G46out,0,Hydraulic 6 - Timeout
+881,F G4 G46 G46out,0,Hydraulic 6 - Dir A Max User 1
+882,F G4 G46 G46out,0,Hydraulic 6 - Dir B Max User 1
+883,F G4 G46 G46out,0,Hydraulic 6 - Dir A Max User 2
+884,F G4 G46 G46out,0,Hydraulic 6 - Dir B Max User 2
+885,F G4 G46 G46out,0,Hydraulic 6 - Dir A Max User 3
+886,F G4 G46 G46out,0,Hydraulic 6 - Dir B Max User 3
+1045,F G4 G46 G46out,0,Hydraulic 6 - Ramp Up
+1046,F G4 G46 G46out,0,Hydraulic 6 - RampDown
+1047,F G4 G46 G46out,0,Hydraulic 6 - Ramp Time
+1048,F G4 G46 G46out,0,Hydraulic 6 - Kp
+1049,F G4 G46 G46out,0,Hydraulic 6 - Ki
+329,F G4 G47 G47in,1000,+ Hydraulic 7 - Setup B
+328,F G4 G47 G47out,1000,+ Hydraulic 7 - Setup A
+330,F G4 G47 G47out,1000,+ Hydraulic 7 - Setup C
+331,F G4 G47 G47in,0,Hydraulic 7 - Pot Dir A start
+332,F G4 G47 G47in,0,Hydraulic 7 - Pot Dir A end
+333,F G4 G47 G47in,0,Hydraulic 7 - Pot Dir B start
+334,F G4 G47 G47in,0,Hydraulic 7 - Pot Dir B end
+335,F G4 G47 G47out,0,Hydraulic 7 - Dir A Pump rpm start
+336,F G4 G47 G47out,0,Hydraulic 7 - Dir A Pump rpm mid
+337,F G4 G47 G47out,0,Hydraulic 7 - Dir A Pump rpm max
+338,F G4 G47 G47out,0,Hydraulic 7 - Dir A FC min
+339,F G4 G47 G47out,0,Hydraulic 7 - Dir A FC max
+340,F G4 G47 G47out,0,Hydraulic 7 - Dir B FC min
+341,F G4 G47 G47out,0,Hydraulic 7 - Dir B FC max
+342,F G4 G47 G47out,0,Hydraulic 7 - Dir A PVG min
+343,F G4 G47 G47out,0,Hydraulic 7 - Dir A PVG max
+344,F G4 G47 G47out,0,Hydraulic 7 - Dir B PVG min
+345,F G4 G47 G47out,0,Hydraulic 7 - Dir B PVG max
+584,F G4 G47 G47out,0,Hydraulic 7 - Dir B Pump rpm start
+585,F G4 G47 G47out,0,Hydraulic 7 - Dir B Pump rpm mid
+586,F G4 G47 G47out,0,Hydraulic 7 - Dir B Pump rpm max
+795,F G4 G47 G47out,0,Hydraulic 7 - Dir A PWM min
+796,F G4 G47 G47out,0,Hydraulic 7 - Dir A PWM max
+797,F G4 G47 G47out,0,Hydraulic 7 - Dir B PWM min
+798,F G4 G47 G47out,0,Hydraulic 7 - Dir B PWM max
+829,F G4 G47 G47out,0,Hydraulic 7 - Timeout
+887,F G4 G47 G47out,0,Hydraulic 7 - Dir A Max User 1
+888,F G4 G47 G47out,0,Hydraulic 7 - Dir B Max User 1
+889,F G4 G47 G47out,0,Hydraulic 7 - Dir A Max User 2
+890,F G4 G47 G47out,0,Hydraulic 7 - Dir B Max User 2
+891,F G4 G47 G47out,0,Hydraulic 7 - Dir A Max User 3
+892,F G4 G47 G47out,0,Hydraulic 7 - Dir B Max User 3
+1050,F G4 G47 G47out,0,Hydraulic 7 - Ramp Up
+1051,F G4 G47 G47out,0,Hydraulic 7 - Ramp Down
+1052,F G4 G47 G47out,0,Hydraulic 7 - Ramp Time
+1053,F G4 G47 G47out,0,Hydraulic 7 - Kp
+1054,F G4 G47 G47out,0,Hydraulic 7 - Ki
+347,F G4 G48 G48in,1000,+ Hydraulic 8 - Setup B
+346,F G4 G48 G48out,1000,+ Hydraulic 8 - Setup A
+348,F G4 G48 G48out,1000,+ Hydraulic 8 - Setup C
+349,F G4 G48 G48in,0,Hydraulic 8 - Pot Dir A start
+350,F G4 G48 G48in,0,Hydraulic 8 - Pot Dir A end
+351,F G4 G48 G48in,0,Hydraulic 8 - Pot Dir B start
+352,F G4 G48 G48in,0,Hydraulic 8 - Pot Dir B end
+353,F G4 G48 G48out,0,Hydraulic 8 - Dir A Pump rpm start
+354,F G4 G48 G48out,0,Hydraulic 8 - Dir A Pump rpm mid
+355,F G4 G48 G48out,0,Hydraulic 8 - Dir A Pump rpm max
+356,F G4 G48 G48out,0,Hydraulic 8 - Dir A FC min
+357,F G4 G48 G48out,0,Hydraulic 8 - Dir A FC max
+358,F G4 G48 G48out,0,Hydraulic 8 - Dir B FC min
+359,F G4 G48 G48out,0,Hydraulic 8 - Dir B FC max
+360,F G4 G48 G48out,0,Hydraulic 8 - Dir A PVG min
+361,F G4 G48 G48out,0,Hydraulic 8 - Dir A PVG max
+362,F G4 G48 G48out,0,Hydraulic 8 - Dir B PVG min
+363,F G4 G48 G48out,0,Hydraulic 8 - Dir B PVG max
+587,F G4 G48 G48out,0,Hydraulic 8 - Dir B Pump rpm start
+588,F G4 G48 G48out,0,Hydraulic 8 - Dir B Pump rpm mid
+589,F G4 G48 G48out,0,Hydraulic 8 - Dir B Pump rpm max
+799,F G4 G48 G48out,0,Hydraulic 8 - Dir A PWM min
+800,F G4 G48 G48out,0,Hydraulic 8 - Dir A PWM max
+801,F G4 G48 G48out,0,Hydraulic 8 - Dir B PWM min
+802,F G4 G48 G48out,0,Hydraulic 8 - Dir B PWM max
+830,F G4 G48 G48out,0,Hydraulic 8 - Timeout
+893,F G4 G48 G48out,0,Hydraulic 8 - Dir A Max User 1
+894,F G4 G48 G48out,0,Hydraulic 8 - Dir B Max User 1
+895,F G4 G48 G48out,0,Hydraulic 8 - Dir A Max User 2
+896,F G4 G48 G48out,0,Hydraulic 8 - Dir B Max User 2
+897,F G4 G48 G48out,0,Hydraulic 8 - Dir A Max User 3
+898,F G4 G48 G48out,0,Hydraulic 8 - Dir B Max User 3
+1055,F G4 G48 G48out,0,Hydraulic 8 - Ramp Up
+1056,F G4 G48 G48out,0,Hydraulic 8 - Ramp Down
+1057,F G4 G48 G48out,0,Hydraulic 8 - Ramp Time
+1058,F G4 G48 G48out,0,Hydraulic 8 - Kp
+1059,F G4 G48 G48out,0,Hydraulic 8 - Ki
+365,F G4 G49 G49in,1000,+ Hydraulic 9 - Setup B
+364,F G4 G49 G49out,1000,+ Hydraulic 9 - Setup A
+366,F G4 G49 G49out,1000,+ Hydraulic 9 - Setup C
+367,F G4 G49 G49in,0,Hydraulic 9 - Pot Dir A start
+368,F G4 G49 G49in,0,Hydraulic 9 - Pot Dir A end
+369,F G4 G49 G49in,0,Hydraulic 9 - Pot Dir B start
+370,F G4 G49 G49in,0,Hydraulic 9 - Pot Dir B end
+371,F G4 G49 G49out,0,Hydraulic 9 - Dir A Pump rpm start
+372,F G4 G49 G49out,0,Hydraulic 9 - Dir A Pump rpm mid
+373,F G4 G49 G49out,0,Hydraulic 9 - Dir A Pump rpm max
+374,F G4 G49 G49out,0,Hydraulic 9 - Dir A FC min
+375,F G4 G49 G49out,0,Hydraulic 9 - Dir A FC max
+376,F G4 G49 G49out,0,Hydraulic 9 - Dir B FC min
+377,F G4 G49 G49out,0,Hydraulic 9 - Dir B FC max
+378,F G4 G49 G49out,0,Hydraulic 9 - Dir A PVG min
+379,F G4 G49 G49out,0,Hydraulic 9 - Dir A PVG max
+380,F G4 G49 G49out,0,Hydraulic 9 - Dir B PVG min
+381,F G4 G49 G49out,0,Hydraulic 9 - Dir B PVG max
+590,F G4 G49 G49out,0,Hydraulic 9 - Dir B Pump rpm start
+591,F G4 G49 G49out,0,Hydraulic 9 - Dir B Pump rpm mid
+592,F G4 G49 G49out,0,Hydraulic 9 - Dir B Pump rpm max
+803,F G4 G49 G49out,0,Hydraulic 9 - Dir A PWM min
+804,F G4 G49 G49out,0,Hydraulic 9 - Dir A PWM max
+805,F G4 G49 G49out,0,Hydraulic 9 - Dir B PWM min
+806,F G4 G49 G49out,0,Hydraulic 9 - Dir B PWM max
+831,F G4 G49 G49out,0,Hydraulic 9 - Timeout
+899,F G4 G49 G49out,0,Hydraulic 9 - Dir A Max User 1
+900,F G4 G49 G49out,0,Hydraulic 9 - Dir B Max User 1
+901,F G4 G49 G49out,0,Hydraulic 9 - Dir A Max User 2
+902,F G4 G49 G49out,0,Hydraulic 9 - Dir B Max User 2
+903,F G4 G49 G49out,0,Hydraulic 9 - Dir A Max User 3
+904,F G4 G49 G49out,0,Hydraulic 9 - Dir B Max User 3
+1060,F G4 G49 G49out,0,Hydraulic 9 - Ramp Up
+1061,F G4 G49 G49out,0,Hydraulic 9 - Ramp Down
+1062,F G4 G49 G49out,0,Hydraulic 9 - Ramp Time
+1063,F G4 G49 G49out,0,Hydraulic 9 - Kp
+1064,F G4 G49 G49out,0,Hydraulic 9 - Ki
+383,F G4 G410 G410in,1000,+ Hydraulic 10 - Setup B
+382,F G4 G410 G410out,1000,+ Hydraulic 10 - Setup A
+384,F G4 G410 G410out,1000,+ Hydraulic 10 - Setup C
+385,F G4 G410 G410in,0,Hydraulic 10 - Pot Dir A start
+386,F G4 G410 G410in,0,Hydraulic 10 - Pot Dir A end
+387,F G4 G410 G410in,0,Hydraulic 10 - Pot Dir B start
+388,F G4 G410 G410in,0,Hydraulic 10 - Pot Dir B end
+389,F G4 G410 G410out,0,Hydraulic 10 - Dir A Pump rpm start
+390,F G4 G410 G410out,0,Hydraulic 10 - Dir A Pump rpm mid
+391,F G4 G410 G410out,0,Hydraulic 10 - Dir A Pump rpm max
+392,F G4 G410 G410out,0,Hydraulic 10 - Dir A FC min
+393,F G4 G410 G410out,0,Hydraulic 10 - Dir A FC max
+394,F G4 G410 G410out,0,Hydraulic 10 - Dir B FC min
+395,F G4 G410 G410out,0,Hydraulic 10 - Dir B FC max
+396,F G4 G410 G410out,0,Hydraulic 10 - Dir A PVG min
+397,F G4 G410 G410out,0,Hydraulic 10 - Dir A PVG max
+398,F G4 G410 G410out,0,Hydraulic 10 - Dir B PVG min
+399,F G4 G410 G410out,0,Hydraulic 10 - Dir B PVG max
+593,F G4 G410 G410out,0,Hydraulic 10 - Dir B Pump rpm start
+594,F G4 G410 G410out,0,Hydraulic 10 - Dir B Pump rpm mid
+595,F G4 G410 G410out,0,Hydraulic 10 - Dir B Pump rpm max
+807,F G4 G410 G410out,0,Hydraulic 10 - Dir A PWM min
+808,F G4 G410 G410out,0,Hydraulic 10 - Dir A PWM max
+809,F G4 G410 G410out,0,Hydraulic 10 - Dir B PWM min
+810,F G4 G410 G410out,0,Hydraulic 10 - Dir B PWM max
+832,F G4 G410 G410out,0,Hydraulic 10 - Timeout
+905,F G4 G410 G410out,0,Hydraulic 10 - Dir A Max User 1
+906,F G4 G410 G410out,0,Hydraulic 10 - Dir B Max User 1
+907,F G4 G410 G410out,0,Hydraulic 10 - Dir A Max User 2
+908,F G4 G410 G410out,0,Hydraulic 10 - Dir B Max User 2
+909,F G4 G410 G410out,0,Hydraulic 10 - Dir A Max User 3
+910,F G4 G410 G410out,0,Hydraulic 10 - Dir B Max User 3
+1065,F G4 G410 G410out,0,Hydraulic 10 - Ramp Up
+1066,F G4 G410 G410out,0,Hydraulic 10 - Ramp Down
+1067,F G4 G410 G410out,0,Hydraulic 10 - Ramp Time
+1068,F G4 G410 G410out,0,Hydraulic 10 - Kp
+1069,F G4 G410 G410out,0,Hydraulic 10 - Ki
+401,F G4 G411 G411in,1000,+ Hydraulic 11 - Setup B
+400,F G4 G411 G411out,1000,+ Hydraulic 11 - Setup A
+402,F G4 G411 G411out,1000,+ Hydraulic 11 - Setup C
+403,F G4 G411 G411in,0,Hydraulic 11 - Pot Dir A start
+404,F G4 G411 G411in,0,Hydraulic 11 - Pot Dir A end
+405,F G4 G411 G411in,0,Hydraulic 11 - Pot Dir B start
+406,F G4 G411 G411in,0,Hydraulic 11 - Pot Dir B end
+407,F G4 G411 G411out,0,Hydraulic 11 - Dir A Pump rpm start
+408,F G4 G411 G411out,0,Hydraulic 11 - Dir A Pump rpm mid
+409,F G4 G411 G411out,0,Hydraulic 11 - Dir A Pump rpm max
+410,F G4 G411 G411out,0,Hydraulic 11 - Dir A FC min
+411,F G4 G411 G411out,0,Hydraulic 11 - Dir A FC max
+412,F G4 G411 G411out,0,Hydraulic 11 - Dir B FC min
+413,F G4 G411 G411out,0,Hydraulic 11 - Dir B FC max
+414,F G4 G411 G411out,0,Hydraulic 11 - Dir A PVG min
+415,F G4 G411 G411out,0,Hydraulic 11 - Dir A PVG max
+416,F G4 G411 G411out,0,Hydraulic 11 - Dir B PVG min
+417,F G4 G411 G411out,0,Hydraulic 11 - Dir B PVG max
+596,F G4 G411 G411out,0,Hydraulic 11 - Dir B Pump rpm start
+597,F G4 G411 G411out,0,Hydraulic 11 - Dir B Pump rpm mid
+598,F G4 G411 G411out,0,Hydraulic 11 - Dir B Pump rpm max
+811,F G4 G411 G411out,0,Hydraulic 11 - Dir A PWM min
+812,F G4 G411 G411out,0,Hydraulic 11 - Dir A PWM max
+813,F G4 G411 G411out,0,Hydraulic 11 - Dir B PWM min
+814,F G4 G411 G411out,0,Hydraulic 11 - Dir B PWM max
+833,F G4 G411 G411out,0,Hydraulic 11 - Timeout
+911,F G4 G411 G411out,0,Hydraulic 11 - Dir A Max User 1
+912,F G4 G411 G411out,0,Hydraulic 11 - Dir B Max User 1
+913,F G4 G411 G411out,0,Hydraulic 11 - Dir A Max User 2
+914,F G4 G411 G411out,0,Hydraulic 11 - Dir B Max User 2
+915,F G4 G411 G411out,0,Hydraulic 11 - Dir A Max User 3
+916,F G4 G411 G411out,0,Hydraulic 11 - Dir B Max User 3
+1070,F G4 G411 G411out,0,Hydraulic 11 - Ramp Up
+1071,F G4 G411 G411out,0,Hydraulic 11 - Ramp Down
+1072,F G4 G411 G411out,0,Hydraulic 11 - Ramp Time
+1073,F G4 G411 G411out,0,Hydraulic 11 - Kp
+1074,F G4 G411 G411out,0,Hydraulic 11 - Ki
+1154,F G11,46,Park Brake Mode
+1155,F G11,0,Park Brake - ON min
+1156,F G11,0,Park Brake - ON max
+1157,F G11,0,Park Brake - OFF min
+1158,F G11,0,Park Brake - OFF max
+1159,F G11,0,Park Brake - Release min delay
+1160,F G11,0,Park Brake - Release_max delay
+1012,F G11,0,Brake Light Regen Value
+615,F G5,26,BMS type
+616,F G5,0,BMS Low SoC %
+617,F G5,27,Eco Mode Setup
+618,F G5,0,Eco Mode SoC %
+100,F G6,3,Login Type
+101,F G6,4,Default User
+102,F G6,1,Login Timeout Enable
+103,F G6,0,Login Timeout Value
+104,F G6,0,User 1 Password
+105,F G6,0,User 2 Password
+106,F G6,0,User 3 Password
+107,F G6,0,User 4 Password
+108,F G6,0,User 5 Password
+109,F G6,0,User 6 Password
+110,F G6,0,User 7 Password
+111,F G6,0,User 8 Password
+917,F G6,0,DSC - Max Speed User 1
+918,F G6,0,DSC - Max Speed User 2
+919,F G6,0,DSC - Max Speed User 3
+920,F G6,0,Mast Max Height User 1 
+921,F G6,0,Mast Max Height User 2
+922,F G6,0,Mast Max Height User 3
+115,F G7,999,+ Units Setup
+137,F G8 G81,9,Work Lights Mode
+135,F G8 G81,999,+ Work Lights Setup
+136,F G8 G81,0,Work Lights Off Delay
+505,F G8 G83 G831,999,+ FAN 1 Setup
+506,F G8 G83 G832,999,+ FAN 2 Setup
+507,F G8 G83,0,FAN P Controller Temperature
+508,F G8 G83,0,FAN P Motor Temperature
+509,F G8 G83,0,FAN P Delta temperature ON/OFF
+510,F G8 G83,0,FAN TRR Controller Temperature
+511,F G8 G83,0,FAN TRR Motor Temperature
+512,F G8 G83,0,FAN TRR Delta temperature ON/OFF
+513,F G8 G83,0,FAN TRL Controller Temperature
+514,F G8 G83,0,FAN TRL Motor Temperature
+515,F G8 G83,0,FAN TRL Delta temperature ON/OFF
+516,F G8 G83,0,FAN TFR Controller Temperature
+517,F G8 G83,0,FAN TFR Motor Temperature
+518,F G8 G83,0,FAN TFR Delta temperature ON/OFF
+519,F G8 G83,0,FAN TFL Controller Temperature
+520,F G8 G83,0,FAN TFL Motor Temperature
+521,F G8 G83,0,FAN TFL Delta temperature ON/OFF
+142,F G8 G82,5,Road Ligths mode
+141,F G8 G82,999,+ Road Ligths Setup
+941,F G8 G84,999,+ Height Assist Setup
+950,F G8 G84,0,Height Assist Travel Position
+1075,F G8 G84,0,Height Assist Load Position
+1076,F G8 G84,0,Height Assist Platform Position
+1078,F G8 G84,0,Carriage In max Position
+1077,F G8 G84,0,Height Assist Position Margin
+942,F G8 G84,0,Height Assist Deadband Top
+943,F G8 G84,0,Height Assist Deadband Bottom
+944,F G8 G84,0,Height Assist Stop Speed rpm
+945,F G8 G84,0,Height Assist Stop Speed mm/s
+946,F G8 G84,0,Height Assist Lock timeout
+947,F G8 G84 G841,0,Height Offset
+1079,F G8 G84 G841,0,Carriage Out min Position
+951,F G8 G84 G841,0,Position Rack1
+952,F G8 G84 G841,0,Position Rack2
+953,F G8 G84 G841,0,Position Rack3
+954,F G8 G84 G841,0,Position Rack4
+955,F G8 G84 G841,0,Position Rack5
+956,F G8 G84 G841,0,Position Rack6
+957,F G8 G84 G841,0,Position Rack7
+958,F G8 G84 G841,0,Position Rack8
+959,F G8 G84 G841,0,Position Rack9
+960,F G8 G84 G841,0,Position Rack10
+961,F G8 G84 G841,0,Position Rack11
+962,F G8 G84 G841,0,Position Rack12
+963,F G8 G84 G841,0,Position Rack13
+964,F G8 G84 G841,0,Position Rack14
+965,F G8 G84 G841,0,Position Rack15
+966,F G8 G84 G841,0,Position Rack16
+967,F G8 G84 G841,0,Position Rack17
+968,F G8 G84 G841,0,Position Rack18
+969,F G8 G84 G841,0,Position Rack19
+970,F G8 G84 G841,0,Position Rack20
+948,F G8 G84 G842,0,Height Offset
+1080,F G8 G84 G842,0,Carriage Out min Position
+971,F G8 G84 G842,0,Position Rack1
+972,F G8 G84 G842,0,Position Rack2
+973,F G8 G84 G842,0,Position Rack3
+974,F G8 G84 G842,0,Position Rack4
+975,F G8 G84 G842,0,Position Rack5
+976,F G8 G84 G842,0,Position Rack6
+977,F G8 G84 G842,0,Position Rack7
+978,F G8 G84 G842,0,Position Rack8
+979,F G8 G84 G842,0,Position Rack9
+980,F G8 G84 G842,0,Position Rack10
+981,F G8 G84 G842,0,Position Rack11
+982,F G8 G84 G842,0,Position Rack12
+983,F G8 G84 G842,0,Position Rack13
+984,F G8 G84 G842,0,Position Rack14
+985,F G8 G84 G842,0,Position Rack15
+986,F G8 G84 G842,0,Position Rack16
+987,F G8 G84 G842,0,Position Rack17
+988,F G8 G84 G842,0,Position Rack18
+989,F G8 G84 G842,0,Position Rack19
+990,F G8 G84 G842,0,Position Rack20
+949,F G8 G84 G843,0,Height Offset
+1081,F G8 G84 G843,0,Carriage Out min Position
+991,F G8 G84 G843,0,Position Rack1
+992,F G8 G84 G843,0,Position Rack2
+993,F G8 G84 G843,0,Position Rack3
+994,F G8 G84 G843,0,Position Rack4
+995,F G8 G84 G843,0,Position Rack5
+996,F G8 G84 G843,0,Position Rack6
+997,F G8 G84 G843,0,Position Rack7
+998,F G8 G84 G843,0,Position Rack8
+999,F G8 G84 G843,0,Position Rack9
+1000,F G8 G84 G843,0,Position Rack10
+1001,F G8 G84 G843,0,Position Rack11
+1002,F G8 G84 G843,0,Position Rack12
+1003,F G8 G84 G843,0,Position Rack13
+1004,F G8 G84 G843,0,Position Rack14
+1005,F G8 G84 G843,0,Position Rack15
+1006,F G8 G84 G843,0,Position Rack16
+1007,F G8 G84 G843,0,Position Rack17
+1008,F G8 G84 G843,0,Position Rack18
+1009,F G8 G84 G843,0,Position Rack19
+1010,F G8 G84 G843,0,Position Rack20
+1161,F G8 G84 G844,0,Lift Kp
+1163,F G8 G84 G844,0,Lift Ki
+1162,F G8 G84 G844,0,Lower Kp
+1170,F G8 G84 G844,0,Lower Ki
+1164,F G8 G84 G844,0,Reach In Kp
+1166,F G8 G84 G844,0,Reach In Ki
+1165,F G8 G84 G844,0,Reach Out Kp
+1171,F G8 G84 G844,0,Reach Out Ki
+1082,F G8 G85,999,+ Tilt Assist Setup
+1084,F G8 G85,0,Tilt Assist Angle 1
+1085,F G8 G85,0,Tilt Assist Angle 2
+1086,F G8 G85,0,Tilt Assist Angle Margin
+1083,F G8 G85,0,Tilt Assist Pump speed
+1167,F G8 G85 G851,0,Tilt In Kp
+1169,F G8 G85 G851,0,Tilt In Ki
+1168,F G8 G85 G851,0,Tilt Out Kp
+1172,F G8 G85 G851,0,Tilt Out Ki
+1087,F G8 G86,999,+ CINAS Setup
+1088,F G8 G86,999,+ CINAS Sensors Setup
+1089,F G8 G86,49,Allignment Type
+1090,F G8 G86,50,Enter Aisle Mode
+1091,F G8 G86,51,Exit Aisle Mode
+1092,F G8 G86,0,In Aisle Speed
+1093,F G8 G86,0,Slow Down Speed
+1094,F G8 G86,0,Object Detection Speed
+1095,F G8 G86,0,Steer Reduction
+1096,F G8 G86,0,Distance to Rail
+502,F G8 G87,999,+ OSCam1
+503,F G8 G87,999,+ OSCam2
+504,F G8 G87,999,+ OSCam3
+1097,F G8 G87,0,OSCam1 Horizontal Line
+1098,F G8 G87,0,OSCam2 Horizontal Line
+1099,F G8 G87,0,OSCam3 Horizontal Line
+172,F G9 G91 G911,0,TRR - Swivel closed raw value 
+173,F G9 G91 G911,0,TRR - Swivel opened raw value 
+187,F G9 G91 G911,0,TRL - Swivel closed raw value 
+188,F G9 G91 G911,0,TRL - Swivel opened raw value 
+202,F G9 G91 G911,0,TFR - Swivel closed raw value 
+203,F G9 G91 G911,0,TFR - Swivel opened raw value 
+217,F G9 G91 G911,0,TFL - Swivel closed raw value 
+218,F G9 G91 G911,0,TFL - Swivel opened raw value 
+1100,F G9 G91 G912,0,SRR Sensor min raw
+1101,F G9 G91 G912,0,SRR Sensor max raw
+1102,F G9 G91 G912,0,SRR Sensor min counts
+1103,F G9 G91 G912,0,SRR Sensor max counts
+1104,F G9 G91 G912,0,SRL Sensor min raw
+1105,F G9 G91 G912,0,SRL Sensor max raw
+1106,F G9 G91 G912,0,SRL Sensor min counts
+1107,F G9 G91 G912,0,SRL Sensor max counts
+1108,F G9 G91 G912,0,SFR Sensor min raw
+1109,F G9 G91 G912,0,SFR Sensor max raw
+1110,F G9 G91 G912,0,SFR Sensor min counts
+1111,F G9 G91 G912,0,SFR Sensor max counts
+1112,F G9 G91 G912,0,SFL Sensor min raw
+1113,F G9 G91 G912,0,SFL Sensor max raw
+1114,F G9 G91 G912,0,SFL Sensor min counts
+1115,F G9 G91 G912,0,SFL Sensor max counts
+1116,F G9 G91 G913,0,Steer Command A min raw 
+1117,F G9 G91 G913,0,Steer Command A max raw  
+1118,F G9 G91 G913,0,Steer Command B min raw 
+1119,F G9 G91 G913,0,Steer Command B max raw  
+1147,F G9 G91 G913,0,Force Feedback 1
+1148,F G9 G91 G913,0,Force Feedback 2
+1149,F G9 G91 G913,0,Force Feedback 3
+1150,F G9 G91 G913,0,SRR prox Counts
+1151,F G9 G91 G913,0,SRL prox Counts
+1152,F G9 G91 G913,0,SFR prox Counts
+1153,F G9 G91 G913,0,SFL prox Counts
+676,F G9 G92,30,Throttle Type
+677,F G9 G92,0,Throttle Device ID
+678,F G9 G92,0,Throttle Fwd start ch1
+679,F G9 G92,0,Throttle Fwd end ch1
+680,F G9 G92,0,Throttle Rev start ch1
+681,F G9 G92,0,Throttle Rev end ch1
+682,F G9 G92,0,Throttle Fwd start ch2
+683,F G9 G92,0,Throttle Fwd end ch2
+684,F G9 G92,0,Throttle Rev start ch2
+685,F G9 G92,0,Throttle Rev end ch2
+686,F G9 G92,0,Throttle Map response In
+687,F G9 G92,0,Throttle Map response Out
+688,F G9 G92,0,Throttle Redundancy Deadband
+689,F G9 G92,0,Throttle Redundancy Timeout
+931,F G9 G93,30,Brake Type
+932,F G9 G93,0,Brake Device ID
+933,F G9 G93,0,Brake start ch1
+934,F G9 G93,0,Brake end ch1
+935,F G9 G93,0,Brake start ch2
+936,F G9 G93,0,Brake end ch2
+937,F G9 G93,0,Brake Map response In
+938,F G9 G93,0,Brake Map_response Out
+939,F G9 G93,0,Brake Redundancy Deadband
+940,F G9 G93,0,Brake Redundancy Timeout
+690,F G9 G94 G941,1,Fingertip A Setup
+691,F G9 G94 G941,0,Fingertip A Fwd start ch1
+692,F G9 G94 G941,0,Fingertip A Fwd end ch1
+693,F G9 G94 G941,0,Fingertip A Rev start ch1
+694,F G9 G94 G941,0,Fingertip A Rev end ch1
+695,F G9 G94 G941,0,Fingertip A Fwd start ch2
+696,F G9 G94 G941,0,Fingertip A Fwd end ch2
+697,F G9 G94 G941,0,Fingertip A Rev start ch2
+698,F G9 G94 G941,0,Fingertip A Rev end ch2
+699,F G9 G94 G941,0,Fingertip A Map response In
+700,F G9 G94 G941,0,Fingertip A Map response Out
+701,F G9 G94 G941,0,Fingertip A Redundancy Deadband
+702,F G9 G94 G941,0,Fingertip A Redundancy Timeout
+703,F G9 G94 G942,1,Fingertip B Setup
+704,F G9 G94 G942,0,Fingertip B Fwd start ch1
+705,F G9 G94 G942,0,Fingertip B Fwd end ch1
+706,F G9 G94 G942,0,Fingertip B Rev start ch1
+707,F G9 G94 G942,0,Fingertip B Rev end ch1
+708,F G9 G94 G942,0,Fingertip B Fwd start ch2
+709,F G9 G94 G942,0,Fingertip B Fwd end ch2
+710,F G9 G94 G942,0,Fingertip B Rev start ch2
+711,F G9 G94 G942,0,Fingertip B Rev end ch2
+712,F G9 G94 G942,0,Fingertip B Map response In
+713,F G9 G94 G942,0,Fingertip B Map response Out
+714,F G9 G94 G942,0,Fingertip B Redundancy Deadband
+715,F G9 G94 G942,0,Fingertip B Redundancy Timeout
+716,F G9 G94 G943,1,Fingertip C Setup
+717,F G9 G94 G943,0,Fingertip C Fwd start ch1
+718,F G9 G94 G943,0,Fingertip C Fwd end ch1
+719,F G9 G94 G943,0,Fingertip C Rev start ch1
+720,F G9 G94 G943,0,Fingertip C Rev end ch1
+721,F G9 G94 G943,0,Fingertip C Fwd start ch2
+722,F G9 G94 G943,0,Fingertip C Fwd end ch2
+723,F G9 G94 G943,0,Fingertip C Rev start ch2
+724,F G9 G94 G943,0,Fingertip C Rev end ch2
+725,F G9 G94 G943,0,Fingertip C Map response In
+726,F G9 G94 G943,0,Fingertip C Map response Out
+727,F G9 G94 G943,0,Fingertip C Redundancy Deadband
+728,F G9 G94 G943,0,Fingertip C Redundancy Timeout
+729,F G9 G94 G944,1,Fingertip D Setup
+730,F G9 G94 G944,0,Fingertip D Fwd start ch1
+731,F G9 G94 G944,0,Fingertip D Fwd end ch1
+732,F G9 G94 G944,0,Fingertip D Rev start ch1
+733,F G9 G94 G944,0,Fingertip D Rev end ch1
+734,F G9 G94 G944,0,Fingertip D Fwd start ch2
+735,F G9 G94 G944,0,Fingertip D Fwd end ch2
+736,F G9 G94 G944,0,Fingertip D Rev start ch2
+737,F G9 G94 G944,0,Fingertip D Rev end ch2
+738,F G9 G94 G944,0,Fingertip D Map response In
+739,F G9 G94 G944,0,Fingertip D Map response Out
+740,F G9 G94 G944,0,Fingertip D Redundancy Deadband
+741,F G9 G94 G944,0,Fingertip D Redundancy Timeout
+742,F G9 G94 G945,1,Fingertip E Setup
+743,F G9 G94 G945,0,Fingertip E Fwd start ch1
+744,F G9 G94 G945,0,Fingertip E Fwd end ch1
+745,F G9 G94 G945,0,Fingertip E Rev start ch1
+746,F G9 G94 G945,0,Fingertip E Rev end ch1
+747,F G9 G94 G945,0,Fingertip E Fwd start ch2
+748,F G9 G94 G945,0,Fingertip E Fwd end ch2
+749,F G9 G94 G945,0,Fingertip E Rev start ch2
+750,F G9 G94 G945,0,Fingertip E Rev end ch2
+751,F G9 G94 G945,0,Fingertip E Map response In
+752,F G9 G94 G945,0,Fingertip E Map response Out
+753,F G9 G94 G945,0,Fingertip E Redundancy Deadband
+754,F G9 G94 G945,0,Fingertip E Redundancy Timeout
+755,F G9 G94 G946,1,Fingertip F Setup
+756,F G9 G94 G946,0,Fingertip F Fwd start ch1
+757,F G9 G94 G946,0,Fingertip F Fwd end ch1
+758,F G9 G94 G946,0,Fingertip F Rev start ch1
+759,F G9 G94 G946,0,Fingertip F Rev end ch1
+760,F G9 G94 G946,0,Fingertip F Fwd start ch2
+761,F G9 G94 G946,0,Fingertip F Fwd end ch2
+762,F G9 G94 G946,0,Fingertip F Rev start ch2
+763,F G9 G94 G946,0,Fingertip F Rev end ch2
+764,F G9 G94 G946,0,Fingertip F Map response In
+765,F G9 G94 G946,0,Fingertip F Map response Out
+766,F G9 G94 G946,0,Fingertip F Redundancy Deadband
+767,F G9 G94 G946,0,Fingertip F Redundancy Timeout
+527,F G9 G95,32,Reach Input - Setup
+528,F G9 G95,0,Reach Input - Min raw
+529,F G9 G95,0,Reach Input - Max raw
+530,F G9 G95,0,Reach Input - Min Position
+531,F G9 G95,0,Reach Input - Max Position
+522,F G9 G96,22,Height Input - Setup
+523,F G9 G96,0,Height Input - Min raw
+524,F G9 G96,0,Height Input - Max raw
+525,F G9 G96,0,Height Input - Min Position
+526,F G9 G96,0,Height Input - Max Position
+1013,F G9 G97,999,+ Tilt Sensors Setup
+665,F G9 G98,1,Weight Sensor Setup
+666,F G9 G98,0,Weight Sensor Setup P1 Raw
+667,F G9 G98,0,Weight Sensor Setup P2 Raw
+668,F G9 G98,0,Weight Sensor Setup P3 Raw
+669,F G9 G98,0,Weight Sensor Setup P4 Raw
+670,F G9 G98,0,Weight Sensor Setup P5 Raw
+671,F G9 G98,0,Weight Sensor Setup P1 Value
+672,F G9 G98,0,Weight Sensor Setup P2 Value
+673,F G9 G98,0,Weight Sensor Setup P3 Value
+674,F G9 G98,0,Weight Sensor Setup P4 Value
+675,F G9 G98,0,Weight Sensor Setup P5 Value
+1014,F G9 G98,0,Weight Sensor Setup Max Value
+622,F G10 G101,0,Steer map FR Input P1
+623,F G10 G101,0,Steer map FR Input P2
+624,F G10 G101,0,Steer map FR Input P3
+625,F G10 G101,0,Steer map FR Input P4
+626,F G10 G101,0,Steer map FR Input P5
+627,F G10 G101,0,Steer map FR Output P1
+628,F G10 G101,0,Steer map FR Output P2
+629,F G10 G101,0,Steer map FR Output P3
+630,F G10 G101,0,Steer map FR Output P4
+631,F G10 G101,0,Steer map FR Output P5
+644,F G10 G101,0,Steer map Ride On reduction FR
+632,F G10 G102,0,Steer map LR Input P1
+633,F G10 G102,0,Steer map LR Input P2
+634,F G10 G102,0,Steer map LR Input P3
+635,F G10 G102,0,Steer map LR Input P4
+636,F G10 G102,0,Steer map LR Input P5
+637,F G10 G102,0,Steer map LR Input P6
+638,F G10 G102,0,Steer map LR Output P1
+639,F G10 G102,0,Steer map LR Output P2
+640,F G10 G102,0,Steer map LR Output P3
+641,F G10 G102,0,Steer map LR Output P4
+642,F G10 G102,0,Steer map LR Output P5
+643,F G10 G102,0,Steer map LR Output P6
+645,F G10 G102,0,Steer map Ride On reduction LR
+646,F G10 G103,28,Wheel Position Setup
+647,F G10 G103,0,Wheel Position Proximity 1 Angle
+648,F G10 G103,0,Wheel Position Proximity 2 Angle
+649,F G10 G103,0,Wheel Position Analog Sensor Angle 1
+650,F G10 G103,0,Wheel Position Analog Sensor Angle 2
+651,F G10 G103,0,Wheel Position Analog Sensor Deg/turn
+652,F G10 G103,0,Wheel Position Analog Sensor Max Raw
+653,F G10 G103,0,Wheel Position Analog Sensor Min Raw
+654,F G10 G103,29,Steer Sensor Setup
+655,F G10 G104,0,Steer Sensor Raw Centre ch1
+656,F G10 G104,0,Steer Sensor Raw 90 deg CW ch1
+657,F G10 G104,0,Steer Sensor Raw 90 deg CCW ch1
+658,F G10 G104,0,Steer Sensor Raw Centre ch2
+659,F G10 G104,0,Steer Sensor Raw 90 deg CW ch2
+660,F G10 G104,0,Steer Sensor Raw 90 deg CCW ch2
+661,F G10 G104,0,Steer Sensor Redundancy Deadband
+662,F G10 G104,0,Steer Sensor Redundancy Timeout
+663,F G10 G105,1,Offset Setup
+664,F G10 G105,0,Offset Reset Angle
+1016,F G10 G106,999,+ Ride On Setup
+1017,F G10 G106,0,Deadband
+1018,F G10 G106,0,Platform displacement
+1019,F G10 G106,0,Arms displacement
+619,F G10,2,Overspeed Protection Mode
+770,F G10,0,Overspeed Protection Factor
+620,F G10,0,Interlock protection Delay
+621,F G10,0,Supply Overvoltage Protection
+159,F G12 GG1,2,Pump (P) Setup
+834,F G12 GG1,0,Pump Idle Timeout
+835,F G12 GG1,0,Pump Idle Speed
+836,F G12 GG1,0,Pump FR Speed
+837,F G12 GG1,0,Pump LR Speed
+839,F G12 GG1,0,Pump Max Speed
+838,F G12 GG1,0,Pump Typical Speed
+150,F G12 GG1,0,Pump (P) Motor ID
+160,F G12 GG2,999,+ TRR setup
+161,F G12 GG2,0,TRR - x position
+162,F G12 GG2,0,TRR - y position
+163,F G12 GG2,0,TRR - x offset
+164,F G12 GG2,0,TRR - y offset
+165,F G12 GG2,0,TRR - Gear Ratio
+166,F G12 GG2,0,TRR - Tyre Rolling Circumference
+167,F G12 GG2,0,TRR - Steer type
+168,F G12 GG2,0,TRR - Swivel distance between centres
+169,F G12 GG2,0,TRR - Swivel trunnion radius
+170,F G12 GG2,0,TRR - Swivel closed centres distance
+171,F G12 GG2,0,TRR - Swivel opened centres distance
+174,F G12 GG2,0,TRR - Swivel angle offset 
+532,F G12 GG2,0,TRR CW limit angle
+533,F G12 GG2,0,TRR CCW limit angle
+534,F G12 GG2,0,TRR CW limit raw
+535,F G12 GG2,0,TRR CCW limit raw
+841,F G12 GG2,0,TRR Max Speed
+840,F G12 GG2,0,TRR Typical Speed
+151,F G12 GG2,0,Traction Rear Right (TRR) Motor ID
+175,F G12 GG3,999,+ TRL setup
+176,F G12 GG3,0,TRL - x position
+177,F G12 GG3,0,TRL - y position
+178,F G12 GG3,0,TRL - x offset
+179,F G12 GG3,0,TRL - y offset
+180,F G12 GG3,0,TRL - Gear Ratio
+181,F G12 GG3,0,TRL - Tyre Rolling Circumference
+182,F G12 GG3,0,TRL - Steer type
+183,F G12 GG3,0,TRL - Swivel distance between centres
+184,F G12 GG3,0,TRL - Swivel trunnion radius
+185,F G12 GG3,0,TRL - Swivel closed centres distance
+186,F G12 GG3,0,TRL - Swivel opened centres distance
+189,F G12 GG3,0,TRL - Swivel angle offset 
+536,F G12 GG3,0,TRL CW limit angle
+537,F G12 GG3,0,TRL CCW limit angle
+538,F G12 GG3,0,TRL CW limit raw
+539,F G12 GG3,0,TRL CCW limit raw
+843,F G12 GG3,0,TRL Max Speed
+842,F G12 GG3,0,TRL Typical Speed
+152,F G12 GG3,0,Traction Rear Left (TRL) Motor ID
+190,F G12 GG4,999,+ TFR setup
+191,F G12 GG4,0,TFR - x position
+192,F G12 GG4,0,TFR - y position
+193,F G12 GG4,0,TFR - x offset
+194,F G12 GG4,0,TFR - y offset
+195,F G12 GG4,0,TFR - Gear Ratio
+196,F G12 GG4,0,TFR - Tyre Rolling Circumference
+197,F G12 GG4,0,TFR - Steer type
+198,F G12 GG4,0,TFR - Swivel distance between centres
+199,F G12 GG4,0,TFR - Swivel trunnion radius
+200,F G12 GG4,0,TFR - Swivel closed centres distance
+201,F G12 GG4,0,TFR - Swivel opened centres distance
+204,F G12 GG4,0,TFR - Swivel angle offset 
+540,F G12 GG4,0,TFR CW limit angle
+541,F G12 GG4,0,TFR CCW limit angle
+542,F G12 GG4,0,TFR CW limit raw
+543,F G12 GG4,0,TFR CCW limit raw
+845,F G12 GG4,0,TFR Max Speed
+844,F G12 GG4,0,TFR Typical Speed
+153,F G12 GG4,0,Traction Front Right (TFR) Motor ID
+205,F G12 GG5,999,+ TFL setup
+206,F G12 GG5,0,TFL - x position
+207,F G12 GG5,0,TFL - y position
+208,F G12 GG5,0,TFL - x offset
+209,F G12 GG5,0,TFL - y offset
+210,F G12 GG5,0,TFL - Gear Ratio
+211,F G12 GG5,0,TFL - Tyre Rolling Circumference
+212,F G12 GG5,0,TFL - Steer type
+213,F G12 GG5,0,TFL - Swivel distance between centres
+214,F G12 GG5,0,TFL - Swivel trunnion radius
+215,F G12 GG5,0,TFL - Swivel closed centres distance
+216,F G12 GG5,0,TFL - Swivel opened centres distance
+219,F G12 GG5,0,TFL - Swivel angle offset 
+544,F G12 GG5,0,TFL CW limit angle
+545,F G12 GG5,0,TFL CCW limit angle
+546,F G12 GG5,0,TFL CW limit raw
+547,F G12 GG5,0,TFL CCW limit raw
+847,F G12 GG5,0,TFL Max Speed
+846,F G12 GG5,0,TFL Typical Speed
+154,F G12 GG5,0,Traction Front Left (TFL) Motor ID
+145,F G12 GG6,2,Steer Rear Right (SRR) Setup
+155,F G12 GG6,0,Steer Rear Right (SRR) Motor ID
+146,F G12 GG7,2,Steer Rear Left (SRL) Setup
+156,F G12 GG7,0,Steer Rear Left (SRL) Motor ID
+147,F G12 GG8,2,Steer Front Right (SFR) Setup
+157,F G12 GG8,0,Steer Front Right (SFR) Motor ID
+148,F G12 GG9,2,Steer Front Left (SFL) Setup
+158,F G12 GG9,0,Steer Front Left (SFL) Motor ID
+116,F G13,0,Screen Shutdown Time
+118,F G13,0,Sound Volume
+117,F G13,999,+ Sound Setup
+1143,G GH1,0,CAN timeout heartbeat
+1144,G GH1,0,CAN timeout nmt
+1145,G GH1,0,CAN timeout PDO critical
+1146,G GH1,0,CAN timeout PDO normal
+768,G GH2,0,Directional Joystick Angle
+769,G GH2,0,Hydraulics Joystick Angle
+1011,G GH2,0,Display Truck Rotation
+600,H,0,DSC - Setup
+3,I,0,Machine Version
+480,I,0,Mast SD - Stage 4 Position
+23,I,0,none
+24,I,0,none
+25,I,0,none
+26,I,0,none
+27,I,0,none
+28,I,0,none
+29,I,0,none
+30,I,0,none
+31,I,0,none
+49,I,0,none
+50,I,0,none
+51,I,0,none
+52,I,0,none
+53,I,0,none
+54,I,0,none
+55,I,0,none
+56,I,0,none
+57,I,0,none
+58,I,0,none
+59,I,0,none
+60,I,0,none
+61,I,0,none
+62,I,0,none
+63,I,0,none
+64,I,0,none
+65,I,0,none
+66,I,0,none
+67,I,0,none
+68,I,0,none
+69,I,0,none
+70,I,0,none
+71,I,0,none
+72,I,0,none
+73,I,0,none
+74,I,0,none
+75,I,0,none
+76,I,0,none
+77,I,0,none
+78,I,0,none
+79,I,0,none
+80,I,0,none
+81,I,0,none
+82,I,0,none
+83,I,0,none
+84,I,0,none
+85,I,0,none
+86,I,0,none
+87,I,0,none
+88,I,0,none
+119,I,0,none
+121,I,0,none
+122,I,0,none
+128,I,0,none
+129,I,0,none
+133,I,0,none
+134,I,0,none
+149,I,0,none
+418,I,0,none
+419,I,0,none
+599,I,0,none
+1016,I,0,none
+1017,I,0,none
+1018,I,0,none
+1019,I,0,none
+1490,J,0,P_PAR_write_disable
+1491,J,0,TRR_PAR_write_disable
+1492,J,0,TRL_PAR_write_disable
+1493,J,0,TFR_PAR_write_disable
+1494,J,0,TFL_PAR_write_disable
+1495,J,0,SRR_PAR_write_disable
+1496,J,0,SRL_PAR_write_disable
+1497,J,0,SFR_PAR_write_disable
+1498,J,0,SFL_PAR_write_disable
+1499,J,0,EXP_PAR_write_disable
+1500,J,0,END_OF_PAR

@@ -1,0 +1,286 @@
+#220
+0,7,11,Hydraulic Function
+9,9,39,6-port 1 enable
+8,8,38,6-port 1 state
+11,11,41,6-port 2 enable
+10,10,40,6-port 2 state
+13,13,43,6-port 3 enable
+12,12,42,6-port 3 state
+#221
+0,1,12,Input Type
+2,5,13,Switch Feedback - dir A
+6,9,14,Switch Feedback - dir B
+2,3,15,Joystick Axis
+10,15,16,Joystick Button
+2,7,17,Fingertip
+#222
+0,1,18,Output Type
+2,5,19,PWM Valve Section
+2,5,19,PWM Proportional Valve Section
+2,7,20,PVG Valve Section
+11,12,21,Redundancy type
+13,13,43,Output feedback
+8,8,38,Priority if lower speed
+15,15,45,Return to Neutral
+14,14,44,Invert Output direction
+9,9,39,Invert Icon direction
+#238
+0,7,11,Hydraulic Function
+9,9,39,6-port 1 enable
+8,8,38,6-port 1 state
+11,11,41,6-port 2 enable
+10,10,40,6-port 2 state
+13,13,43,6-port 3 enable
+12,12,42,6-port 3 state
+#239
+0,1,12,Input Type
+2,5,13,Switch Feedback - dir A
+6,9,14,Switch Feedback - dir B
+2,3,15,Joystick Axis
+10,15,16,Joystick Button
+2,7,17,Fingertip
+#240
+0,1,18,Output Type
+2,5,19,PWM Valve Section
+2,5,19,PWM Proportional Valve Section
+2,7,20,PVG Valve Section
+11,12,21,Redundancy type
+13,13,43,Output feedback
+8,8,38,Priority if lower speed
+15,15,45,Return to Neutral
+14,14,44,Invert Output direction
+9,9,39,Invert Icon direction
+#256
+0,7,11,Hydraulic Function
+9,9,39,6-port 1 enable
+8,8,38,6-port 1 state
+11,11,41,6-port 2 enable
+10,10,40,6-port 2 state
+13,13,43,6-port 3 enable
+12,12,42,6-port 3 state
+#257
+0,1,12,Input Type
+2,5,13,Switch Feedback - dir A
+6,9,14,Switch Feedback - dir B
+2,3,15,Joystick Axis
+10,15,16,Joystick Button
+2,7,17,Fingertip
+#258
+0,1,18,Output Type
+2,5,19,PWM Valve Section
+2,5,19,PWM Proportional Valve Section
+2,7,20,PVG Valve Section
+11,12,21,Redundancy type
+13,13,43,Output feedback
+8,8,38,Priority if lower speed
+15,15,45,Return to Neutral
+14,14,44,Invert Output direction
+9,9,39,Invert Icon direction
+#274
+0,7,11,Hydraulic Function
+9,9,39,6-port 1 enable
+8,8,38,6-port 1 state
+11,11,41,6-port 2 enable
+10,10,40,6-port 2 state
+13,13,43,6-port 3 enable
+12,12,42,6-port 3 state
+#275
+0,1,12,Input Type
+2,5,13,Switch Feedback - dir A
+6,9,14,Switch Feedback - dir B
+2,3,15,Joystick Axis
+10,15,16,Joystick Button
+2,7,17,Fingertip
+#276
+0,1,18,Output Type
+2,5,19,PWM Valve Section
+2,5,19,PWM Proportional Valve Section
+2,7,20,PVG Valve Section
+11,12,21,Redundancy type
+13,13,43,Output feedback
+8,8,38,Priority if lower speed
+15,15,45,Return to Neutral
+14,14,44,Invert Output direction
+9,9,39,Invert Icon direction
+#292
+0,7,11,Hydraulic Function
+9,9,39,6-port 1 enable
+8,8,38,6-port 1 state
+11,11,41,6-port 2 enable
+10,10,40,6-port 2 state
+13,13,43,6-port 3 enable
+12,12,42,6-port 3 state
+#293
+0,1,12,Input Type
+2,5,13,Switch Feedback - dir A
+6,9,14,Switch Feedback - dir B
+2,3,15,Joystick Axis
+10,15,16,Joystick Button
+2,7,17,Fingertip
+#294
+0,1,18,Output Type
+2,5,19,PWM Valve Section
+2,5,19,PWM Proportional Valve Section
+2,7,20,PVG Valve Section
+11,12,21,Redundancy type
+13,13,43,Output feedback
+8,8,38,Priority if lower speed
+15,15,45,Return to Neutral
+14,14,44,Invert Output direction
+9,9,39,Invert Icon direction
+#310
+0,7,11,Hydraulic Function
+9,9,39,6-port 1 enable
+8,8,38,6-port 1 state
+11,11,41,6-port 2 enable
+10,10,40,6-port 2 state
+13,13,43,6-port 3 enable
+12,12,42,6-port 3 state
+#311
+0,1,12,Input Type
+2,5,13,Switch Feedback - dir A
+6,9,14,Switch Feedback - dir B
+2,3,15,Joystick Axis
+10,15,16,Joystick Button
+2,7,17,Fingertip
+#312
+0,1,18,Output Type
+2,5,19,PWM Valve Section
+2,5,19,PWM Proportional Valve Section
+2,7,20,PVG Valve Section
+11,12,21,Redundancy type
+13,13,43,Output feedback
+8,8,38,Priority if lower speed
+15,15,45,Return to Neutral
+14,14,44,Invert Output direction
+9,9,39,Invert Icon direction
+#328
+0,7,11,Hydraulic Function
+9,9,39,6-port 1 enable
+8,8,38,6-port 1 state
+11,11,41,6-port 2 enable
+10,10,40,6-port 2 state
+13,13,43,6-port 3 enable
+12,12,42,6-port 3 state
+#329
+0,1,12,Input Type
+2,5,13,Switch Feedback - dir A
+6,9,14,Switch Feedback - dir B
+2,3,15,Joystick Axis
+10,15,16,Joystick Button
+2,7,17,Fingertip
+#330
+0,1,18,Output Type
+2,5,19,PWM Valve Section
+2,5,19,PWM Proportional Valve Section
+2,7,20,PVG Valve Section
+11,12,21,Redundancy type
+13,13,43,Output feedback
+8,8,38,Priority if lower speed
+15,15,45,Return to Neutral
+14,14,44,Invert Output direction
+9,9,39,Invert Icon direction
+#346
+0,7,11,Hydraulic Function
+9,9,39,6-port 1 enable
+8,8,38,6-port 1 state
+11,11,41,6-port 2 enable
+10,10,40,6-port 2 state
+13,13,43,6-port 3 enable
+12,12,42,6-port 3 state
+#347
+0,1,12,Input Type
+2,5,13,Switch Feedback - dir A
+6,9,14,Switch Feedback - dir B
+2,3,15,Joystick Axis
+10,15,16,Joystick Button
+2,7,17,Fingertip
+#348
+0,1,18,Output Type
+2,5,19,PWM Valve Section
+2,5,19,PWM Proportional Valve Section
+2,7,20,PVG Valve Section
+11,12,21,Redundancy type
+13,13,43,Output feedback
+8,8,38,Priority if lower speed
+15,15,45,Return to Neutral
+14,14,44,Invert Output direction
+9,9,39,Invert Icon direction
+#364
+0,7,11,Hydraulic Function
+9,9,39,6-port 1 enable
+8,8,38,6-port 1 state
+11,11,41,6-port 2 enable
+10,10,40,6-port 2 state
+13,13,43,6-port 3 enable
+12,12,42,6-port 3 state
+#365
+0,1,12,Input Type
+2,5,13,Switch Feedback - dir A
+6,9,14,Switch Feedback - dir B
+2,3,15,Joystick Axis
+10,15,16,Joystick Button
+2,7,17,Fingertip
+#366
+0,1,18,Output Type
+2,5,19,PWM Valve Section
+2,5,19,PWM Proportional Valve Section
+2,7,20,PVG Valve Section
+11,12,21,Redundancy type
+13,13,43,Output feedback
+8,8,38,Priority if lower speed
+15,15,45,Return to Neutral
+14,14,44,Invert Output direction
+9,9,39,Invert Icon direction
+#382
+0,7,11,Hydraulic Function
+9,9,39,6-port 1 enable
+8,8,38,6-port 1 state
+11,11,41,6-port 2 enable
+10,10,40,6-port 2 state
+13,13,43,6-port 3 enable
+12,12,42,6-port 3 state
+#383
+0,1,12,Input Type
+2,5,13,Switch Feedback - dir A
+6,9,14,Switch Feedback - dir B
+2,3,15,Joystick Axis
+10,15,16,Joystick Button
+2,7,17,Fingertip
+#384
+0,1,18,Output Type
+2,5,19,PWM Valve Section
+2,5,19,PWM Proportional Valve Section
+2,7,20,PVG Valve Section
+11,12,21,Redundancy type
+13,13,43,Output feedback
+8,8,38,Priority if lower speed
+15,15,45,Return to Neutral
+14,14,44,Invert Output direction
+9,9,39,Invert Icon direction
+#400
+0,7,11,Hydraulic Function
+9,9,39,6-port 1 enable
+8,8,38,6-port 1 state
+11,11,41,6-port 2 enable
+10,10,40,6-port 2 state
+13,13,43,6-port 3 enable
+12,12,42,6-port 3 state
+#401
+0,1,12,Input Type
+2,5,13,Switch Feedback - dir A
+6,9,14,Switch Feedback - dir B
+2,3,15,Joystick Axis
+10,15,16,Joystick Button
+2,7,17,Fingertip
+#402
+0,1,18,Output Type
+2,5,19,PWM Valve Section
+2,5,19,PWM Proportional Valve Section
+2,7,20,PVG Valve Section
+11,12,21,Redundancy type
+13,13,43,Output feedback
+8,8,38,Priority if lower speed
+15,15,45,Return to Neutral
+14,14,44,Invert Output direction
+9,9,39,Invert Icon direction

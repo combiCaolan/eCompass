@@ -1,0 +1,25 @@
+no units,0
+V,1
+mV,2
+A,0
+mA,4
+ohm,5
+W,6
+km,7,ml
+m,8,ft
+mm,9,in
+ton,10
+kg,11,lb
+hr,12
+min,13
+s,14
+ms,15
+km/h,16,mph
+m/s,17,ft/s
+deg C,18,deg F
+deg,19
+rad,20
+%,21
+rpm,22
+m/s,23
+days,24

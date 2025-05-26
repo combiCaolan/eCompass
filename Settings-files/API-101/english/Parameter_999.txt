@@ -1,0 +1,234 @@
+#115
+0,6,Distance
+1,6,Speed
+2,6,Weight
+3,6,Temperature
+#117
+0,1,Height Assist
+1,1,Tilt Assist
+#130
+0,1,Seat/Floor
+1,1,Seatbelt/Door
+5,1,Sequence required
+6,1,Sequence required at startup
+2,1,Operator Enable Traction
+3,1,Operator Enable Hydraulics
+7,1,Hydraulics
+#135
+0,1,Hydraulics
+1,1,Carousel
+2,1,Crab
+3,1,Startup
+#138
+0,1,Hydraulics
+1,1,Carousel
+2,1,Crab
+#141
+0,1,Roadlights enable
+#143
+0,1,Forks direction
+1,1,Reverse Forks direction
+2,1,Left of Forks direction
+3,1,Right of Forks direction
+4,1,Offset
+5,1,Carousel or Crab
+6,1,Hydraulics
+7,1,Lower
+#160
+0,1,Wheel
+1,1,Traction
+2,1,Steer
+3,1,Steer Feedback
+4,1,Angular Sensor
+5,1,CAN
+6,1,Cylinder direction
+#175
+0,1,Wheel
+1,1,Traction
+2,1,Steer
+3,1,Steer Feedback
+4,1,Angular Sensor
+5,1,CAN
+6,1,Cylinder direction
+#190
+0,1,Wheel
+1,1,Traction
+2,1,Steer
+3,1,Steer Feedback
+4,1,Angular Sensor
+5,1,CAN
+6,1,Cylinder direction
+#205
+0,1,Wheel
+1,1,Traction
+2,1,Steer
+3,1,Steer Feedback
+4,1,Angular Sensor
+5,1,CAN
+6,1,Cylinder direction
+#420
+0,1,Mast H1 - proximity
+1,1,Mast H2 - proximity
+2,1,Mast H3 - proximity
+3,1,Mast H4 - proximity
+4,1,Reach R1 - proximity
+5,1,Reach R2 - proximity
+6,1,Reach R3 - proximity
+7,1,Reach R4 - proximity
+#421
+0,1,DAP analog H1
+1,1,DAP analog H2
+2,1,DAP analog H3
+3,1,DAP analog H4
+4,1,DAP analog R1
+5,1,DAP analog R2
+6,1,DAP analog R3
+7,1,DAP analog R4
+#422
+0,1,DAP Active Level H1
+1,1,DAP Active Level H2
+2,1,DAP Active Level H3
+3,1,DAP Active Level H4
+4,1,DAP Active Level R1
+5,1,DAP Active Level R2
+6,1,DAP Active Level R3
+7,1,DAP Active Level R4
+#423
+0,1,DAP Override H1
+1,1,DAP Override H2
+2,1,DAP Override H3
+3,1,DAP Override H4
+4,1,DAP Override R1
+5,1,DAP Override R2
+6,1,DAP Override R3
+7,1,DAP Override R4
+#472
+0,1,Mast SD - Lower Stop
+1,1,Mast SD - Higher Stop
+2,1,Mast SD - Stage 1
+3,1,Mast SD - Stage 2
+4,1,Mast SD - Stage 3
+#487
+0,1,Carriage SD - Back Stop
+1,1,Carriage SD - Front Stop
+#502
+0,1,Enable
+1,1,Front
+2,1,Reverse
+3,1,Left
+4,1,Right
+5,1,Forks
+6,1,Hi Forks
+7,1,Assist
+8,1,HLine
+#503
+0,1,Enable
+1,1,Front
+2,1,Reverse
+3,1,Left
+4,1,Right
+5,1,Forks
+6,1,Hi Forks
+7,1,Assist
+8,1,HLine
+#504
+0,1,Enable
+1,1,Front
+2,1,Reverse
+3,1,Left
+4,1,Right
+5,1,Forks
+6,1,Hi Forks
+7,1,Assist
+8,1,HLine
+#505
+0,1,Pump Controller
+1,1,Pump Motor
+2,1,TRR Controller
+3,1,TRR Motor
+4,1,TRL Controller
+5,1,TRL Motor
+6,1,TFR Controller
+7,1,TFR Motor
+8,1,TFL Controller
+9,1,TFL Motor
+#506
+0,1,Pump Controller
+1,1,Pump Motor
+2,1,TRR Controller
+3,1,TRR Motor
+4,1,TRL Controller
+5,1,TRL Motor
+6,1,TFR Controller
+7,1,TFR Motor
+8,1,TFL Controller
+9,1,TFL Motor
+#553
+0,1,Dual Axis
+1,1,Stop before direction change
+2,1,Stop before mode change another axis
+3,1,Reset if same direction selected
+4,1,Zero throttle before restart
+5,1,Inverted throttle act as brake
+6,1,Reflex Steering
+7,1,Reflex/Steer Valve on rear
+#941
+0,1,On/Off
+1,1,Input type
+3,1,Tilt Lock
+4,1,Speed
+5,1,Zone A
+6,1,Zone B
+7,1,Zone C
+8,1,Travel Position
+9,1,Load Position
+10,1,Platform Position
+#1013
+0,1,Forks Tilt Sensor Enable
+1,1,Forks Tilt Sensor Invert Direction
+2,1,Truck Tilt Sensor Enable
+3,1,Truck Tilt Sensor Invert Direction
+#1016
+0,1,Platform Enable
+1,1,Arms Enable
+#1082
+0,1,On/Off
+1,1,Input type
+2,1,Automatic Mode
+3,1,Tilt 1
+4,1,Tilt 2
+5,1,Slow Down Inverted
+#1087
+0,2,Enable
+1,47,Aisle Detection sensors
+2,47,Slow Down Detection sensors 
+3,47,Object Detection sensors 
+4,47,Stop sensors 
+5,47,Guidance sensors 
+6,2,Outside alarm
+7,2,Inside alarm
+8,2,Override
+9,2,Acknowlege input
+10,2,Acknowlege output
+11,2,Right light
+12,2,Left light
+13,2,Axis light
+14,48,Changeover type
+#1088
+0,1,Aisle Detection RR
+1,1,Aisle Detection RL
+2,1,Aisle Detection FR
+3,1,Aisle Detection FL
+4,1,Slow Down Detection RR
+5,1,Slow Down Detection RL
+6,1,Slow Down Detection FR
+7,1,Slow Down Detection FL
+8,1,Object Detection R
+9,1,Object Detection L
+10,1,Stop R
+11,1,Stop L
+12,1,Guidance RR
+13,1,Guidance RL
+14,1,Guidance FR
+15,1,Guidance FL
+#End

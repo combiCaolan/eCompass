@@ -1,0 +1,47 @@
+#WebLogo{
+	cursor:pointer;
+	margin:11px;
+}
+
+#HomeMenuButton{
+	float:left;
+	margin:5px;
+	border:0;
+	color:white;
+	background:transparent;
+	font-size:19px;
+	outline:none;
+}
+
+#WebHeader{
+	background: rgb(13, 105, 56);
+	top:0;
+	position:fixed;
+	width:100%;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	padding:10px 20px;
+}
+
+#HeaderTitle{
+	color:white; 
+	float:left;	
+	font-weight:100;
+	margin:6px;
+	margin-left:15px;
+	margin-right:25px;
+}
+
+#HomeMenuItems{
+	font-size: 17px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    font-family: inherit;
+    float: right;
+	cursor:pointer;
+}
+
+.fa, .fas {
+	font-weight:100;
+}

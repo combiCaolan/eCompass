@@ -1,0 +1,21 @@
+<!--<div class="dropdownProfile">
+<button class="dropbtn" style="background:none; border:0; outline:none; color:white; font-size:22px;"> Button
+</button>
+<div class="dropdown-content">
+  <button id="DownloadButton" onclick="UsernameDialog()" >Username : <p id="UsernameLocal"></p><script>document.getElementById('UsernameLocal').innerHTML = localStorage.getItem('loggedin_user')</script></button>
+   <hr/>
+   <button id="DownloadButton" onclick="AccessLevelDialog()">AccessLevel : <p id="AccessLevel"></p></button>
+   <button id="DownloadButton">API Version : <p id="APIVersion"></p></button>
+</div>
+</div>
+-->
+<div class="dropdown">
+	<button class="dropbtn" id="HeaderUserButtonReal"><i class='far fa-user'></i></button>
+	<div class="dropdown-content">
+		<button id="DownloadButton" ><p id="FixedUsernameText">Username</p><p id="UsernameLocal"></p>
+		</button>
+		<button id="DownloadButton" ><p id="FixedAccessLevelText">AccessLevel</p><p id="AccessLevel"></p></button>
+		<button id="DownloadButton"><p id="FixedAPIText">API Version</p><p id="APIVersion"></p></button>
+		<button id="DownloadButton" onclick="location.href=`http://support.combilift.net/wp-login.php?action=logout`;"><p id="FixedLogoutText">Logout</p></button>
+	</div>
+</div>

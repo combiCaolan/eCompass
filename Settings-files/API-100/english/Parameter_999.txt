@@ -1,0 +1,156 @@
+#115
+0,6,Distance
+1,6,Speed
+2,6,Weight
+3,6,Temperature
+#130
+0,1,Seat/Floor
+1,1,Seatbelt/Door
+5,1,Sequence required
+6,1,Sequence required at startup
+2,1,Operator Enable Traction
+3,1,Operator Enable Hydraulics
+7,1,Hydraulics
+#135
+0,1,Hydraulics
+1,1,Carousel
+2,1,Crab
+3,1,Startup
+#138
+0,1,Hydraulics
+1,1,Carousel
+2,1,Crab
+#141
+0,1,Roadlights enable
+#143
+0,1,Forks direction
+1,1,Reverse Forks direction
+2,1,Left of Forks direction
+3,1,Right of Forks direction
+4,1,Offset
+5,1,Carousel or Crab
+6,1,Hydraulics
+7,1,Lower
+#160
+0,1,Wheel
+1,1,Traction
+2,1,Steer
+3,1,Steer Feedback
+4,1,Angular Sensor
+5,1,CAN
+6,1,Cylinder direction
+#175
+0,1,Wheel
+1,1,Traction
+2,1,Steer
+3,1,Steer Feedback
+4,1,Angular Sensor
+5,1,CAN
+6,1,Cylinder direction
+#190
+0,1,Wheel
+1,1,Traction
+2,1,Steer
+3,1,Steer Feedback
+4,1,Angular Sensor
+5,1,CAN
+6,1,Cylinder direction
+#205
+0,1,Wheel
+1,1,Traction
+2,1,Steer
+3,1,Steer Feedback
+4,1,Angular Sensor
+5,1,CAN
+6,1,Cylinder direction
+#420
+0,1,Mast H1 - proximity
+1,1,Mast H2 - proximity
+2,1,Mast H3 - proximity
+3,1,Mast H4 - proximity
+4,1,Reach R1 - proximity
+5,1,Reach R2 - proximity
+6,1,Reach R3 - proximity
+7,1,Reach R4 - proximity
+#421
+0,1,DAP analog H1
+1,1,DAP analog H2
+2,1,DAP analog H3
+3,1,DAP analog H4
+4,1,DAP analog R1
+5,1,DAP analog R2
+6,1,DAP analog R3
+7,1,DAP analog R4
+#422
+0,1,DAP Active Level H1
+1,1,DAP Active Level H2
+2,1,DAP Active Level H3
+3,1,DAP Active Level H4
+4,1,DAP Active Level R1
+5,1,DAP Active Level R2
+6,1,DAP Active Level R3
+7,1,DAP Active Level R4
+#423
+0,1,DAP Override H1
+1,1,DAP Override H2
+2,1,DAP Override H3
+3,1,DAP Override H4
+4,1,DAP Override R1
+5,1,DAP Override R2
+6,1,DAP Override R3
+7,1,DAP Override R4
+#472
+0,1,Mast SD - Lower Stop
+1,1,Mast SD - Higher Stop
+2,1,Mast SD - Stage 1
+3,1,Mast SD - Stage 2
+4,1,Mast SD - Stage 3
+#487
+0,1,Carriage SD - Back Stop
+1,1,Carriage SD - Front Stop
+#505
+0,1,Pump Controller
+1,1,Pump Motor
+2,1,TRR Controller
+3,1,TRR Motor
+4,1,TRL Controller
+5,1,TRL Motor
+6,1,TFR Controller
+7,1,TFR Motor
+8,1,TFL Controller
+9,1,TFL Motor
+#506
+0,1,Pump Controller
+1,1,Pump Motor
+2,1,TRR Controller
+3,1,TRR Motor
+4,1,TRL Controller
+5,1,TRL Motor
+6,1,TFR Controller
+7,1,TFR Motor
+8,1,TFL Controller
+9,1,TFL Motor
+#553
+0,1,Dual Axis
+1,1,Stop before direction change
+2,1,Stop before mode change another axis
+3,1,Reset if same direction selected
+4,1,Zero throttle before restart
+5,1,Inverted throttle act as brake
+6,1,Reflex Steering
+7,1,Reflex/Steer Valve on rear
+#1013
+0,1,Forks Tilt Sensor Enable
+1,1,Forks Tilt Sensor Invert Direction
+2,1,Truck Tilt Sensor Enable
+3,1,Truck Tilt Sensor Invert Direction
+#941
+0,1,On/Off
+1,1,Input type
+2,1,Rest Position
+3,1,Tilt Lock
+4,1,Speed
+5,1,Zone A
+6,1,Zone B
+7,1,Zone C
+#End
