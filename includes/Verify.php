@@ -1,6 +1,6 @@
 <?php
 //Load Wordpress variables below and paths
-include_once('../wp-load.php');
+// include_once('../wp-load.php');
 include_once('includes/Path.php');
 
 //function to return user role
@@ -31,6 +31,15 @@ function display_user_roles()
 	
 	return $user_roles;
 }
+
+// $current_user = wp_get_current_user();
+
+$full_name = "Caolán";
+
+$logged_user_email = "caolanmichaelmaguire@gmail.com";
+
+
+return'';
 
 //If user is not logged in redirect them
 if (!is_user_logged_in()) {

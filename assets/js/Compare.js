@@ -2,6 +2,7 @@ LabelDict = new Object();
 
 LabelDict = {};
 
+try{
 ParameterMain = sessionStorage.getItem('ParameterMain').split('\n');
 counter = 0;
 while(ParameterMain[counter] != undefined){
@@ -189,3 +190,4 @@ while(ParameterMain[counter] != undefined){
 		document.getElementById('results').innerHTML = '';
 		document.getElementById('AddParametersQuery').innerHTML = '';
 	}
+}catch(err){}

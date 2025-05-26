@@ -281,7 +281,7 @@ while(SpecialDescription.split('\n')[counter] != undefined){
 			StartIndex = SpecialDescription.split('\n')[counter].split(',')[0];
 		}
 	}else{
-		SpecialDescriptionsDict[Number(Index)] = SpecialDescriptionsDict[Number(Index)] + SpecialDescription.split('\n')[counter] + '\n';
+		// SpecialDescriptionsDict[Number(Index)] = SpecialDescriptionsDict[Number(Index)] + SpecialDescription.split('\n')[counter] + '\n';
 		counter++;
 	}
 }
