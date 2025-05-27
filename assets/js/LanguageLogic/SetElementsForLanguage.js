@@ -656,7 +656,9 @@ function SetLanguage(){
 
 
 SetLanguage();
-CurrentPage = window.location.pathname.split('/')[window.location.pathname.split('/').length-1];
+if(CurrentPage == undefined){
+	const CurrentPage = window.location.pathname.split('/')[window.location.pathname.split('/').length-1];
+}
 	
 if(CurrentPage == 'editor.php'){
 	BitLabelChecker();

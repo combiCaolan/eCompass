@@ -1,79 +1,60 @@
 <!--Web Header-->
 <div class="topnav" id="myTopnav">
 	<button id="MenuLink" onclick="ParametersMenuToggle()">Parameters Menu</button>
-	<?php include_once('includes/profile.html'); ?>
-	<?php include_once('includes/logoarea.html'); ?>
+	<?php include_once('../includes/profile.html'); ?>
+	<?php include_once('../includes/logoarea.html'); ?>
 
-  <div class="dropdown">
-	<button class="dropbtn" id="HeaderFileButton">File 
-	  <i class="fa fa-caret-down"></i>
-	</button>
-	<div class="dropdown-content">
-	  <a onclick="NewFile()" id="NewFileButton">New</a>
-	  <a onclick="readParameters()" id="OpenFileButton">Open</a>
-	  <a onclick="OpenNewFile()" id="OpenInNewTab">Open new file in new tab</a>
-	  <!--<div id="DefaultFilesDiv" style="background: white; width: 100%;">
-	  </div>-->
-	  <a onclick="location.href = 'Download.php';" id="SaveFileButton">Save</a>
-	  <!--<a onclick="WebdownloadFile('COMBI_PAR.clp',sessionStorage.getItem('Parameters').replace(/^\s*[\r\n]/gm, ''));" id="SaveFileButton">Save</a>-->
-	  <a onclick="CloseFileDialog()" id="CloseFileButton">Close</a>
+	<div class="dropdown">
+		<button class="dropbtn" id="HeaderFileButton">File
+			<i class="fa fa-caret-down"></i>
+		</button>
+		<div class="dropdown-content">
+			<a onclick="NewFile()" id="NewFileButton">New</a>
+			<a onclick="readParameters()" id="OpenFileButton">Open</a>
+			<a onclick="OpenNewFile()" id="OpenInNewTab">Open new file in new tab</a>
+			<a onclick="location.href = 'Download.php';" id="SaveFileButton">Save</a>
+			<a onclick="CloseFileDialog()" id="CloseFileButton">Close</a>
+		</div>
 	</div>
-  </div>  
 
-  <div class="dropdown">
-	<button class="dropbtn" id="HeaderToolsButton">Tools 
-	  <i class="fa fa-caret-down"></i>
-	</button>
-	<div class="dropdown-content">
-	  <a onclick="ErrorAlertDialog()" id="ErrorButton">Errors</a>
-	  <a onclick="FileActionsDialog()" id="FileActionsButton">File Actions</a>
-	  <a onclick="SpecialBlockDialog()" id="SpecialBlocksButton">Special Blocks</a>
-	  <a href="https://knowledgebase6.wpengine.com/elogs" id="LogViewerButton">eLogs - Log Viewer</a>
-  	  <a onclick="window.open('https://knowledgebase6.wpengine.com/knowledge-base/', '_blank');" id="KnowledgeBaseButton">Knowledge Base</a>
-
-<!-- <a href="#" onclick="CompareDialog()" id="CompareFilesButton">Compare</a>
-	  <a href="#" onclick="ChangeUserDialog()" id="ChangeUserButton">Change User</a>-->
-	  <!--<a href="#" id="SpecialBlocks" onclick="SearchDialog()" id="SpecialBlocksButton">Search Dialog</a>-->
+	<div class="dropdown">
+		<button class="dropbtn" id="HeaderToolsButton">Tools
+			<i class="fa fa-caret-down"></i>
+		</button>
+		<div class="dropdown-content">
+			<a onclick="ErrorAlertDialog()" id="ErrorButton">Errors</a>
+			<a onclick="FileActionsDialog()" id="FileActionsButton">File Actions</a>
+			<a onclick="SpecialBlockDialog()" id="SpecialBlocksButton">Special Blocks</a>
+			<a href="https://knowledgebase6.wpengine.com/elogs" id="LogViewerButton">eLogs - Log Viewer</a>
+			<a onclick="window.open('https://knowledgebase6.wpengine.com/knowledge-base/', '_blank');"
+				id="KnowledgeBaseButton">Knowledge Base</a>
+		</div>
 	</div>
-  </div>
 
-<!-- 
-  <div class="dropdown">
-	<button class="dropbtn" id="HeaderSettingsButton">Settings 
-	  <i class="fa fa-caret-down"></i>
-	</button>
-	<div class="dropdown-content">
-	<a id="ChangeApiButton" onclick="ApiDialog()">Change API</a>
-	<a onclick="ChangeLanguageDialog()" id="ChangeLanguageButton">Change Language</a>
+	<div class="dropdown">
+		<button class="dropbtn" id="HeaderHelpButton">Help
+			<i class="fa fa-caret-down"></i>
+		</button>
+		<div class="dropdown-content">
+			<a href="https://knowledgebase6.wpengine.com/" id="SupportButton">Combilift Technical Support</a>
+			<a onclick="location.href= 'https://combilift.com/contact/';" id="ContactSupportButton">Contact Support</a>
+			<a onclick="location.href = 'https://combilift.com/about-us/';" id="AboutUsButton">About Us</a>
+		</div>
 	</div>
-  </div> 
--->
 
-  <div class="dropdown">
-	<button class="dropbtn" id="HeaderHelpButton">Help 
-	  <i class="fa fa-caret-down"></i>
-	</button>
-	<div class="dropdown-content">
-      <a href="https://knowledgebase6.wpengine.com/" id="SupportButton">Combilift Technical Support</a>
-	  <a onclick="location.href= 'https://combilift.com/contact/';" id="ContactSupportButton">Contact Support</a>
-	  <a onclick="location.href = 'https://combilift.com/about-us/';" id="AboutUsButton">About Us</a>
+	<div class="dropdown">
+		<button class="dropbtn" onclick="SearchDialog()" id="SearchIconButton" style="font-size:20px; margin:3px;">
+			<i class="fa fa-search"></i>
+		</button>
 	</div>
-  </div>
-  
-  <div class="dropdown">
-	<button class="dropbtn" onclick="SearchDialog()" id="SearchIconButton" style="font-size:20px; margin:3px;"> 
-		<i class="fa fa-search"></i>
-	</button>
-  </div>
-  <!--<button type="submit" id="SearchIconHeader"><i class="fa fa-search"></i></button>-->
 	<a href="javascript:void(0);" class="icon" id="MobileMenuButtonForText" onclick="MobileMenuFunction()">&#9776;</a>
 </div>
 <!--Web Header-->
 
-<div id="MobileAlert" ><!--onclick="document.getElementById('MobileAlert').setAttribute('style','display:none;')">-->
-<h1>Device Screen too small</h1><br>
-<p>eCompass is designed to work on a bigger resolution.</p>
-<p>Please use a larger resolution.</p>
-<p>If viewing in a mobile device, choose view "Desktop Site" in the browser settings.</p>
+<div id="MobileAlert">
+	<h1>Device Screen too small</h1><br>
+	<p>eCompass is designed to work on a bigger resolution.</p>
+	<p>Please use a larger resolution.</p>
+	<p>If viewing in a mobile device, choose view "Desktop Site" in the browser settings.</p>
 
 </div>

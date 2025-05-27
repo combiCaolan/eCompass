@@ -244,6 +244,7 @@ try {
 } catch (err) { }
 
 AccessLevel = sessionStorage.getItem('AccessLevel');
+AccessLevelForUser = sessionStorage.getItem('AccessLevel');
 
 if (Number(AccessLevel) != 8) {
 	document.getElementById('G').remove();

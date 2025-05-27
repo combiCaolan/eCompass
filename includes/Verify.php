@@ -1,7 +1,7 @@
 <?php
 //Load Wordpress variables below and paths
 // include_once('../wp-load.php');
-include_once('includes/Path.php');
+include_once('../includes/Path.php');
 
 //function to return user role
 function display_user_roles()
@@ -19,16 +19,16 @@ function display_user_roles()
 	$string_kb = "nowledgebase";
 	$string_combi = "ombilift.";
 
-	if (strpos($user_roles_raw, $string_kb) == true){
-		if (strpos($user_email_test, $string_combi) == true){
+	if (strpos($user_roles_raw, $string_kb) == true) {
+		if (strpos($user_email_test, $string_combi) == true) {
 			$user_roles = '7';
-		}else {
+		} else {
 			$user_roles = '6';
-		}	
-	}else {
+		}
+	} else {
 		$user_roles = '0';
-	}	
-	
+	}
+
 	return $user_roles;
 }
 
@@ -39,12 +39,12 @@ $full_name = "Caolán";
 $logged_user_email = "caolanmichaelmaguire@gmail.com";
 
 
-return'';
+return '';
 
 //If user is not logged in redirect them
 if (!is_user_logged_in()) {
-	echo('user is not logged in');
-//	#header('Location: ' . $WebPath . 'https://support.combilift.net/login-selection/'); // /wp-login.php?redirect_to=%2Fecompass%2F');
+	echo ('user is not logged in');
+	//	#header('Location: ' . $WebPath . 'https://support.combilift.net/login-selection/'); // /wp-login.php?redirect_to=%2Fecompass%2F');
 	#header('Location: https://support.combilift.net/login-selection/');
 } else {
 

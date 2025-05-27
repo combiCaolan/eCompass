@@ -3,6 +3,8 @@
 // Enable test mode by setting this to true
 $test_mode = true; // Set to true for test mode
 
+header("Access-Control-Allow-Origin: *");
+
 session_start();
 
 if ($test_mode) {
@@ -10,6 +12,8 @@ if ($test_mode) {
     $full_name = "Caolán Maguire";
     $logged_user_email = "caolan.maguire@combilift.com";
     $access_level = "8";
+
+    echo"<script>sessionStorage.setItem('ServerPath','http://localhost:8000');</script>";
 
     echo '<script> sessionStorage.setItem("loggedinusername","' . $full_name . '"); sessionStorage.setItem("loggedinemail","' . $logged_user_email . '"); sessionStorage.setItem("AccessLevel","' . $access_level . '"); </script>';
 
