@@ -54,8 +54,7 @@ eCompass/
 ├── frontpage.php
 ├── index.php
 ├── README.md
-└── UnsupportedBrowserCheck.js
-```
+└── UnsupportedBrowserCheck.js```
 
 ---
 
