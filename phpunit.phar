@@ -1,0 +1,3336 @@
+#!/usr/bin/env php
+<?php
+if (!version_compare(PHP_VERSION, PHP_VERSION, '=')) {
+    fwrite(
+        STDERR,
+        sprintf(
+            '%s declares an invalid value for PHP_VERSION.' . PHP_EOL .
+            'This breaks fundamental functionality such as version_compare().' . PHP_EOL .
+            'Please use a different PHP interpreter.' . PHP_EOL,
+
+            PHP_BINARY
+        )
+    );
+
+    die(1);
+}
+
+if (version_compare('8.3.0', PHP_VERSION, '>')) {
+    fwrite(
+        STDERR,
+        sprintf(
+            'foal 0.3.0 by Sebastian Bergmann.' . PHP_EOL . PHP_EOL .
+            'This version of FOAL requires PHP >= 8.3.' . PHP_EOL .
+            'You are using PHP %s (%s).' . PHP_EOL,
+            PHP_VERSION,
+            PHP_BINARY
+        )
+    );
+
+    die(1);
+}
+
+$requiredExtensions = ['vld', 'Zend OPcache'];
+
+$unavailableExtensions = array_filter(
+    $requiredExtensions,
+    static function ($extension) {
+        return !extension_loaded($extension);
+    }
+);
+
+if ([] !== $unavailableExtensions) {
+    fwrite(
+        STDERR,
+        sprintf(
+            'FOAL requires the "%s" extensions, but the "%s" %s not available.' . PHP_EOL,
+            implode('", "', $requiredExtensions),
+            implode('", "', $unavailableExtensions),
+            count($unavailableExtensions) === 1 ? 'extension is' : 'extensions are'
+        )
+    );
+
+    die(1);
+}
+
+unset($requiredExtensions, $unavailableExtensions);
+
+$options = getopt('', array('composer-lock', 'manifest', 'sbom'));
+
+if (isset($options['composer-lock'])) {
+    $printComposerLock = true;
+} elseif (isset($options['manifest'])) {
+    $printManifest = true;
+} elseif (isset($options['sbom'])) {
+    $printSbom = true;
+}
+
+unset($options);
+
+define('__FOAL_PHAR__', str_replace(DIRECTORY_SEPARATOR, '/', __FILE__));
+define('__FOAL_PHAR_ROOT__', 'phar://foal-0.3.0.phar');
+
+Phar::mapPhar('foal-0.3.0.phar');
+
+spl_autoload_register(
+    function ($class) {
+        static $classes = null;
+
+        if ($classes === null) {
+            $classes = ['FOAL\\SebastianBergmann\\CliParser\\AmbiguousOptionException' => '/sebastian-cli-parser/exceptions/AmbiguousOptionException.php',
+                'FOAL\\SebastianBergmann\\CliParser\\Exception' => '/sebastian-cli-parser/exceptions/Exception.php',
+                'FOAL\\SebastianBergmann\\CliParser\\OptionDoesNotAllowArgumentException' => '/sebastian-cli-parser/exceptions/OptionDoesNotAllowArgumentException.php',
+                'FOAL\\SebastianBergmann\\CliParser\\Parser' => '/sebastian-cli-parser/Parser.php',
+                'FOAL\\SebastianBergmann\\CliParser\\RequiredOptionArgumentMissingException' => '/sebastian-cli-parser/exceptions/RequiredOptionArgumentMissingException.php',
+                'FOAL\\SebastianBergmann\\CliParser\\UnknownOptionException' => '/sebastian-cli-parser/exceptions/UnknownOptionException.php',
+                'FOAL\\SebastianBergmann\\Diff\\Chunk' => '/sebastian-diff/Chunk.php',
+                'FOAL\\SebastianBergmann\\Diff\\ConfigurationException' => '/sebastian-diff/Exception/ConfigurationException.php',
+                'FOAL\\SebastianBergmann\\Diff\\Diff' => '/sebastian-diff/Diff.php',
+                'FOAL\\SebastianBergmann\\Diff\\Differ' => '/sebastian-diff/Differ.php',
+                'FOAL\\SebastianBergmann\\Diff\\Exception' => '/sebastian-diff/Exception/Exception.php',
+                'FOAL\\SebastianBergmann\\Diff\\InvalidArgumentException' => '/sebastian-diff/Exception/InvalidArgumentException.php',
+                'FOAL\\SebastianBergmann\\Diff\\Line' => '/sebastian-diff/Line.php',
+                'FOAL\\SebastianBergmann\\Diff\\LongestCommonSubsequenceCalculator' => '/sebastian-diff/LongestCommonSubsequenceCalculator.php',
+                'FOAL\\SebastianBergmann\\Diff\\MemoryEfficientLongestCommonSubsequenceCalculator' => '/sebastian-diff/MemoryEfficientLongestCommonSubsequenceCalculator.php',
+                'FOAL\\SebastianBergmann\\Diff\\Output\\AbstractChunkOutputBuilder' => '/sebastian-diff/Output/AbstractChunkOutputBuilder.php',
+                'FOAL\\SebastianBergmann\\Diff\\Output\\DiffOnlyOutputBuilder' => '/sebastian-diff/Output/DiffOnlyOutputBuilder.php',
+                'FOAL\\SebastianBergmann\\Diff\\Output\\DiffOutputBuilderInterface' => '/sebastian-diff/Output/DiffOutputBuilderInterface.php',
+                'FOAL\\SebastianBergmann\\Diff\\Output\\StrictUnifiedDiffOutputBuilder' => '/sebastian-diff/Output/StrictUnifiedDiffOutputBuilder.php',
+                'FOAL\\SebastianBergmann\\Diff\\Output\\UnifiedDiffOutputBuilder' => '/sebastian-diff/Output/UnifiedDiffOutputBuilder.php',
+                'FOAL\\SebastianBergmann\\Diff\\Parser' => '/sebastian-diff/Parser.php',
+                'FOAL\\SebastianBergmann\\Diff\\TimeEfficientLongestCommonSubsequenceCalculator' => '/sebastian-diff/TimeEfficientLongestCommonSubsequenceCalculator.php',
+                'FOAL\\SebastianBergmann\\FOAL\\Analyser' => '/foal/Analyser.php',
+                'FOAL\\SebastianBergmann\\FOAL\\CLI\\Application' => '/foal/cli/Application.php',
+                'FOAL\\SebastianBergmann\\FOAL\\CLI\\Arguments' => '/foal/cli/Arguments.php',
+                'FOAL\\SebastianBergmann\\FOAL\\CLI\\ArgumentsBuilder' => '/foal/cli/ArgumentsBuilder.php',
+                'FOAL\\SebastianBergmann\\FOAL\\CLI\\ArgumentsBuilderException' => '/foal/exception/ArgumentsBuilderException.php',
+                'FOAL\\SebastianBergmann\\FOAL\\CLI\\Factory' => '/foal/cli/Factory.php',
+                'FOAL\\SebastianBergmann\\FOAL\\CLI\\Version' => '/foal/cli/Version.php',
+                'FOAL\\SebastianBergmann\\FOAL\\DiffRenderer' => '/foal/DiffRenderer.php',
+                'FOAL\\SebastianBergmann\\FOAL\\Exception' => '/foal/exception/Exception.php',
+                'FOAL\\SebastianBergmann\\FOAL\\File' => '/foal/file/File.php',
+                'FOAL\\SebastianBergmann\\FOAL\\FileCollection' => '/foal/file/FileCollection.php',
+                'FOAL\\SebastianBergmann\\FOAL\\FileCollectionIterator' => '/foal/file/FileCollectionIterator.php',
+                'FOAL\\SebastianBergmann\\FOAL\\LinesWithOpcodesFinder' => '/foal/bytecode/LinesWithOpcodesFinder.php',
+                'FOAL\\SebastianBergmann\\FOAL\\OpcacheNotLoadedException' => '/foal/exception/OpcacheNotLoadedException.php',
+                'FOAL\\SebastianBergmann\\FOAL\\ProcessException' => '/foal/exception/ProcessException.php',
+                'FOAL\\SebastianBergmann\\FOAL\\Renderer' => '/foal/Renderer.php',
+                'FOAL\\SebastianBergmann\\FOAL\\TextRenderer' => '/foal/TextRenderer.php',
+                'FOAL\\SebastianBergmann\\FOAL\\VldLinesWithOpcodesFinder' => '/foal/bytecode/VldLinesWithOpcodesFinder.php',
+                'FOAL\\SebastianBergmann\\FOAL\\VldNotLoadedException' => '/foal/exception/VldNotLoadedException.php',
+                'FOAL\\SebastianBergmann\\FOAL\\VldParser' => '/foal/bytecode/VldParser.php',
+                'FOAL\\SebastianBergmann\\FileIterator\\ExcludeIterator' => '/php-file-iterator/ExcludeIterator.php',
+                'FOAL\\SebastianBergmann\\FileIterator\\Facade' => '/php-file-iterator/Facade.php',
+                'FOAL\\SebastianBergmann\\FileIterator\\Factory' => '/php-file-iterator/Factory.php',
+                'FOAL\\SebastianBergmann\\FileIterator\\Iterator' => '/php-file-iterator/Iterator.php',
+                'FOAL\\SebastianBergmann\\Version' => '/sebastian-version/Version.php'];
+        }
+
+        if (isset($classes[$class])) {
+            require_once 'phar://foal-0.3.0.phar' . $classes[$class];
+        }
+    },
+    true,
+    false
+);
+
+if (isset($printComposerLock)) {
+    print file_get_contents(__FOAL_PHAR_ROOT__ . '/composer.lock');
+
+    exit;
+}
+
+if (isset($printManifest)) {
+    print file_get_contents(__FOAL_PHAR_ROOT__ . '/manifest.txt');
+
+    exit;
+}
+
+if (isset($printSbom)) {
+    print file_get_contents(__FOAL_PHAR_ROOT__ . '/sbom.xml');
+
+    exit;
+}
+
+exit((new \FOAL\SebastianBergmann\FOAL\CLI\Factory)->createApplication()->run($_SERVER['argv']));
+
+__HALT_COMPILER(); ?>
+z  6          foal-0.3.0.phar       composer.lock≈$  (C f≈$  dhﬂ§         foal/Analyser.phpΩ  (C fΩ  ∂ı6F§         foal/DiffRenderer.phpv  (C fv  å1À¯§         foal/Renderer.phpl  (C fl  ¶∞j§         foal/TextRenderer.php¶  (C f¶  πıÅÕ§      (   foal/bytecode/LinesWithOpcodesFinder.phpÜ  (C fÜ  (˜¬§      +   foal/bytecode/VldLinesWithOpcodesFinder.php˜
+  (C f˜
+  P]3ﬂ§         foal/bytecode/VldParser.php§  (C f§  PxFÎ§         foal/cli/Application.phpT  (C fT  Üu§         foal/cli/Arguments.phpë  (C fë  •	⁄'§         foal/cli/ArgumentsBuilder.phpZ  (C fZ  Ämi§         foal/cli/Factory.phpy  (C fy  ‘gâÒ§         foal/cli/Version.phpe  (C fe  √¿3§      ,   foal/exception/ArgumentsBuilderException.php¡  (C f¡  !ÛÅ¥§         foal/exception/Exception.php<  (C f<  IaD§      ,   foal/exception/OpcacheNotLoadedException.phpí  (C fí  sŸ‰§      #   foal/exception/ProcessException.phpâ  (C fâ  °¯J§      (   foal/exception/VldNotLoadedException.phpé  (C fé  ÓôÄ§         foal/file/File.phpë  (C fë  ØQî§         foal/file/FileCollection.php  (C f  ˛B˚ô§      $   foal/file/FileCollectionIterator.php,  (C f,  s@á§         manifest.txtÇ   (C fÇ   S—YI§      %   php-file-iterator/ExcludeIterator.php+  (C f+  Í˚;⁄§         php-file-iterator/Facade.phpà  (C fà  )>º‘§         php-file-iterator/Factory.php›
+  (C f›
+  µ	º§         php-file-iterator/Iterator.phpœ  (C fœ  '>j§         php-file-iterator/LICENSE˚  (C f˚  >ˆR§         sbom.xml9  (C f9  7úÀS§         sebastian-cli-parser/LICENSE˚  (C f˚  ßÿk§         sebastian-cli-parser/Parser.phpπ  (C fπ  k‡	V§      <   sebastian-cli-parser/exceptions/AmbiguousOptionException.phpC  (C fC  ¢2T§      -   sebastian-cli-parser/exceptions/Exception.phpr  (C fr  Pl˚§      G   sebastian-cli-parser/exceptions/OptionDoesNotAllowArgumentException.php\  (C f\  Ãm‡.§      J   sebastian-cli-parser/exceptions/RequiredOptionArgumentMissingException.phpe  (C fe  ù…ui§      :   sebastian-cli-parser/exceptions/UnknownOptionException.php<  (C f<  ﬁ!®è§         sebastian-diff/Chunk.php’  (C f’  ˛í6§         sebastian-diff/Diff.php}  (C f}  ËÍ√$§         sebastian-diff/Differ.phpÙ  (C fÙ  F3}—§      3   sebastian-diff/Exception/ConfigurationException.php  (C f  PˆÃù§      &   sebastian-diff/Exception/Exception.phpg  (C fg  —£¿ã§      5   sebastian-diff/Exception/InvalidArgumentException.phpà  (C fà  –Npº§         sebastian-diff/LICENSE˚  (C f˚  É‹°7§         sebastian-diff/Line.php.  (C f.  ö–„§      5   sebastian-diff/LongestCommonSubsequenceCalculator.phpÓ  (C fÓ  p¨ﬂ §      D   sebastian-diff/MemoryEfficientLongestCommonSubsequenceCalculator.php!
+  (C f!
+  ë€?§      4   sebastian-diff/Output/AbstractChunkOutputBuilder.phpÛ  (C fÛ  ˘Z⁄§      /   sebastian-diff/Output/DiffOnlyOutputBuilder.phps  (C fs  æ†§      4   sebastian-diff/Output/DiffOutputBuilderInterface.php  (C f  ñ©&˜§      8   sebastian-diff/Output/StrictUnifiedDiffOutputBuilder.phpO(  (C fO(  ’Ø¸©§      2   sebastian-diff/Output/UnifiedDiffOutputBuilder.php   (C f   :œbo§         sebastian-diff/Parser.phpÌ  (C fÌ  É-–≥§      B   sebastian-diff/TimeEfficientLongestCommonSubsequenceCalculator.php+	  (C f+	  âﬁ(y§         sebastian-version/LICENSE˚  (C f˚  ëﬁD"§         sebastian-version/Version.php6	  (C f6	  a C+§      {
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "b8704dc16908a55680411d3491d832af",
+    "packages": [
+        {
+            "name": "phpunit/php-file-iterator",
+            "version": "5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
+                "reference": "99e95c94ad9500daca992354fa09d7b99abe2210"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/99e95c94ad9500daca992354fa09d7b99abe2210",
+                "reference": "99e95c94ad9500daca992354fa09d7b99abe2210",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "FilterIterator implementation that filters files based on a list of suffixes.",
+            "homepage": "https://github.com/sebastianbergmann/php-file-iterator/",
+            "keywords": [
+                "filesystem",
+                "iterator"
+            ],
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/php-file-iterator/issues",
+                "security": "https://github.com/sebastianbergmann/php-file-iterator/security/policy",
+                "source": "https://github.com/sebastianbergmann/php-file-iterator/tree/5.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sebastianbergmann",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-02-02T06:05:04+00:00"
+        },
+        {
+            "name": "sebastian/cli-parser",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/cli-parser.git",
+                "reference": "00a74d5568694711f0222e54fb281e1d15fdf04a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/cli-parser/zipball/00a74d5568694711f0222e54fb281e1d15fdf04a",
+                "reference": "00a74d5568694711f0222e54fb281e1d15fdf04a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "Library for parsing CLI options",
+            "homepage": "https://github.com/sebastianbergmann/cli-parser",
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/cli-parser/issues",
+                "security": "https://github.com/sebastianbergmann/cli-parser/security/policy",
+                "source": "https://github.com/sebastianbergmann/cli-parser/tree/3.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sebastianbergmann",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-03-02T07:26:58+00:00"
+        },
+        {
+            "name": "sebastian/diff",
+            "version": "6.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/diff.git",
+                "reference": "ab83243ecc233de5655b76f577711de9f842e712"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/ab83243ecc233de5655b76f577711de9f842e712",
+                "reference": "ab83243ecc233de5655b76f577711de9f842e712",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.0",
+                "symfony/process": "^4.2 || ^5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "6.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                },
+                {
+                    "name": "Kore Nordmann",
+                    "email": "mail@kore-nordmann.de"
+                }
+            ],
+            "description": "Diff implementation",
+            "homepage": "https://github.com/sebastianbergmann/diff",
+            "keywords": [
+                "diff",
+                "udiff",
+                "unidiff",
+                "unified diff"
+            ],
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/diff/issues",
+                "security": "https://github.com/sebastianbergmann/diff/security/policy",
+                "source": "https://github.com/sebastianbergmann/diff/tree/6.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sebastianbergmann",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-03-02T07:30:33+00:00"
+        },
+        {
+            "name": "sebastian/version",
+            "version": "5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/version.git",
+                "reference": "13999475d2cb1ab33cb73403ba356a814fdbb001"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/version/zipball/13999475d2cb1ab33cb73403ba356a814fdbb001",
+                "reference": "13999475d2cb1ab33cb73403ba356a814fdbb001",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "Library that helps with managing the version number of Git-hosted PHP projects",
+            "homepage": "https://github.com/sebastianbergmann/version",
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/version/issues",
+                "security": "https://github.com/sebastianbergmann/version/security/policy",
+                "source": "https://github.com/sebastianbergmann/version/tree/5.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sebastianbergmann",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-02-02T06:10:47+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": true,
+    "prefer-lowest": false,
+    "platform": {
+        "php": "^8.3",
+        "ext-zend-opcache": "*",
+        "ext-vld": "*"
+    },
+    "platform-dev": [],
+    "platform-overrides": {
+        "php": "8.3.0"
+    },
+    "plugin-api-version": "2.6.0"
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL;
+
+use function array_diff;
+use function array_values;
+use function file;
+final readonly class Analyser
+{
+    private LinesWithOpcodesFinder $finder;
+    public function __construct(LinesWithOpcodesFinder $finder)
+    {
+        $this->finder = $finder;
+    }
+    /**
+     * @psalm-param non-empty-list<non-empty-string> $files
+     */
+    public function analyse(array $files) : FileCollection
+    {
+        $result = [];
+        foreach ($files as $file) {
+            $result[] = new File($file, file($file), $this->linesEliminatedByOptimizer($file));
+        }
+        return FileCollection::from(...$result);
+    }
+    /**
+     * @psalm-param non-empty-string $file
+     *
+     * @psalm-return list<int>
+     */
+    private function linesEliminatedByOptimizer(string $file) : array
+    {
+        return array_values(array_diff($this->finder->beforeOptimization($file), $this->finder->afterOptimization($file)));
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL;
+
+use FOAL\SebastianBergmann\Diff\Differ;
+use FOAL\SebastianBergmann\Diff\Output\StrictUnifiedDiffOutputBuilder;
+final readonly class DiffRenderer implements Renderer
+{
+    public function render(File $file) : string
+    {
+        $before = $file->sourceLines();
+        $after = $before;
+        foreach ($file->linesEliminatedByOptimizer() as $line) {
+            $after[$line - 1] = '';
+        }
+        $differ = new Differ(new StrictUnifiedDiffOutputBuilder(['fromFile' => $file->path(), 'toFile' => $file->path() . ' (optimized)']));
+        return $differ->diff($before, $after);
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL;
+
+interface Renderer
+{
+    public function render(File $file) : string;
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL;
+
+use function array_flip;
+use function array_key_exists;
+use function rtrim;
+use function sprintf;
+final readonly class TextRenderer implements Renderer
+{
+    public function render(File $file) : string
+    {
+        $buffer = $file->path() . \PHP_EOL;
+        $sourceLines = $file->sourceLines();
+        $eliminatedLines = array_flip($file->linesEliminatedByOptimizer());
+        $line = 0;
+        foreach ($sourceLines as $sourceLine) {
+            $line++;
+            $buffer .= sprintf('%s %-6d %s' . \PHP_EOL, array_key_exists($line, $eliminatedLines) ? '-' : ' ', $line, rtrim($sourceLine));
+        }
+        return $buffer;
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL;
+
+interface LinesWithOpcodesFinder
+{
+    /**
+     * @psalm-param non-empty-string $file
+     *
+     * @psalm-return list<int>
+     */
+    public function beforeOptimization(string $file) : array;
+    /**
+     * @psalm-param non-empty-string $file
+     *
+     * @psalm-return list<int>
+     */
+    public function afterOptimization(string $file) : array;
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL;
+
+use function exec;
+use function extension_loaded;
+use function implode;
+final readonly class VldLinesWithOpcodesFinder implements LinesWithOpcodesFinder
+{
+    private const string PRINT_OPCODES_OPTIONS = '-d vld.active=1 -d vld.execute=0 -d vld.verbosity=0 -d vld.format=1 -d vld.col_sep=\';\'';
+    private const string ENABLE_OPTIMIZATION_OPTIONS = '-d opcache.enable=1 -d opcache.enable_cli=1 -d opcache.optimization_level=-1';
+    private const string DISABLE_OPTIMIZATION_OPTIONS = '-d opcache.enable=0 -d opcache.enable_cli=0';
+    private VldParser $parser;
+    /**
+     * @throws OpcacheNotLoadedException
+     * @throws VldNotLoadedException
+     */
+    public function __construct(VldParser $parser)
+    {
+        $this->ensureOpCacheIsAvailable();
+        $this->ensureVldIsAvailable();
+        $this->parser = $parser;
+    }
+    /**
+     * @psalm-param non-empty-string $file
+     *
+     * @psalm-return list<int>
+     */
+    public function beforeOptimization(string $file) : array
+    {
+        return $this->parser->linesWithOpcodes($this->execute(\PHP_BINARY . ' ' . self::DISABLE_OPTIMIZATION_OPTIONS . ' ' . self::PRINT_OPCODES_OPTIONS . ' ' . $file . ' 2>&1'));
+    }
+    /**
+     * @psalm-param non-empty-string $file
+     *
+     * @psalm-return list<int>
+     */
+    public function afterOptimization(string $file) : array
+    {
+        return $this->parser->linesWithOpcodes($this->execute(\PHP_BINARY . ' ' . self::ENABLE_OPTIMIZATION_OPTIONS . ' ' . self::PRINT_OPCODES_OPTIONS . ' ' . $file . ' 2>&1'));
+    }
+    /**
+     * @throws OpcacheNotLoadedException
+     */
+    private function ensureOpCacheIsAvailable() : void
+    {
+        if (!extension_loaded('Zend OPcache')) {
+            // @codeCoverageIgnoreStart
+            throw new OpcacheNotLoadedException();
+            // @codeCoverageIgnoreEnd
+        }
+    }
+    /**
+     * @throws VldNotLoadedException
+     */
+    private function ensureVldIsAvailable() : void
+    {
+        if (!extension_loaded('vld')) {
+            // @codeCoverageIgnoreStart
+            throw new VldNotLoadedException();
+            // @codeCoverageIgnoreEnd
+        }
+    }
+    /**
+     * @psalm-return list<string>
+     */
+    private function execute(string $command) : array
+    {
+        exec($command, $output, $returnValue);
+        if ($returnValue !== 0) {
+            // @codeCoverageIgnoreStart
+            throw new ProcessException(implode("\r\n", $output));
+            // @codeCoverageIgnoreEnd
+        }
+        return $output;
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL;
+
+use function array_unique;
+use function explode;
+use function sort;
+use function str_starts_with;
+use function trim;
+final readonly class VldParser
+{
+    /**
+     * @psalm-param list<string> $lines
+     *
+     * @psalm-return list<int>
+     */
+    public function linesWithOpcodes(array $lines) : array
+    {
+        $linesWithOpcodes = [];
+        $opArray = \false;
+        foreach ($lines as $line) {
+            if (str_starts_with($line, ';line')) {
+                $opArray = \true;
+                continue;
+            }
+            if (trim($line) === ';') {
+                $opArray = \false;
+            }
+            if (!$opArray) {
+                continue;
+            }
+            $linesWithOpcodes[] = (int) explode(';', $line)[1];
+        }
+        $linesWithOpcodes = array_unique($linesWithOpcodes);
+        sort($linesWithOpcodes);
+        return $linesWithOpcodes;
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL\CLI;
+
+use const PHP_EOL;
+use function array_merge;
+use function array_unique;
+use function array_values;
+use function assert;
+use function is_dir;
+use function is_file;
+use function printf;
+use function realpath;
+use FOAL\SebastianBergmann\FileIterator\Facade;
+use FOAL\SebastianBergmann\FOAL\Analyser;
+use FOAL\SebastianBergmann\FOAL\DiffRenderer;
+use FOAL\SebastianBergmann\FOAL\TextRenderer;
+final readonly class Application
+{
+    private Analyser $analyser;
+    public function __construct(Analyser $analyser)
+    {
+        $this->analyser = $analyser;
+    }
+    /**
+     * @psalm-param list<non-empty-string> $argv
+     */
+    public function run(array $argv) : int
+    {
+        $this->printVersion();
+        try {
+            $arguments = (new ArgumentsBuilder())->build($argv);
+            // @codeCoverageIgnoreStart
+        } catch (ArgumentsBuilderException $e) {
+            print PHP_EOL . $e->getMessage() . PHP_EOL;
+            return 1;
+            // @codeCoverageIgnoreEnd
+        }
+        if ($arguments->version()) {
+            return 0;
+        }
+        print PHP_EOL;
+        if ($arguments->help()) {
+            $this->help();
+            return 0;
+        }
+        if ($arguments->arguments() === []) {
+            $this->help();
+            return 1;
+        }
+        $files = [];
+        foreach ($arguments->arguments() as $argument) {
+            $candidate = realpath($argument);
+            if ($candidate === \false) {
+                continue;
+            }
+            assert($candidate !== '');
+            if (is_file($candidate)) {
+                $files[] = $candidate;
+                continue;
+            }
+            if (is_dir($candidate)) {
+                $files = array_merge($files, (new Facade())->getFilesAsArray($candidate, '.php'));
+            }
+        }
+        if (empty($files)) {
+            print 'No files found to analyse' . PHP_EOL;
+            return 1;
+        }
+        $files = $this->analyser->analyse(array_values(array_unique($files)));
+        if ($arguments->diff()) {
+            $renderer = new DiffRenderer();
+        } else {
+            $renderer = new TextRenderer();
+        }
+        $first = \true;
+        foreach ($files as $file) {
+            if (!$first) {
+                print PHP_EOL;
+            }
+            print $renderer->render($file);
+            $first = \false;
+        }
+        return 0;
+    }
+    private function printVersion() : void
+    {
+        printf('foal %s by Sebastian Bergmann.' . PHP_EOL, Version::id());
+    }
+    private function help() : void
+    {
+        print <<<'EOT'
+Usage:
+  foal [options] <directory|file> ...
+
+  --diff                           Display optimized-away lines as diff
+
+  -h|--help                        Prints this usage information and exits
+  --version                        Prints the version and exits
+
+EOT;
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL\CLI;
+
+final readonly class Arguments
+{
+    /**
+     * @psalm-var list<non-empty-string>
+     */
+    private array $arguments;
+    private bool $diff;
+    private bool $help;
+    private bool $version;
+    /**
+     * @psalm-param list<non-empty-string> $arguments
+     */
+    public function __construct(array $arguments, bool $diff, bool $help, bool $version)
+    {
+        $this->arguments = $arguments;
+        $this->diff = $diff;
+        $this->help = $help;
+        $this->version = $version;
+    }
+    /**
+     * @psalm-return list<non-empty-string>
+     */
+    public function arguments() : array
+    {
+        return $this->arguments;
+    }
+    public function diff() : bool
+    {
+        return $this->diff;
+    }
+    public function help() : bool
+    {
+        return $this->help;
+    }
+    public function version() : bool
+    {
+        return $this->version;
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL\CLI;
+
+use function assert;
+use function is_array;
+use FOAL\SebastianBergmann\CliParser\Exception as CliParserException;
+use FOAL\SebastianBergmann\CliParser\Parser as CliParser;
+final readonly class ArgumentsBuilder
+{
+    /**
+     * @psalm-param list<non-empty-string> $argv
+     *
+     * @throws ArgumentsBuilderException
+     */
+    public function build(array $argv) : Arguments
+    {
+        try {
+            $options = (new CliParser())->parse($argv, 'hv', ['diff', 'help', 'version']);
+            // @codeCoverageIgnoreStart
+        } catch (CliParserException $e) {
+            throw new ArgumentsBuilderException($e->getMessage(), $e->getCode(), $e);
+            // @codeCoverageIgnoreEnd
+        }
+        $diff = \false;
+        $help = \false;
+        $version = \false;
+        foreach ($options[0] as $option) {
+            assert(is_array($option));
+            switch ($option[0]) {
+                case '--diff':
+                    $diff = \true;
+                    break;
+                case 'h':
+                case '--help':
+                    $help = \true;
+                    break;
+                case 'v':
+                case '--version':
+                    $version = \true;
+                    break;
+            }
+        }
+        return new Arguments($options[1], $diff, $help, $version);
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL\CLI;
+
+use FOAL\SebastianBergmann\FOAL\Analyser;
+use FOAL\SebastianBergmann\FOAL\VldLinesWithOpcodesFinder;
+use FOAL\SebastianBergmann\FOAL\VldParser;
+final readonly class Factory
+{
+    public function createApplication() : Application
+    {
+        return new Application(new Analyser(new VldLinesWithOpcodesFinder(new VldParser())));
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL\CLI;
+
+use function dirname;
+use FOAL\SebastianBergmann\Version as VersionId;
+final class Version
+{
+    private static string $pharVersion = '0.3.0';
+    private static string $version = '';
+    public static function id() : string
+    {
+        if (self::$pharVersion !== '') {
+            // @codeCoverageIgnoreStart
+            return self::$pharVersion;
+            // @codeCoverageIgnoreEnd
+        }
+        if (self::$version === '') {
+            self::$version = (new VersionId('0.3.0', dirname(__DIR__, 2)))->asString();
+        }
+        return self::$version;
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL\CLI;
+
+use RuntimeException;
+use FOAL\SebastianBergmann\FOAL\Exception;
+final class ArgumentsBuilderException extends RuntimeException implements Exception
+{
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL;
+
+interface Exception
+{
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL;
+
+use RuntimeException;
+final class OpcacheNotLoadedException extends RuntimeException implements Exception
+{
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL;
+
+use RuntimeException;
+final class ProcessException extends RuntimeException implements Exception
+{
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL;
+
+use RuntimeException;
+final class VldNotLoadedException extends RuntimeException implements Exception
+{
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL;
+
+final readonly class File
+{
+    /**
+     * @psalm-var non-empty-string
+     */
+    private string $path;
+    /**
+     * @psalm-var list<string>
+     */
+    private array $sourceLines;
+    /**
+     * @psalm-var list<int>
+     */
+    private array $linesEliminatedByOptimizer;
+    /**
+     * @psalm-param non-empty-string $path
+     * @psalm-param list<string> $sourceLines
+     * @psalm-param list<int> $linesEliminatedByOptimizer
+     */
+    public function __construct(string $path, array $sourceLines, array $linesEliminatedByOptimizer)
+    {
+        $this->path = $path;
+        $this->sourceLines = $sourceLines;
+        $this->linesEliminatedByOptimizer = $linesEliminatedByOptimizer;
+    }
+    /**
+     * @psalm-return non-empty-string
+     */
+    public function path() : string
+    {
+        return $this->path;
+    }
+    /**
+     * @psalm-return list<string>
+     */
+    public function sourceLines() : array
+    {
+        return $this->sourceLines;
+    }
+    /**
+     * @psalm-return list<int>
+     */
+    public function linesEliminatedByOptimizer() : array
+    {
+        return $this->linesEliminatedByOptimizer;
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL;
+
+use function array_values;
+use function count;
+use Countable;
+use IteratorAggregate;
+/**
+ * @template-implements IteratorAggregate<int, File>
+ *
+ * @psalm-immutable
+ */
+final readonly class FileCollection implements Countable, IteratorAggregate
+{
+    /**
+     * @psalm-var list<File>
+     */
+    private array $files;
+    public static function from(File ...$files) : self
+    {
+        return new self(array_values($files));
+    }
+    /**
+     * @psalm-param list<File> $files
+     */
+    private function __construct(array $files)
+    {
+        $this->files = $files;
+    }
+    /**
+     * @psalm-return list<File>
+     */
+    public function asArray() : array
+    {
+        return $this->files;
+    }
+    public function getIterator() : FileCollectionIterator
+    {
+        return new FileCollectionIterator($this);
+    }
+    public function count() : int
+    {
+        return count($this->files);
+    }
+    public function isEmpty() : bool
+    {
+        return empty($this->files);
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of FOAL.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FOAL;
+
+use Iterator;
+/**
+ * @template-implements Iterator<int, File>
+ */
+final class FileCollectionIterator implements Iterator
+{
+    /**
+     * @psalm-var list<File>
+     */
+    private readonly array $files;
+    private int $position = 0;
+    public function __construct(FileCollection $collection)
+    {
+        $this->files = $collection->asArray();
+    }
+    public function rewind() : void
+    {
+        $this->position = 0;
+    }
+    public function valid() : bool
+    {
+        return isset($this->files[$this->position]);
+    }
+    public function key() : int
+    {
+        return $this->position;
+    }
+    public function current() : File
+    {
+        return $this->files[$this->position];
+    }
+    public function next() : void
+    {
+        $this->position++;
+    }
+}
+sebastian/foal: 0.3.0
+phpunit/php-file-iterator: 5.0.0
+sebastian/cli-parser: 3.0.1
+sebastian/diff: 6.0.1
+sebastian/version: 5.0.0
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of phpunit/php-file-iterator.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FileIterator;
+
+use function assert;
+use function str_starts_with;
+use RecursiveDirectoryIterator;
+use RecursiveFilterIterator;
+use SplFileInfo;
+/**
+ * @internal This class is not covered by the backward compatibility promise for phpunit/php-file-iterator
+ */
+final class ExcludeIterator extends RecursiveFilterIterator
+{
+    /**
+     * @psalm-var list<string>
+     */
+    private array $exclude;
+    /**
+     * @psalm-param list<string> $exclude
+     */
+    public function __construct(RecursiveDirectoryIterator $iterator, array $exclude)
+    {
+        parent::__construct($iterator);
+        $this->exclude = $exclude;
+    }
+    public function accept() : bool
+    {
+        $current = $this->current();
+        assert($current instanceof SplFileInfo);
+        $path = $current->getRealPath();
+        if ($path === \false) {
+            return \false;
+        }
+        foreach ($this->exclude as $exclude) {
+            if (str_starts_with($path, $exclude)) {
+                return \false;
+            }
+        }
+        return \true;
+    }
+    public function hasChildren() : bool
+    {
+        return $this->getInnerIterator()->hasChildren();
+    }
+    public function getChildren() : self
+    {
+        return new self($this->getInnerIterator()->getChildren(), $this->exclude);
+    }
+    public function getInnerIterator() : RecursiveDirectoryIterator
+    {
+        $innerIterator = parent::getInnerIterator();
+        assert($innerIterator instanceof RecursiveDirectoryIterator);
+        return $innerIterator;
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of phpunit/php-file-iterator.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FileIterator;
+
+use function array_unique;
+use function assert;
+use function sort;
+use SplFileInfo;
+/**
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
+ */
+final class Facade
+{
+    /**
+     * @psalm-param list<non-empty-string>|non-empty-string $paths
+     * @psalm-param list<non-empty-string>|string $suffixes
+     * @psalm-param list<non-empty-string>|string $prefixes
+     * @psalm-param list<non-empty-string> $exclude
+     *
+     * @psalm-return list<non-empty-string>
+     */
+    public function getFilesAsArray(array|string $paths, array|string $suffixes = '', array|string $prefixes = '', array $exclude = []) : array
+    {
+        $iterator = (new Factory())->getFileIterator($paths, $suffixes, $prefixes, $exclude);
+        $files = [];
+        foreach ($iterator as $file) {
+            assert($file instanceof SplFileInfo);
+            $file = $file->getRealPath();
+            if ($file) {
+                $files[] = $file;
+            }
+        }
+        $files = array_unique($files);
+        sort($files);
+        return $files;
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of phpunit/php-file-iterator.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FileIterator;
+
+use const GLOB_ONLYDIR;
+use function array_filter;
+use function array_map;
+use function array_merge;
+use function array_values;
+use function glob;
+use function is_dir;
+use function is_string;
+use function realpath;
+use AppendIterator;
+use FilesystemIterator;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+/**
+ * @internal This class is not covered by the backward compatibility promise for phpunit/php-file-iterator
+ */
+final class Factory
+{
+    /**
+     * @psalm-param list<non-empty-string>|non-empty-string $paths
+     * @psalm-param list<non-empty-string>|string $suffixes
+     * @psalm-param list<non-empty-string>|string $prefixes
+     * @psalm-param list<non-empty-string> $exclude
+     */
+    public function getFileIterator(array|string $paths, array|string $suffixes = '', array|string $prefixes = '', array $exclude = []) : AppendIterator
+    {
+        if (is_string($paths)) {
+            $paths = [$paths];
+        }
+        $paths = $this->resolveWildcards($paths);
+        $exclude = $this->resolveWildcards($exclude);
+        if (is_string($prefixes)) {
+            if ($prefixes !== '') {
+                $prefixes = [$prefixes];
+            } else {
+                $prefixes = [];
+            }
+        }
+        if (is_string($suffixes)) {
+            if ($suffixes !== '') {
+                $suffixes = [$suffixes];
+            } else {
+                $suffixes = [];
+            }
+        }
+        $iterator = new AppendIterator();
+        foreach ($paths as $path) {
+            if (is_dir($path)) {
+                $iterator->append(new Iterator($path, new RecursiveIteratorIterator(new ExcludeIterator(new RecursiveDirectoryIterator($path, FilesystemIterator::FOLLOW_SYMLINKS | FilesystemIterator::SKIP_DOTS), $exclude)), $suffixes, $prefixes));
+            }
+        }
+        return $iterator;
+    }
+    /**
+     * @psalm-param list<non-empty-string> $paths
+     *
+     * @psalm-return list<non-empty-string>
+     */
+    private function resolveWildcards(array $paths) : array
+    {
+        $_paths = [[]];
+        foreach ($paths as $path) {
+            if ($locals = glob($path, GLOB_ONLYDIR)) {
+                $_paths[] = array_map('\\realpath', $locals);
+            } else {
+                // @codeCoverageIgnoreStart
+                $_paths[] = [realpath($path)];
+                // @codeCoverageIgnoreEnd
+            }
+        }
+        return array_values(array_filter(array_merge(...$_paths)));
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of phpunit/php-file-iterator.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\FileIterator;
+
+use function assert;
+use function preg_match;
+use function realpath;
+use function str_ends_with;
+use function str_replace;
+use function str_starts_with;
+use AppendIterator;
+use FilterIterator;
+use SplFileInfo;
+/**
+ * @template-extends FilterIterator<int, string, AppendIterator>
+ *
+ * @internal This class is not covered by the backward compatibility promise for phpunit/php-file-iterator
+ */
+final class Iterator extends FilterIterator
+{
+    public const PREFIX = 0;
+    public const SUFFIX = 1;
+    private false|string $basePath;
+    /**
+     * @psalm-var list<string>
+     */
+    private array $suffixes;
+    /**
+     * @psalm-var list<string>
+     */
+    private array $prefixes;
+    /**
+     * @psalm-param list<string> $suffixes
+     * @psalm-param list<string> $prefixes
+     */
+    public function __construct(string $basePath, \Iterator $iterator, array $suffixes = [], array $prefixes = [])
+    {
+        $this->basePath = realpath($basePath);
+        $this->prefixes = $prefixes;
+        $this->suffixes = $suffixes;
+        parent::__construct($iterator);
+    }
+    public function accept() : bool
+    {
+        $current = $this->getInnerIterator()->current();
+        assert($current instanceof SplFileInfo);
+        $filename = $current->getFilename();
+        $realPath = $current->getRealPath();
+        if ($realPath === \false) {
+            // @codeCoverageIgnoreStart
+            return \false;
+            // @codeCoverageIgnoreEnd
+        }
+        return $this->acceptPath($realPath) && $this->acceptPrefix($filename) && $this->acceptSuffix($filename);
+    }
+    private function acceptPath(string $path) : bool
+    {
+        // Filter files in hidden directories by checking path that is relative to the base path.
+        if (preg_match('=/\\.[^/]*/=', str_replace((string) $this->basePath, '', $path))) {
+            return \false;
+        }
+        return \true;
+    }
+    private function acceptPrefix(string $filename) : bool
+    {
+        return $this->acceptSubString($filename, $this->prefixes, self::PREFIX);
+    }
+    private function acceptSuffix(string $filename) : bool
+    {
+        return $this->acceptSubString($filename, $this->suffixes, self::SUFFIX);
+    }
+    /**
+     * @psalm-param list<string> $subStrings
+     */
+    private function acceptSubString(string $filename, array $subStrings, int $type) : bool
+    {
+        if (empty($subStrings)) {
+            return \true;
+        }
+        foreach ($subStrings as $string) {
+            if ($type === self::PREFIX && str_starts_with($filename, $string) || $type === self::SUFFIX && str_ends_with($filename, $string)) {
+                return \true;
+            }
+        }
+        return \false;
+    }
+}
+BSD 3-Clause License
+
+Copyright (c) 2009-2024, Sebastian Bergmann
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<?xml version="1.0"?>
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4">
+ <components>
+  <component type="library">
+   <group>sebastian</group>
+   <name>foal</name>
+   <version>0.3.0</version>
+   <description>Tool to find lines eliminated by OpCache's bytecode optimizer</description>
+   <licenses>
+    <license>
+     <id>BSD-3-Clause</id>
+    </license>
+   </licenses>
+   <purl>pkg:composer/sebastian/foal@0.3.0</purl>
+  </component>
+  <component type="library">
+   <group>phpunit</group>
+   <name>php-file-iterator</name>
+   <version>5.0.0</version>
+   <description>FilterIterator implementation that filters files based on a list of suffixes.</description>
+   <licenses>
+    <license>
+     <id>BSD-3-Clause</id>
+    </license>
+   </licenses>
+   <purl>pkg:composer/phpunit/php-file-iterator@5.0.0</purl>
+  </component>
+  <component type="library">
+   <group>sebastian</group>
+   <name>cli-parser</name>
+   <version>3.0.1</version>
+   <description>Library for parsing CLI options</description>
+   <licenses>
+    <license>
+     <id>BSD-3-Clause</id>
+    </license>
+   </licenses>
+   <purl>pkg:composer/sebastian/cli-parser@3.0.1</purl>
+  </component>
+  <component type="library">
+   <group>sebastian</group>
+   <name>diff</name>
+   <version>6.0.1</version>
+   <description>Diff implementation</description>
+   <licenses>
+    <license>
+     <id>BSD-3-Clause</id>
+    </license>
+   </licenses>
+   <purl>pkg:composer/sebastian/diff@6.0.1</purl>
+  </component>
+  <component type="library">
+   <group>sebastian</group>
+   <name>version</name>
+   <version>5.0.0</version>
+   <description>Library that helps with managing the version number of Git-hosted PHP projects</description>
+   <licenses>
+    <license>
+     <id>BSD-3-Clause</id>
+    </license>
+   </licenses>
+   <purl>pkg:composer/sebastian/version@5.0.0</purl>
+  </component>
+ </components>
+</bom>
+BSD 3-Clause License
+
+Copyright (c) 2020-2024, Sebastian Bergmann
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/cli-parser.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\CliParser;
+
+use function array_map;
+use function array_merge;
+use function array_shift;
+use function array_slice;
+use function assert;
+use function count;
+use function current;
+use function explode;
+use function is_array;
+use function is_int;
+use function is_string;
+use function key;
+use function next;
+use function preg_replace;
+use function reset;
+use function sort;
+use function str_ends_with;
+use function str_starts_with;
+use function strlen;
+use function strstr;
+use function substr;
+final class Parser
+{
+    /**
+     * @psalm-param list<string> $argv
+     * @psalm-param list<string> $longOptions
+     *
+     * @psalm-return array{0: array, 1: array}
+     *
+     * @throws AmbiguousOptionException
+     * @throws OptionDoesNotAllowArgumentException
+     * @throws RequiredOptionArgumentMissingException
+     * @throws UnknownOptionException
+     */
+    public function parse(array $argv, string $shortOptions, ?array $longOptions = null) : array
+    {
+        if (empty($argv)) {
+            return [[], []];
+        }
+        $options = [];
+        $nonOptions = [];
+        if ($longOptions) {
+            sort($longOptions);
+        }
+        if (isset($argv[0][0]) && $argv[0][0] !== '-') {
+            array_shift($argv);
+        }
+        reset($argv);
+        $argv = array_map('trim', $argv);
+        while (\false !== ($arg = current($argv))) {
+            $i = key($argv);
+            assert(is_int($i));
+            next($argv);
+            if ($arg === '') {
+                continue;
+            }
+            if ($arg === '--') {
+                $nonOptions = array_merge($nonOptions, array_slice($argv, $i + 1));
+                break;
+            }
+            if ($arg[0] !== '-' || strlen($arg) > 1 && $arg[1] === '-' && !$longOptions) {
+                $nonOptions[] = $arg;
+                continue;
+            }
+            if (strlen($arg) > 1 && $arg[1] === '-' && is_array($longOptions)) {
+                $this->parseLongOption(substr($arg, 2), $longOptions, $options, $argv);
+                continue;
+            }
+            $this->parseShortOption(substr($arg, 1), $shortOptions, $options, $argv);
+        }
+        return [$options, $nonOptions];
+    }
+    /**
+     * @throws RequiredOptionArgumentMissingException
+     */
+    private function parseShortOption(string $argument, string $shortOptions, array &$options, array &$argv) : void
+    {
+        $argumentLength = strlen($argument);
+        for ($i = 0; $i < $argumentLength; $i++) {
+            $option = $argument[$i];
+            $optionArgument = null;
+            if ($argument[$i] === ':' || ($spec = strstr($shortOptions, $option)) === \false) {
+                throw new UnknownOptionException('-' . $option);
+            }
+            if (strlen($spec) > 1 && $spec[1] === ':') {
+                if ($i + 1 < $argumentLength) {
+                    $options[] = [$option, substr($argument, $i + 1)];
+                    break;
+                }
+                if (!(strlen($spec) > 2 && $spec[2] === ':')) {
+                    $optionArgument = current($argv);
+                    if (!$optionArgument) {
+                        throw new RequiredOptionArgumentMissingException('-' . $option);
+                    }
+                    assert(is_string($optionArgument));
+                    next($argv);
+                }
+            }
+            $options[] = [$option, $optionArgument];
+        }
+    }
+    /**
+     * @psalm-param list<string> $longOptions
+     *
+     * @throws AmbiguousOptionException
+     * @throws OptionDoesNotAllowArgumentException
+     * @throws RequiredOptionArgumentMissingException
+     * @throws UnknownOptionException
+     */
+    private function parseLongOption(string $argument, array $longOptions, array &$options, array &$argv) : void
+    {
+        $count = count($longOptions);
+        $list = explode('=', $argument);
+        $option = $list[0];
+        $optionArgument = null;
+        if (count($list) > 1) {
+            $optionArgument = $list[1];
+        }
+        $optionLength = strlen($option);
+        foreach ($longOptions as $i => $longOption) {
+            $opt_start = substr($longOption, 0, $optionLength);
+            if ($opt_start !== $option) {
+                continue;
+            }
+            $opt_rest = substr($longOption, $optionLength);
+            if ($opt_rest !== '' && $i + 1 < $count && $option[0] !== '=' && str_starts_with($longOptions[$i + 1], $option)) {
+                throw new AmbiguousOptionException('--' . $option);
+            }
+            if (str_ends_with($longOption, '=')) {
+                if (!str_ends_with($longOption, '==') && !strlen((string) $optionArgument)) {
+                    if (\false === ($optionArgument = current($argv))) {
+                        throw new RequiredOptionArgumentMissingException('--' . $option);
+                    }
+                    next($argv);
+                }
+            } elseif ($optionArgument) {
+                throw new OptionDoesNotAllowArgumentException('--' . $option);
+            }
+            $fullOption = '--' . preg_replace('/={1,2}$/', '', $longOption);
+            $options[] = [$fullOption, $optionArgument];
+            return;
+        }
+        throw new UnknownOptionException('--' . $option);
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/cli-parser.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\CliParser;
+
+use function sprintf;
+use RuntimeException;
+final class AmbiguousOptionException extends RuntimeException implements Exception
+{
+    public function __construct(string $option)
+    {
+        parent::__construct(sprintf('Option "%s" is ambiguous', $option));
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/cli-parser.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\CliParser;
+
+use Throwable;
+interface Exception extends Throwable
+{
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/cli-parser.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\CliParser;
+
+use function sprintf;
+use RuntimeException;
+final class OptionDoesNotAllowArgumentException extends RuntimeException implements Exception
+{
+    public function __construct(string $option)
+    {
+        parent::__construct(sprintf('Option "%s" does not allow an argument', $option));
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/cli-parser.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\CliParser;
+
+use function sprintf;
+use RuntimeException;
+final class RequiredOptionArgumentMissingException extends RuntimeException implements Exception
+{
+    public function __construct(string $option)
+    {
+        parent::__construct(sprintf('Required argument for option "%s" is missing', $option));
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/cli-parser.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\CliParser;
+
+use function sprintf;
+use RuntimeException;
+final class UnknownOptionException extends RuntimeException implements Exception
+{
+    public function __construct(string $option)
+    {
+        parent::__construct(sprintf('Unknown option "%s"', $option));
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/diff.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\Diff;
+
+use ArrayIterator;
+use IteratorAggregate;
+use Traversable;
+/**
+ * @template-implements IteratorAggregate<int, Line>
+ */
+final class Chunk implements IteratorAggregate
+{
+    private int $start;
+    private int $startRange;
+    private int $end;
+    private int $endRange;
+    private array $lines;
+    public function __construct(int $start = 0, int $startRange = 1, int $end = 0, int $endRange = 1, array $lines = [])
+    {
+        $this->start = $start;
+        $this->startRange = $startRange;
+        $this->end = $end;
+        $this->endRange = $endRange;
+        $this->lines = $lines;
+    }
+    public function start() : int
+    {
+        return $this->start;
+    }
+    public function startRange() : int
+    {
+        return $this->startRange;
+    }
+    public function end() : int
+    {
+        return $this->end;
+    }
+    public function endRange() : int
+    {
+        return $this->endRange;
+    }
+    /**
+     * @psalm-return list<Line>
+     */
+    public function lines() : array
+    {
+        return $this->lines;
+    }
+    /**
+     * @psalm-param list<Line> $lines
+     */
+    public function setLines(array $lines) : void
+    {
+        foreach ($lines as $line) {
+            if (!$line instanceof Line) {
+                throw new InvalidArgumentException();
+            }
+        }
+        $this->lines = $lines;
+    }
+    public function getIterator() : Traversable
+    {
+        return new ArrayIterator($this->lines);
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/diff.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\Diff;
+
+use ArrayIterator;
+use IteratorAggregate;
+use Traversable;
+/**
+ * @template-implements IteratorAggregate<int, Chunk>
+ */
+final class Diff implements IteratorAggregate
+{
+    /**
+     * @psalm-var non-empty-string
+     */
+    private string $from;
+    /**
+     * @psalm-var non-empty-string
+     */
+    private string $to;
+    /**
+     * @psalm-var list<Chunk>
+     */
+    private array $chunks;
+    /**
+     * @psalm-param non-empty-string $from
+     * @psalm-param non-empty-string $to
+     * @psalm-param list<Chunk> $chunks
+     */
+    public function __construct(string $from, string $to, array $chunks = [])
+    {
+        $this->from = $from;
+        $this->to = $to;
+        $this->chunks = $chunks;
+    }
+    /**
+     * @psalm-return non-empty-string
+     */
+    public function from() : string
+    {
+        return $this->from;
+    }
+    /**
+     * @psalm-return non-empty-string
+     */
+    public function to() : string
+    {
+        return $this->to;
+    }
+    /**
+     * @psalm-return list<Chunk>
+     */
+    public function chunks() : array
+    {
+        return $this->chunks;
+    }
+    /**
+     * @psalm-param list<Chunk> $chunks
+     */
+    public function setChunks(array $chunks) : void
+    {
+        $this->chunks = $chunks;
+    }
+    public function getIterator() : Traversable
+    {
+        return new ArrayIterator($this->chunks);
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/diff.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\Diff;
+
+use const PHP_INT_SIZE;
+use const PREG_SPLIT_DELIM_CAPTURE;
+use const PREG_SPLIT_NO_EMPTY;
+use function array_shift;
+use function array_unshift;
+use function array_values;
+use function count;
+use function current;
+use function end;
+use function is_string;
+use function key;
+use function min;
+use function preg_split;
+use function prev;
+use function reset;
+use function str_ends_with;
+use function substr;
+use FOAL\SebastianBergmann\Diff\Output\DiffOutputBuilderInterface;
+final class Differ
+{
+    public const OLD = 0;
+    public const ADDED = 1;
+    public const REMOVED = 2;
+    public const DIFF_LINE_END_WARNING = 3;
+    public const NO_LINE_END_EOF_WARNING = 4;
+    private DiffOutputBuilderInterface $outputBuilder;
+    public function __construct(DiffOutputBuilderInterface $outputBuilder)
+    {
+        $this->outputBuilder = $outputBuilder;
+    }
+    public function diff(array|string $from, array|string $to, ?LongestCommonSubsequenceCalculator $lcs = null) : string
+    {
+        $diff = $this->diffToArray($from, $to, $lcs);
+        return $this->outputBuilder->getDiff($diff);
+    }
+    public function diffToArray(array|string $from, array|string $to, ?LongestCommonSubsequenceCalculator $lcs = null) : array
+    {
+        if (is_string($from)) {
+            $from = $this->splitStringByLines($from);
+        }
+        if (is_string($to)) {
+            $to = $this->splitStringByLines($to);
+        }
+        [$from, $to, $start, $end] = self::getArrayDiffParted($from, $to);
+        if ($lcs === null) {
+            $lcs = $this->selectLcsImplementation($from, $to);
+        }
+        $common = $lcs->calculate(array_values($from), array_values($to));
+        $diff = [];
+        foreach ($start as $token) {
+            $diff[] = [$token, self::OLD];
+        }
+        reset($from);
+        reset($to);
+        foreach ($common as $token) {
+            while (($fromToken = reset($from)) !== $token) {
+                $diff[] = [array_shift($from), self::REMOVED];
+            }
+            while (($toToken = reset($to)) !== $token) {
+                $diff[] = [array_shift($to), self::ADDED];
+            }
+            $diff[] = [$token, self::OLD];
+            array_shift($from);
+            array_shift($to);
+        }
+        while (($token = array_shift($from)) !== null) {
+            $diff[] = [$token, self::REMOVED];
+        }
+        while (($token = array_shift($to)) !== null) {
+            $diff[] = [$token, self::ADDED];
+        }
+        foreach ($end as $token) {
+            $diff[] = [$token, self::OLD];
+        }
+        if ($this->detectUnmatchedLineEndings($diff)) {
+            array_unshift($diff, ["#Warning: Strings contain different line endings!\n", self::DIFF_LINE_END_WARNING]);
+        }
+        return $diff;
+    }
+    private function splitStringByLines(string $input) : array
+    {
+        return preg_split('/(.*\\R)/', $input, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+    }
+    private function selectLcsImplementation(array $from, array $to) : LongestCommonSubsequenceCalculator
+    {
+        // We do not want to use the time-efficient implementation if its memory
+        // footprint will probably exceed this value. Note that the footprint
+        // calculation is only an estimation for the matrix and the LCS method
+        // will typically allocate a bit more memory than this.
+        $memoryLimit = 100 * 1024 * 1024;
+        if ($this->calculateEstimatedFootprint($from, $to) > $memoryLimit) {
+            return new MemoryEfficientLongestCommonSubsequenceCalculator();
+        }
+        return new TimeEfficientLongestCommonSubsequenceCalculator();
+    }
+    private function calculateEstimatedFootprint(array $from, array $to) : float|int
+    {
+        $itemSize = PHP_INT_SIZE === 4 ? 76 : 144;
+        return $itemSize * min(count($from), count($to)) ** 2;
+    }
+    private function detectUnmatchedLineEndings(array $diff) : bool
+    {
+        $newLineBreaks = ['' => \true];
+        $oldLineBreaks = ['' => \true];
+        foreach ($diff as $entry) {
+            if (self::OLD === $entry[1]) {
+                $ln = $this->getLinebreak($entry[0]);
+                $oldLineBreaks[$ln] = \true;
+                $newLineBreaks[$ln] = \true;
+            } elseif (self::ADDED === $entry[1]) {
+                $newLineBreaks[$this->getLinebreak($entry[0])] = \true;
+            } elseif (self::REMOVED === $entry[1]) {
+                $oldLineBreaks[$this->getLinebreak($entry[0])] = \true;
+            }
+        }
+        // if either input or output is a single line without breaks than no warning should be raised
+        if (['' => \true] === $newLineBreaks || ['' => \true] === $oldLineBreaks) {
+            return \false;
+        }
+        // two-way compare
+        foreach ($newLineBreaks as $break => $set) {
+            if (!isset($oldLineBreaks[$break])) {
+                return \true;
+            }
+        }
+        foreach ($oldLineBreaks as $break => $set) {
+            if (!isset($newLineBreaks[$break])) {
+                return \true;
+            }
+        }
+        return \false;
+    }
+    private function getLinebreak($line) : string
+    {
+        if (!is_string($line)) {
+            return '';
+        }
+        $lc = substr($line, -1);
+        if ("\r" === $lc) {
+            return "\r";
+        }
+        if ("\n" !== $lc) {
+            return '';
+        }
+        if (str_ends_with($line, "\r\n")) {
+            return "\r\n";
+        }
+        return "\n";
+    }
+    private static function getArrayDiffParted(array &$from, array &$to) : array
+    {
+        $start = [];
+        $end = [];
+        reset($to);
+        foreach ($from as $k => $v) {
+            $toK = key($to);
+            if ($toK === $k && $v === $to[$k]) {
+                $start[$k] = $v;
+                unset($from[$k], $to[$k]);
+            } else {
+                break;
+            }
+        }
+        end($from);
+        end($to);
+        do {
+            $fromK = key($from);
+            $toK = key($to);
+            if (null === $fromK || null === $toK || current($from) !== current($to)) {
+                break;
+            }
+            prev($from);
+            prev($to);
+            $end = [$fromK => $from[$fromK]] + $end;
+            unset($from[$fromK], $to[$toK]);
+        } while (\true);
+        return [$from, $to, $start, $end];
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/diff.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\Diff;
+
+use function gettype;
+use function is_object;
+use function sprintf;
+use Exception;
+final class ConfigurationException extends InvalidArgumentException
+{
+    public function __construct(string $option, string $expected, $value, int $code = 0, ?Exception $previous = null)
+    {
+        parent::__construct(sprintf('Option "%s" must be %s, got "%s".', $option, $expected, is_object($value) ? $value::class : (null === $value ? '<null>' : gettype($value) . '#' . $value)), $code, $previous);
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/diff.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\Diff;
+
+use Throwable;
+interface Exception extends Throwable
+{
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/diff.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\Diff;
+
+class InvalidArgumentException extends \InvalidArgumentException implements Exception
+{
+}
+BSD 3-Clause License
+
+Copyright (c) 2002-2024, Sebastian Bergmann
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/diff.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\Diff;
+
+final class Line
+{
+    public const ADDED = 1;
+    public const REMOVED = 2;
+    public const UNCHANGED = 3;
+    private int $type;
+    private string $content;
+    public function __construct(int $type = self::UNCHANGED, string $content = '')
+    {
+        $this->type = $type;
+        $this->content = $content;
+    }
+    public function content() : string
+    {
+        return $this->content;
+    }
+    public function type() : int
+    {
+        return $this->type;
+    }
+    public function isAdded() : bool
+    {
+        return $this->type === self::ADDED;
+    }
+    public function isRemoved() : bool
+    {
+        return $this->type === self::REMOVED;
+    }
+    public function isUnchanged() : bool
+    {
+        return $this->type === self::UNCHANGED;
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/diff.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\Diff;
+
+interface LongestCommonSubsequenceCalculator
+{
+    /**
+     * Calculates the longest common subsequence of two arrays.
+     */
+    public function calculate(array $from, array $to) : array;
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/diff.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\Diff;
+
+use function array_fill;
+use function array_merge;
+use function array_reverse;
+use function array_slice;
+use function count;
+use function in_array;
+use function max;
+final class MemoryEfficientLongestCommonSubsequenceCalculator implements LongestCommonSubsequenceCalculator
+{
+    /**
+     * @inheritDoc
+     */
+    public function calculate(array $from, array $to) : array
+    {
+        $cFrom = count($from);
+        $cTo = count($to);
+        if ($cFrom === 0) {
+            return [];
+        }
+        if ($cFrom === 1) {
+            if (in_array($from[0], $to, \true)) {
+                return [$from[0]];
+            }
+            return [];
+        }
+        $i = (int) ($cFrom / 2);
+        $fromStart = array_slice($from, 0, $i);
+        $fromEnd = array_slice($from, $i);
+        $llB = $this->length($fromStart, $to);
+        $llE = $this->length(array_reverse($fromEnd), array_reverse($to));
+        $jMax = 0;
+        $max = 0;
+        for ($j = 0; $j <= $cTo; $j++) {
+            $m = $llB[$j] + $llE[$cTo - $j];
+            if ($m >= $max) {
+                $max = $m;
+                $jMax = $j;
+            }
+        }
+        $toStart = array_slice($to, 0, $jMax);
+        $toEnd = array_slice($to, $jMax);
+        return array_merge($this->calculate($fromStart, $toStart), $this->calculate($fromEnd, $toEnd));
+    }
+    private function length(array $from, array $to) : array
+    {
+        $current = array_fill(0, count($to) + 1, 0);
+        $cFrom = count($from);
+        $cTo = count($to);
+        for ($i = 0; $i < $cFrom; $i++) {
+            $prev = $current;
+            for ($j = 0; $j < $cTo; $j++) {
+                if ($from[$i] === $to[$j]) {
+                    $current[$j + 1] = $prev[$j] + 1;
+                } else {
+                    /**
+                     * @noinspection PhpConditionCanBeReplacedWithMinMaxCallInspection
+                     *
+                     * We do not use max() here to avoid the function call overhead
+                     */
+                    if ($current[$j] > $prev[$j + 1]) {
+                        $current[$j + 1] = $current[$j];
+                    } else {
+                        $current[$j + 1] = $prev[$j + 1];
+                    }
+                }
+            }
+        }
+        return $current;
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/diff.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\Diff\Output;
+
+use function count;
+abstract class AbstractChunkOutputBuilder implements DiffOutputBuilderInterface
+{
+    /**
+     * Takes input of the diff array and returns the common parts.
+     * Iterates through diff line by line.
+     */
+    protected function getCommonChunks(array $diff, int $lineThreshold = 5) : array
+    {
+        $diffSize = count($diff);
+        $capturing = \false;
+        $chunkStart = 0;
+        $chunkSize = 0;
+        $commonChunks = [];
+        for ($i = 0; $i < $diffSize; $i++) {
+            if ($diff[$i][1] === 0) {
+                if ($capturing === \false) {
+                    $capturing = \true;
+                    $chunkStart = $i;
+                    $chunkSize = 0;
+                } else {
+                    $chunkSize++;
+                }
+            } elseif ($capturing !== \false) {
+                if ($chunkSize >= $lineThreshold) {
+                    $commonChunks[$chunkStart] = $chunkStart + $chunkSize;
+                }
+                $capturing = \false;
+            }
+        }
+        if ($capturing !== \false && $chunkSize >= $lineThreshold) {
+            $commonChunks[$chunkStart] = $chunkStart + $chunkSize;
+        }
+        return $commonChunks;
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/diff.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\Diff\Output;
+
+use function fclose;
+use function fopen;
+use function fwrite;
+use function str_ends_with;
+use function stream_get_contents;
+use function substr;
+use FOAL\SebastianBergmann\Diff\Differ;
+/**
+ * Builds a diff string representation in a loose unified diff format
+ * listing only changes lines. Does not include line numbers.
+ */
+final class DiffOnlyOutputBuilder implements DiffOutputBuilderInterface
+{
+    private string $header;
+    public function __construct(string $header = "--- Original\n+++ New\n")
+    {
+        $this->header = $header;
+    }
+    public function getDiff(array $diff) : string
+    {
+        $buffer = fopen('php://memory', 'r+b');
+        if ('' !== $this->header) {
+            fwrite($buffer, $this->header);
+            if (!str_ends_with($this->header, "\n")) {
+                fwrite($buffer, "\n");
+            }
+        }
+        foreach ($diff as $diffEntry) {
+            if ($diffEntry[1] === Differ::ADDED) {
+                fwrite($buffer, '+' . $diffEntry[0]);
+            } elseif ($diffEntry[1] === Differ::REMOVED) {
+                fwrite($buffer, '-' . $diffEntry[0]);
+            } elseif ($diffEntry[1] === Differ::DIFF_LINE_END_WARNING) {
+                fwrite($buffer, ' ' . $diffEntry[0]);
+                continue;
+                // Warnings should not be tested for line break, it will always be there
+            } else {
+                /* Not changed (old) 0 */
+                continue;
+                // we didn't write the not-changed line, so do not add a line break either
+            }
+            $lc = substr($diffEntry[0], -1);
+            if ($lc !== "\n" && $lc !== "\r") {
+                fwrite($buffer, "\n");
+                // \No newline at end of file
+            }
+        }
+        $diff = stream_get_contents($buffer, -1, 0);
+        fclose($buffer);
+        return $diff;
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/diff.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\Diff\Output;
+
+/**
+ * Defines how an output builder should take a generated
+ * diff array and return a string representation of that diff.
+ */
+interface DiffOutputBuilderInterface
+{
+    public function getDiff(array $diff) : string;
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/diff.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\Diff\Output;
+
+use function array_merge;
+use function array_splice;
+use function count;
+use function fclose;
+use function fopen;
+use function fwrite;
+use function is_bool;
+use function is_int;
+use function is_string;
+use function max;
+use function min;
+use function sprintf;
+use function stream_get_contents;
+use function substr;
+use FOAL\SebastianBergmann\Diff\ConfigurationException;
+use FOAL\SebastianBergmann\Diff\Differ;
+/**
+ * Strict Unified diff output builder.
+ *
+ * Generates (strict) Unified diff's (unidiffs) with hunks.
+ */
+final class StrictUnifiedDiffOutputBuilder implements DiffOutputBuilderInterface
+{
+    private static array $default = [
+        'collapseRanges' => \true,
+        // ranges of length one are rendered with the trailing `,1`
+        'commonLineThreshold' => 6,
+        // number of same lines before ending a new hunk and creating a new one (if needed)
+        'contextLines' => 3,
+        // like `diff:  -u, -U NUM, --unified[=NUM]`, for patch/git apply compatibility best to keep at least @ 3
+        'fromFile' => null,
+        'fromFileDate' => null,
+        'toFile' => null,
+        'toFileDate' => null,
+    ];
+    private bool $changed;
+    private bool $collapseRanges;
+    /**
+     * @psalm-var positive-int
+     */
+    private int $commonLineThreshold;
+    private string $header;
+    /**
+     * @psalm-var positive-int
+     */
+    private int $contextLines;
+    public function __construct(array $options = [])
+    {
+        $options = array_merge(self::$default, $options);
+        if (!is_bool($options['collapseRanges'])) {
+            throw new ConfigurationException('collapseRanges', 'a bool', $options['collapseRanges']);
+        }
+        if (!is_int($options['contextLines']) || $options['contextLines'] < 0) {
+            throw new ConfigurationException('contextLines', 'an int >= 0', $options['contextLines']);
+        }
+        if (!is_int($options['commonLineThreshold']) || $options['commonLineThreshold'] <= 0) {
+            throw new ConfigurationException('commonLineThreshold', 'an int > 0', $options['commonLineThreshold']);
+        }
+        $this->assertString($options, 'fromFile');
+        $this->assertString($options, 'toFile');
+        $this->assertStringOrNull($options, 'fromFileDate');
+        $this->assertStringOrNull($options, 'toFileDate');
+        $this->header = sprintf("--- %s%s\n+++ %s%s\n", $options['fromFile'], null === $options['fromFileDate'] ? '' : "\t" . $options['fromFileDate'], $options['toFile'], null === $options['toFileDate'] ? '' : "\t" . $options['toFileDate']);
+        $this->collapseRanges = $options['collapseRanges'];
+        $this->commonLineThreshold = $options['commonLineThreshold'];
+        $this->contextLines = $options['contextLines'];
+    }
+    public function getDiff(array $diff) : string
+    {
+        if (0 === count($diff)) {
+            return '';
+        }
+        $this->changed = \false;
+        $buffer = fopen('php://memory', 'r+b');
+        fwrite($buffer, $this->header);
+        $this->writeDiffHunks($buffer, $diff);
+        if (!$this->changed) {
+            fclose($buffer);
+            return '';
+        }
+        $diff = stream_get_contents($buffer, -1, 0);
+        fclose($buffer);
+        // If the last char is not a linebreak: add it.
+        // This might happen when both the `from` and `to` do not have a trailing linebreak
+        $last = substr($diff, -1);
+        return "\n" !== $last && "\r" !== $last ? $diff . "\n" : $diff;
+    }
+    private function writeDiffHunks($output, array $diff) : void
+    {
+        // detect "No newline at end of file" and insert into `$diff` if needed
+        $upperLimit = count($diff);
+        if (0 === $diff[$upperLimit - 1][1]) {
+            $lc = substr($diff[$upperLimit - 1][0], -1);
+            if ("\n" !== $lc) {
+                array_splice($diff, $upperLimit, 0, [["\n\\ No newline at end of file\n", Differ::NO_LINE_END_EOF_WARNING]]);
+            }
+        } else {
+            // search back for the last `+` and `-` line,
+            // check if it has a trailing linebreak, else add a warning under it
+            $toFind = [1 => \true, 2 => \true];
+            for ($i = $upperLimit - 1; $i >= 0; $i--) {
+                if (isset($toFind[$diff[$i][1]])) {
+                    unset($toFind[$diff[$i][1]]);
+                    $lc = substr($diff[$i][0], -1);
+                    if ("\n" !== $lc) {
+                        array_splice($diff, $i + 1, 0, [["\n\\ No newline at end of file\n", Differ::NO_LINE_END_EOF_WARNING]]);
+                    }
+                    if (!count($toFind)) {
+                        break;
+                    }
+                }
+            }
+        }
+        // write hunks to output buffer
+        $cutOff = max($this->commonLineThreshold, $this->contextLines);
+        $hunkCapture = \false;
+        $sameCount = $toRange = $fromRange = 0;
+        $toStart = $fromStart = 1;
+        $i = 0;
+        /** @var int $i */
+        foreach ($diff as $i => $entry) {
+            if (0 === $entry[1]) {
+                // same
+                if (\false === $hunkCapture) {
+                    $fromStart++;
+                    $toStart++;
+                    continue;
+                }
+                $sameCount++;
+                $toRange++;
+                $fromRange++;
+                if ($sameCount === $cutOff) {
+                    $contextStartOffset = $hunkCapture - $this->contextLines < 0 ? $hunkCapture : $this->contextLines;
+                    // note: $contextEndOffset = $this->contextLines;
+                    //
+                    // because we never go beyond the end of the diff.
+                    // with the cutoff/contextlines here the follow is never true;
+                    //
+                    // if ($i - $cutOff + $this->contextLines + 1 > \count($diff)) {
+                    //    $contextEndOffset = count($diff) - 1;
+                    // }
+                    //
+                    // ; that would be true for a trailing incomplete hunk case which is dealt with after this loop
+                    $this->writeHunk($diff, $hunkCapture - $contextStartOffset, $i - $cutOff + $this->contextLines + 1, $fromStart - $contextStartOffset, $fromRange - $cutOff + $contextStartOffset + $this->contextLines, $toStart - $contextStartOffset, $toRange - $cutOff + $contextStartOffset + $this->contextLines, $output);
+                    $fromStart += $fromRange;
+                    $toStart += $toRange;
+                    $hunkCapture = \false;
+                    $sameCount = $toRange = $fromRange = 0;
+                }
+                continue;
+            }
+            $sameCount = 0;
+            if ($entry[1] === Differ::NO_LINE_END_EOF_WARNING) {
+                continue;
+            }
+            $this->changed = \true;
+            if (\false === $hunkCapture) {
+                $hunkCapture = $i;
+            }
+            if (Differ::ADDED === $entry[1]) {
+                // added
+                $toRange++;
+            }
+            if (Differ::REMOVED === $entry[1]) {
+                // removed
+                $fromRange++;
+            }
+        }
+        if (\false === $hunkCapture) {
+            return;
+        }
+        // we end here when cutoff (commonLineThreshold) was not reached, but we were capturing a hunk,
+        // do not render hunk till end automatically because the number of context lines might be less than the commonLineThreshold
+        $contextStartOffset = $hunkCapture - $this->contextLines < 0 ? $hunkCapture : $this->contextLines;
+        // prevent trying to write out more common lines than there are in the diff _and_
+        // do not write more than configured through the context lines
+        $contextEndOffset = min($sameCount, $this->contextLines);
+        $fromRange -= $sameCount;
+        $toRange -= $sameCount;
+        $this->writeHunk($diff, $hunkCapture - $contextStartOffset, $i - $sameCount + $contextEndOffset + 1, $fromStart - $contextStartOffset, $fromRange + $contextStartOffset + $contextEndOffset, $toStart - $contextStartOffset, $toRange + $contextStartOffset + $contextEndOffset, $output);
+    }
+    private function writeHunk(array $diff, int $diffStartIndex, int $diffEndIndex, int $fromStart, int $fromRange, int $toStart, int $toRange, $output) : void
+    {
+        fwrite($output, '@@ -' . $fromStart);
+        if (!$this->collapseRanges || 1 !== $fromRange) {
+            fwrite($output, ',' . $fromRange);
+        }
+        fwrite($output, ' +' . $toStart);
+        if (!$this->collapseRanges || 1 !== $toRange) {
+            fwrite($output, ',' . $toRange);
+        }
+        fwrite($output, " @@\n");
+        for ($i = $diffStartIndex; $i < $diffEndIndex; $i++) {
+            if ($diff[$i][1] === Differ::ADDED) {
+                $this->changed = \true;
+                fwrite($output, '+' . $diff[$i][0]);
+            } elseif ($diff[$i][1] === Differ::REMOVED) {
+                $this->changed = \true;
+                fwrite($output, '-' . $diff[$i][0]);
+            } elseif ($diff[$i][1] === Differ::OLD) {
+                fwrite($output, ' ' . $diff[$i][0]);
+            } elseif ($diff[$i][1] === Differ::NO_LINE_END_EOF_WARNING) {
+                $this->changed = \true;
+                fwrite($output, $diff[$i][0]);
+            }
+            // } elseif ($diff[$i][1] === Differ::DIFF_LINE_END_WARNING) { // custom comment inserted by PHPUnit/diff package
+            //  skip
+            // } else {
+            //  unknown/invalid
+            // }
+        }
+    }
+    private function assertString(array $options, string $option) : void
+    {
+        if (!is_string($options[$option])) {
+            throw new ConfigurationException($option, 'a string', $options[$option]);
+        }
+    }
+    private function assertStringOrNull(array $options, string $option) : void
+    {
+        if (null !== $options[$option] && !is_string($options[$option])) {
+            throw new ConfigurationException($option, 'a string or <null>', $options[$option]);
+        }
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/diff.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\Diff\Output;
+
+use function array_splice;
+use function count;
+use function fclose;
+use function fopen;
+use function fwrite;
+use function max;
+use function min;
+use function str_ends_with;
+use function stream_get_contents;
+use function substr;
+use FOAL\SebastianBergmann\Diff\Differ;
+/**
+ * Builds a diff string representation in unified diff format in chunks.
+ */
+final class UnifiedDiffOutputBuilder extends AbstractChunkOutputBuilder
+{
+    private bool $collapseRanges = \true;
+    private int $commonLineThreshold = 6;
+    /**
+     * @psalm-var positive-int
+     */
+    private int $contextLines = 3;
+    private string $header;
+    private bool $addLineNumbers;
+    public function __construct(string $header = "--- Original\n+++ New\n", bool $addLineNumbers = \false)
+    {
+        $this->header = $header;
+        $this->addLineNumbers = $addLineNumbers;
+    }
+    public function getDiff(array $diff) : string
+    {
+        $buffer = fopen('php://memory', 'r+b');
+        if ('' !== $this->header) {
+            fwrite($buffer, $this->header);
+            if (!str_ends_with($this->header, "\n")) {
+                fwrite($buffer, "\n");
+            }
+        }
+        if (0 !== count($diff)) {
+            $this->writeDiffHunks($buffer, $diff);
+        }
+        $diff = stream_get_contents($buffer, -1, 0);
+        fclose($buffer);
+        // If the diff is non-empty and last char is not a linebreak: add it.
+        // This might happen when both the `from` and `to` do not have a trailing linebreak
+        $last = substr($diff, -1);
+        return '' !== $diff && "\n" !== $last && "\r" !== $last ? $diff . "\n" : $diff;
+    }
+    private function writeDiffHunks($output, array $diff) : void
+    {
+        // detect "No newline at end of file" and insert into `$diff` if needed
+        $upperLimit = count($diff);
+        if (0 === $diff[$upperLimit - 1][1]) {
+            $lc = substr($diff[$upperLimit - 1][0], -1);
+            if ("\n" !== $lc) {
+                array_splice($diff, $upperLimit, 0, [["\n\\ No newline at end of file\n", Differ::NO_LINE_END_EOF_WARNING]]);
+            }
+        } else {
+            // search back for the last `+` and `-` line,
+            // check if it has trailing linebreak, else add a warning under it
+            $toFind = [1 => \true, 2 => \true];
+            for ($i = $upperLimit - 1; $i >= 0; $i--) {
+                if (isset($toFind[$diff[$i][1]])) {
+                    unset($toFind[$diff[$i][1]]);
+                    $lc = substr($diff[$i][0], -1);
+                    if ("\n" !== $lc) {
+                        array_splice($diff, $i + 1, 0, [["\n\\ No newline at end of file\n", Differ::NO_LINE_END_EOF_WARNING]]);
+                    }
+                    if (!count($toFind)) {
+                        break;
+                    }
+                }
+            }
+        }
+        // write hunks to output buffer
+        $cutOff = max($this->commonLineThreshold, $this->contextLines);
+        $hunkCapture = \false;
+        $sameCount = $toRange = $fromRange = 0;
+        $toStart = $fromStart = 1;
+        $i = 0;
+        /** @var int $i */
+        foreach ($diff as $i => $entry) {
+            if (0 === $entry[1]) {
+                // same
+                if (\false === $hunkCapture) {
+                    $fromStart++;
+                    $toStart++;
+                    continue;
+                }
+                $sameCount++;
+                $toRange++;
+                $fromRange++;
+                if ($sameCount === $cutOff) {
+                    $contextStartOffset = $hunkCapture - $this->contextLines < 0 ? $hunkCapture : $this->contextLines;
+                    // note: $contextEndOffset = $this->contextLines;
+                    //
+                    // because we never go beyond the end of the diff.
+                    // with the cutoff/contextlines here the follow is never true;
+                    //
+                    // if ($i - $cutOff + $this->contextLines + 1 > \count($diff)) {
+                    //    $contextEndOffset = count($diff) - 1;
+                    // }
+                    //
+                    // ; that would be true for a trailing incomplete hunk case which is dealt with after this loop
+                    $this->writeHunk($diff, $hunkCapture - $contextStartOffset, $i - $cutOff + $this->contextLines + 1, $fromStart - $contextStartOffset, $fromRange - $cutOff + $contextStartOffset + $this->contextLines, $toStart - $contextStartOffset, $toRange - $cutOff + $contextStartOffset + $this->contextLines, $output);
+                    $fromStart += $fromRange;
+                    $toStart += $toRange;
+                    $hunkCapture = \false;
+                    $sameCount = $toRange = $fromRange = 0;
+                }
+                continue;
+            }
+            $sameCount = 0;
+            if ($entry[1] === Differ::NO_LINE_END_EOF_WARNING) {
+                continue;
+            }
+            if (\false === $hunkCapture) {
+                $hunkCapture = $i;
+            }
+            if (Differ::ADDED === $entry[1]) {
+                $toRange++;
+            }
+            if (Differ::REMOVED === $entry[1]) {
+                $fromRange++;
+            }
+        }
+        if (\false === $hunkCapture) {
+            return;
+        }
+        // we end here when cutoff (commonLineThreshold) was not reached, but we were capturing a hunk,
+        // do not render hunk till end automatically because the number of context lines might be less than the commonLineThreshold
+        $contextStartOffset = $hunkCapture - $this->contextLines < 0 ? $hunkCapture : $this->contextLines;
+        // prevent trying to write out more common lines than there are in the diff _and_
+        // do not write more than configured through the context lines
+        $contextEndOffset = min($sameCount, $this->contextLines);
+        $fromRange -= $sameCount;
+        $toRange -= $sameCount;
+        $this->writeHunk($diff, $hunkCapture - $contextStartOffset, $i - $sameCount + $contextEndOffset + 1, $fromStart - $contextStartOffset, $fromRange + $contextStartOffset + $contextEndOffset, $toStart - $contextStartOffset, $toRange + $contextStartOffset + $contextEndOffset, $output);
+    }
+    private function writeHunk(array $diff, int $diffStartIndex, int $diffEndIndex, int $fromStart, int $fromRange, int $toStart, int $toRange, $output) : void
+    {
+        if ($this->addLineNumbers) {
+            fwrite($output, '@@ -' . $fromStart);
+            if (!$this->collapseRanges || 1 !== $fromRange) {
+                fwrite($output, ',' . $fromRange);
+            }
+            fwrite($output, ' +' . $toStart);
+            if (!$this->collapseRanges || 1 !== $toRange) {
+                fwrite($output, ',' . $toRange);
+            }
+            fwrite($output, " @@\n");
+        } else {
+            fwrite($output, "@@ @@\n");
+        }
+        for ($i = $diffStartIndex; $i < $diffEndIndex; $i++) {
+            if ($diff[$i][1] === Differ::ADDED) {
+                fwrite($output, '+' . $diff[$i][0]);
+            } elseif ($diff[$i][1] === Differ::REMOVED) {
+                fwrite($output, '-' . $diff[$i][0]);
+            } elseif ($diff[$i][1] === Differ::OLD) {
+                fwrite($output, ' ' . $diff[$i][0]);
+            } elseif ($diff[$i][1] === Differ::NO_LINE_END_EOF_WARNING) {
+                fwrite($output, "\n");
+                // $diff[$i][0]
+            } else {
+                /* Not changed (old) Differ::OLD or Warning Differ::DIFF_LINE_END_WARNING */
+                fwrite($output, ' ' . $diff[$i][0]);
+            }
+        }
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/diff.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\Diff;
+
+use function array_pop;
+use function assert;
+use function count;
+use function max;
+use function preg_match;
+use function preg_split;
+/**
+ * Unified diff parser.
+ */
+final class Parser
+{
+    /**
+     * @return Diff[]
+     */
+    public function parse(string $string) : array
+    {
+        $lines = preg_split('(\\r\\n|\\r|\\n)', $string);
+        if (!empty($lines) && $lines[count($lines) - 1] === '') {
+            array_pop($lines);
+        }
+        $lineCount = count($lines);
+        $diffs = [];
+        $diff = null;
+        $collected = [];
+        for ($i = 0; $i < $lineCount; $i++) {
+            if (preg_match('#^---\\h+"?(?P<file>[^\\v\\t"]+)#', $lines[$i], $fromMatch) && preg_match('#^\\+\\+\\+\\h+"?(?P<file>[^\\v\\t"]+)#', $lines[$i + 1], $toMatch)) {
+                if ($diff !== null) {
+                    $this->parseFileDiff($diff, $collected);
+                    $diffs[] = $diff;
+                    $collected = [];
+                }
+                assert(!empty($fromMatch['file']));
+                assert(!empty($toMatch['file']));
+                $diff = new Diff($fromMatch['file'], $toMatch['file']);
+                $i++;
+            } else {
+                if (preg_match('/^(?:diff --git |index [\\da-f.]+|[+-]{3} [ab])/', $lines[$i])) {
+                    continue;
+                }
+                $collected[] = $lines[$i];
+            }
+        }
+        if ($diff !== null && count($collected)) {
+            $this->parseFileDiff($diff, $collected);
+            $diffs[] = $diff;
+        }
+        return $diffs;
+    }
+    private function parseFileDiff(Diff $diff, array $lines) : void
+    {
+        $chunks = [];
+        $chunk = null;
+        $diffLines = [];
+        foreach ($lines as $line) {
+            if (preg_match('/^@@\\s+-(?P<start>\\d+)(?:,\\s*(?P<startrange>\\d+))?\\s+\\+(?P<end>\\d+)(?:,\\s*(?P<endrange>\\d+))?\\s+@@/', $line, $match, \PREG_UNMATCHED_AS_NULL)) {
+                $chunk = new Chunk((int) $match['start'], isset($match['startrange']) ? max(0, (int) $match['startrange']) : 1, (int) $match['end'], isset($match['endrange']) ? max(0, (int) $match['endrange']) : 1);
+                $chunks[] = $chunk;
+                $diffLines = [];
+                continue;
+            }
+            if (preg_match('/^(?P<type>[+ -])?(?P<line>.*)/', $line, $match)) {
+                $type = Line::UNCHANGED;
+                if ($match['type'] === '+') {
+                    $type = Line::ADDED;
+                } elseif ($match['type'] === '-') {
+                    $type = Line::REMOVED;
+                }
+                $diffLines[] = new Line($type, $match['line']);
+                $chunk?->setLines($diffLines);
+            }
+        }
+        $diff->setChunks($chunks);
+    }
+}
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/diff.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann\Diff;
+
+use function array_reverse;
+use function count;
+use function max;
+use SplFixedArray;
+final class TimeEfficientLongestCommonSubsequenceCalculator implements LongestCommonSubsequenceCalculator
+{
+    /**
+     * @inheritDoc
+     */
+    public function calculate(array $from, array $to) : array
+    {
+        $common = [];
+        $fromLength = count($from);
+        $toLength = count($to);
+        $width = $fromLength + 1;
+        $matrix = new SplFixedArray($width * ($toLength + 1));
+        for ($i = 0; $i <= $fromLength; $i++) {
+            $matrix[$i] = 0;
+        }
+        for ($j = 0; $j <= $toLength; $j++) {
+            $matrix[$j * $width] = 0;
+        }
+        for ($i = 1; $i <= $fromLength; $i++) {
+            for ($j = 1; $j <= $toLength; $j++) {
+                $o = $j * $width + $i;
+                // don't use max() to avoid function call overhead
+                $firstOrLast = $from[$i - 1] === $to[$j - 1] ? $matrix[$o - $width - 1] + 1 : 0;
+                if ($matrix[$o - 1] > $matrix[$o - $width]) {
+                    if ($firstOrLast > $matrix[$o - 1]) {
+                        $matrix[$o] = $firstOrLast;
+                    } else {
+                        $matrix[$o] = $matrix[$o - 1];
+                    }
+                } else {
+                    if ($firstOrLast > $matrix[$o - $width]) {
+                        $matrix[$o] = $firstOrLast;
+                    } else {
+                        $matrix[$o] = $matrix[$o - $width];
+                    }
+                }
+            }
+        }
+        $i = $fromLength;
+        $j = $toLength;
+        while ($i > 0 && $j > 0) {
+            if ($from[$i - 1] === $to[$j - 1]) {
+                $common[] = $from[$i - 1];
+                $i--;
+                $j--;
+            } else {
+                $o = $j * $width + $i;
+                if ($matrix[$o - $width] > $matrix[$o - 1]) {
+                    $j--;
+                } else {
+                    $i--;
+                }
+            }
+        }
+        return array_reverse($common);
+    }
+}
+BSD 3-Clause License
+
+Copyright (c) 2013-2024, Sebastian Bergmann
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<?php
+
+declare (strict_types=1);
+/*
+ * This file is part of sebastian/version.
+ *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace FOAL\SebastianBergmann;
+
+use function end;
+use function explode;
+use function fclose;
+use function is_dir;
+use function is_resource;
+use function proc_close;
+use function proc_open;
+use function stream_get_contents;
+use function substr_count;
+use function trim;
+final readonly class Version
+{
+    /**
+     * @psalm-var non-empty-string
+     */
+    private string $version;
+    /**
+     * @psalm-param non-empty-string $release
+     * @psalm-param non-empty-string $path
+     */
+    public function __construct(string $release, string $path)
+    {
+        $this->version = $this->generate($release, $path);
+    }
+    /**
+     * @psalm-return non-empty-string
+     */
+    public function asString() : string
+    {
+        return $this->version;
+    }
+    /**
+     * @psalm-param non-empty-string $release
+     * @psalm-param non-empty-string $path
+     *
+     * @psalm-return non-empty-string
+     */
+    private function generate(string $release, string $path) : string
+    {
+        if (substr_count($release, '.') + 1 === 3) {
+            $version = $release;
+        } else {
+            $version = $release . '-dev';
+        }
+        $git = $this->getGitInformation($path);
+        if (!$git) {
+            return $version;
+        }
+        if (substr_count($release, '.') + 1 === 3) {
+            return $git;
+        }
+        $git = explode('-', $git);
+        return $release . '-' . end($git);
+    }
+    /**
+     * @psalm-param non-empty-string $path
+     */
+    private function getGitInformation(string $path) : false|string
+    {
+        if (!is_dir($path . \DIRECTORY_SEPARATOR . '.git')) {
+            return \false;
+        }
+        $process = proc_open('git describe --tags', [1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes, $path);
+        if (!is_resource($process)) {
+            return \false;
+        }
+        $result = trim(stream_get_contents($pipes[1]));
+        fclose($pipes[1]);
+        fclose($pipes[2]);
+        $returnCode = proc_close($process);
+        if ($returnCode !== 0) {
+            return \false;
+        }
+        return $result;
+    }
+}
+bç¶YrÂì…[jJ¨BnÖv∫Û*¡Îæ÷!ï$ˇ¥≥hÊ+5À‹T–¢˙ˇ·”ﬁA:‹ŒßŸ]@≠fÂBØW2   GBMB

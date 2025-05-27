@@ -1,23 +1,23 @@
 <?php
 
-$APITitle = stripslashes($_POST['ApiTitle']);
+// $APITitle = stripslashes($_POST['ApiTitle']);
 
-$content = stripslashes($_POST['notes']);
+// $content = stripslashes($_POST['notes']);
 
 
 
-if(!is_dir("../Settings-files/" . $APITitle)){
+// if(!is_dir("../Settings-files/" . $APITitle)){
 
-	mkdir("../Settings-files/" . $APITitle);
+// 	mkdir("../Settings-files/" . $APITitle);
 
-	$notesFile = fopen("../Settings-files/" . $APITitle . "/notes.txt", "w") or die("Unable to open file!");
+// 	$notesFile = fopen("../Settings-files/" . $APITitle . "/notes.txt", "w") or die("Unable to open file!");
 
-	fwrite($notesFile, $content);
+// 	fwrite($notesFile, $content);
 
-	fclose($notesFile);
+// 	fclose($notesFile);
 
-	echo "API Version Created <br/>";
+// 	echo "API Version Created <br/>";
 
-}
+// }
 
 ?>

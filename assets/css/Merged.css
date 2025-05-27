@@ -1,26 +1,15 @@
-/*START MENU LEVEL CSS*/
+/* -----------------------------------------------------------------------------
+   MENU LEVEL CSS
+   -----------------------------------------------------------------------------
+   Styles for different menu nesting levels in the parameter tree.
+   Each level increases the left margin and border for visual hierarchy.
+----------------------------------------------------------------------------- */
+.MenuLevel1 { margin-left:15px; border-left:1px solid lightgray; }
+.MenuLevel2 { margin-left:25px; border-left:1px solid lightgray; }
+.MenuLevel3 { margin-left:35px; border-left:1px solid lightgray; }
+.MenuLevel4 { margin-left:45px; border-left:1px solid lightgray; }
 
-.MenuLevel1{
-	margin-left:15px;
-	border-left:1px solid lightgray;
-}
 
-.MenuLevel2{
-	margin-left:25px;
-	border-left:1px solid lightgray;
-}
-
-.MenuLevel3{
-	margin-left:35px;
-	border-left:1px solid lightgray;
-}
-
-.MenuLevel4{
-	margin-left:45px;
-	border-left:1px solid lightgray;
-}
-
-/*END MENU LEVEL CSS*/
 /*START GENERAL.CSS*/
 #SearchDialogMessageOption{
 	background: whitesmoke;

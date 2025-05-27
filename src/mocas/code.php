@@ -7,21 +7,21 @@ $hourmeter_new = 34356642;
 $timewindow_new = 234567;
 
 
-$validation_code=1;
+$validation_code = 1;
 $hourmeter_mix = 0;
 $timewindow_mix = 0;
 
 
-define("b0",  0x1); // 2^0
-define("b1",  0x2); // 2^1
-define("b2",  0x4); // 2^2
-define("b3",  0x8); // 2^3
-define("b4",  0x10); // 2^4
-define("b5",  0x20); // 2^5
-define("b6",  0x40); // 2^6
-define("b7",  0x80); // 2^7
-define("b8",  0x100); // 2^8
-define("b9",  0x200); // 2^9
+define("b0", 0x1); // 2^0
+define("b1", 0x2); // 2^1
+define("b2", 0x4); // 2^2
+define("b3", 0x8); // 2^3
+define("b4", 0x10); // 2^4
+define("b5", 0x20); // 2^5
+define("b6", 0x40); // 2^6
+define("b7", 0x80); // 2^7
+define("b8", 0x100); // 2^8
+define("b9", 0x200); // 2^9
 define("b10", 0x400); // 2^10
 define("b11", 0x800); // 2^11
 define("b12", 0x1000); // 2^12
@@ -225,15 +225,10 @@ $timewindow_mix = $timewindow_mix + $timewindow_new_b11 + $timewindow_new_b12 + 
 
 
 
-echo($serial . "<br>". $module . "<br>". $validation_code . "<br>");
+echo ($serial . "<br>" . $module . "<br>" . $validation_code . "<br>");
 
-echo($hourmeter_new . "<br>". $hourmeter_mix . "<br>");
-echo($timewindow_new . "<br>". $timewindow_mix . "<br>");
-
-
-//$x=17;
-//$y= $x & b4;
-//echo($x . "<br>". b4 . "<br>". $y . "<br>");
+echo ($hourmeter_new . "<br>" . $hourmeter_mix . "<br>");
+echo ($timewindow_new . "<br>" . $timewindow_mix . "<br>");
 
 
 ?>

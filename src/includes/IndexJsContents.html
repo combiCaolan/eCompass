@@ -1,22 +1,31 @@
+<!--
+    IndexJsContents.html
+    ----------------------------------------------------------------------------
+    Includes all main JavaScript files required for the eCompass application's
+    index or landing page. This ensures that all necessary scripts for UI logic,
+    language handling, compatibility checks, and menu actions are loaded.
+    ----------------------------------------------------------------------------
+-->
+
 <script src="assets/js/AddMissingParameters.js"></script>
 <!--<script src="assets/js/ListTruckDir.js"></script>-->
 <script src="UnsupportedBrowserCheck.js"></script>
 <script src="assets/js/LanguageLogic/DynamicLanguage.js"></script>
 <script src="assets/js/Dialog.js"></script>
-
-
-
-
 <!--<script src="assets/js/InitialStart/LanguageSet.js"></script>-->
 <script src="assets/js/Api-Logic/Api-Change.js"></script>
 <script src="assets/js/AllMenuButtonFunctions.js"></script>
 <script src="assets/js/MenuLogic.js"></script>
 <script src="assets/js/LanguageLogic/SetElementsForLanguage.js"></script>
+
 <script>
-if(localStorage.getItem('OpenInNewTab') != null){
-	Path = localStorage.getItem('OpenInNewTab');
-	//OpenNewTabDialog
-	//$("#OpenNewTabDialog").dialog();
-	localStorage.removeItem('OpenInNewTab');
-}
+    /**
+     * If the app was opened in a new tab, handle any required path logic.
+     */
+    if(localStorage.getItem('OpenInNewTab') != null){
+        Path = localStorage.getItem('OpenInNewTab');
+        // Optionally open a dialog or handle the new tab event here
+        // $("#OpenNewTabDialog").dialog();
+        localStorage.removeItem('OpenInNewTab');
+    }
 </script>

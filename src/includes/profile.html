@@ -1,13 +1,33 @@
+<!--
+    profile.html
+    ----------------------------------------------------------------------------
+    Contains the user profile dropdown for the eCompass web application.
+    Displays the logged-in user's name, access level, API version, and a logout option.
+    Uses FontAwesome for the user icon.
+    ----------------------------------------------------------------------------
+-->
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
 <div class="dropdown">
-	<button class="dropbtn" id="HeaderUserButtonReal"><i class='fas fa-user-alt'></i></button>
-	<div class="dropdown-content">
-		<button id="DownloadButton" ><p id="FixedUsernameText">Username</p><p id="UsernameLocal"></p>
-		</button>
-		<button id="DownloadButton" ><p id="FixedAccessLevelText">AccessLevel</p><p id="AccessLevel"></p></button>
-		<button id="DownloadButton"><p id="FixedAPIText">API Version</p><p id="APIVersion"></p></button>
-		<button id="DownloadButton" onclick="location.href=`http://support.combilift.net/wp-login.php?action=logout`;"><p id="FixedLogoutText">Logout</p></button>
-	</div>
+    <button class="dropbtn" id="HeaderUserButtonReal">
+        <i class='fas fa-user-alt'></i>
+    </button>
+    <div class="dropdown-content">
+        <button id="DownloadButton">
+            <p id="FixedUsernameText">Username</p>
+            <p id="UsernameLocal"></p>
+        </button>
+        <button id="DownloadButton">
+            <p id="FixedAccessLevelText">AccessLevel</p>
+            <p id="AccessLevel"></p>
+        </button>
+        <button id="DownloadButton">
+            <p id="FixedAPIText">API Version</p>
+            <p id="APIVersion"></p>
+        </button>
+        <button id="DownloadButton" onclick="location.href=`http://support.combilift.net/wp-login.php?action=logout`;">
+            <p id="FixedLogoutText">Logout</p>
+        </button>
+    </div>
 </div>

@@ -1,6 +1,20 @@
+<!--
+    JsContents.html
+    ----------------------------------------------------------------------------
+    Includes all main JavaScript files and styles required for the eCompass
+    application's editor and main parameter pages. This ensures that all
+    necessary scripts for parameter logic, UI, language handling, error
+    handling, and menu actions are loaded in the correct order.
+    ----------------------------------------------------------------------------
+-->
+
+<!-- Set available APIs (example: API 100) -->
 <script>AvailableAPI = ['100'];</script>
+
+<!-- FontAwesome for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<!-- Core application scripts and modules -->
 <script src="../assets/js/SpecialBlocks.js"></script>
 <script src="../assets/js/DescriptionDictionary.js"></script>
 <script src="../assets/js/AddMissingParameters.js"></script>
@@ -9,62 +23,47 @@
 <script src="../assets/js/Parameter-Types/dropdown.js"></script>
 <script src="../assets/js/LanguageLogic/DynamicLanguage.js"></script>
 <script src="../assets/js/PostLoad.js"></script>
-
 <script src="../assets/js/Compare.js"></script>
 <script src="../assets/js/Dialog.js"></script>
-
-
-
-
-
 <!--<script src="assets/js/Javascript-Style/MenuShowHideLogic.js"></script>-->
-
-
-
 <script src="../assets/js/Parameter-Types/HydInOut.js"></script>
 <script src="../assets/js/main.js"></script>
-		
 <script src="../assets/js/Parameter-Manipulation/removeParameter.js"></script>
 <script src="../assets/js/Parameter-Manipulation/AddParameter.js"></script>
-
 <script src="../assets/js/Parameter-Types/password.js"></script>
-
-
 <script src="../assets/js/Parameter-Manipulation/UpdateParameters/change.js"></script>
 <script src="../assets/js/Parameter-Types/bit900.js"></script>
 <script src="../assets/js/Parameter-Types/bit1000.js"></script>
 <script src="../assets/js/Parameter-Types/SerialNumberLogic.js"></script>
 <script src="../assets/js/ParameterView.js"></script>
-
 <script src="../assets/js/Javascript-Style/CollapseDiv.js"></script>
-
 <script src="../assets/js/ParametersMenu.js"></script>
 <script src="../assets/js/Parameter-Types/FixedParameters.js"></script>
 <script src="../assets/js/Parameter-Manipulation/UpdateParameters/UpdateParameters.js"></script>
 <script src="../assets/js/Parameter-Manipulation/UpdateParameters/ChangeBuildDate.js"></script>
 <script src="../assets/js/LanguageLogic/implement.js"></script>
 <script src="../assets/js/LanguageLogic/SetElementsForLanguage.js"></script>
-
-
-
 <script src="../assets/js/Api-Logic/Api-Change.js"></script>
-
 <script src="../assets/js/AllMenuButtonFunctions.js"></script>
 <script src="../assets/js/Error.js"></script>
 <script src="../assets/js/MenuLogic.js"></script>
-<script>
-TreeViewClick(document.getElementById('2'),2);
 
-IntegrityCheckOnStartup();
+<script>
+    // Initialize the tree view and perform integrity checks on startup
+    TreeViewClick(document.getElementById('2'), 2);
+    IntegrityCheckOnStartup();
 </script>
+
 <!--
-<script src="assets/js/framework/jquery-1.12.4.js"></script>
-<script src="assets/js/framework/jquery-ui.js"></script>
-<script src="assets/js/Hydraulic-Parameters/HydInOutChange.js"></script>
-<script src="assets/js/Export/Download.js"></script>
-<script src="assets/js/SetAccesLevel.js"></script>
-<script src="assets/js/Export/export.js"></script>
-<script src="assets/js/MenuFunctionality/MenuFunctionality.js"></script>
-<script src="assets/js/PostLoad/IntegrityPerParameterCheck.js"></script>
-<script src="assets/js/IntegrityChecks/IntegrityCheck.js"></script>
-<script src="assets/js/PostLoad/reloadOrigParState.js"></script>-->
+    The following scripts are commented out but may be used for additional features:
+    <script src="assets/js/framework/jquery-1.12.4.js"></script>
+    <script src="assets/js/framework/jquery-ui.js"></script>
+    <script src="assets/js/Hydraulic-Parameters/HydInOutChange.js"></script>
+    <script src="assets/js/Export/Download.js"></script>
+    <script src="assets/js/SetAccesLevel.js"></script>
+    <script src="assets/js/Export/export.js"></script>
+    <script src="assets/js/MenuFunctionality/MenuFunctionality.js"></script>
+    <script src="assets/js/PostLoad/IntegrityPerParameterCheck.js"></script>
+    <script src="assets/js/IntegrityChecks/IntegrityCheck.js"></script>
+    <script src="assets/js/PostLoad/reloadOrigParState.js"></script>
+-->
