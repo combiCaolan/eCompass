@@ -13,6 +13,8 @@ if ($test_mode) {
     $logged_user_email = "caolan.maguire@combilift.com";
     $access_level = "8";
 
+    echo"<script>localStorage.setItem('Language','English')</script>";
+
     echo"<script>sessionStorage.setItem('ServerPath','http://localhost:8000');</script>";
 
     echo '<script> sessionStorage.setItem("loggedinusername","' . $full_name . '"); sessionStorage.setItem("loggedinemail","' . $logged_user_email . '"); sessionStorage.setItem("AccessLevel","' . $access_level . '"); </script>';

@@ -22,7 +22,7 @@ ChangesMadePreDownload = false;
 var ErrorCount = false;
 
 //Opening Directory for comparing files
-ParameterDirectoryPath = String(sessionStorage.getItem('ServerPath') + '/ecompass/settings/' + sessionStorage.getItem('APIV')  + '/' + localStorage.getItem('Language') + '/Description_Main.txt');
+ParameterDirectoryPath = String(sessionStorage.getItem('ServerPath') + '/eCompass/settings/' + sessionStorage.getItem('APIV')  + '/' + localStorage.getItem('Language') + '/Description_Main.txt');
 alert(ParameterDirectoryPath);
 var rawFile = new XMLHttpRequest();
 rawFile.open("GET", ParameterDirectoryPath, false);
@@ -33,7 +33,7 @@ rawFile.onreadystatechange = function ()
 		if(rawFile.status === 200 || rawFile.status == 0)
 		{
 			var data = rawFile.responseText;
-			//sessionStorage.setItem('ParametersDescription',data);
+			sessionStorage.setItem('ParametersDescription',data);
 		}
 	}
 }

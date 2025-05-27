@@ -52,9 +52,9 @@
 
 	<!--<script src="assets/js/InitialStart/LanguageSet.js"></script>-->
 	<script src="../assets/js/Api-Logic/Api-Change.js"></script>
-	<script src="../assets/js/AllMenuButtonFunctions.js"></script>
+	<script src="../assets/js/MenuAndFileActions.js"></script>
 	<script src="../assets/js/MenuLogic.js"></script>
-	<script src="../assets/js/LanguageLogic/SetElementsForLanguage.js"></script>
+	<script src="../assets/js/LanguageLogic/UILanguageSetter.js.js"></script>
 	<script>
 		if (localStorage.getItem('OpenInNewTab') != null) {
 			Path = localStorage.getItem('OpenInNewTab');
