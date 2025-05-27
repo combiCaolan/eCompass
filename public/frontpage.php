@@ -1,16 +1,16 @@
-<?php include_once('../includes/Verify.php'); ?>
-<?php include_once('../includes/ListTruckDir.php'); ?>
+<?php include_once('../src/includes/Verify.php'); ?>
+<?php include_once('../src/includes/ListTruckDir.php'); ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-	<?php include_once('../includes/headContents.html'); ?>
+	<?php include_once('../src/includes/headContents.html'); ?>
 </head>
 
 <body>
-	<?php include_once('../includes/Dialog.html'); ?>
-	<?php include_once('../includes/WebHeader.html'); ?>
+	<?php include_once('../src/includes/Dialog.html'); ?>
+	<?php include_once('../src/includes/WebHeader.html'); ?>
 	<div id="row_usr">
 		<div id="right_row">
 			<h1 style="font-weight:100;" id="WelcomeBack">Welcome Back,<h1 style="font-weight:100;" id="ConcatName">

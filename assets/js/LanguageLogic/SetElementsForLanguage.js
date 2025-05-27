@@ -656,7 +656,7 @@ function SetLanguage(){
 
 
 SetLanguage();
-if(CurrentPage == undefined){
+if(typeof CurrentPage == undefined){
 	const CurrentPage = window.location.pathname.split('/')[window.location.pathname.split('/').length-1];
 }
 	

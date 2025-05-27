@@ -21,8 +21,8 @@ if (Template) {
 
 // Set UI elements if present
 if (document.getElementById('CloseFileDialog')) {
-    document.getElementById('CloseFileDialog').title = LanguageDict["Close"];
-    document.getElementById('CloseFileDialog').innerHTML = LanguageDict["CloseFileDialogMessage"];
+    document.getElementById('CloseFileDialog').title = 'Close';//LanguageDict["Close"];
+    document.getElementById('CloseFileDialog').innerHTML = 'Close File';//LanguageDict["CloseFileDialogMessage"];
 }
 if (document.getElementById('UsernameLocal')) {
     document.getElementById('UsernameLocal').innerHTML = sessionStorage.getItem('loggedinusername') || '';
@@ -116,10 +116,13 @@ function readParameters(DefaultFileName) {
         sessionStorage.setItem('API', 'GeneralDefault_API_1.clp');
     }
 
+    alert('1');
+
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = '.clp';
     input.onchange = e => {
+        alert('2');
         const file = e.target.files[0];
         if (!file) return;
         const reader = new FileReader();

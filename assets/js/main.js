@@ -22,7 +22,8 @@ ChangesMadePreDownload = false;
 var ErrorCount = false;
 
 //Opening Directory for comparing files
-ParameterDirectoryPath = String(sessionStorage.getItem('ServerPath') + '/ecompass/Settings-files/' + sessionStorage.getItem('APIV')  + '/' + localStorage.getItem('Language') + '/Description_Main.txt');
+ParameterDirectoryPath = String(sessionStorage.getItem('ServerPath') + '/ecompass/settings/' + sessionStorage.getItem('APIV')  + '/' + localStorage.getItem('Language') + '/Description_Main.txt');
+alert(ParameterDirectoryPath);
 var rawFile = new XMLHttpRequest();
 rawFile.open("GET", ParameterDirectoryPath, false);
 rawFile.onreadystatechange = function ()

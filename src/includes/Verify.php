@@ -1,7 +1,7 @@
 <?php
 //Load Wordpress variables below and paths
 // include_once('../wp-load.php');
-include_once('../includes/Path.php');
+include_once('../src/includes/Path.php');
 
 //function to return user role
 function display_user_roles()

@@ -1,6 +1,6 @@
 <?php
 	echo"<script> TruckDefaultDir = []; </script>";
-	if ($handle = opendir('../Truck_Default_Files')) {
+	if ($handle = opendir('../src/truck-default-files')) {
 	    while (false !== ($entry = readdir($handle))) {
 	        if ($entry != "." && $entry != "..") {
 			if($entry !== 'index.php'){

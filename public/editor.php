@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<?php 
-// include_once('../includes/Verify.php'); 
-?>
+
 <html>
 	<head>		
-		<?php include_once('../includes/headContents.html'); ?>
+		<?php include_once('../src/includes/headContents.html'); ?>
 	</head>
 <body>
-		<?php include_once('../includes/Dialog.html'); ?>
+		<?php include_once('../src/includes/Dialog.html'); ?>
 		<div id="LoadingScreen">
 			<div class="loader"></div>
 		</div>
 		<div id="Container">
-				<?php include_once('../includes/WebHeader.html'); ?>
+				<?php include_once('../src/includes/WebHeader.html'); ?>
 					<ul class="tree">
 						<li id="Treetab" style="margin-top:81px;"> <input type="button" style="float:right;" id="DropDownMachineDetails" onclick="DropDownUni('A','DropDownMachineDetails');" value="&#x25bc;" /> <p onclick="DropDownUni('A','DropDownMachineDetails');" id="TruckDetailsID"></p></li>
 							<div id="A">
@@ -57,7 +55,7 @@
 					<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 				</div>
 		</div>
-		<?php include_once('../includes/ListTruckDir.php'); ?>
-		<?php include_once('../includes/JsContents.html') ?>
+		<?php include_once('../src/includes/ListTruckDir.php'); ?>
+		<?php include_once('../src/includes/JsContents.html') ?>
 </body>
 </html>

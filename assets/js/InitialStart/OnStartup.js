@@ -23,7 +23,7 @@ sessionStorage.removeItem('UserMadeChanges');
 var d = new Date();
 sessionStorage.setItem('UserMadeChanges', d + '\n');
 /*Start Reading Paramters API File*/
-file = String(sessionStorage.getItem('ServerPath') + '/Settings-files/' + sessionStorage.getItem('APIV') + '/' + localStorage.getItem('Language') + '/DefaultAddParameters.txt');
+file = String(sessionStorage.getItem('ServerPath') + '/settings/' + sessionStorage.getItem('APIV') + '/' + localStorage.getItem('Language') + '/DefaultAddParameters.txt');
 var rawFile = new XMLHttpRequest();
 rawFile.open("GET", file, false);
 rawFile.onreadystatechange = function () {
@@ -39,7 +39,7 @@ rawFile.send(null);
 /*START LANGUAGESET.JS*/
 if (localStorage.getItem('Language')) {
 	CurrentLanguage = localStorage.getItem('Language').replace('\r', '');
-	CurrentLanguageDirectory = sessionStorage.getItem('ServerPath') + String('/Settings-files/' + sessionStorage.getItem('APIV') + '/' + localStorage.getItem('Language') + '/LANGUAGE_' + localStorage.getItem('Language') + '.txt');
+	CurrentLanguageDirectory = sessionStorage.getItem('ServerPath') + String('/settings/' + sessionStorage.getItem('APIV') + '/' + localStorage.getItem('Language') + '/LANGUAGE_' + localStorage.getItem('Language') + '.txt');
 	var rawFile = new XMLHttpRequest();
 	rawFile.open("GET", CurrentLanguageDirectory, false);
 	rawFile.onreadystatechange = function () {
@@ -57,7 +57,7 @@ if (localStorage.getItem('Language')) {
 
 
 /*Start Reading Language File*/
-file = String(sessionStorage.getItem('ServerPath') + '/Settings-files/' + sessionStorage.getItem('APIV') + '/' + localStorage.getItem('Language') + '/LANGUAGE_' + localStorage.getItem('Language') + '.txt');
+file = String(sessionStorage.getItem('ServerPath') + '/settings/' + sessionStorage.getItem('APIV') + '/' + localStorage.getItem('Language') + '/LANGUAGE_' + localStorage.getItem('Language') + '.txt');
 var rawFile = new XMLHttpRequest();
 rawFile.open("GET", file, false);
 rawFile.onreadystatechange = function () {
@@ -72,7 +72,7 @@ rawFile.send(null);
 
 
 /*Start Reading Dropdown List*/
-file = String(sessionStorage.getItem('ServerPath') + '/Settings-files/' + CurrentDefaultApiVersion + '/' + localStorage.getItem('Language') + '/DropDown_list.txt');
+file = String(sessionStorage.getItem('ServerPath') + '/settings/' + CurrentDefaultApiVersion + '/' + localStorage.getItem('Language') + '/DropDown_list.txt');
 var rawFile = new XMLHttpRequest();
 rawFile.open("GET", file, false);
 rawFile.onreadystatechange = function () {
@@ -87,7 +87,7 @@ rawFile.send(null);
 
 /*Start Reading Units Directory*/
 //Opening Units Directory for finding Units Model
-UnitsDirectoryPath = String(sessionStorage.getItem('ServerPath') + '/Settings-files/' + CurrentDefaultApiVersion + '/' + localStorage.getItem('Language') + '/UnitsDirectory.txt');
+UnitsDirectoryPath = String(sessionStorage.getItem('ServerPath') + '/settings/' + CurrentDefaultApiVersion + '/' + localStorage.getItem('Language') + '/UnitsDirectory.txt');
 
 var rawFile = new XMLHttpRequest();
 rawFile.open("GET", UnitsDirectoryPath, false);
@@ -105,7 +105,7 @@ rawFile.send(null);
 /*End Reading Units Directory*/
 
 /*Start Reading Bit 999 File*/
-file = String(sessionStorage.getItem('ServerPath') + '/Settings-files/' + CurrentDefaultApiVersion + '/' + localStorage.getItem('Language') + '/Parameter_999.txt');
+file = String(sessionStorage.getItem('ServerPath') + '/settings/' + CurrentDefaultApiVersion + '/' + localStorage.getItem('Language') + '/Parameter_999.txt');
 var rawFile = new XMLHttpRequest();
 rawFile.open("GET", file, false);
 rawFile.onreadystatechange = function () {
@@ -119,7 +119,7 @@ rawFile.send(null);
 /*End Reading Bit 999 File*/
 
 /*Start Reading Bit 1000 File*/
-file = String(sessionStorage.getItem('ServerPath') + '/Settings-files/' + CurrentDefaultApiVersion + '/' + localStorage.getItem('Language') + '/Parameter_1000.txt');
+file = String(sessionStorage.getItem('ServerPath') + '/settings/' + CurrentDefaultApiVersion + '/' + localStorage.getItem('Language') + '/Parameter_1000.txt');
 var rawFile = new XMLHttpRequest();
 rawFile.open("GET", file, false);
 rawFile.onreadystatechange = function () {
@@ -134,7 +134,7 @@ rawFile.send(null);
 /*End Reading Bit 1000 File*/
 
 /*Start Reading Special Description File*/
-file = String(sessionStorage.getItem('ServerPath') + '/Settings-files/' + CurrentDefaultApiVersion + '/' + localStorage.getItem('Language') + '/Description_special.txt');
+file = String(sessionStorage.getItem('ServerPath') + '/settings/' + CurrentDefaultApiVersion + '/' + localStorage.getItem('Language') + '/Description_special.txt');
 var rawFile = new XMLHttpRequest();
 rawFile.open("GET", file, false);
 rawFile.onreadystatechange = function () {
@@ -150,7 +150,7 @@ rawFile.send(null);
 
 
 /*Start Reading Parameter Main*/
-file = String(sessionStorage.getItem('ServerPath') + '/Settings-files/' + sessionStorage.getItem('APIV') + '/' + localStorage.getItem('Language') + '/Parameter_Main.txt');
+file = String(sessionStorage.getItem('ServerPath') + '/settings/' + sessionStorage.getItem('APIV') + '/' + localStorage.getItem('Language') + '/Parameter_Main.txt');
 var rawFile = new XMLHttpRequest();
 rawFile.open("GET", file, false);
 rawFile.onreadystatechange = function () {
@@ -167,7 +167,7 @@ rawFile.send(null);
 
 
 /*Start Reading Parameters Description File*/
-file = String(sessionStorage.getItem('ServerPath') + '/Settings-files/' + sessionStorage.getItem('APIV') + '/' + localStorage.getItem('Language') + '/Description_Main.txt');
+file = String(sessionStorage.getItem('ServerPath') + '/settings/' + sessionStorage.getItem('APIV') + '/' + localStorage.getItem('Language') + '/Description_Main.txt');
 var rawFile = new XMLHttpRequest();
 rawFile.open("GET", file, false);
 rawFile.onreadystatechange = function () {
@@ -184,7 +184,7 @@ rawFile.send(null);
 
 
 /*Start Reading Template clp File*/
-file = String(sessionStorage.getItem('ServerPath') + '/Settings-files/' + sessionStorage.getItem('APIV') + '/' + localStorage.getItem('Language') + '/TemplateFile.clp');
+file = String(sessionStorage.getItem('ServerPath') + '/settings/' + sessionStorage.getItem('APIV') + '/' + localStorage.getItem('Language') + '/TemplateFile.clp');
 var rawFile = new XMLHttpRequest();
 rawFile.open("GET", file, false);
 rawFile.onreadystatechange = function () {
