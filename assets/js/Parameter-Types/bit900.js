@@ -1,77 +1,76 @@
 /**
  * Displays bit options for a Bit999 parameter, allowing the user to select and update bit values.
- * @param {string} Line - The parameter line (CSV string).
- * @param {HTMLElement} ClickedButton - The button that was clicked.
+ * @param {string} line - The parameter line (CSV string).
+ * @param {HTMLElement} clickedButton - The button that was clicked.
  */
-function Bit999DisplayOptionsFunction(Line, ClickedButton) {
-    document.getElementById('topDefineDescription').innerHTML = '';
+function Bit999DisplayOptionsFunction(line, clickedButton) {
+    const descElem = document.getElementById('topDefineDescription');
+    descElem.innerHTML = '';
 
-    const Index = Line.split(',')[0];
-    const constantElem = document.getElementById('constant' + Index);
+    const index = line.split(',')[0];
+    const constantElem = document.getElementById('constant' + index);
     if (constantElem.innerHTML !== '') {
         constantElem.innerHTML = '';
         return;
     }
 
     // Parse bit values
-    const CurrentValue = parseInt(Line.split(',')[1], 10);
-    const DefaultValue = parseInt(Line.split(',')[2], 10);
-    const FactoryValue = parseInt(Line.split(',')[3], 10);
+    const currentValue = parseInt(line.split(',')[1], 10);
+    const defaultValue = parseInt(line.split(',')[2], 10);
+    const factoryValue = parseInt(line.split(',')[3], 10);
 
     // Get bits as arrays (32 bits)
     const getBits = (octet) => Array.from({ length: 32 }, (_, i) => (octet & (1 << i)) ? 1 : 0);
-    const bits = getBits(CurrentValue);
-    const Defaultbits = getBits(DefaultValue);
-    const Factorybits = getBits(FactoryValue);
+    const bits = getBits(currentValue);
+    const defaultBits = getBits(defaultValue);
+    const factoryBits = getBits(factoryValue);
 
     // Find Bit999 directory line for this parameter
     const bit999Dir = sessionStorage.getItem('Bit999').split('\n');
-    let BitLine = null;
+    let bitLine = null;
     for (let i = 0; i < bit999Dir.length; i++) {
-        if (bit999Dir[i][0] === '#' && bit999Dir[i].replace('#', '').replace(/\r/g, '') === Index) {
-            BitLine = i + 1;
+        if (bit999Dir[i][0] === '#' && bit999Dir[i].replace('#', '').replace(/\r/g, '') === index) {
+            bitLine = i + 1;
             break;
         }
     }
-    if (BitLine === null) return;
+    if (bitLine === null) return;
 
     // Title and Description
-    const Title = document.createElement('p');
-    Title.id = 'WorkSpaceTitle';
-    Title.innerHTML = ClickedButton.innerHTML;
+    const title = document.createElement('p');
+    title.id = 'WorkSpaceTitle';
+    title.innerHTML = clickedButton.innerHTML;
 
-    const Description = document.createElement('p');
-    Description.innerHTML = MainDescriptionsDict[Index] !== undefined
-        ? MainDescriptionsDict[Index].replace('#' + Index, '')
+    const description = document.createElement('p');
+    description.innerHTML = MainDescriptionsDict[index] !== undefined
+        ? MainDescriptionsDict[index].replace('#' + index, '')
         : "This parameter's description is not present";
 
     // Export checkbox (not appended by default)
-    const ExportDiv = document.createElement('div');
-    const SwitchParameterLabel = document.createElement("label");
-    SwitchParameterLabel.innerHTML = LanguageDict["Export"];
-    const SwitchParameter = document.createElement("input");
-    SwitchParameter.type = 'checkbox';
-    SwitchParameter.id = "Switch Parameter Checkbox";
-    if (!removedParametersCounters.includes(String(Line))) {
-        SwitchParameter.checked = true;
-        document.getElementById('topDefineDescription').style.opacity = 1;
-    } else {
-        document.getElementById('topDefineDescription').style.opacity = 0.4;
-    }
-    SwitchParameter.onchange = function () {
-        exportonchange(Line.split(',')[0], this);
+    const exportDiv = document.createElement('div');
+    const switchParameterLabel = document.createElement("label");
+    switchParameterLabel.innerHTML = LanguageDict["Export"];
+    const switchParameter = document.createElement("input");
+    switchParameter.type = 'checkbox';
+    switchParameter.id = "SwitchParameterCheckbox";
+    switchParameter.checked = !removedParametersCounters.includes(String(line));
+    descElem.style.opacity = switchParameter.checked ? 1 : 0.4;
+    switchParameter.onchange = function () {
+        exportonchange(line.split(',')[0], this);
     };
-    SwitchParameter.style = "text-align:center; font-size:18px;";
+    switchParameter.style = "text-align:center; font-size:18px;";
+    exportDiv.appendChild(switchParameterLabel);
+    exportDiv.appendChild(switchParameter);
 
     // Option list
     const unorderedList = document.createElement('ul');
     unorderedList.id = 'Bit999DropDownDiv';
 
     let bitCounter = 1;
-    let lineIdx = BitLine;
+    let lineIdx = bitLine;
     while (bit999Dir[lineIdx] && bit999Dir[lineIdx][0] !== '#') {
         const bitParts = bit999Dir[lineIdx].split(',');
-        const ListItem = document.createElement('li');
+        const listItem = document.createElement('li');
         const input = document.createElement('input');
         input.type = 'submit';
         input.id = 'Bitnineninenine' + bitCounter;
@@ -80,19 +79,19 @@ function Bit999DisplayOptionsFunction(Line, ClickedButton) {
         if (bitParts[2]) input.name = bitParts[2].replace(/ /g, '');
         input.onclick = function () {
             BitDropDown999(
-                Index,
+                index,
                 bitParts[0],
                 bitParts[1],
-                ClickedButton.innerHTML,
+                clickedButton.innerHTML,
                 bitParts[2].replace(/\n/g, '').replace(/\r/g, ''),
                 bits,
-                Defaultbits,
-                Factorybits,
+                defaultBits,
+                factoryBits,
                 bitCounter
             );
         };
-        ListItem.appendChild(input);
-        unorderedList.appendChild(ListItem);
+        listItem.appendChild(input);
+        unorderedList.appendChild(listItem);
         lineIdx++;
         bitCounter++;
     }
@@ -106,15 +105,15 @@ function Bit999DisplayOptionsFunction(Line, ClickedButton) {
  * Updates the parameter value in sessionStorage and refreshes the UI.
  */
 function BitDropDown999(
-    ParentParameterIndex,
-    Bit,
-    DropDownIndex,
-    NameOfParentParameter,
-    NameOfParameterBit,
-    BitResults,
-    DefaultBitResults,
-    FactoryBitResults,
-    BitButtonCounter
+    parentParameterIndex,
+    bit,
+    dropDownIndex,
+    parentParameterName,
+    parameterBitName,
+    bitResults,
+    defaultBitResults,
+    factoryBitResults,
+    bitButtonCounter
 ) {
     // Deselect all previously selected
     try {
@@ -124,168 +123,167 @@ function BitDropDown999(
     } catch (err) {}
 
     // Highlight selected
-    const WhichNumber = Number(BitButtonCounter) - 1;
-    document.getElementById("constant" + ParentParameterIndex)
-        .childNodes[0].childNodes[WhichNumber].className = 'SelectedThirdSubGroup';
+    const whichNumber = Number(bitButtonCounter) - 1;
+    document.getElementById("constant" + parentParameterIndex)
+        .childNodes[0].childNodes[whichNumber].className = 'SelectedThirdSubGroup';
 
     // Clear UI
     document.getElementById('topDefineDescription').innerHTML = '';
     document.getElementById('topDefineTable').innerHTML = '';
 
     // Title and Description
-    const Title = document.createElement('p');
-    Title.id = 'WorkSpaceTitle';
-    Title.innerHTML = NameOfParameterBit;
-    document.getElementById('topDefineTable').appendChild(Title);
+    const title = document.createElement('p');
+    title.id = 'WorkSpaceTitle';
+    title.innerHTML = parameterBitName;
+    document.getElementById('topDefineTable').appendChild(title);
 
-    const Description = document.createElement('p');
-    Description.id = 'description';
-    Description.innerHTML = SpecialDescriptionsDict[Number(ParentParameterIndex + '.' + BitButtonCounter)];
-    document.getElementById('topDefineDescription').appendChild(Description);
+    const description = document.createElement('p');
+    description.id = 'description';
+    description.innerHTML = SpecialDescriptionsDict[Number(parentParameterIndex + '.' + bitButtonCounter)];
+    document.getElementById('topDefineDescription').appendChild(description);
 
     // Find dropdown options for this bit
-    const DropDownFile = sessionStorage.getItem('DropDownlist');
-    const DropDownLines = DropDownFile.split('\n');
-    let DropDownLineNum = '';
-    for (let i = 0; i < DropDownLines.length; i++) {
-        if (DropDownLines[i][0] === '#' && DropDownLines[i].replace('#', '').replace(/\r/g, '') === DropDownIndex) {
-            DropDownLineNum = i + 1;
+    const dropDownFile = sessionStorage.getItem('DropDownlist');
+    const dropDownLines = dropDownFile.split('\n');
+    let dropDownLineNum = '';
+    for (let i = 0; i < dropDownLines.length; i++) {
+        if (dropDownLines[i][0] === '#' && dropDownLines[i].replace('#', '').replace(/\r/g, '') === dropDownIndex) {
+            dropDownLineNum = i + 1;
             break;
         }
     }
-    if (DropDownLineNum === '') {
-        console.log('ERR * line The DropDown parameters file does not have this index referenced: ' + DropDownIndex);
+    if (dropDownLineNum === '') {
+        console.log('ERR * line The DropDown parameters file does not have this index referenced: ' + dropDownIndex);
         return;
     }
 
     // Labels
-    const CurrentValueLabel = document.createElement('p');
-    CurrentValueLabel.id = 'ReadResult';
-    CurrentValueLabel.innerHTML = LanguageDict["CurrentValue"];
-    document.getElementById('topDefineDescription').appendChild(CurrentValueLabel);
+    const currentValueLabel = document.createElement('p');
+    currentValueLabel.id = 'ReadResult';
+    currentValueLabel.innerHTML = LanguageDict["CurrentValue"];
+    document.getElementById('topDefineDescription').appendChild(currentValueLabel);
 
-    const DefaultValueLabel = document.createElement('p');
-    DefaultValueLabel.id = 'ReadResult';
-    DefaultValueLabel.innerHTML = LanguageDict["DefaultValue"];
+    const defaultValueLabel = document.createElement('p');
+    defaultValueLabel.id = 'ReadResult';
+    defaultValueLabel.innerHTML = LanguageDict["DefaultValue"];
 
-    const FactoryValueLabel = document.createElement('p');
-    FactoryValueLabel.id = 'ReadResult';
-    FactoryValueLabel.innerHTML = LanguageDict["FactoryValue"];
+    const factoryValueLabel = document.createElement('p');
+    factoryValueLabel.id = 'ReadResult';
+    factoryValueLabel.innerHTML = LanguageDict["FactoryValue"];
 
     // Build dropdowns or readonly fields
-    const OptionsDict = {};
-    let DropDown, DefaultValue, FactoryValue;
-    if (Number(writePermissionDict[ParentParameterIndex]) <= Number(AccessLevelForUser)) {
-        DropDown = document.createElement('select');
-        DefaultValue = document.createElement('select');
-        FactoryValue = document.createElement('select');
-        DropDown.id = 'CurrentBitDropValue';
-        DefaultValue.id = 'DefaultBitDropValue';
-        FactoryValue.id = 'FactoryBitDropValue';
+    const optionsDict = {};
+    let dropDown, defaultValue, factoryValue;
+    if (Number(writePermissionDict[parentParameterIndex]) <= Number(AccessLevelForUser)) {
+        dropDown = document.createElement('select');
+        defaultValue = document.createElement('select');
+        factoryValue = document.createElement('select');
+        dropDown.id = 'CurrentBitDropValue';
+        defaultValue.id = 'DefaultBitDropValue';
+        factoryValue.id = 'FactoryBitDropValue';
     } else {
-        DropDown = document.createElement('p');
-        DefaultValue = document.createElement('p');
-        FactoryValue = document.createElement('p');
-        DropDown.id = DefaultValue.id = FactoryValue.id = 'ReadResult';
+        dropDown = document.createElement('p');
+        defaultValue = document.createElement('p');
+        factoryValue = document.createElement('p');
+        dropDown.id = defaultValue.id = factoryValue.id = 'ReadResult';
     }
 
     // Populate dropdowns
-    let idx = DropDownLineNum;
-    while (DropDownLines[idx] && DropDownLines[idx][0] !== '#') {
-        const parts = DropDownLines[idx].split(',');
+    let idx = dropDownLineNum;
+    while (dropDownLines[idx] && dropDownLines[idx][0] !== '#') {
+        const parts = dropDownLines[idx].split(',');
         const [optionText, optionValue] = [parts[0], parts[1]];
-        OptionsDict[optionValue] = optionText;
+        optionsDict[optionValue] = optionText;
 
-        if (Number(writePermissionDict[ParentParameterIndex]) <= Number(AccessLevelForUser)) {
+        if (Number(writePermissionDict[parentParameterIndex]) <= Number(AccessLevelForUser)) {
             const makeOption = (val, txt) => {
                 const opt = document.createElement('option');
                 opt.value = val;
                 opt.innerHTML = txt;
                 return opt;
             };
-            DropDown.appendChild(makeOption(optionValue, optionText));
-            DefaultValue.appendChild(makeOption(optionValue, optionText));
-            FactoryValue.appendChild(makeOption(optionValue, optionText));
+            dropDown.appendChild(makeOption(optionValue, optionText));
+            defaultValue.appendChild(makeOption(optionValue, optionText));
+            factoryValue.appendChild(makeOption(optionValue, optionText));
             if (Number(AccessLevelForUser) < 8) {
-                DefaultValue.disabled = true;
-                FactoryValue.disabled = true;
+                defaultValue.disabled = true;
+                factoryValue.disabled = true;
             }
         }
         idx++;
     }
 
-    DefaultValue.style = FactoryValue.style = 'margin:10px;';
+    defaultValue.style = factoryValue.style = 'margin:10px;';
 
     // Set values or text
     const getBitVal = (arr, bit) => Array.isArray(arr) ? arr[bit] : arr.split(',')[bit];
-    if (Number(writePermissionDict[ParentParameterIndex]) <= Number(AccessLevelForUser)) {
-        DropDown.value = getBitVal(BitResults, Bit);
-        DefaultValue.value = getBitVal(DefaultBitResults, Bit);
-        FactoryValue.value = getBitVal(FactoryBitResults, Bit);
+    if (Number(writePermissionDict[parentParameterIndex]) <= Number(AccessLevelForUser)) {
+        dropDown.value = getBitVal(bitResults, bit);
+        defaultValue.value = getBitVal(defaultBitResults, bit);
+        factoryValue.value = getBitVal(factoryBitResults, bit);
     } else {
-        DropDown.innerHTML = OptionsDict[getBitVal(BitResults, Bit)];
-        DefaultValue.innerHTML = OptionsDict[getBitVal(DefaultBitResults, Bit)];
-        FactoryValue.innerHTML = OptionsDict[getBitVal(FactoryBitResults, Bit)];
+        dropDown.innerHTML = optionsDict[getBitVal(bitResults, bit)];
+        defaultValue.innerHTML = optionsDict[getBitVal(defaultBitResults, bit)];
+        factoryValue.innerHTML = optionsDict[getBitVal(factoryBitResults, bit)];
     }
 
     // Append to UI
-    document.getElementById('topDefineDescription').appendChild(DropDown);
-    document.getElementById('topDefineDescription').appendChild(DefaultValueLabel);
-    document.getElementById('topDefineDescription').appendChild(DefaultValue);
-    document.getElementById('topDefineDescription').appendChild(FactoryValueLabel);
-    document.getElementById('topDefineDescription').appendChild(FactoryValue);
+    document.getElementById('topDefineDescription').appendChild(dropDown);
+    document.getElementById('topDefineDescription').appendChild(defaultValueLabel);
+    document.getElementById('topDefineDescription').appendChild(defaultValue);
+    document.getElementById('topDefineDescription').appendChild(factoryValueLabel);
+    document.getElementById('topDefineDescription').appendChild(factoryValue);
 
     // Set onchange handlers if editable
-    if (Number(writePermissionDict[ParentParameterIndex]) <= Number(AccessLevelForUser)) {
-        DropDown.onchange = () => BitDropDownChange999(BitResults, Bit, ParentParameterIndex, "Current");
-        DefaultValue.onchange = () => BitDropDownChange999(DefaultBitResults, Bit, ParentParameterIndex, "Default");
-        FactoryValue.onchange = () => BitDropDownChange999(FactoryBitResults, Bit, ParentParameterIndex, "Factory");
+    if (Number(writePermissionDict[parentParameterIndex]) <= Number(AccessLevelForUser)) {
+        dropDown.onchange = () => BitDropDownChange999(bitResults, bit, parentParameterIndex, "Current");
+        defaultValue.onchange = () => BitDropDownChange999(defaultBitResults, bit, parentParameterIndex, "Default");
+        factoryValue.onchange = () => BitDropDownChange999(factoryBitResults, bit, parentParameterIndex, "Factory");
     }
 }
 
 /**
  * Handles changes to a Bit999 dropdown value, updating the parameter in sessionStorage.
- * @param {string} BitResults - Comma-separated bit values.
- * @param {number} Bit - The bit index to update.
- * @param {string|number} LineNumber - The parameter index.
- * @param {string} UpdateType - "Current", "Default", or "Factory".
+ * @param {string|Array} bitResults - Bit values as array or comma-separated string.
+ * @param {number} bit - The bit index to update.
+ * @param {string|number} lineNumber - The parameter index.
+ * @param {string} updateType - "Current", "Default", or "Factory".
  */
-function BitDropDownChange999(BitResults, Bit, LineNumber, UpdateType) {
-    const CurrentBits = BitResults.split(',');
-    let DesiredBit;
-    if (UpdateType === 'Current') {
-        DesiredBit = document.getElementById('CurrentBitDropValue').value;
-    } else if (UpdateType === 'Default') {
-        DesiredBit = document.getElementById('DefaultBitDropValue').value;
-    } else if (UpdateType === 'Factory') {
-        DesiredBit = document.getElementById('FactoryBitDropValue').value;
+function BitDropDownChange999(bitResults, bit, lineNumber, updateType) {
+    const currentBits = Array.isArray(bitResults) ? bitResults.slice() : bitResults.split(',');
+    let desiredBit;
+    if (updateType === 'Current') {
+        desiredBit = document.getElementById('CurrentBitDropValue').value;
+    } else if (updateType === 'Default') {
+        desiredBit = document.getElementById('DefaultBitDropValue').value;
+    } else if (updateType === 'Factory') {
+        desiredBit = document.getElementById('FactoryBitDropValue').value;
     }
 
     // Update the bit array
-    const NewBit = CurrentBits.map((val, idx) => idx == Bit ? DesiredBit : val);
-    const ChangedBits = NewBit.toString();
+    const newBits = currentBits.map((val, idx) => idx == bit ? desiredBit : val);
 
     // Convert bits to integer value
-    let FinalCurrentValue = 0;
+    let finalValue = 0;
     for (let i = 0; i <= 31; i++) {
-        FinalCurrentValue += Number(NewBit[i]) * Math.pow(2, i);
+        finalValue += Number(newBits[i]) * Math.pow(2, i);
     }
 
     // Update the parameter line in sessionStorage
-    const Parameters = sessionStorage.getItem('Parameters').split('\n');
-    for (let i = 0; i < Parameters.length; i++) {
-        const paramParts = Parameters[i].split(',');
-        if (paramParts[0] == LineNumber) {
-            let NewLine;
-            if (UpdateType === 'Current') {
-                NewLine = [paramParts[0], FinalCurrentValue, paramParts[2], paramParts[3], paramParts[4], paramParts[5], paramParts[6], paramParts[7], paramParts[8], paramParts[9], paramParts[10]].join(',');
-            } else if (UpdateType === 'Default') {
-                NewLine = [paramParts[0], paramParts[1], FinalCurrentValue, paramParts[3], paramParts[4], paramParts[5], paramParts[6], paramParts[7], paramParts[8], paramParts[9], paramParts[10]].join(',');
-            } else if (UpdateType === 'Factory') {
-                NewLine = [paramParts[0], paramParts[1], paramParts[2], FinalCurrentValue, paramParts[4], paramParts[5], paramParts[6], paramParts[7], paramParts[8], paramParts[9], paramParts[10]].join(',');
+    const parameters = sessionStorage.getItem('Parameters').split('\n');
+    for (let i = 0; i < parameters.length; i++) {
+        const paramParts = parameters[i].split(',');
+        if (paramParts[0] == lineNumber) {
+            let newLine;
+            if (updateType === 'Current') {
+                newLine = [paramParts[0], finalValue, paramParts[2], paramParts[3], paramParts[4], paramParts[5], paramParts[6], paramParts[7], paramParts[8], paramParts[9], paramParts[10]].join(',');
+            } else if (updateType === 'Default') {
+                newLine = [paramParts[0], paramParts[1], finalValue, paramParts[3], paramParts[4], paramParts[5], paramParts[6], paramParts[7], paramParts[8], paramParts[9], paramParts[10]].join(',');
+            } else if (updateType === 'Factory') {
+                newLine = [paramParts[0], paramParts[1], paramParts[2], finalValue, paramParts[4], paramParts[5], paramParts[6], paramParts[7], paramParts[8], paramParts[9], paramParts[10]].join(',');
             }
-            Parameters[i] = NewLine;
-            sessionStorage.setItem('Parameters', Parameters.join('\n'));
+            parameters[i] = newLine;
+            sessionStorage.setItem('Parameters', parameters.join('\n'));
             break;
         }
     }
@@ -293,8 +291,8 @@ function BitDropDownChange999(BitResults, Bit, LineNumber, UpdateType) {
     ChangesMadePreDownload = true;
 
     // Refresh UI
-    const BitParameterName = document.getElementById('WorkSpaceTitle').innerHTML.replace(/ /g, '');
-    TreeViewClick(document.getElementById(LineNumber.toString()), LineNumber);
-    TreeViewClick(document.getElementById(LineNumber.toString()), LineNumber);
-    document.getElementsByName(BitParameterName)[0].onclick();
+    const bitParameterName = document.getElementById('WorkSpaceTitle').innerHTML.replace(/ /g, '');
+    treeViewClick(document.getElementById(lineNumber.toString()), lineNumber);
+    treeViewClick(document.getElementById(lineNumber.toString()), lineNumber);
+    document.getElementsByName(bitParameterName)[0].onclick();
 }

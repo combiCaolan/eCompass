@@ -118,7 +118,7 @@ function OrganiseMenu(){
 				document.getElementById(CurrentLine[1]).appendChild(ParameterDiv);
 			}
 		}else{
-			Parameter.setAttribute('onclick','TreeViewClick(this,' + CurrentLine[0] + ')');
+			Parameter.setAttribute('onclick','treeViewClick(this,' + CurrentLine[0] + ')');
 			
 			if(CurrentLine[0] == 2 || CurrentLine[0] == 4){
 				Parameter.setAttribute('class','PreTreeButton');
@@ -131,7 +131,7 @@ function OrganiseMenu(){
 			}else{
 				CurrentGroup = CurrentLine[1].split(' ');
 				if(CurrentGroup.length < 2){
-					Parameter.setAttribute('onclick','TreeViewClick(this,' + CurrentLine[0] + ')');
+					Parameter.setAttribute('onclick','treeViewClick(this,' + CurrentLine[0] + ')');
 					Parameter.setAttribute('class','TreeButton');
 					ParameterDiv = document.createElement("div");
 					ParameterDiv.setAttribute('id','constant' + CurrentLine[0]);

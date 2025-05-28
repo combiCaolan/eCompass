@@ -1,281 +1,319 @@
-function DropDownFunction(ParameterLine,object){
-	try{
-		//console.log(WritePermissionDict[Number(ParameterLine[0])]);
-	}catch(err){
-		return;
-	}
-	if(document.getElementById('topDefineDescription')){
-		document.getElementById('topDefineDescription').innerHTML = '';
-	}
-	
-	DropDownList = sessionStorage.getItem('DropDownlist');
-	ParameterDescriptionList = sessionStorage.getItem('DescriptionMain');
-	
-	NumberToFind = Number(ParameterLine[0]);
-	if(document.getElementById('constant' + NumberToFind).innerHTML != ''){
-		document.getElementById('constant' + NumberToFind).innerHTML = '';
-	}
+/**
+ * Handles dropdown parameter display and updates.
+ */
+function dropDownFunction(parameterLine, object) {
+    // Clear previous description
+    const descElem = document.getElementById('topDefineDescription');
+    if (descElem) descElem.innerHTML = '';
 
-	tr = document.createElement('tr');
-	//Title
-	Title= document.createElement('P');
-	Title.setAttribute('id','WorkSpaceTitle');
-	Title.innerHTML = object.innerHTML;
-	document.getElementById('topDefineTable').appendChild(Title);
-	ParameterMain = sessionStorage.getItem('ParameterMain');
-	counter = 0;
-	while(ParameterMain.split('\n')[counter].split(',')[0] !== NumberToFind){
-		if(ParameterMain.split('\n')[counter].split(',')[0] == NumberToFind){
-			OptionIndex = ParameterMain.split('\n')[counter].split(',')[2];
-			break;
-		}
-		counter++;
-	}
+    const dropDownList = sessionStorage.getItem('DropDownlist') || '';
+    const parameterMain = sessionStorage.getItem('ParameterMain') || '';
+    const numberToFind = Number(parameterLine[0]);
+    const constantElem = document.getElementById('constant' + numberToFind);
+    if (constantElem && constantElem.innerHTML !== '') constantElem.innerHTML = '';
 
-	if(NumberToFind == '2'){
-	    var http = new XMLHttpRequest();
-		
-		url = sessionStorage.getItem('ServerPath') + '/ecompass/assets/Truck_Images/' + ParameterLine[3] + '.png';
-		http.open('HEAD', url, false);
-		http.send();
+    // Title
+    const title = document.createElement('p');
+    title.id = 'WorkSpaceTitle';
+    title.innerHTML = object.innerHTML;
+    document.getElementById('topDefineTable').appendChild(title);
 
-		if(http.status != 404){
-			TruckImage = document.createElement('img');
-			TruckImage.setAttribute('src',sessionStorage.getItem('ServerPath') + '/assets/truck-images/' + ParameterLine[3] + '.png');	
-			TruckImage.setAttribute('id','TruckImage');
-			tr.appendChild(TruckImage);
-		}
-	}
+    // Find OptionIndex
+    let optionIndex = null;
+    parameterMain.split('\n').forEach(line => {
+        const parts = line.split(',');
+        if (parts[0] == numberToFind) optionIndex = parts[2];
+    });
 
-	/*Description*/
-	var descriptionDiv = document.createElement("div");	
-	var description = document.createElement("p");
-	description.setAttribute("id","description"); 
-	descriptionDiv.appendChild(description);
-	tr.appendChild(descriptionDiv);
-	
-	if(MainDescriptionsDict[Number(ParameterLine[0])]){
-		description.innerHTML = MainDescriptionsDict[Number(ParameterLine[0])].replace('#' + ParameterLine[0],'');
-	}
+    // Truck image for parameter 2
+    if (numberToFind === 2) {
+        const imgUrl = `${sessionStorage.getItem('ServerPath')}/assets/truck-images/${parameterLine[3]}.png`;
+        const http = new XMLHttpRequest();
+        http.open('HEAD', imgUrl, false);
+        http.send();
+        if (http.status !== 404) {
+            const truckImage = document.createElement('img');
+            truckImage.src = imgUrl;
+            truckImage.id = 'TruckImage';
+            document.getElementById('topDefineTable').appendChild(truckImage);
+        }
+    }
 
-	/*End Description*/
-	/*STARTING EXPORT*/
-				ExportDiv = document.createElement('div');
-				//tr.appendChild(ExportDiv);
-				
-				SwitchParameterLabel = document.createElement("label");
-				SwitchParameterLabel.setAttribute('id','Export');
-				SwitchParameterLabel.innerHTML = LanguageDict["ExportSelectedParamters"];
-				ExportDiv.appendChild(SwitchParameterLabel);	
-				
-				SwitchParameter = document.createElement("input");
-				SwitchParameter.setAttribute('id','Export');
-				SwitchParameter.type = 'checkbox';
-				
-				SwitchParameter.setAttribute("id","Switch Parameter Checkbox");
-				
-				if(removedParametersCounters.includes(String(Line)) == false){
-					//parameter is not in remove list
-					SwitchParameter.setAttribute("checked","");
-					document.getElementById('topDefineDescription').setAttribute('style','opacity:1;');
-				}else{
-					document.getElementById('topDefineDescription').setAttribute('style','opacity:0.4;');
-				}	
-				
-				SwitchParameter.setAttribute("onchange","exportonchange("+Line[0]+",this)"); 
-				SwitchParameter.setAttribute("style","text-align:center; font-size:18px;"); 
-				ExportDiv.appendChild(SwitchParameter);	
-	/*ENDING EXPORT*/
+    // Description
+    const descriptionDiv = document.createElement('div');
+    const description = document.createElement('p');
+    description.id = 'description';
+    if (typeof MainDescriptionsDict !== 'undefined' && MainDescriptionsDict[numberToFind]) {
+        description.innerHTML = MainDescriptionsDict[numberToFind].replace('#' + numberToFind, '');
+    }
+    descriptionDiv.appendChild(description);
+    const tr = document.createElement('tr');
+    tr.appendChild(descriptionDiv);
 
-	/*Create Dropdown option*/
-	DropDownOptionsDictionary = {};
-	i = 0;
-	while(DropDownList.split('\n')[i] !== undefined){
-		if(DropDownList.split('\n')[i][0] == '#'){
-			if(Number(DropDownList.split('\n')[i].replace('#','')) == Number(OptionIndex)){
-				CurrentTag = document.createElement('p');
-				CurrentTag.setAttribute('id','ReadResult');
-				CurrentTag.innerHTML = LanguageDict["CurrentValue"];
-				tr.appendChild(CurrentTag);
-				DropDown = document.createElement('select');
-				DropDown.setAttribute('onchange','DropDownOnChange(`' + ParameterLine + '`)');
-				DropDown.setAttribute('id','CurrentDropDownValue');
-				DropDown.setAttribute('selectedIndex',ParameterLine[3].toString());
-				tr.appendChild(DropDown);
-				i++;
-				while(DropDownList.split('\n')[i][0] !== '#'){
-					Option = document.createElement('option');
-					Option.value = DropDownList.split('\n')[i].split(',')[1];
-					if(NumberToFind == '2'){
-						if(Number(DropDownList.split('\n')[i].split(',')[1]) == Number(ParameterLine[3])){
-							Option.setAttribute('selected','selected');
-						}
-					}else{
-						if(Number(DropDownList.split('\n')[i].split(',')[1]) == Number(ParameterLine[1])){
-							Option.setAttribute('selected','selected');
-						}
-					}
-					Option.innerHTML = DropDownList.split('\n')[i].split(',')[0];
-					DropDownOptionsDictionary[DropDownList.split('\n')[i].split(',')[1].replace('\n','').replace('\r','')] = DropDownList.split('\n')[i].split(',')[0];
-					DropDown.appendChild(Option);
-					i++;
-				}
-			}
-		}
-		i++;
-	}
+    // Export checkbox
+    const exportDiv = document.createElement('div');
+    const exportLabel = document.createElement('label');
+    exportLabel.id = 'Export';
+    exportLabel.innerHTML = LanguageDict["ExportSelectedParamters"];
+    exportDiv.appendChild(exportLabel);
 
-	//Default & Factory
-	if(NumberToFind != '2'){
-		if(AccessLevelForUser == '8'){
-			DefaultSelectTag = document.createElement('select');
-			DefaultSelectTag.setAttribute('onchange','DefaultDropDownOnChange(`' + ParameterLine + '`)');
-			DefaultSelectTag.setAttribute('id','DefaultSelectTag');
-			counter = 0;
-			if(DropDownOptionsDictionary[JSON.stringify(counter)] == undefined){
-				counter++;
-			}
-			DefaultTag = document.createElement('p');
-			DefaultTag.setAttribute('id','ReadResult');
-			DefaultTag.innerHTML = LanguageDict["DefaultValue"];
-			tr.appendChild(DefaultTag);
-			while(DropDownOptionsDictionary[counter.toString()] !== undefined){
-				Option = document.createElement('option');
-				Option.value = counter.toString();
-				Option.innerHTML = DropDownOptionsDictionary[counter.toString()];
-				if(JSON.stringify(counter) == ParameterLine[2].toString()){
-					Option.setAttribute('selected','selected')
-				}
-				DefaultSelectTag.appendChild(Option);
-				counter++;
-			}
+    const exportCheckbox = document.createElement('input');
+    exportCheckbox.type = 'checkbox';
+    exportCheckbox.id = 'SwitchParameterCheckbox';
+    exportCheckbox.style = "text-align:center; font-size:18px;";
+    exportCheckbox.checked = !removedParametersCounters.includes(String(parameterLine[0]));
+    exportCheckbox.onchange = function () {
+        exportonchange(parameterLine[0], this);
+    };
+    exportDiv.appendChild(exportCheckbox);
 
-			tr.appendChild(DefaultSelectTag);
-			FactorySelectTag = document.createElement('select');
-			FactorySelectTag.setAttribute('onchange','FactoryDropDownOnChange(`' + ParameterLine + '`)');
-			FactorySelectTag.setAttribute('id','FactorySelectTag');
-			counter = 0;
-			if(DropDownOptionsDictionary[JSON.stringify(counter)] == undefined){
-				counter++;
-			}
-			
-			FactoryTag = document.createElement('p');
-			FactoryTag.setAttribute('id','ReadResult');
-			FactoryTag.innerHTML = LanguageDict["FactoryValue"];
-			tr.appendChild(FactoryTag);
-			tr.appendChild(FactorySelectTag);
-		}else{
-			DefaultTag = document.createElement('p');
-			DefaultTag.setAttribute('id','DropDownReadTitle');
-			DefaultTag.innerHTML = 'Default Value : ' + DropDownOptionsDictionary[ParameterLine[2].toString()];
-			tr.appendChild(DefaultTag);
-			FactoryTag = document.createElement('p');
-			FactoryTag.setAttribute('id','DropDownReadTitle');
-			FactoryTag.innerHTML = 'Factory Value : ' + DropDownOptionsDictionary[ParameterLine[3].toString()];;
-			tr.appendChild(FactoryTag);
-		}
-	}
-	document.getElementById('topDefineDescription').appendChild(tr);
-	if(Number(writePermissionDict[Number(ParameterLine[0])]) > Number(AccessLevelForUser)){
-		DropDown.setAttribute('disabled','disabled');
-		DropDown.setAttribute('onclick','');
-		try{
-			FactorySelectTag.setAttribute('disabled','disabled');
-			FactorySelectTag.setAttribute('onclick','');
-			
-			DefaultSelectTag.setAttribute('disabled','');
-			DefaultSelectTag.setAttribute('onclick','');
-		}catch(err){
-		}
-	}
-	$('#topDefineDescription').fadeIn();
-	while(DropDownOptionsDictionary[counter.toString()] !== undefined){
-		Option = document.createElement('option');
-		Option.value = counter.toString();
-		Option.innerHTML = DropDownOptionsDictionary[counter.toString()];
+    // Set opacity based on removal state
+    descElem.style.opacity = exportCheckbox.checked ? "1" : "0.4";
 
-		if(JSON.stringify(counter) == ParameterLine[3].toString()){
-			Option.setAttribute('selected','selected')
-		}
+    // Dropdown options
+    let dropDownOptionsDict = {};
+    let i = 0;
+    const dropDownLines = dropDownList.split('\n');
+    while (i < dropDownLines.length) {
+        if (dropDownLines[i][0] === '#' && Number(dropDownLines[i].replace('#', '')) === Number(optionIndex)) {
+            // Current Value dropdown
+            const currentTag = document.createElement('p');
+            currentTag.id = 'ReadResult';
+            currentTag.innerHTML = LanguageDict["CurrentValue"];
+            tr.appendChild(currentTag);
 
-		if(typeof FactorySelectTag != 'undefined'){
-			FactorySelectTag.appendChild(Option);
-		}
-		counter++;
-	}
+            const dropDown = document.createElement('select');
+            dropDown.id = 'CurrentDropDownValue';
+            dropDown.onchange = () => dropDownOnChange(parameterLine);
+            tr.appendChild(dropDown);
+
+            i++;
+            while (i < dropDownLines.length && dropDownLines[i][0] !== '#') {
+                const [label, value] = dropDownLines[i].split(',');
+                const option = document.createElement('option');
+                option.value = value;
+                option.innerHTML = label;
+                if (numberToFind === 2 && Number(value) === Number(parameterLine[3])) {
+                    option.selected = true;
+                } else if (Number(value) === Number(parameterLine[1])) {
+                    option.selected = true;
+                }
+                dropDownOptionsDict[value.replace(/\r|\n/g, '')] = label;
+                dropDown.appendChild(option);
+                i++;
+            }
+        }
+        i++;
+    }
+
+    // Default & Factory dropdowns for admin
+    if (numberToFind !== 2) {
+        if (AccessLevelForUser == '8') {
+            // Default
+            const defaultTag = document.createElement('p');
+            defaultTag.id = 'ReadResult';
+            defaultTag.innerHTML = LanguageDict["DefaultValue"];
+            tr.appendChild(defaultTag);
+
+            const defaultSelect = document.createElement('select');
+            defaultSelect.id = 'DefaultSelectTag';
+            defaultSelect.onchange = () => defaultDropDownOnChange(parameterLine);
+            Object.entries(dropDownOptionsDict).forEach(([val, label]) => {
+                const option = document.createElement('option');
+                option.value = val;
+                option.innerHTML = label;
+                if (val == parameterLine[2]) option.selected = true;
+                defaultSelect.appendChild(option);
+            });
+            tr.appendChild(defaultSelect);
+
+            // Factory
+            const factoryTag = document.createElement('p');
+            factoryTag.id = 'ReadResult';
+            factoryTag.innerHTML = LanguageDict["FactoryValue"];
+            tr.appendChild(factoryTag);
+
+            const factorySelect = document.createElement('select');
+            factorySelect.id = 'FactorySelectTag';
+            factorySelect.onchange = () => factoryDropDownOnChange(parameterLine);
+            Object.entries(dropDownOptionsDict).forEach(([val, label]) => {
+                const option = document.createElement('option');
+                option.value = val;
+                option.innerHTML = label;
+                if (val == parameterLine[3]) option.selected = true;
+                factorySelect.appendChild(option);
+            });
+            tr.appendChild(factorySelect);
+        } else {
+            // Read-only default/factory
+            const defaultTag = document.createElement('p');
+            defaultTag.id = 'DropDownReadTitle';
+            defaultTag.innerHTML = 'Default Value : ' + dropDownOptionsDict[parameterLine[2]];
+            tr.appendChild(defaultTag);
+
+            const factoryTag = document.createElement('p');
+            factoryTag.id = 'DropDownReadTitle';
+            factoryTag.innerHTML = 'Factory Value : ' + dropDownOptionsDict[parameterLine[3]];
+            tr.appendChild(factoryTag);
+        }
+    }
+
+    descElem.appendChild(tr);
+    descElem.appendChild(exportDiv);
+
+    // Permissions
+    if (typeof writePermissionDict !== 'undefined' && Number(writePermissionDict[numberToFind]) > Number(AccessLevelForUser)) {
+        const dropDown = document.getElementById('CurrentDropDownValue');
+        if (dropDown) {
+            dropDown.disabled = true;
+            dropDown.onclick = null;
+        }
+        try {
+            const factorySelect = document.getElementById('FactorySelectTag');
+            if (factorySelect) {
+                factorySelect.disabled = true;
+                factorySelect.onclick = null;
+            }
+            const defaultSelect = document.getElementById('DefaultSelectTag');
+            if (defaultSelect) {
+                defaultSelect.disabled = true;
+                defaultSelect.onclick = null;
+            }
+        } catch (err) {}
+    }
+    $('#topDefineDescription').fadeIn();
 }
 
-function DropDownOnChange(ParameterLine){
-	if(Number(NumberToFind) >= 37 && Number(NumberToFind) <= 63){
-		try{
-			document.getElementById('DivAreaMocas').innerHTML = '';
-		}catch(err){
-		}
-		DivArea = document.createElement('div');
-		DivArea.setAttribute('id','DivAreaMocas');
-		
-		TextInput = document.createElement('input');
-		TextInput.setAttribute('placeholder',' Why are you updating this parameter?');
-		//TextInput.setAttribute('style','margin:10px; padding:7px;');
-		
-		DivArea.appendChild(TextInput);
-		
-		Submit = document.createElement('input');
-		Submit.setAttribute('type','submit');
-		Submit.setAttribute('value','submit this updated parameter');
-		DivArea.appendChild(Submit);
-		
-		document.getElementById('topDefineDescription').appendChild(DivArea);
-	}
-	
-	if(NumberToFind == '2'){
-		NewLine = ParameterLine.split(',')[0] + ',' + ParameterLine.split(',')[1] + ',' + ParameterLine.split(',')[2] + ',' + document.getElementById('CurrentDropDownValue').value.replace('/r','') + ',' + ParameterLine.split(',')[4] + ',' + ParameterLine.split(',')[5] + ',' + ParameterLine.split(',')[6] + ',' + ParameterLine.split(',')[7] + ',' + ParameterLine.split(',')[8] + ',' + ParameterLine.split(',')[9] + ',' + ParameterLine.split(',')[10];
-	}else{
-		NewLine = ParameterLine.split(',')[0] + ',' + document.getElementById('CurrentDropDownValue').value.replace('\r','') + ',' +  ParameterLine.split(',')[2] + ',' + ParameterLine.split(',')[3] + ',' + ParameterLine.split(',')[4] + ',' + ParameterLine.split(',')[5] + ',' + ParameterLine.split(',')[6] + ',' + ParameterLine.split(',')[7] + ',' + ParameterLine.split(',')[8] + ',' + ParameterLine.split(',')[9] + ',' + ParameterLine.split(',')[10];
-	}
-	
-	ChangeTo = document.getElementById('CurrentDropDownValue').options[document.getElementById('CurrentDropDownValue').selectedIndex].innerHTML;
-	
-	CurrentParameterTitle = document.getElementById('WorkSpaceTitle').innerHTML;
-	LogLine = sessionStorage.getItem('loggedinusername') + ' changed ' + CurrentParameterTitle + ' [Current Value] to ' + ChangeTo + '\n';
-	CurrentLogs = sessionStorage.getItem('UserMadeChanges');
-	sessionStorage.setItem('UserMadeChanges',CurrentLogs + LogLine);
-	
-	New = sessionStorage.getItem('Parameters').replace(ParameterLine.replace(/\n/g,''),NewLine.replace(/\n/g,''));
-	sessionStorage.setItem('Parameters',New);
-	ChangesMadePreDownload = true;
-	TreeViewClick(document.getElementById(NumberToFind.toString()),NumberToFind.toString());
+/**
+ * Handles change for the main dropdown.
+ */
+function dropDownOnChange(parameterLine) {
+    // Optionally add a reason for update for certain parameters
+    if (Number(parameterLine[0]) >= 37 && Number(parameterLine[0]) <= 63) {
+        let divArea = document.getElementById('DivAreaMocas');
+        if (divArea) divArea.innerHTML = '';
+        else {
+            divArea = document.createElement('div');
+            divArea.id = 'DivAreaMocas';
+        }
+        const textInput = document.createElement('input');
+        textInput.placeholder = ' Why are you updating this parameter?';
+        divArea.appendChild(textInput);
+
+        const submit = document.createElement('input');
+        submit.type = 'submit';
+        submit.value = 'submit this updated parameter';
+        divArea.appendChild(submit);
+
+        document.getElementById('topDefineDescription').appendChild(divArea);
+    }
+
+    let newLine;
+    if (parameterLine[0] == '2') {
+        newLine = [
+            parameterLine[0],
+            parameterLine[1],
+            parameterLine[2],
+            document.getElementById('CurrentDropDownValue').value.replace('/r', ''),
+            parameterLine[4],
+            parameterLine[5],
+            parameterLine[6],
+            parameterLine[7],
+            parameterLine[8],
+            parameterLine[9],
+            parameterLine[10]
+        ].join(',');
+    } else {
+        newLine = [
+            parameterLine[0],
+            document.getElementById('CurrentDropDownValue').value.replace('\r', ''),
+            parameterLine[2],
+            parameterLine[3],
+            parameterLine[4],
+            parameterLine[5],
+            parameterLine[6],
+            parameterLine[7],
+            parameterLine[8],
+            parameterLine[9],
+            parameterLine[10]
+        ].join(',');
+    }
+
+    const changeTo = document.getElementById('CurrentDropDownValue').options[
+        document.getElementById('CurrentDropDownValue').selectedIndex
+    ].innerHTML;
+
+    const currentParameterTitle = document.getElementById('WorkSpaceTitle').innerHTML;
+    const logLine = `${sessionStorage.getItem('loggedinusername')} changed ${currentParameterTitle} [Current Value] to ${changeTo}\n`;
+    const currentLogs = sessionStorage.getItem('UserMadeChanges');
+    sessionStorage.setItem('UserMadeChanges', currentLogs + logLine);
+
+    const parameters = sessionStorage.getItem('Parameters').replace(parameterLine.join(','), newLine);
+    sessionStorage.setItem('Parameters', parameters);
+    ChangesMadePreDownload = true;
+    TreeViewClick(document.getElementById(parameterLine[0]), parameterLine[0]);
 }
 
-function DefaultDropDownOnChange(ParameterLine){	
-	NewLine = ParameterLine.split(',')[0] + ',' + ParameterLine.split(',')[1] + ',' +  document.getElementById('DefaultSelectTag').value.replace('\r','') + ',' + ParameterLine.split(',')[3] + ',' + ParameterLine.split(',')[4] + ',' + ParameterLine.split(',')[5] + ',' + ParameterLine.split(',')[6] + ',' + ParameterLine.split(',')[7] + ',' + ParameterLine.split(',')[8] + ',' + ParameterLine.split(',')[9] + ',' + ParameterLine.split(',')[10];
-	
-	ChangeTo = document.getElementById('CurrentDropDownValue').options[document.getElementById('DefaultSelectTag').selectedIndex].innerHTML;
-	
-	CurrentParameterTitle = document.getElementById('WorkSpaceTitle').innerHTML;
-	LogLine = sessionStorage.getItem('loggedinusername') + ' changed ' + CurrentParameterTitle + ' [Default Value] to ' + ChangeTo + '\n';
-	CurrentLogs = sessionStorage.getItem('UserMadeChanges');
-	sessionStorage.setItem('UserMadeChanges',CurrentLogs + LogLine);
-	
-	
-	New = sessionStorage.getItem('Parameters').replace(ParameterLine.replace(/\n/g,''),NewLine.replace(/\n/g,''));
-	sessionStorage.setItem('Parameters',New);
-	TreeViewClick(document.getElementById(NumberToFind.toString()),NumberToFind.toString());
+/**
+ * Handles change for the default value dropdown.
+ */
+function defaultDropDownOnChange(parameterLine) {
+    const newLine = [
+        parameterLine[0],
+        parameterLine[1],
+        document.getElementById('DefaultSelectTag').value.replace('\r', ''),
+        parameterLine[3],
+        parameterLine[4],
+        parameterLine[5],
+        parameterLine[6],
+        parameterLine[7],
+        parameterLine[8],
+        parameterLine[9],
+        parameterLine[10]
+    ].join(',');
+
+    const changeTo = document.getElementById('DefaultSelectTag').options[
+        document.getElementById('DefaultSelectTag').selectedIndex
+    ].innerHTML;
+
+    const currentParameterTitle = document.getElementById('WorkSpaceTitle').innerHTML;
+    const logLine = `${sessionStorage.getItem('loggedinusername')} changed ${currentParameterTitle} [Default Value] to ${changeTo}\n`;
+    const currentLogs = sessionStorage.getItem('UserMadeChanges');
+    sessionStorage.setItem('UserMadeChanges', currentLogs + logLine);
+
+    const parameters = sessionStorage.getItem('Parameters').replace(parameterLine.join(','), newLine);
+    sessionStorage.setItem('Parameters', parameters);
+    TreeViewClick(document.getElementById(parameterLine[0]), parameterLine[0]);
 }
 
-function FactoryDropDownOnChange(ParameterLine){
-	NewLine = ParameterLine.split(',')[0] + ',' + ParameterLine.split(',')[1] + ',' +  ParameterLine.split(',')[2] + ',' + document.getElementById('FactorySelectTag').value.replace('\r','') + ',' + ParameterLine.split(',')[4] + ',' + ParameterLine.split(',')[5] + ',' + ParameterLine.split(',')[6] + ',' + ParameterLine.split(',')[7] + ',' + ParameterLine.split(',')[8] + ',' + ParameterLine.split(',')[9] + ',' + ParameterLine.split(',')[10];
-	
-	
-	ChangeTo = document.getElementById('CurrentDropDownValue').options[document.getElementById('FactorySelectTag').selectedIndex].innerHTML;
-	
-	CurrentParameterTitle = document.getElementById('WorkSpaceTitle').innerHTML;
-	LogLine = sessionStorage.getItem('loggedinusername') + ' changed ' + CurrentParameterTitle + ' [Factory Value] to ' + ChangeTo + '\n';
-	CurrentLogs = sessionStorage.getItem('UserMadeChanges');
-	sessionStorage.setItem('UserMadeChanges',CurrentLogs + LogLine);
-	
-	
-	New = sessionStorage.getItem('Parameters').replace(ParameterLine.replace(/\n/g,''),NewLine.replace(/\n/g,''));
-	sessionStorage.setItem('Parameters',New);
-	TreeViewClick(document.getElementById(NumberToFind.toString()),NumberToFind.toString());
+/**
+ * Handles change for the factory value dropdown.
+ */
+function factoryDropDownOnChange(parameterLine) {
+    const newLine = [
+        parameterLine[0],
+        parameterLine[1],
+        parameterLine[2],
+        document.getElementById('FactorySelectTag').value.replace('\r', ''),
+        parameterLine[4],
+        parameterLine[5],
+        parameterLine[6],
+        parameterLine[7],
+        parameterLine[8],
+        parameterLine[9],
+        parameterLine[10]
+    ].join(',');
+
+    const changeTo = document.getElementById('FactorySelectTag').options[
+        document.getElementById('FactorySelectTag').selectedIndex
+    ].innerHTML;
+
+    const currentParameterTitle = document.getElementById('WorkSpaceTitle').innerHTML;
+    const logLine = `${sessionStorage.getItem('loggedinusername')} changed ${currentParameterTitle} [Factory Value] to ${changeTo}\n`;
+    const currentLogs = sessionStorage.getItem('UserMadeChanges');
+    sessionStorage.setItem('UserMadeChanges', currentLogs + logLine);
+
+    const parameters = sessionStorage.getItem('Parameters').replace(parameterLine.join(','), newLine);
+    sessionStorage.setItem('Parameters', parameters);
+    TreeViewClick(document.getElementById(parameterLine[0]), parameterLine[0]);
 }

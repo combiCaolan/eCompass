@@ -1,152 +1,148 @@
-function NoPermission(){
-	document.getElementById('topDefineDescription').innerHTML = '';
+/**
+ * Display a "No Permission" message in the UI.
+ */
+function showNoPermission() {
+    const container = document.getElementById('topDefineDescription');
+    container.innerHTML = '';
 
-	IconDiv = document.createElement('div');
-	IconDiv.setAttribute('style','width:100px; height:100px; background:gray; border-radius:50%; margin-left:45%; color:white; font-size:80px; font-weight:900; margin-top:30px; text-align:center;');
+    const iconDiv = document.createElement('div');
+    iconDiv.style = 'width:100px; height:100px; background:gray; border-radius:50%; margin-left:45%; color:white; font-size:80px; font-weight:900; margin-top:30px; text-align:center;';
+    iconDiv.innerHTML = '!';
 
-	IconDiv.innerHTML = '!';
+    const title = document.createElement('h1');
+    title.innerHTML = 'No Permission';
+    title.style.textAlign = 'center';
 
-	Title = document.createElement('h1');
-	Title.innerHTML = 'No Permission';
+    const msg = document.createElement('p');
+    msg.innerHTML = 'You do not have Permission to edit or view this parameter';
+    msg.style.textAlign = 'center';
 
-	Msg = document.createElement('p');
-	Msg.innerHTML = 'You do not have Permission to edit or view this parameter';
-
-	Title.setAttribute('style','text-align:center;');
-	Msg.setAttribute('style','text-align:center;');
-
-	document.getElementById('topDefineDescription').appendChild(IconDiv);
-	document.getElementById('topDefineDescription').appendChild(Title);
-	document.getElementById('topDefineDescription').appendChild(Msg);
+    container.appendChild(iconDiv);
+    container.appendChild(title);
+    container.appendChild(msg);
 }
 
-function ParameterNotPresent(LineNumber,HTMLObject){
-	document.getElementById('topDefineDescription').innerHTML = ''	
-	WorkSpaceTitle = document.createElement('p');
-	WorkSpaceTitle.setAttribute('id','WorkSpaceTitle');
-	
-	try{
-		WorkSpaceTitle.innerHTML = HTMLObject.innerHTML;
-	}catch(err){
-	}
-	
-	Description = document.createElement('p');
-	Description.setAttribute('id','description');
-	try{
-		if(MainDescriptionsDict != undefined && MainDescriptionsDict[HTMLObject.id] != undefined){
-			Description.innerHTML = MainDescriptionsDict[HTMLObject.id].replace('#' + HTMLObject.id,'');
-		}
-	}catch(err){
-	}
-	
-	ParameterMsg = document.createElement('p');
-	ParameterMsg.setAttribute('value','This Parameter is not present on this file');
-	
-	AddParameterButton = document.createElement('input');
-	AddParameterButton.setAttribute('id','AddParameterButton');
-	AddParameterButton.setAttribute('onclick','AddParmeterToClp("' + LineNumber + '","' + HTMLObject + '")');
-	AddParameterButton.setAttribute('type','submit');
-	AddParameterButton.setAttribute('value','Add "' + HTMLObject.innerHTML + '" to this file?');
-	
-	document.getElementById('topDefineDescription').appendChild(WorkSpaceTitle);
-	document.getElementById('topDefineDescription').appendChild(Description);
-	document.getElementById('topDefineDescription').appendChild(ParameterMsg);
-	document.getElementById('topDefineDescription').appendChild(AddParameterButton);
+/**
+ * Display UI for a parameter not present in the file.
+ */
+function showParameterNotPresent(lineNumber, htmlObject) {
+    const container = document.getElementById('topDefineDescription');
+    container.innerHTML = '';
+
+    const workSpaceTitle = document.createElement('p');
+    workSpaceTitle.id = 'WorkSpaceTitle';
+    workSpaceTitle.innerHTML = htmlObject.innerHTML || '';
+
+    const description = document.createElement('p');
+    description.id = 'description';
+    if (typeof MainDescriptionsDict !== 'undefined' && MainDescriptionsDict[htmlObject.id]) {
+        description.innerHTML = MainDescriptionsDict[htmlObject.id].replace('#' + htmlObject.id, '');
+    }
+
+    const parameterMsg = document.createElement('p');
+    parameterMsg.value = 'This Parameter is not present on this file';
+
+    const addParameterButton = document.createElement('input');
+    addParameterButton.id = 'AddParameterButton';
+    addParameterButton.type = 'submit';
+    addParameterButton.value = `Add "${htmlObject.innerHTML}" to this file?`;
+    addParameterButton.onclick = function () {
+        AddParmeterToClp(lineNumber, htmlObject);
+    };
+
+    container.appendChild(workSpaceTitle);
+    container.appendChild(description);
+    container.appendChild(parameterMsg);
+    container.appendChild(addParameterButton);
 }
 
-/**/
-UserParametersFileDict = {};
-counter = 0;
-while(sessionStorage.getItem('Parameters').split('\n')[counter] != undefined){
-	UserParametersFileDict[sessionStorage.getItem('Parameters').split('\n')[counter].split(',')[0]] = sessionStorage.getItem('Parameters').split('\n')[counter];
-	counter++;
-}
-/**/
+// Build a dictionary of user parameters from sessionStorage
+let userParametersFileDict = {};
+const parametersArr = (sessionStorage.getItem('Parameters') || '').split('\n');
+parametersArr.forEach(line => {
+    if (line) {
+        const parts = line.split(',');
+        userParametersFileDict[parts[0]] = line;
+    }
+});
 
+/**
+ * Handles clicking on a parameter in the tree view.
+ */
+function treeViewClick(value, objectId, msg) {
+    const pre64 = ['2', '4'];
+    try {
+        const parentId = document.getElementById(objectId).parentNode.id;
+        const selectedClass = parentId[0] === 'G' ? 'ThirdSubGroup' : 'TreeButton';
+        const selectedElem = document.getElementsByClassName('SelectedThirdSubGroup')[0];
+        if (selectedElem) selectedElem.setAttribute('class', selectedClass);
+    } catch (err) {}
 
-function TreeViewClick(value,object,msg){
-	Pre64 = [2,4];
-	try{
-		//console.log('Parent Node : ' + document.getElementById(object).parentNode.id);
-		if(document.getElementById(object).parentNode.id[0] == 'G'){
-			document.getElementsByClassName('SelectedThirdSubGroup')[0].setAttribute('class','ThirdSubGroup');
-		}else{
-			document.getElementsByClassName('SelectedThirdSubGroup')[0].setAttribute('class','TreeButton');
-		}
-	}catch(err){}
-	
-	if(document.getElementById(object).getAttribute('class') != 'BitTreeButton'){
-		if(Pre64.includes(object)){
-		}else{
-			document.getElementById(object).setAttribute('class','SelectedThirdSubGroup');
-		}
-	}
+    const objectElem = document.getElementById(objectId);
+    if (objectElem && objectElem.getAttribute('class') !== 'BitTreeButton') {
+        if (!pre64.includes(objectId)) {
+            objectElem.setAttribute('class', 'SelectedThirdSubGroup');
+        }
+    }
 
-	document.getElementById('topDefineTable').innerHTML = '';
-	document.getElementById('topDefineDescription').innerHTML = '';
-	
-	if(msg == undefined){
-		UserParametersFileDict = {};
-		counter = 0;
-		while(sessionStorage.getItem('Parameters').split('\n')[counter] != undefined){
-			UserParametersFileDict[sessionStorage.getItem('Parameters').split('\n')[counter].split(',')[0]] = sessionStorage.getItem('Parameters').split('\n')[counter];
-			counter++;
-		}
-	}
-	
-	if(UserParametersFileDict[object] == undefined){
-		ParameterNotPresent(object,value);
-		return;
-	}
-	
-	try{
-		if(Number(ReadPermissionDict[object]) > Number(AccessLevelForUser)){
-			NoPermission();
-			$('#topDefineDescription').fadeIn();
-			return;
-		}	
-	}catch(err){
-		//console.log('RedPermission Dictionary not set yet');
-	}
-	
-	
-	//Custom Bits Require Line in this format
-	Line = UserParametersFileDict[object].split(',');
-	//Current Line for comparison
-	CurrentLine = UserParametersFileDict[object];
-	
-	IndexNumber = Line[0];
-	
-	//Serial Number
-	if(IndexNumber == '4'){
-		document.getElementById('topDefineDescription').innerHTML = '';
-		SerialNumberFunction(Line,value);
-		return;
-	}
+    document.getElementById('topDefineTable').innerHTML = '';
+    document.getElementById('topDefineDescription').innerHTML = '';
 
-	if(passwordList.includes(IndexNumber) == true){
-		document.getElementById('topDefineDescription').innerHTML = '';
-		PasswordCustom(Line);
-		return;
-	}
+    // Refresh userParametersFileDict if msg is undefined
+    if (typeof msg === 'undefined') {
+        userParametersFileDict = {};
+        (sessionStorage.getItem('Parameters') || '').split('\n').forEach(line => {
+            if (line) {
+                const parts = line.split(',');
+                userParametersFileDict[parts[0]] = line;
+            }
+        });
+    }
 
+    if (!userParametersFileDict[objectId]) {
+        showParameterNotPresent(objectId, value);
+        return;
+    }
 
-	if(bitParameters999.includes(IndexNumber) == true){
-		Bit999DisplayOptionsFunction(Line.toString(),document.getElementById(IndexNumber));
-		return;
-	}
+    try {
+        if (typeof ReadPermissionDict !== 'undefined' && Number(ReadPermissionDict[objectId]) > Number(AccessLevelForUser)) {
+            showNoPermission();
+            $('#topDefineDescription').fadeIn();
+            return;
+        }
+    } catch (err) {}
 
-	if(bitParameters1000.includes(IndexNumber) == true){
-		Bit1000DisplayOptionsFunction(Line.toString(),document.getElementById(IndexNumber));
-		return;
-	}
+    // Custom Bits Require Line in this format
+    const lineArr = userParametersFileDict[objectId].split(',');
+    const indexNumber = lineArr[0];
 
+    // Serial Number
+    if (indexNumber === '4') {
+        document.getElementById('topDefineDescription').innerHTML = '';
+        SerialNumberFunction(lineArr, value);
+        return;
+    }
 
-	if(customParametersDropDown.includes(IndexNumber) == true){
-		DropDownFunction(Line,value);
-		return;
-	}
+    if (typeof passwordList !== 'undefined' && passwordList.includes(indexNumber)) {
+        document.getElementById('topDefineDescription').innerHTML = '';
+        PasswordCustom(lineArr);
+        return;
+    }
 
+    if (typeof bitParameters999 !== 'undefined' && bitParameters999.includes(indexNumber)) {
+        Bit999DisplayOptionsFunction(lineArr.toString(), document.getElementById(indexNumber));
+        return;
+    }
 
-	RegularParmeter(value,object);
+    if (typeof bitParameters1000 !== 'undefined' && bitParameters1000.includes(indexNumber)) {
+        Bit1000DisplayOptionsFunction(lineArr.toString(), document.getElementById(indexNumber));
+        return;
+    }
+
+    if (typeof customParametersDropDown !== 'undefined' && customParametersDropDown.includes(indexNumber)) {
+        dropDownFunction(lineArr, value);
+        return;
+    }
+
+    RegularParameter(value, objectId, lineArr);
 }

@@ -1,427 +1,184 @@
-function RegularParmeter(value,object){
-	/*Start Find and set Units*/
-	counter = 0;
-	while(sessionStorage.getItem('UnitsDirectory').split('\n')[counter] != undefined){
-		if(sessionStorage.getItem('UnitsDirectory').split('\n')[counter].split(',')[1].replace('\r','') == Line[6]){
-			UnitForIndex = sessionStorage.getItem('UnitsDirectory').split('\n')[counter].split(',')[0];
-			break;
-		}else{
-			counter++;
-		}
-	}
-	/*End of Fine and set Units*/
-	
-	/*Start Title*/
-	 Title = document.createElement("p");
-	Title.innerHTML = value.innerHTML;
-	Title.setAttribute('id','WorkSpaceTitle');
-	document.getElementById('topDefineDescription').appendChild(Title);
-	/*End Title*/
-	
-	/*Opening Description*/
-	descriptionArea = document.createElement('tr');
-	DescriptionText = document.createElement('p');
-	if(MainDescriptionsDict[object]){
-		DescriptionText.innerHTML = MainDescriptionsDict[object].replace('#' + object,'');
-	}
-	
-	DescriptionText.setAttribute('id','description');
-	descriptionArea.appendChild(DescriptionText);
-	document.getElementById('topDefineDescription').appendChild(descriptionArea);
-	/*Closing Description*/
+/**
+ * Renders the regular parameter view with editable and read-only fields.
+ * @param {HTMLElement} value - The DOM element representing the parameter (for label/title).
+ * @param {string|number} object - The parameter ID.
+ * @param {Array} lineArr - The parameter data array (e.g. [IndexNumber, Current, Default, Factory, Min, Max, ..., Scale, ...]).
+ */
+function RegularParameter(value, object, lineArr) {
+    // Find and set units
+    let unitForIndex = 'no units';
+    const unitsDirectory = (sessionStorage.getItem('UnitsDirectory') || '').split('\n');
+    for (let i = 0; i < unitsDirectory.length; i++) {
+        const unitLine = unitsDirectory[i].split(',');
+        if (unitLine[1] && unitLine[1].replace('\r', '') === lineArr[6]) {
+            unitForIndex = unitLine[0];
+            break;
+        }
+    }
 
+    // Title
+    const title = document.createElement("p");
+    title.innerHTML = value.innerHTML;
+    title.id = 'WorkSpaceTitle';
+    document.getElementById('topDefineDescription').appendChild(title);
 
-	/*STARTING EXPORT*/
-	ExportDiv = document.createElement('div');
-	//document.getElementById('topDefineDescription').appendChild(ExportDiv);
+    // Description
+    const descriptionArea = document.createElement('tr');
+    const descriptionText = document.createElement('p');
+    if (typeof MainDescriptionsDict !== 'undefined' && MainDescriptionsDict[object]) {
+        descriptionText.innerHTML = MainDescriptionsDict[object].replace('#' + object, '');
+    }
+    descriptionText.id = 'description';
+    descriptionArea.appendChild(descriptionText);
+    document.getElementById('topDefineDescription').appendChild(descriptionArea);
 
-	SwitchParameterLabel = document.createElement("label");
-	SwitchParameterLabel.setAttribute('id','Export');
-	SwitchParameterLabel.innerHTML = LanguageDict["ExportSelectedParamters"];
-	ExportDiv.appendChild(SwitchParameterLabel);	
+    // Export checkbox
+    const exportDiv = document.createElement('div');
+    const switchParameterLabel = document.createElement("label");
+    switchParameterLabel.id = 'Export';
+    switchParameterLabel.innerHTML = LanguageDict["ExportSelectedParamters"];
+    exportDiv.appendChild(switchParameterLabel);
 
-	SwitchParameter = document.createElement("input");
-	SwitchParameter.setAttribute('id','Export');
-	SwitchParameter.type = 'checkbox';
+    const switchParameter = document.createElement("input");
+    switchParameter.type = 'checkbox';
+    switchParameter.id = "SwitchParameterCheckbox";
+    switchParameter.checked = !removedParametersCounters.includes(String(lineArr[0]));
+    switchParameter.onchange = function () {
+        exportonchange(lineArr[0], this);
+    };
+    switchParameter.style = "text-align:center; font-size:18px;";
+    exportDiv.appendChild(switchParameter);
 
-	SwitchParameter.setAttribute("id","Switch Parameter Checkbox");
+    document.getElementById('topDefineDescription').style.opacity = switchParameter.checked ? "1" : "0.4";
+    document.getElementById('topDefineDescription').appendChild(exportDiv);
 
-	if(removedParametersCounters.includes(String(Line)) == false){
-		//parameter is not in remove list
-		SwitchParameter.setAttribute("checked","");
-		document.getElementById('topDefineDescription').setAttribute('style','opacity:1;');
-	}else{
-		document.getElementById('topDefineDescription').setAttribute('style','opacity:0.4;');
-	}	
+    // Helper to create value fields (Current, Max, Min, Default, Factory)
+    function createValueField(labelText, value, id, onChangeType, editable, unit, scale, index) {
+        const unitLabel = document.createElement("label");
+        if (unit !== 'no units') unitLabel.innerHTML = '&nbsp;&nbsp;' + unit;
+        unitLabel.style = 'float:right;';
 
-	SwitchParameter.setAttribute("onchange","exportonchange("+Line[0]+",this)"); 
-	SwitchParameter.setAttribute("style","text-align:center; font-size:18px;"); 
-	ExportDiv.appendChild(SwitchParameter);	
-	/*ENDING EXPORT*/
+        const div = document.createElement("div");
+        div.style = editable
+            ? 'margin:10px; padding:15px;'
+            : 'margin:10px; padding:15px; background:whitesmoke;';
+        document.getElementById('topDefineDescription').appendChild(div);
 
-	/*invalue*/
-	 invalueunitlabelValue = document.createElement("label");
-	if(UnitForIndex != 'no units'){
-		invalueunitlabelValue.innerHTML = '&nbsp&nbsp' + UnitForIndex;
-	}
-	invalueunitlabelValue.setAttribute('style','float:right;');
+        const table = document.createElement("table");
+        const tr = document.createElement("tr");
+        const label = document.createElement("label");
+        label.style = 'float:left;';
+        label.innerHTML = labelText + '<br>';
 
-	 invalueDiv = document.createElement("div");
-	document.getElementById('topDefineDescription').appendChild(invalueDiv);
+        let input;
+        if (editable) {
+            input = document.createElement("input");
+            input.title = labelText;
+            input.value = scale !== 1 ? value / scale : value;
+            input.setAttribute("scale", scale !== 1 ? "true" : "false");
+            input.type = 'number';
+            input.style = 'float:left; text-align:right;';
+            input.id = id;
+            input.onchange = function () {
+                parameterchange(
+                    lineArr[0],
+                    onChangeType,
+                    lineArr[index],
+                    [
+                        lineArr[0], lineArr[1], lineArr[2], lineArr[3], lineArr[4], lineArr[5],
+                        lineArr[6], lineArr[7], lineArr[8], lineArr[9], (lineArr[10] || '').replace('\r', '')
+                    ].join(',')
+                );
+            };
+        } else {
+            input = document.createElement("label");
+            input.innerHTML = scale !== 1 ? '<br>' + value / scale : value;
+            input.setAttribute("scale", scale !== 1 ? "true" : "false");
+            input.type = 'number';
+            input.style = 'float:left;';
+        }
 
-	 invalueValueDivTABLE = document.createElement("table");
-	 invalueValueTR = document.createElement("tr");
-	 invalueLabel = document.createElement("label");
-	invalueLabel.setAttribute('style','float:left;');
-	invalueLabel.innerHTML = LanguageDict["CurrentValue"] + '<br>';
-	
+        const parInd = document.createElement(editable ? 'p' : 'label');
+        parInd.innerHTML = '&nbsp;&nbsp;&nbsp;';
+        parInd.style = editable ? 'float:right;' : 'float:left;';
 
-	//if(Number(AccessLevelForUser) >= Number(Line[8])){
-		invalueDiv.setAttribute('style','margin:10px; padding:15px;');				
+        div.appendChild(table);
+        table.appendChild(tr);
+        tr.appendChild(label);
+        label.appendChild(parInd);
+        parInd.appendChild(input);
+        parInd.appendChild(unitLabel);
+    }
 
-		 invalue = document.createElement("input");
-		invalue.setAttribute('title','Current Value');
-	
-		if(Line[7] !== 1){
-				invalue.value = Line[1] / Line[7];
-				invalue.setAttribute("scale","true");
-		}else{
-				invalue.value = Line[1];
-				invalue.setAttribute("scale","false");
-		}
-		
-		invalue.type = 'number';
-		invalue.setAttribute('style','float:left; text-align:right;');
-		invalue.setAttribute('id','WorkSpaceCurrentValue');
-		invalue.setAttribute('onchange','parameterchange("' + IndexNumber + '","' + 'CurrentValue' + '","' + Line[1] + '","' + IndexNumber + ',' + Line[1] + ',' + Line[2] + ',' + Line[3] + ',' + Line[4] + ',' + Line[5] + ',' + Line[6] + ',' + Line[7] + ',' + Line[8] + ',' + 	Line[9] + ',' + Line[10].replace('\r','') + '");');
+    // Render Current Value
+    createValueField(
+        LanguageDict["CurrentValue"],
+        lineArr[1],
+        'WorkSpaceCurrentValue',
+        'CurrentValue',
+        true,
+        unitForIndex,
+        lineArr[7],
+        1
+    );
 
-		 invalueParInd = document.createElement('p');
-		invalueParInd.innerHTML = '&nbsp&nbsp&nbsp';
-		invalueParInd.setAttribute('style','float:right;');
-		invalueDiv.appendChild(invalueValueDivTABLE);
-		invalueValueDivTABLE.appendChild(invalueValueTR);
-		invalueValueTR.appendChild(invalueLabel);
-		invalueLabel.appendChild(invalueParInd);
-		invalueParInd.appendChild(invalue);
-		invalueParInd.appendChild(invalueunitlabelValue);
+    // Render Max Value
+    createValueField(
+        LanguageDict["MaxValue"],
+        lineArr[5],
+        'WorkSpaceMaxValue',
+        'MaxValue',
+        Number(AccessLevelForUser) >= 8,
+        unitForIndex,
+        lineArr[7],
+        5
+    );
 
-	/*}else{
-		invalueDiv.setAttribute('style','margin:10px; padding:15px; background:whitesmoke;');				
+    // Render Min Value
+    createValueField(
+        LanguageDict["MinValue"],
+        lineArr[4],
+        'WorkSpaceMinValue',
+        'MinValue',
+        Number(AccessLevelForUser) >= 8,
+        unitForIndex,
+        lineArr[7],
+        4
+    );
 
-		 invalue = document.createElement("label");
-		if(Line[7] !== 1){
-			invalue.innerHTML = '<br>' + Line[1] / Line[7];
-			invalue.setAttribute("scale","true");
-		}else{
-			invalue.innerHTML = Line[1];
-			invalue.setAttribute("scale","false");
-		}
-		invalue.type = 'number';
-		invalue.setAttribute('style','float:left;');
+    // Render Default Value
+    createValueField(
+        LanguageDict["DefaultValue"],
+        lineArr[2],
+        'WorkSpaceDefaultValue',
+        'DefaultValue',
+        Number(AccessLevelForUser) >= 8,
+        unitForIndex,
+        lineArr[7],
+        2
+    );
 
-		 invalueParInd = document.createElement('label');
-		invalueParInd.innerHTML = '';
-		invalueParInd.setAttribute('style','float:left;');
-		invalueDiv.appendChild(invalueValueDivTABLE);
-		invalueValueDivTABLE.appendChild(invalueValueTR);
-		invalueValueTR.appendChild(invalueLabel);
-		invalueLabel.appendChild(invalueParInd);
-		invalueParInd.appendChild(invalue);
-		invalue.appendChild(invalueunitlabelValue);
-	}*/
-	/*Closing invalue*/	
+    // Render Factory Value
+    createValueField(
+        LanguageDict["FactoryValue"],
+        lineArr[3],
+        'WorkSpaceFactoryValue',
+        'FactoryValue',
+        Number(AccessLevelForUser) >= 8,
+        unitForIndex,
+        lineArr[7],
+        3
+    );
 
+    // Permissions
+    if (typeof writePermissionDict !== 'undefined' && Number(writePermissionDict[object]) > Number(AccessLevelForUser)) {
+        try {
+            document.getElementById('WorkSpaceCurrentValue').setAttribute('disabled', 'disabled');
+            document.getElementById('WorkSpaceCurrentValue').onclick = null;
+        } catch (err) {
+            // No input available
+        }
+    }
 
-	/*Max*/
-	MaxunitlabelValue = document.createElement("label");
-		if(UnitForIndex == 'no units'){
-		}else{
-			MaxunitlabelValue.innerHTML = '&nbsp&nbsp' + UnitForIndex;
-		}
-	MaxunitlabelValue.setAttribute('style','float:right;');
-
-	MaxDiv = document.createElement("div");
-	document.getElementById('topDefineDescription').appendChild(MaxDiv);
-
-	MaxValueDivTABLE = document.createElement("table");
-	MaxValueTR = document.createElement("tr");
-	MaxLabel = document.createElement("label");
-	MaxLabel.setAttribute('style','float:left;');
-	MaxLabel.innerHTML = LanguageDict["MaxValue"] + '<br>';
-
-	if(Number(AccessLevelForUser) >= 8){//Number(Line[8])){
-		MaxDiv.setAttribute('style','margin:10px; padding:15px;');				
-
-		 Max = document.createElement("input");
-		Max.setAttribute('title','Max Value');
-		if(Line[7] !== 1){
-			Max.value = Line[5] / Line[7];
-			Max.setAttribute("scale","true");
-		}else{
-			Max.value = Line[5];
-			Max.setAttribute("scale","false");
-		}
-		Max.type = 'number';
-		Max.setAttribute('style','float:left; text-align:right;');
-		Max.setAttribute('id','WorkSpaceMaxValue');
-		Max.setAttribute('onchange','parameterchange("' + IndexNumber + '","' + 'MaxValue' + '","' + Line[1] + '","' + IndexNumber + ',' + Line[1] + ',' + Line[2] + ',' + Line[3] + ',' + Line[4] + ',' + Line[5] + ',' + Line[6] + ',' + Line[7] + ',' + Line[8] + ',' + Line[9] + ',' + Line[10].replace('\r','') + '");');
-
-		 MaxParInd = document.createElement('p');
-		MaxParInd.innerHTML = '&nbsp&nbsp&nbsp';
-		MaxParInd.setAttribute('style','float:right;');
-		MaxDiv.appendChild(MaxValueDivTABLE);
-		MaxValueDivTABLE.appendChild(MaxValueTR);
-		MaxValueTR.appendChild(MaxLabel);
-		MaxLabel.appendChild(MaxParInd);
-		MaxParInd.appendChild(Max);
-		MaxParInd.appendChild(MaxunitlabelValue);
-
-	}else{
-		MaxDiv.setAttribute('style','margin:10px; padding:15px; background:whitesmoke;');				
-
-		 Max = document.createElement("label");
-		if(Line[7] !== 1){
-			Max.innerHTML = '<br>' + Line[5] / Line[7];
-			Max.setAttribute("scale","true");
-		}else{
-			Max.innerHTML = Line[5];
-			Max.setAttribute("scale","false");
-		}
-		Max.type = 'number';
-		Max.setAttribute('style','float:left;');
-
-		 MaxParInd = document.createElement('label');
-		MaxParInd.innerHTML = '&nbsp&nbsp&nbsp';
-		MaxParInd.setAttribute('style','float:left;');
-		MaxDiv.appendChild(MaxValueDivTABLE);
-		MaxValueDivTABLE.appendChild(MaxValueTR);
-		MaxValueTR.appendChild(MaxLabel);
-		MaxLabel.appendChild(MaxParInd);
-		MaxParInd.appendChild(Max);
-		Max.appendChild(MaxunitlabelValue);
-	}
-	/*Closing Max*/	
-
-
-	/*Min*/
-	 MinunitlabelValue = document.createElement("label");
-	if(UnitForIndex == 'no units'){
-	}else{
-	MinunitlabelValue.innerHTML = '&nbsp&nbsp' + UnitForIndex;
-	}
-	MinunitlabelValue.setAttribute('style','float:right;');
-
-	 MinDiv = document.createElement("div");
-	document.getElementById('topDefineDescription').appendChild(MinDiv);
-
-	 MinValueDivTABLE = document.createElement("table");
-	 MinValueTR = document.createElement("tr");
-	 MinLabel = document.createElement("label");
-	MinLabel.setAttribute('style','float:left;');
-	MinLabel.innerHTML = LanguageDict["MinValue"] + '<br>';
-
-	if(Number(AccessLevelForUser) >= 8){//Number(Line[8])){
-	MinDiv.setAttribute('style','margin:10px; padding:15px;');				
-
-	 Min = document.createElement("input");
-	Min.setAttribute('title','Min Value');
-	if(Line[7] !== 1){
-		Min.value = Line[4] / Line[7];
-		Min.setAttribute("scale","true");
-	}else{
-		Min.value = Line[4];
-		Min.setAttribute("scale","false");
-	}
-	Min.type = 'number';
-	Min.setAttribute('style','float:left; text-align:right;');
-	Min.setAttribute('id','WorkSpaceMinValue');
-	Min.setAttribute('onchange','parameterchange("' + IndexNumber + '","' + 'MinValue' + '","' + Line[1] + '","' + IndexNumber + ',' + Line[1] + ',' + Line[2] + ',' + Line[3] + ',' + Line[4] + ',' + Line[5] + ',' + Line[6] + ',' + Line[7] + ',' + Line[8] + ',' + Line[9] + ',' + Line[10].replace('\r','') + '");');
-
-	 MinParInd = document.createElement('p');
-	MinParInd.innerHTML = '&nbsp&nbsp&nbsp';
-	MinParInd.setAttribute('style','float:right;');
-	MinDiv.appendChild(MinValueDivTABLE);
-	MinValueDivTABLE.appendChild(MinValueTR);
-	MinValueTR.appendChild(MinLabel);
-	MinLabel.appendChild(MinParInd);
-	MinParInd.appendChild(Min);
-	MinParInd.appendChild(MinunitlabelValue);
-
-	}else{
-	MinDiv.setAttribute('style','margin:10px; padding:15px; background:whitesmoke;');				
-
-	 Min = document.createElement("label");
-	if(Line[7] !== 1){
-		Min.innerHTML = '<br>' + Line[4] / Line[7];
-		Min.setAttribute("scale","true");
-	}else{
-		Min.innerHTML = Line[4];
-		Min.setAttribute("scale","false");
-	}
-	Min.type = 'number';
-	Min.setAttribute('style','float:left;');
-
-	 MinParInd = document.createElement('label');
-	MinParInd.innerHTML = '&nbsp&nbsp&nbsp';
-	MinParInd.setAttribute('style','float:left;');
-	MinDiv.appendChild(MinValueDivTABLE);
-	MinValueDivTABLE.appendChild(MinValueTR);
-	MinValueTR.appendChild(MinLabel);
-	MinLabel.appendChild(MinParInd);
-	MinParInd.appendChild(Min);
-	Min.appendChild(MinunitlabelValue);
-	}
-	/*Closing Min*/	
-
-	/*Default*/
-	 DefaultunitlabelValue = document.createElement("label");
-	if(UnitForIndex == 'no units'){
-	}else{
-	DefaultunitlabelValue.innerHTML = '&nbsp&nbsp' + UnitForIndex;
-	}
-	DefaultunitlabelValue.setAttribute('style','float:right;');
-
-	 DefaultDiv = document.createElement("div");
-	document.getElementById('topDefineDescription').appendChild(DefaultDiv);
-
-	 DefaultValueDivTABLE = document.createElement("table");
-	 DefaultValueTR = document.createElement("tr");
-	 DefaultLabel = document.createElement("label");
-	DefaultLabel.setAttribute('style','float:left;');
-	DefaultLabel.innerHTML = LanguageDict["DefaultValue"] + '<br>';
-
-	if(Number(AccessLevelForUser) >= 8){
-	DefaultDiv.setAttribute('style','margin:10px; padding:15px;');				
-
-	 Default = document.createElement("input");
-	Default.setAttribute('title','Default Value');
-	if(Line[7] !== 1){
-		Default.value = Line[2] / Line[7];
-		Default.setAttribute("scale","true");
-	}else{
-		Default.value = Line[2];
-		Default.setAttribute("scale","false");
-	}
-	Default.type = 'number';
-	Default.setAttribute('style','float:left; text-align:right;');
-	Default.setAttribute('id','WorkSpaceDefaultValue');
-	Default.setAttribute('onchange','parameterchange("' + IndexNumber + '","' + 'DefaultValue' + '","' + Line[1] + '","' + IndexNumber + ',' + Line[1] + ',' + Line[2] + ',' + Line[3] + ',' + Line[4] + ',' + Line[5] + ',' + Line[6] + ',' + Line[7] + ',' + Line[8] + ',' + Line[9] + ',' + Line[10].replace('\r','') + '");');
-
-	 DefaultParInd = document.createElement('p');
-	DefaultParInd.innerHTML = '&nbsp&nbsp&nbsp';
-	DefaultParInd.setAttribute('style','float:right;');
-	DefaultDiv.appendChild(DefaultValueDivTABLE);
-	DefaultValueDivTABLE.appendChild(DefaultValueTR);
-	DefaultValueTR.appendChild(DefaultLabel);
-	DefaultLabel.appendChild(DefaultParInd);
-	DefaultParInd.appendChild(Default);
-	DefaultParInd.appendChild(DefaultunitlabelValue);
-
-	}else{
-	DefaultDiv.setAttribute('style','margin:10px; padding:15px; background:whitesmoke;');				
-
-	 Default = document.createElement("label");
-	if(Line[7] !== 1){
-		Default.innerHTML = '<br>' + Line[2] / Line[7];
-		Default.setAttribute("scale","true");
-	}else{
-		Default.innerHTML = Line[2];
-		Default.setAttribute("scale","false");
-	}
-	Default.type = 'number';
-	Default.setAttribute('style','float:left;');
-
-	 DefaultParInd = document.createElement('label');
-	DefaultParInd.innerHTML = '&nbsp&nbsp&nbsp';
-	DefaultParInd.setAttribute('style','float:left;');
-	DefaultDiv.appendChild(DefaultValueDivTABLE);
-	DefaultValueDivTABLE.appendChild(DefaultValueTR);
-	DefaultValueTR.appendChild(DefaultLabel);
-	DefaultLabel.appendChild(DefaultParInd);
-	DefaultParInd.appendChild(Default);
-	Default.appendChild(DefaultunitlabelValue);
-	}
-	/*Closing Default*/	
-
-	/*Factory*/
-	 FactoryunitlabelValue = document.createElement("label");
-	if(UnitForIndex == 'no units'){
-	}else{
-	FactoryunitlabelValue.innerHTML = '&nbsp&nbsp' + UnitForIndex;
-	}
-	FactoryunitlabelValue.setAttribute('style','float:right;');
-
-	 FactoryDiv = document.createElement("div");
-	document.getElementById('topDefineDescription').appendChild(FactoryDiv);
-
-	 FactoryValueDivTABLE = document.createElement("table");
-	 FactoryValueTR = document.createElement("tr");
-	 FactoryLabel = document.createElement("label");
-	FactoryLabel.setAttribute('style','float:left;');
-	FactoryLabel.innerHTML = LanguageDict["FactoryValue"] + '<br>';
-
-	if(Number(AccessLevelForUser) >= 8){
-		FactoryDiv.setAttribute('style','margin:10px; padding:15px;');				
-
-		 Factory = document.createElement("input");
-		Default.setAttribute('title','Factory Value');
-	if(Line[7] !== 1){
-		Factory.value = Line[3] / Line[7];
-		Factory.setAttribute("scale","true");
-	}else{
-		Factory.value = Line[3];
-		Factory.setAttribute("scale","false");
-	}
-	Factory.type = 'number';
-	Factory.setAttribute('style','float:left; text-align:right;');
-	Factory.setAttribute('id','WorkSpaceFactoryValue');
-	Factory.setAttribute('onchange','parameterchange("' + IndexNumber + '","' + 'FactoryValue' + '","' + IndexNumber + '","' + IndexNumber + ',' + Line[1] + ',' + Line[2] + ',' + Line[3] + ',' + Line[4] + ',' + Line[5] + ',' + Line[6] + ',' + Line[7] + ',' + Line[8] + ',' + Line[9] + ',' + Line[10].replace('\r','') + '");');
-
-	 FactoryParInd = document.createElement('p');
-	FactoryParInd.innerHTML = '&nbsp&nbsp&nbsp';
-	FactoryParInd.setAttribute('style','float:right;');
-	FactoryDiv.appendChild(FactoryValueDivTABLE);
-	FactoryValueDivTABLE.appendChild(FactoryValueTR);
-	FactoryValueTR.appendChild(FactoryLabel);
-	FactoryLabel.appendChild(FactoryParInd);
-	FactoryParInd.appendChild(Factory);
-	FactoryParInd.appendChild(FactoryunitlabelValue);
-
-	}else{
-		FactoryDiv.setAttribute('style','margin:10px; padding:15px; background:whitesmoke;');				
-
-		 Factory = document.createElement("label");
-		if(Line[7] !== 1){
-			Factory.innerHTML = '<br>' + Line[3] / Line[7];
-			Factory.setAttribute("scale","true");
-		}else{
-			Factory.innerHTML = Line[3];
-			Factory.setAttribute("scale","false");
-		}
-		Factory.type = 'number';
-		Factory.setAttribute('style','float:left;');
-
-		 FactoryParInd = document.createElement('label');
-		FactoryParInd.innerHTML = '&nbsp&nbsp&nbsp';
-		FactoryParInd.setAttribute('style','float:left;');
-		FactoryDiv.appendChild(FactoryValueDivTABLE);
-		FactoryValueDivTABLE.appendChild(FactoryValueTR);
-		FactoryValueTR.appendChild(FactoryLabel);
-		FactoryLabel.appendChild(FactoryParInd);
-		FactoryParInd.appendChild(Factory);
-		Factory.appendChild(FactoryunitlabelValue);
-	}
-	/*Closing Factory*/	
-	if(Number(writePermissionDict[object]) > Number(AccessLevelForUser)){
-		try{
-			document.getElementById('WorkSpaceCurrentValue').setAttribute('disabled','disabled');
-			document.getElementById('WorkSpaceCurrentValue').setAttribute('onclick','');
-		}catch(err){
-			//console.log('No input available');
-		}
-	}else{
-		//console.log('I could not work it either');
-	}
-	
-	$('#topDefineDescription').fadeIn();
+    $('#topDefineDescription').fadeIn();
 }

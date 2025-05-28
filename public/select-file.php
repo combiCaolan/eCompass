@@ -69,7 +69,7 @@ include_once('../src/includes/ListTruckDirectories.php'); // List available truc
 	<script src="../assets/js/add-missing-parameters.js"></script>
 	<script src="../assets/js/LanguageLogic/dynamic-language.js"></script>
 	<script src="../assets/js/Dialog.js"></script>
-	<script src="../assets/js/Api-Logic/Api-Change.js"></script>
+	<!-- <script src="../assets/js/Api-Logic/Api-Change.js"></script> -->
 	<script src="../assets/js/menu-button-functions.js"></script>
 	<script src="../assets/js/menu-logic.js"></script>
 	<script src="../assets/js/LanguageLogic/set-elements-for-language.js"></script>
