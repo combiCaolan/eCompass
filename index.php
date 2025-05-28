@@ -35,7 +35,7 @@ if ($test_mode) {
 
     // Set access level in JS and load startup script
     echo ('<script> var AccessLevelForUser = "8"; sessionStorage.setItem("AccessLevel","8");</script>');
-    echo ('<script src="assets/js/InitialStart/OnStartup.js"></script>');
+    echo ('<script src="assets/js/InitialStart/on-startup.js"></script>');
     // Optionally, return or exit to prevent running the rest of the code
     return;
 }

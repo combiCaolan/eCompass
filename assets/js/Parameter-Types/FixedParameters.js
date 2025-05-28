@@ -909,7 +909,7 @@ function MenuParametersOnclick(Line,HTMLObject){
 
 	
 	//MoCAS Values
-	if(MoCAS.includes(LineNumber)){
+	if(moCAS.includes(LineNumber)){
 		Table = document.getElementById('topDefineDescription');
 		
 		TH = document.createElement('p');

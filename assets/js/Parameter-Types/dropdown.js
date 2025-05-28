@@ -41,7 +41,7 @@ function DropDownFunction(ParameterLine,object){
 
 		if(http.status != 404){
 			TruckImage = document.createElement('img');
-			TruckImage.setAttribute('src',sessionStorage.getItem('ServerPath') + '/ecompass/assets/Truck_Images/' + ParameterLine[3] + '.png');	
+			TruckImage.setAttribute('src',sessionStorage.getItem('ServerPath') + '/assets/truck-images/' + ParameterLine[3] + '.png');	
 			TruckImage.setAttribute('id','TruckImage');
 			tr.appendChild(TruckImage);
 		}

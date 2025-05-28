@@ -174,7 +174,7 @@ function readParameters(defaultFileName) {
                 if (key) userParametersFileDict[key] = line;
             });
 
-            location.href = 'editor.php';
+            location.href = 'parameter-editor.php';
         };
     };
     input.click();

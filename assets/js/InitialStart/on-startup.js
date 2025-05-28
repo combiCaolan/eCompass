@@ -114,7 +114,7 @@ function onStartup() {
     window.MainDescriptionsDict = undefined;
 
     // Redirect to front page
-    location.href = '/public/frontpage.php';
+    location.href = '/public/select-file.php';
 }
 
 // --- Helper Parsers ---

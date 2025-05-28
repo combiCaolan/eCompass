@@ -218,7 +218,7 @@ function OrganiseMenu(){
 		counter++;
 	}
 
-	LoadDisplay();
+	loadDisplay();
 	HideAllMenus();
 	PostLoadedRun();
 	BitLabelChecker();

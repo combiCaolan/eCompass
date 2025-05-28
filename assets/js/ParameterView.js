@@ -124,25 +124,25 @@ function TreeViewClick(value,object,msg){
 		return;
 	}
 
-	if(PasswordList.includes(IndexNumber) == true){
+	if(passwordList.includes(IndexNumber) == true){
 		document.getElementById('topDefineDescription').innerHTML = '';
 		PasswordCustom(Line);
 		return;
 	}
 
 
-	if(BitParameters999.includes(IndexNumber) == true){
+	if(bitParameters999.includes(IndexNumber) == true){
 		Bit999DisplayOptionsFunction(Line.toString(),document.getElementById(IndexNumber));
 		return;
 	}
 
-	if(BitParameters1000.includes(IndexNumber) == true){
+	if(bitParameters1000.includes(IndexNumber) == true){
 		Bit1000DisplayOptionsFunction(Line.toString(),document.getElementById(IndexNumber));
 		return;
 	}
 
 
-	if(CustomParametersDropDown.includes(IndexNumber) == true){
+	if(customParametersDropDown.includes(IndexNumber) == true){
 		DropDownFunction(Line,value);
 		return;
 	}

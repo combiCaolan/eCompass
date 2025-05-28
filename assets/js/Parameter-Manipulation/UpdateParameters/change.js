@@ -1,280 +1,225 @@
-function parameterchange(LineNumber,ParameterType,OldValue,Line) {
-	
-	NewLine = null;
-	if(ParameterType == "CurrentValue"){
-		document.getElementById('WorkSpaceCurrentValue').style.background = 'blue';
-		document.getElementById('WorkSpaceCurrentValue').style.color = 'white';
-		LogMsgParType = document.getElementById('WorkSpaceCurrentValue').value;
-	}
-	
-	if(ParameterType == "MaxValue"){
-		document.getElementById('WorkSpaceMaxValue').style.background = 'blue';
-		document.getElementById('WorkSpaceMaxValue').style.color = 'white';
-		LogMsgParType = document.getElementById('WorkSpaceMaxValue').value;
-	}
-	
-	if(ParameterType == "MinValue"){
-		document.getElementById('WorkSpaceMinValue').style.background = 'blue';
-		document.getElementById('WorkSpaceMinValue').style.color = 'white';
-		LogMsgParType = document.getElementById('WorkSpaceMinValue').value;
-	}
+/**
+ * Handles parameter changes in the workspace UI.
+ * Cleans up UI, validates, scales, and updates session storage.
+ */
+function parameterchange(lineNumber, parameterType, oldValue, line) {
+    let newLine = null;
+    let logMsgParType;
+    const currentLineSplit = line.split(',');
+    const scale = Number(currentLineSplit[7]);
+    const scaled = scale !== 1;
 
-	if(ParameterType == "DefaultValue"){
-		document.getElementById('WorkSpaceDefaultValue').style.background = 'blue';
-		document.getElementById('WorkSpaceDefaultValue').style.color = 'white';
-		LogMsgParType = document.getElementById('WorkSpaceDefaultValue').value;
-	}
+    // Helper to get and style an input by id
+    function highlightInput(id) {
+        const el = document.getElementById(id);
+        if (el) {
+            el.style.background = 'blue';
+            el.style.color = 'white';
+            return el.value;
+        }
+        return '';
+    }
 
-	if(ParameterType == "FactoryValue"){
-		document.getElementById('WorkSpaceFactoryValue').style.background = 'blue';
-		document.getElementById('WorkSpaceFactoryValue').style.color = 'white';
-		LogMsgParType = document.getElementById('WorkSpaceFactoryValue').value;
-	}
+    // Highlight and get value based on parameterType
+    switch (parameterType) {
+        case "CurrentValue":
+            logMsgParType = highlightInput('WorkSpaceCurrentValue');
+            break;
+        case "MaxValue":
+            logMsgParType = highlightInput('WorkSpaceMaxValue');
+            break;
+        case "MinValue":
+            logMsgParType = highlightInput('WorkSpaceMinValue');
+            break;
+        case "DefaultValue":
+            logMsgParType = highlightInput('WorkSpaceDefaultValue');
+            break;
+        case "FactoryValue":
+            logMsgParType = highlightInput('WorkSpaceFactoryValue');
+            break;
+        default:
+            logMsgParType = '';
+    }
 
-	//Start Check if Parameter Needs to be scaled
-	if(Line.split(',')[7] !== '1'){
-		scaled = true;
-	}else{
-		scaled = false;
-	}
+    // Apply scaling if needed
+    if (scaled) {
+        logMsgParType = logMsgParType * scale;
+    }
 
-	if(scaled = true){
-		LogMsgParType = LogMsgParType * Number(Line.split(',')[7]);
-	}
-	LogMsg = sessionStorage.getItem('loggedinusername') + ' changed ' + ParameterType + ' from ' + OldValue + ' to ' + LogMsgParType;
-	
-	UserLogMsg = sessionStorage.getItem('UserMadeChanges');
-	sessionStorage.setItem('UserMadeChanges',UserLogMsg + '\n' + LogMsg)
+    // Log the change
+    const logMsg = `${sessionStorage.getItem('loggedinusername')} changed ${parameterType} from ${oldValue} to ${logMsgParType}`;
+    const userLogMsg = sessionStorage.getItem('UserMadeChanges') || '';
+    sessionStorage.setItem('UserMadeChanges', userLogMsg + '\n' + logMsg);
 
-	//End Check if Parameter Needs to be scaled
-	CurrentLineSplit = Line.split(',');
+    // Validate empty values
+    function checkEmpty(id, idx, msg) {
+        const el = document.getElementById(id);
+        if (el && el.value === "") {
+            ErrorMessageDialog('Update Issue', msg);
+            el.value = currentLineSplit[idx];
+            return true;
+        }
+        return false;
+    }
 
-	//START CHECK IF ANY VALUE EMPTY
-	if(Number(AccessLevelForUser) == 8){
-		if(document.getElementById('WorkSpaceCurrentValue').value == ""){
-			ErrorMessageDialog('Update Issue',ErrorMessageUpdateIssue);
-			document.getElementById('WorkSpaceCurrentValue').value == CurrentLineSplit[1];
-			return;
-		}
+    if (Number(AccessLevelForUser) === 8) {
+        if (checkEmpty('WorkSpaceCurrentValue', 1, ErrorMessageUpdateIssue)) return;
+        if (checkEmpty('WorkSpaceMaxValue', 5, 'Max Value is empty? Setting Back to Previous Value')) return;
+        if (checkEmpty('WorkSpaceMinValue', 4, 'Min Value is empty? Setting Back to Previous Value')) return;
+        if (checkEmpty('WorkSpaceDefaultValue', 2, 'Default Value is empty? Setting Back to Previous Value')) return;
+        if (checkEmpty('WorkSpaceFactoryValue', 3, 'Factory Value is empty? Setting Back to Previous Value')) return;
+    } else {
+        if (checkEmpty('WorkSpaceCurrentValue', 1, 'Current Value is empty? Setting Back to Previous Value')) return;
+    }
 
-		if(document.getElementById('WorkSpaceMaxValue').value == ""){
-			ErrorMessageDialog('Update Issue','Max Value is empty? Setting Back to Previous Value');
-			document.getElementById('WorkSpaceMaxValue').value == CurrentLineSplit[5];
-			return;
-		}
+    // Out of scale checks
+    function checkScale(type, idx, msg) {
+        const el = document.getElementById(type);
+        if (!el) return false;
+        let value = Number(el.value);
+        if (scaled) value *= scale;
+        if (value > Number(currentLineSplit[5])) {
+            ErrorMessageDialog('Scale Issue', `You cannot make your ${msg} larger than your maximum value`);
+            el.value = currentLineSplit[idx];
+            return true;
+        }
+        if (value < Number(currentLineSplit[4])) {
+            ErrorMessageDialog('Scale Issue', `You cannot make your ${msg} smaller than your minimum value`);
+            el.value = currentLineSplit[idx];
+            return true;
+        }
+        return false;
+    }
 
-		if(document.getElementById('WorkSpaceMinValue').value == ""){
-			ErrorMessageDialog('Update Issue','Min Value is empty? Setting Back to Previous Value');
-			document.getElementById('WorkSpaceMinValue').value == CurrentLineSplit[4];
-			return;
-		}
+    if (parameterType === "CurrentValue" && checkScale('WorkSpaceCurrentValue', 1, 'current value')) return;
+    if (parameterType === "DefaultValue" && checkScale('WorkSpaceDefaultValue', 2, 'Default value')) return;
+    if (parameterType === "FactoryValue" && checkScale('WorkSpaceFactoryValue', 3, 'Factory value')) return;
 
-		if(document.getElementById('WorkSpaceDefaultValue').value == ""){
-			ErrorMessageDialog('Update Issue','Default Value is empty? Setting Back to Previous Value');
-			document.getElementById('WorkSpaceDefaultValue').value == CurrentLineSplit[2];
-			return;
-		}
+    // Not a number checks
+    function checkNaN(id, idx, msg) {
+        const el = document.getElementById(id);
+        if (el && isNaN(el.value)) {
+            ErrorMessageDialog('Not Number Value', msg);
+            el.value = currentLineSplit[idx];
+            return true;
+        }
+        return false;
+    }
 
-		if(document.getElementById('WorkSpaceFactoryValue').value == ""){
-			ErrorMessageDialog('Update Issue','Factory Value is empty? Setting Back to Previous Value');
-			document.getElementById('WorkSpaceFactoryValue').value == CurrentLineSplit[3];
-			return;
-		}
-	}else{
-		if(document.getElementById('WorkSpaceCurrentValue').value == ""){
-			ErrorMessageDialog('Update Issue','Current Value is empty? Setting Back to Previous Value');
-			document.getElementById('WorkSpaceCurrentValue').value == CurrentLineSplit[1];
-			return;
-		}
-	}
-	//END CHECK IF ANY VALUE EMPTY
-	
-	//START IF OUT OF SCALE CHECK
-	if(ParameterType == "CurrentValue"){
-		//Max Value
-		if(scaled == true){
-			MaxValue = document.getElementById('WorkSpaceCurrentValue').value * CurrentLineSplit[7];
-		}else{
-			MaxValue = document.getElementById('WorkSpaceCurrentValue').value
-		}
-	
-		if(Number(MaxValue) > Number(CurrentLineSplit[5])){
-			//alert(MaxValue);
-			//alert(CurrentLineSplit[5]);
-			ErrorMessageDialog('Scale Issue','You cannot make your current value larger than your maximum value');
-			if(scaled == true){
-				document.getElementById('WorkSpaceCurrentValue').value = CurrentLineSplit[1] / CurrentLineSplit[7];
-				return;
-			}else{
-				document.getElementById('WorkSpaceCurrentValue').value = CurrentLineSplit[1];
-				return;
-			}
-		}
+    if (parameterType === "CurrentValue" && checkNaN('WorkSpaceCurrentValue', 1, 'A non number has been placed in the current value input')) return;
+    if (parameterType === "MinValue" && checkNaN('WorkSpaceMinValue', 4, 'A non number has been placed in the min value input')) return;
+    if (parameterType === "MaxValue" && checkNaN('WorkSpaceMaxValue', 5, 'A non number has been placed in the max value input')) return;
+    if (parameterType === "DefaultValue" && checkNaN('WorkSpaceDefaultValue', 2, 'A non number has been placed in the Default value input')) return;
+    if (parameterType === "FactoryValue" && checkNaN('WorkSpaceFactoryValue', 3, 'A non number has been placed in the Factory value input')) return;
 
-		if(Number(MaxValue) < Number(CurrentLineSplit[4])){
-			ErrorMessageDialog('Scale Issue','You cannot make your current value smaller than your minimum value');
-			if(scaled == true){
-				document.getElementById('WorkSpaceCurrentValue').value = CurrentLineSplit[1] / CurrentLineSplit[7];
-				return;
-			}else{
-				document.getElementById('WorkSpaceCurrentValue').value = CurrentLineSplit[1];
-				return;
-			}
-		}
-	}
+    // Build new line
+    function buildLine(values) {
+        return JSON.stringify(values.join(','));
+    }
 
-	if(ParameterType == "DefaultValue"){
-		if(scaled == true){
-			MaxValue = document.getElementById('WorkSpaceDefaultValue').value * CurrentLineSplit[7];
-		}else{
-			MaxValue = document.getElementById('WorkSpaceDefaultValue').value
-		}
-		
-		if(Number(MaxValue) > Number(CurrentLineSplit[5])){
-			ErrorMessageDialog('Scale Issue','You cannot make your Default value larger than your maximum value');
-			document.getElementById('WorkSpaceDefaultValue').value = CurrentLineSplit[2];
-			return;
-		}
+    if (Number(AccessLevelForUser) === 8) {
+        switch (parameterType) {
+            case 'CurrentValue':
+                newLine = buildLine([
+                    currentLineSplit[0],
+                    scaled ? Number(document.getElementById('WorkSpaceCurrentValue').value) * scale : document.getElementById('WorkSpaceCurrentValue').value,
+                    currentLineSplit[2],
+                    currentLineSplit[3],
+                    currentLineSplit[4],
+                    currentLineSplit[5],
+                    currentLineSplit[6],
+                    currentLineSplit[7],
+                    currentLineSplit[8],
+                    currentLineSplit[9],
+                    currentLineSplit[10].replace('\r', '')
+                ]);
+                break;
+            case 'MaxValue':
+                newLine = buildLine([
+                    currentLineSplit[0],
+                    currentLineSplit[1],
+                    currentLineSplit[2],
+                    currentLineSplit[3],
+                    currentLineSplit[4],
+                    scaled ? document.getElementById('WorkSpaceMaxValue').value * scale : document.getElementById('WorkSpaceMaxValue').value,
+                    currentLineSplit[6],
+                    currentLineSplit[7],
+                    currentLineSplit[8],
+                    currentLineSplit[9],
+                    currentLineSplit[10].replace('\r', '')
+                ]);
+                break;
+            case 'MinValue':
+                newLine = buildLine([
+                    currentLineSplit[0],
+                    currentLineSplit[1],
+                    currentLineSplit[2],
+                    currentLineSplit[3],
+                    scaled ? document.getElementById('WorkSpaceMinValue').value * scale : document.getElementById('WorkSpaceMinValue').value,
+                    currentLineSplit[5],
+                    currentLineSplit[6],
+                    currentLineSplit[7],
+                    currentLineSplit[8],
+                    currentLineSplit[9],
+                    currentLineSplit[10].replace('\r', '')
+                ]);
+                break;
+            case 'DefaultValue':
+                newLine = buildLine([
+                    currentLineSplit[0],
+                    currentLineSplit[1],
+                    scaled ? document.getElementById('WorkSpaceDefaultValue').value * scale : document.getElementById('WorkSpaceDefaultValue').value,
+                    currentLineSplit[3],
+                    currentLineSplit[4],
+                    currentLineSplit[5],
+                    currentLineSplit[6],
+                    currentLineSplit[7],
+                    currentLineSplit[8],
+                    currentLineSplit[9],
+                    currentLineSplit[10].replace('\r', '')
+                ]);
+                break;
+            case 'FactoryValue':
+                newLine = buildLine([
+                    currentLineSplit[0],
+                    currentLineSplit[1],
+                    currentLineSplit[2],
+                    scaled ? document.getElementById('WorkSpaceFactoryValue').value * scale : document.getElementById('WorkSpaceFactoryValue').value,
+                    currentLineSplit[4],
+                    currentLineSplit[5],
+                    currentLineSplit[6],
+                    currentLineSplit[7],
+                    currentLineSplit[8],
+                    currentLineSplit[9],
+                    currentLineSplit[10].replace('\r', '')
+                ]);
+                break;
+        }
+    } else if (parameterType === 'CurrentValue') {
+        newLine = buildLine([
+            currentLineSplit[0],
+            scaled ? Number(document.getElementById('WorkSpaceCurrentValue').value) * scale : document.getElementById('WorkSpaceCurrentValue').value,
+            currentLineSplit[2],
+            currentLineSplit[3],
+            currentLineSplit[4],
+            currentLineSplit[5],
+            currentLineSplit[6],
+            currentLineSplit[7],
+            currentLineSplit[8],
+            currentLineSplit[9],
+            currentLineSplit[10].replace('\r', '')
+        ]);
+    }
 
-		if(Number(MaxValue) < Number(CurrentLineSplit[4])){
-			ErrorMessageDialog('Scale Issue','You cannot make your Default value smaller than your minimum value');
-			document.getElementById('WorkSpaceDefaultValue').value = CurrentLineSplit[2];
-			return;
-		}
-	}
+    // Update session storage
+    if (newLine) {
+        const newLineStr = newLine.replace(/"/g, '');
+        let parameters = sessionStorage.getItem('Parameters');
+        parameters = parameters.replace(line, newLineStr);
+        sessionStorage.setItem('Parameters', parameters);
 
-	if(ParameterType == "FactoryValue"){
-		if(scaled == true){
-			MaxValue = document.getElementById('WorkSpaceFactoryValue').value * CurrentLineSplit[7];
-		}else{
-			MaxValue = document.getElementById('WorkSpaceFactoryValue').value
-		}
-		
-		if(Number(MaxValue) > Number(CurrentLineSplit[5])){
-			ErrorMessageDialog('Scale Issue','You cannot make your Factory value larger than your maximum value');
-			document.getElementById('WorkSpaceFactoryValue').value = CurrentLineSplit[3];
-			return;
-		}
-		
-		if(Number(MaxValue) < Number(CurrentLineSplit[4])){
-			ErrorMessageDialog('Scale Issue','You cannot make your Factory value larger than your maximum value');
-			document.getElementById('WorkSpaceFactoryValue').value = CurrentLineSplit[3];
-			return;
-		}
-	}
-	//END IF OUT OF SCALE CHECK
-
-	//START IF NOT NUMBER CHECK
-	if(ParameterType == "CurrentValue"){
-		if(isNaN(document.getElementById('WorkSpaceCurrentValue').value) == true){
-			ErrorMessageDialog('Not Number Value','A non number has been placed in the current value input');
-			document.getElementById('WorkSpaceCurrentValue').value = CurrentLineSplit[1];
-			return;
-		}
-	}
-
-	if(ParameterType == "MinValue"){
-		if(isNaN(document.getElementById('WorkSpaceMinValue').value) == true){
-			ErrorMessageDialog('Not Number Value','A non number has been placed in the min value input');
-			document.getElementById('WorkSpaceMinValue').value = CurrentLineSplit[4];
-			return;
-		}
-	}
-	
-	if(ParameterType == "MaxValue"){
-		if(isNaN(document.getElementById('WorkSpaceMaxValue').value) == true){
-			ErrorMessageDialog('Not Number Value','A non number has been placed in the max value input');
-			document.getElementById('WorkSpaceMaxValue').value = CurrentLineSplit[5];
-			return;
-		}
-	}
-	
-	if(ParameterType == "DefaultValue"){
-		if(isNaN(document.getElementById('WorkSpaceDefaultValue').value) == true){
-			ErrorMessageDialog('Not Number Value','A non number has been placed in the Default value input');
-			document.getElementById('WorkSpaceDefaultValue').value = CurrentLineSplit[2];
-			return;
-		}
-	}
-	
-	if(ParameterType == "FactoryValue"){
-		if(isNaN(document.getElementById('WorkSpaceFactoryValue').value) == true){
-			document.getElementById('WorkSpaceFactoryValue').value = CurrentLineSplit[3];
-			return;
-		}
-	}
-	//END IF NOT NUMBER CHECK
-	
-	//START MAKING NEW LINE
-	if(AccessLevelForUser == 8){
-		if(ParameterType == 'CurrentValue'){
-			if(scaled == true){
-				NewLine = JSON.stringify(CurrentLineSplit[0] + ',' + Number(document.getElementById('WorkSpaceCurrentValue').value) * CurrentLineSplit[7] + ',' + CurrentLineSplit[2] + ',' + CurrentLineSplit[3] + ',' + CurrentLineSplit[4] + ',' + CurrentLineSplit[5] + ',' + CurrentLineSplit[6] + ',' + CurrentLineSplit[7] + ',' + CurrentLineSplit[8] + ',' + CurrentLineSplit[9] + ',' + CurrentLineSplit[10].replace('\r',''));
-			}else{
-				NewLine = JSON.stringify(CurrentLineSplit[0] + ',' + document.getElementById('WorkSpaceCurrentValue').value + ',' + CurrentLineSplit[2] + ',' + CurrentLineSplit[3] + ',' + CurrentLineSplit[4] + ',' + CurrentLineSplit[5] + ',' + CurrentLineSplit[6] + ',' + CurrentLineSplit[7] + ',' + CurrentLineSplit[8] + ',' + CurrentLineSplit[9] + ',' + CurrentLineSplit[10].replace('\r',''));
-			}
-		}
-		
-		if(ParameterType == 'MaxValue'){
-			if(scaled == true){
-				NewLine = JSON.stringify(CurrentLineSplit[0] + ',' + CurrentLineSplit[1] + ',' + CurrentLineSplit[2] + ',' + CurrentLineSplit[3] + ',' + CurrentLineSplit[4] + ',' + document.getElementById('WorkSpaceMaxValue').value * CurrentLineSplit[7] + ',' + CurrentLineSplit[6] + ',' + CurrentLineSplit[7] + ',' + CurrentLineSplit[8] + ',' + CurrentLineSplit[9] + ',' + CurrentLineSplit[10].replace('\r',''));
-			}else{
-				NewLine = JSON.stringify(CurrentLineSplit[0] + ',' + CurrentLineSplit[1] + ',' + CurrentLineSplit[2] + ',' + CurrentLineSplit[3] + ',' + CurrentLineSplit[4] + ',' + document.getElementById('WorkSpaceMaxValue').value + ',' + CurrentLineSplit[6] + ',' + CurrentLineSplit[7] + ',' + CurrentLineSplit[8] + ',' + CurrentLineSplit[9] + ',' + CurrentLineSplit[10].replace('\r',''));
-			}
-		}
-		
-		if(ParameterType == 'MinValue'){
-			if(scaled == true){
-				NewLine = JSON.stringify(CurrentLineSplit[0] + ',' + CurrentLineSplit[1] + ',' + CurrentLineSplit[2] + ',' + CurrentLineSplit[3] + ',' + document.getElementById('WorkSpaceMinValue').value * CurrentLineSplit[7] + ',' + CurrentLineSplit[5] + ',' + CurrentLineSplit[6] + ',' + CurrentLineSplit[7] + ',' + CurrentLineSplit[8] + ',' + CurrentLineSplit[9] + ',' + CurrentLineSplit[10].replace('\r',''));
-			}else{
-				NewLine = JSON.stringify(CurrentLineSplit[0] + ',' + CurrentLineSplit[1] + ',' + CurrentLineSplit[2] + ',' + CurrentLineSplit[3] + ',' + document.getElementById('WorkSpaceMinValue').value + ',' + CurrentLineSplit[5] + ',' + CurrentLineSplit[6] + ',' + CurrentLineSplit[7] + ',' + CurrentLineSplit[8] + ',' + CurrentLineSplit[9] + ',' + CurrentLineSplit[10].replace('\r',''));
-			}
-		}
-		if(ParameterType == 'DefaultValue'){
-			if(scaled == true){
-				NewLine = JSON.stringify(CurrentLineSplit[0] + ',' + CurrentLineSplit[1] + ',' + document.getElementById('WorkSpaceDefaultValue').value * CurrentLineSplit[7] + ',' + CurrentLineSplit[3] + ',' + CurrentLineSplit[4] + ',' + CurrentLineSplit[5] + ',' + CurrentLineSplit[6] + ',' + CurrentLineSplit[7] + ',' + CurrentLineSplit[8] + ',' + CurrentLineSplit[9] + ',' + CurrentLineSplit[10].replace('\r',''));
-			}else{
-				NewLine = JSON.stringify(CurrentLineSplit[0] + ',' + CurrentLineSplit[1] + ',' + document.getElementById('WorkSpaceDefaultValue').value + ',' + CurrentLineSplit[3] + ',' + CurrentLineSplit[4] + ',' + CurrentLineSplit[5] + ',' + CurrentLineSplit[6] + ',' + CurrentLineSplit[7] + ',' + CurrentLineSplit[8] + ',' + CurrentLineSplit[9] + ',' + CurrentLineSplit[10].replace('\r',''));
-			}
-		}
-		if(ParameterType == 'FactoryValue'){
-			if(scaled == true){
-				NewLine = JSON.stringify(CurrentLineSplit[0] + ',' + CurrentLineSplit[1] + ',' + CurrentLineSplit[2] + ',' + document.getElementById('WorkSpaceFactoryValue').value * CurrentLineSplit[7] + ',' + CurrentLineSplit[4] + ',' + CurrentLineSplit[5] + ',' + CurrentLineSplit[6] + ',' + CurrentLineSplit[7] + ',' + CurrentLineSplit[8] + ',' + CurrentLineSplit[9] + ',' + CurrentLineSplit[10].replace('\r',''));
-			}else{
-				NewLine = JSON.stringify(CurrentLineSplit[0] + ',' + CurrentLineSplit[1] + ',' + CurrentLineSplit[2] + ',' + document.getElementById('WorkSpaceFactoryValue').value + ',' + CurrentLineSplit[4] + ',' + CurrentLineSplit[5] + ',' + CurrentLineSplit[6] + ',' + CurrentLineSplit[7] + ',' + CurrentLineSplit[8] + ',' + CurrentLineSplit[9] + ',' + CurrentLineSplit[10].replace('\r',''));
-			}
-		}
-	}else{
-		if(ParameterType == 'CurrentValue'){
-			if(scaled == true){
-				NewLine = JSON.stringify(CurrentLineSplit[0] + ',' + Number(document.getElementById('WorkSpaceCurrentValue').value) * CurrentLineSplit[7] + ',' + CurrentLineSplit[2] + ',' + CurrentLineSplit[3] + ',' + CurrentLineSplit[4] + ',' + CurrentLineSplit[5] + ',' + CurrentLineSplit[6] + ',' + CurrentLineSplit[7] + ',' + CurrentLineSplit[8] + ',' + CurrentLineSplit[9] + ',' + CurrentLineSplit[10].replace('\r',''));
-			}else{
-				NewLine = JSON.stringify(CurrentLineSplit[0] + ',' + document.getElementById('WorkSpaceCurrentValue').value + ',' + CurrentLineSplit[2] + ',' + CurrentLineSplit[3] + ',' + CurrentLineSplit[4] + ',' + CurrentLineSplit[5] + ',' + CurrentLineSplit[6] + ',' + CurrentLineSplit[7] + ',' + CurrentLineSplit[8] + ',' + CurrentLineSplit[9] + ',' + CurrentLineSplit[10].replace('\r',''));
-			}
-		}
-	}
-
-	if(ParameterType == 'CurrentValue'){
-		document.getElementById('WorkSpaceCurrentValue').setAttribute("onchange",'parameterchange("' + CurrentLineSplit[0] + '",' + '"CurrentValue",' + '"' + CurrentLineSplit[1] + '",'  + NewLine + ')');
-	}
-
-	//START UPDATE ONCHANGE VALUES
-
-	document.getElementById('WorkSpaceCurrentValue').setAttribute('onchange','parameterchange("' + NewLine.replace(/"/g,'')[0] + '","CurrentValue","' + NewLine.replace(/"/g,'')[0] + '","' + NewLine.replace(/"/g,'') + '")');
-
-if(AccessLevelForUser == 8){
-	document.getElementById('WorkSpaceMaxValue').setAttribute('onchange','parameterchange("' + NewLine.replace(/"/g,'')[0] + '","MaxValue","' + NewLine.replace(/"/g,'')[0] + '","' + NewLine.replace(/"/g,'') + '")');
-	document.getElementById('WorkSpaceMinValue').setAttribute('onchange','parameterchange("' + NewLine.replace(/"/g,'')[0] + '","MinValue","' + NewLine.replace(/"/g,'')[0] + '","' + NewLine.replace(/"/g,'') + '")');
-	document.getElementById('WorkSpaceDefaultValue').setAttribute('onchange','parameterchange("' + NewLine.replace(/"/g,'')[0] + '","DefaultValue","' + NewLine.replace(/"/g,'')[0] + '","' + NewLine.replace(/"/g,'') + '")');
-	document.getElementById('WorkSpaceFactoryValue').setAttribute('onchange','parameterchange("' + NewLine.replace(/"/g,'')[0] + '","FactoryValue","' + NewLine.replace(/"/g,'')[0] + '","' + NewLine.replace(/"/g,'') + '")');
-
-}
-
-	NewParameters = sessionStorage.getItem('Parameters').replace(Line,NewLine.replace(/"/g,''));
-	sessionStorage.setItem('Parameters','');
-	sessionStorage.setItem('Parameters',NewParameters);
-
-	if(sessionStorage.getItem('Parameters') == NewParameters){
-		ChangesMadePreDownload = true;
-	}
+        if (sessionStorage.getItem('Parameters') === parameters) {
+            window.ChangesMadePreDownload = true;
+        }
+    }
 }
