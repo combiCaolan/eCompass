@@ -91,13 +91,15 @@ function SetLanguage() {
 	});
 }
 
-SetLanguage();
-
-// Optionally update Bit labels if on editor page
-if (typeof CurrentPage == 'undefined') {
-	const CurrentPage = window.location.pathname.split('/')[window.location.pathname.split('/').length - 1];
-} else {
-	if (CurrentPage == 'editor.php') {
-		BitLabelChecker();
+function updateBitLabels() {
+	// Optionally update Bit labels if on editor page
+	if (typeof CurrentPage == 'undefined') {
+		const CurrentPage = window.location.pathname.split('/')[window.location.pathname.split('/').length - 1];
+	} else {
+		if (CurrentPage == 'editor.php') {
+			BitLabelChecker();
+		}
 	}
 }
+
+module.exports = { SetLanguage };

@@ -1,61 +1,44 @@
-/*Read Description File*/
-/*DescriptionFile = sessionStorage.getItem('ParametersDescription');
-DescriptionDictionary = {};
-
-counter = 0;
-
-counter = 0;
-while(DescriptionFile.split('\n')[counter] != undefined){
-	if(DescriptionFile.split('\n')[counter][0] == '#'){
-		Index = DescriptionFile.split('\n')[counter].replace('#','');
-		IndexDescription = '';
-		counter++;
-		while(DescriptionFile.split('\n')[counter] != undefined && DescriptionFile.split('\n')[counter][0] != '#'){
-			IndexDescription = IndexDescription + DescriptionFile.split('\n')[counter];
-			counter++;
-		}
-		DescriptionDictionary[Index] = IndexDescription;
-	}else{
-		counter++;
-	}
-}
-*/
-
-function ClearWorkSpace(){
-	//Clear Workplace
-	if(document.getElementById('topDefineTable')){
-		document.getElementById('topDefineTable').innerHTML = '';
-	}
-	if(document.getElementById('topDefineDescription')){
-		document.getElementById('topDefineDescription').innerHTML = '';
-	}
+/**
+ * Clears the workspace UI by removing all content from the main description and table areas.
+ */
+function ClearWorkSpace() {
+    const tableElem = document.getElementById('topDefineTable');
+    if (tableElem) tableElem.innerHTML = '';
+    const descElem = document.getElementById('topDefineDescription');
+    if (descElem) descElem.innerHTML = '';
 }
 
-function AddFixedParameter(HTMLObject){
-	
-	WorkSpaceTitle = document.createElement('p');
-	WorkSpaceTitle.setAttribute('id','WorkSpaceTitle');
-	WorkSpaceTitle.innerHTML = HTMLObject.innerHTML;
-	
-	Description = document.createElement('p');
-	Description.setAttribute('id','description');
-	if(MainDescriptionsDict[HTMLObject.id] != undefined){
-		Description.innerHTML = MainDescriptionsDict[HTMLObject.id].replace('#' + HTMLObject.id,'');
-	}
-	
-	ParameterMsg = document.createElement('p');
-	ParameterMsg.setAttribute('value','This Parameter is not present on this file');
-	
-	AddParameterButton = document.createElement('input');
-	AddParameterButton.setAttribute('id','AddParameterButton');
-	AddParameterButton.setAttribute('onclick','AddParmeterToClp("' + HTMLObject.id.toString() + '","' + HTMLObject + '")');
-	AddParameterButton.setAttribute('type','submit');
-	AddParameterButton.setAttribute('value','Add ' + HTMLObject.innerHTML + ' to this file?');
-	
-	document.getElementById('topDefineDescription').appendChild(WorkSpaceTitle);
-	document.getElementById('topDefineDescription').appendChild(Description);
-	document.getElementById('topDefineDescription').appendChild(ParameterMsg);
-	document.getElementById('topDefineDescription').appendChild(AddParameterButton);
+/**
+ * Displays UI to add a fixed parameter that is not present in the current file.
+ * @param {HTMLElement} htmlObject - The parameter button or element clicked.
+ */
+function AddFixedParameter(htmlObject) {
+    const workSpaceTitle = document.createElement('p');
+    workSpaceTitle.id = 'WorkSpaceTitle';
+    workSpaceTitle.innerHTML = htmlObject.innerHTML;
+
+    const description = document.createElement('p');
+    description.id = 'description';
+    if (MainDescriptionsDict[htmlObject.id] !== undefined) {
+        description.innerHTML = MainDescriptionsDict[htmlObject.id].replace('#' + htmlObject.id, '');
+    }
+
+    const parameterMsg = document.createElement('p');
+    parameterMsg.setAttribute('value', 'This Parameter is not present on this file');
+
+    const addParameterButton = document.createElement('input');
+    addParameterButton.id = 'AddParameterButton';
+    addParameterButton.type = 'submit';
+    addParameterButton.value = `Add ${htmlObject.innerHTML} to this file?`;
+    addParameterButton.onclick = function () {
+        AddParmeterToClp(htmlObject.id.toString(), htmlObject);
+    };
+
+    const descElem = document.getElementById('topDefineDescription');
+    descElem.appendChild(workSpaceTitle);
+    descElem.appendChild(description);
+    descElem.appendChild(parameterMsg);
+    descElem.appendChild(addParameterButton);
 }
 
 function MenuParametersOnclick(Line,HTMLObject){
@@ -1092,3 +1075,5 @@ function MenuParametersOnclick(Line,HTMLObject){
 	
 	}
 }
+
+module.exports = { ClearWorkSpace, AddFixedParameter };

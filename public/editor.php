@@ -109,5 +109,9 @@
 
         <!-- Include all required JavaScript for the editor page -->
         <?php include_once('../src/includes/GlobalScripts.html') ?>
+        <script>
+            SetLanguage();
+updateBitLabels()
+        </script>
 </body>
 </html>

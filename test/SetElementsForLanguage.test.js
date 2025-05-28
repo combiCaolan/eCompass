@@ -1,10 +1,12 @@
-// test/SetElementsForLanguage.test.js
 const { expect } = require('chai');
+const jsdomGlobal = require('jsdom-global');
+const { SetLanguage } = require('../assets/js/LanguageLogic/SetElementsForLanguage');
 
 describe('SetLanguage', function() {
+  let cleanup;
+
   beforeEach(function() {
-    // Set up DOM elements and LanguageDict mock here
-    global.document = require('jsdom-global')();
+    cleanup = jsdomGlobal();
     global.LanguageDict = { SearchDialog: 'Search', Message: 'Msg' };
     const elem = document.createElement('div');
     elem.id = 'SearchParameterDialog';
@@ -12,8 +14,7 @@ describe('SetLanguage', function() {
   });
 
   afterEach(function() {
-    // Clean up
-    document.body.innerHTML = '';
+    cleanup();
   });
 
   it('sets dialog title from LanguageDict', function() {
