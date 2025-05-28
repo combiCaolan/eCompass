@@ -66,16 +66,13 @@ include_once('../src/includes/ListTruckDirectories.php'); // List available truc
 	</script>
 
 	<!-- Load additional JavaScript modules for front page functionality -->
-	<script src="../assets/js/AddMissingParameters.js"></script>
-	<!--<script src="assets/js/ListTruckDir.js"></script>-->
-	<script src="../UnsupportedBrowserCheck.js"></script>
-	<script src="../assets/js/LanguageLogic/DynamicLanguage.js"></script>
+	<script src="../assets/js/add-missing-parameters.js"></script>
+	<script src="../assets/js/LanguageLogic/dynamic-language.js"></script>
 	<script src="../assets/js/Dialog.js"></script>
-	<!--<script src="assets/js/InitialStart/LanguageSet.js"></script>-->
 	<script src="../assets/js/Api-Logic/Api-Change.js"></script>
-	<script src="../assets/js/AllMenuButtonFunctions.js"></script>
-	<script src="../assets/js/MenuLogic.js"></script>
-	<script src="../assets/js/LanguageLogic/SetElementsForLanguage.js"></script>
+	<script src="../assets/js/menu-button-functions.js"></script>
+	<script src="../assets/js/menu-logic.js"></script>
+	<script src="../assets/js/LanguageLogic/set-elements-for-language.js"></script>
 
 	<script>
 		/**
