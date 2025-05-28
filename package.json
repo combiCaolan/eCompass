@@ -19,5 +19,11 @@
   "bugs": {
     "url": "https://github.com/combiCaolan/eCompass/issues"
   },
-  "homepage": "https://github.com/combiCaolan/eCompass#readme"
+  "homepage": "https://github.com/combiCaolan/eCompass#readme",
+  "devDependencies": {
+    "vitest": "^3.1.4"
+  },
+  "dependencies": {
+    "jsdom-global": "^3.0.2"
+  }
 }
