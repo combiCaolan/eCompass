@@ -11,11 +11,11 @@
 <html>
     <head>
         <!-- Include common <head> contents (meta tags, styles, scripts, etc.) -->
-        <?php include_once('../src/includes/headContents.html'); ?>
+        <?php include_once('../src/includes/HeadIncludes.html'); ?>
     </head>
 <body>
         <!-- Include modal dialogs for user interactions -->
-        <?php include_once('../src/includes/Dialog.html'); ?>
+        <?php include_once('../src/includes/DialogTemplates.html'); ?>
 
         <!-- Loading screen shown while the app is initializing -->
         <div id="LoadingScreen">
@@ -24,7 +24,7 @@
 
         <div id="Container">
             <!-- Main web header/navigation bar -->
-            <?php include_once('../src/includes/WebHeader.html'); ?>
+            <?php include_once('../src/includes/MainHeader.html'); ?>
 
             <!-- Tree navigation for parameter sections -->
             <ul class="tree">
@@ -105,9 +105,9 @@
         </div>
 
         <!-- List of available truck directories (for file selection/navigation) -->
-        <?php include_once('../src/includes/ListTruckDir.php'); ?>
+        <?php include_once('../src/includes/ListTruckDirectories.php'); ?>
 
         <!-- Include all required JavaScript for the editor page -->
-        <?php include_once('../src/includes/JsContents.html') ?>
+        <?php include_once('../src/includes/GlobalScripts.html') ?>
 </body>
 </html>

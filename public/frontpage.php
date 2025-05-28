@@ -10,7 +10,7 @@
 
 // include_once('../src/includes/Verify.php');      // User verification and session setup
 header("Access-Control-Allow-Origin: *");
-include_once('../src/includes/ListTruckDir.php'); // List available truck directories
+include_once('../src/includes/ListTruckDirectories.php'); // List available truck directories
 ?>
 
 <!DOCTYPE html>
@@ -18,14 +18,14 @@ include_once('../src/includes/ListTruckDir.php'); // List available truck direct
 
 <head>
 	<!-- Include common <head> contents (meta tags, styles, scripts, etc.) -->
-	<?php include_once('../src/includes/headContents.html'); ?>
+	<?php include_once('../src/includes/HeadIncludes.html'); ?>
 </head>
 
 <body>
 	<!-- Include modal dialogs for user interactions -->
-	<?php include_once('../src/includes/Dialog.html'); ?>
+	<?php include_once('../src/includes/DialogTemplates.html'); ?>
 	<!-- Main web header/navigation bar -->
-	<?php include_once('../src/includes/WebHeader.html'); ?>
+	<?php include_once('../src/includes/MainHeader.html'); ?>
 
 	<div id="row_usr">
 		<div id="right_row">

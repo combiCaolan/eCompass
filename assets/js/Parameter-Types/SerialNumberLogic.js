@@ -53,7 +53,7 @@ function SerialNumberFunction(Line,object){
 	SerialParagraph.appendChild(SerialBreak);
 	SerialLabel.appendChild(SerialParagraph);
 	
-	if(Number(WritePermissionDict[4]) <= Number(AccessLevelForUser)){
+	if(Number(writePermissionDict[4]) <= Number(AccessLevelForUser)){
 		SerialInput = document.createElement('input');
 		SerialInput.setAttribute('id','SerialInput');
 		SerialInput.setAttribute('style','style="float:left; text-align:right;"');

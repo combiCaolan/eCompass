@@ -1,14 +1,24 @@
-//Setting Basic Language Structure for workspace
-if(sessionStorage.getItem('LanguageFileContents')){
-	var LanguageDict = new Object();
+/**
+ * DynamicLanguage.js
+ * 
+ * Loads language key-value pairs from sessionStorage and builds the LanguageDict object.
+ * This dictionary is used for dynamic UI localization throughout the application.
+ * Uses best practices for variable naming, code structure, and documentation.
+ */
 
-	var LanguageDict = {};
+// Build LanguageDict from LanguageFileContents in sessionStorage
+let LanguageDict = {};
 
-	LanguageMap = sessionStorage.getItem('LanguageFileContents').split('\n');
-	counter = 0;
-	while(LanguageMap[counter] != undefined){
-		CurrentLine = LanguageMap[counter].split(':');
-		LanguageDict[CurrentLine[0]] = CurrentLine[1];
-		counter++;
-	}
+if (sessionStorage.getItem('LanguageFileContents')) {
+    const languageLines = sessionStorage.getItem('LanguageFileContents').split('\n');
+    for (let i = 0; i < languageLines.length; i++) {
+        const line = languageLines[i];
+        if (!line) continue;
+        const parts = line.split(':');
+        if (parts.length >= 2) {
+            const key = parts[0].trim();
+            const value = parts.slice(1).join(':').trim(); // Handles values with colons
+            LanguageDict[key] = value;
+        }
+    }
 }

@@ -176,7 +176,7 @@ function DropDownFunction(ParameterLine,object){
 		}
 	}
 	document.getElementById('topDefineDescription').appendChild(tr);
-	if(Number(WritePermissionDict[Number(ParameterLine[0])]) > Number(AccessLevelForUser)){
+	if(Number(writePermissionDict[Number(ParameterLine[0])]) > Number(AccessLevelForUser)){
 		DropDown.setAttribute('disabled','disabled');
 		DropDown.setAttribute('onclick','');
 		try{

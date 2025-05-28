@@ -412,7 +412,7 @@ function RegularParmeter(value,object){
 		Factory.appendChild(FactoryunitlabelValue);
 	}
 	/*Closing Factory*/	
-	if(Number(WritePermissionDict[object]) > Number(AccessLevelForUser)){
+	if(Number(writePermissionDict[object]) > Number(AccessLevelForUser)){
 		try{
 			document.getElementById('WorkSpaceCurrentValue').setAttribute('disabled','disabled');
 			document.getElementById('WorkSpaceCurrentValue').setAttribute('onclick','');
