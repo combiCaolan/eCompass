@@ -1,70 +1,87 @@
-function CompleteErrorCheck(){
-	var LabelDict = new Object();
+/**
+ * CompleteErrorCheck.js
+ * 
+ * Checks all parameters for values outside their min/max bounds and displays errors in the UI.
+ * Highlights parameters that are out of range and allows navigation to them.
+ * 
+ * Best practices:
+ * - Uses let/const for variable declarations
+ * - Adds docstrings and inline comments
+ * - Uses descriptive variable names
+ * - Handles errors gracefully
+ */
 
-	var LabelDict = {};
+/**
+ * Checks parameter values against their min and max limits.
+ * Populates the error report UI with any out-of-range parameters.
+ */
+function CompleteErrorCheck() {
+    // Build a dictionary of parameter labels from ParameterMain
+    const labelDict = {};
+    const parameterMain = (sessionStorage.getItem('ParameterMain') || '').split('\n');
+    for (const line of parameterMain) {
+        const parts = line.split(',');
+        if (parts.length > 3) {
+            labelDict[parts[0]] = parts[3];
+        }
+    }
 
-	ParameterMain = sessionStorage.getItem('ParameterMain').split('\n');
-	counter = 0;
-	while(ParameterMain[counter] != undefined){
-		LabelDict[ParameterMain[counter].split(',')[0]] = ParameterMain[counter].split(',')[3];
-		counter++;
-	}
-			
-	MaxErrors = [];
-	MinErrors = [];
+    // Arrays to hold parameter IDs with errors
+    const maxErrors = [];
+    const minErrors = [];
 
-	counter = 0;
-	Parameters = sessionStorage.getItem('Parameters');
-	while(Parameters.split('\n')[counter] != undefined){
-		Line = Parameters.split('\n')[counter];
-		//console.log(Line.replace(/,/g,''));
-		Index = Parameters.split('\n')[counter].split(',')[0];
-		CurrentValue = Parameters.split('\n')[counter].split(',')[1];
-		Min = Parameters.split('\n')[counter].split(',')[4];
-		Max = Parameters.split('\n')[counter].split(',')[5];
-		
-		if(Number(CurrentValue) > Number(Max)){
-			MaxErrors.push(Index);
-		}
-		
-		if(Number(CurrentValue) < Number(Min)){
-			MinErrors.push(Index);
-		}
-		counter++;
-	}
+    // Check each parameter for min/max violations
+    const parameters = (sessionStorage.getItem('Parameters') || '').split('\n');
+    for (const line of parameters) {
+        const parts = line.split(',');
+        if (parts.length > 5) {
+            const index = parts[0];
+            const currentValue = Number(parts[1]);
+            const min = Number(parts[4]);
+            const max = Number(parts[5]);
+            if (currentValue > max) {
+                maxErrors.push(index);
+            }
+            if (currentValue < min) {
+                minErrors.push(index);
+            }
+        }
+    }
 
-	UnorderedList = document.createElement('ul');
-	document.getElementById('ErrorReport').appendChild(UnorderedList);
+    // Create and populate the error report list
+    const errorReportElem = document.getElementById('ErrorReport');
+    if (!errorReportElem) return;
+    errorReportElem.innerHTML = ''; // Clear previous errors
+    const unorderedList = document.createElement('ul');
+    errorReportElem.appendChild(unorderedList);
 
-	//Fill Error Report
-	counter = 0;
-	while(MaxErrors[counter] != undefined){
-		Option = document.createElement('li');
-		Option.innerHTML = LabelDict[MaxErrors[counter]];
-		Option.setAttribute('title','Out of Max Value');
-		Option.setAttribute('style','color:blue; text-decoration:underline;');
-		Option.setAttribute("onclick","TreeViewClick(document.getElementById('" + MaxErrors[counter] + "'),'" + MaxErrors[counter] + "')");
-		UnorderedList.appendChild(Option);
-		counter++;
-	}
+    // Add max errors to the list
+    for (const index of maxErrors) {
+        const option = document.createElement('li');
+        option.innerHTML = labelDict[index] || index;
+        option.title = 'Out of Max Value';
+        option.style = 'color:blue; text-decoration:underline;';
+        option.onclick = () => TreeViewClick(document.getElementById(index), index);
+        unorderedList.appendChild(option);
+    }
 
-	counter = 0;
-	while(MinErrors[counter] != undefined){
-		Option = document.createElement('li');
-		Option.innerHTML = LabelDict[MinErrors[counter]];
-		Option.setAttribute('title','Out of Min Value');
-		Option.setAttribute('style','color:blue; text-decoration:underline;');
-		Option.setAttribute("onclick","TreeViewClick(document.getElementById('" + MinErrors[counter] + "'),'" + MinErrors[counter] + "')");
-		UnorderedList.appendChild(Option);
-		counter++;
-	}
+    // Add min errors to the list
+    for (const index of minErrors) {
+        const option = document.createElement('li');
+        option.innerHTML = labelDict[index] || index;
+        option.title = 'Out of Min Value';
+        option.style = 'color:blue; text-decoration:underline;';
+        option.onclick = () => TreeViewClick(document.getElementById(index), index);
+        unorderedList.appendChild(option);
+    }
 
-
-	if(MaxErrors[0] == undefined && MinErrors[0] == undefined){
-		AllGoodTitle = document.createElement('li');
-		AllGoodTitle.innerHTML = 'No Paramter Errors - All Good!';
-		UnorderedList.appendChild(AllGoodTitle);
-	}
+    // If no errors, show a success message
+    if (maxErrors.length === 0 && minErrors.length === 0) {
+        const allGoodTitle = document.createElement('li');
+        allGoodTitle.innerHTML = 'No Parameter Errors - All Good!';
+        unorderedList.appendChild(allGoodTitle);
+    }
 }
 
+// Run the error check on script load
 CompleteErrorCheck();

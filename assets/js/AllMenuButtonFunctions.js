@@ -1,58 +1,82 @@
-// AllMenuButtonFunctions.js - Refactored for local and modern browser use
+/**
+ * AllMenuButtonFunctions.js
+ * 
+ * Contains utility and UI functions for menu actions, file handling, and dialogs
+ * in the eCompass web application.
+ * 
+ * Best practices: 
+ * - Uses const/let for variable declarations
+ * - Adds docstrings and inline comments
+ * - Removes unused/commented code
+ * - Uses descriptive variable names
+ */
 
 // Utility: Get current page name
-const CurrentPage = window.location.pathname.split('/').pop();
+const currentPage = window.location.pathname.split('/').pop();
 
 // Permissions dictionaries
-const ReadPermissionDict = {};
-const WritePermissionDict = {};
+const readPermissionDict = {};
+const writePermissionDict = {};
 
-// Parse template permissions
-const Template = sessionStorage.getItem('TemplateFile');
-if (Template) {
-    Template.split('\n').forEach(line => {
+// Parse template permissions from sessionStorage
+const template = sessionStorage.getItem('TemplateFile');
+if (template) {
+    template.split('\n').forEach(line => {
         const parts = line.split(',');
         if (parts.length > 9) {
-            ReadPermissionDict[parts[0]] = parts[8];
-            WritePermissionDict[parts[0]] = parts[9];
+            readPermissionDict[parts[0]] = parts[8];
+            writePermissionDict[parts[0]] = parts[9];
         }
     });
 }
 
 // Set UI elements if present
-if (document.getElementById('CloseFileDialog')) {
-    document.getElementById('CloseFileDialog').title = 'Close';//LanguageDict["Close"];
-    document.getElementById('CloseFileDialog').innerHTML = 'Close File';//LanguageDict["CloseFileDialogMessage"];
+const closeFileDialogBtn = document.getElementById('CloseFileDialog');
+if (closeFileDialogBtn) {
+    closeFileDialogBtn.title = 'Close';
+    closeFileDialogBtn.innerHTML = 'Close File';
 }
-if (document.getElementById('UsernameLocal')) {
-    document.getElementById('UsernameLocal').innerHTML = sessionStorage.getItem('loggedinusername') || '';
+const usernameLocal = document.getElementById('UsernameLocal');
+if (usernameLocal) {
+    usernameLocal.innerHTML = sessionStorage.getItem('loggedinusername') || '';
 }
-if (document.getElementById('AccessLevel')) {
-    document.getElementById('AccessLevel').innerHTML = LanguageDict[Number(sessionStorage.getItem('AccessLevel'))] || '';
+const accessLevelElem = document.getElementById('AccessLevel');
+if (accessLevelElem) {
+    accessLevelElem.innerHTML = LanguageDict[Number(sessionStorage.getItem('AccessLevel'))] || '';
 }
-if (document.getElementById('APIVersion')) {
-    document.getElementById('APIVersion').innerHTML = sessionStorage.getItem('APIV') || '';
+const apiVersionElem = document.getElementById('APIVersion');
+if (apiVersionElem) {
+    apiVersionElem.innerHTML = sessionStorage.getItem('APIV') || '';
 }
 
-let ChangesMadePreDownload = false;
+let changesMadePreDownload = false;
 
-// Open eCompass in new tab
-function OpenInNewTab(PassName) {
-    localStorage.setItem('OpenInNewTab', PassName);
+/**
+ * Opens eCompass in a new tab and passes a name via localStorage.
+ * @param {string} passName 
+ */
+function openInNewTab(passName) {
+    localStorage.setItem('OpenInNewTab', passName);
     window.open('https://support.combilift.net/ecompass');
 }
 
-// Open a new file, with unsaved changes warning
-function OpenNewFile() {
-    if (ChangesMadePreDownload) {
-        const check = confirm(LanguageDict['GeneralFileLostWarning']);
-        if (!check) return;
+/**
+ * Opens a new file, warning if there are unsaved changes.
+ */
+function openNewFile() {
+    if (changesMadePreDownload) {
+        const confirmLeave = confirm(LanguageDict['GeneralFileLostWarning']);
+        if (!confirmLeave) return;
     }
-    OpenInNewTab('OpenNew');
+    openInNewTab('OpenNew');
 }
 
-// Download file as .clp
-function WebdownloadFile(filename, text) {
+/**
+ * Downloads a file as .clp using a data URI.
+ * @param {string} filename 
+ * @param {string} text 
+ */
+function webDownloadFile(filename, text) {
     const element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename || 'COMBI_PAR.clp');
@@ -62,18 +86,23 @@ function WebdownloadFile(filename, text) {
     document.body.removeChild(element);
 }
 
-// Mobile menu toggle
-function MobileMenuFunction() {
-    const x = document.getElementById("myTopnav");
-    if (x.className === "topnav") {
-        x.className += " responsive";
+/**
+ * Toggles the mobile menu.
+ */
+function mobileMenuFunction() {
+    const nav = document.getElementById("myTopnav");
+    if (!nav) return;
+    if (nav.className === "topnav") {
+        nav.className += " responsive";
     } else {
-        x.className = "topnav";
+        nav.className = "topnav";
     }
 }
 
-// Home menu click toggle
-function HomeMenuClick() {
+/**
+ * Toggles the home menu and tree view.
+ */
+function homeMenuClick() {
     const tree = document.getElementsByClassName('tree')[0];
     if (!tree) return;
     if (tree.getAttribute('state') !== 'clicked' || tree.getAttribute('state') == null) {
@@ -89,8 +118,10 @@ function HomeMenuClick() {
     }
 }
 
-// Parameters menu toggle
-function ParametersMenuToggle() {
+/**
+ * Toggles the parameters menu and viewer.
+ */
+function parametersMenuToggle() {
     const menuLink = document.getElementById('MenuLink');
     const mobileMenuText = document.getElementById('MobileMenuButtonForText');
     if (menuLink && mobileMenuText) {
@@ -106,23 +137,24 @@ function ParametersMenuToggle() {
     $("#viewer").toggle();
 }
 
-function readParameters(DefaultFileName) {
-    if (CurrentPage === 'editor.php') {
-        const check = confirm(LanguageDict['GeneralFileLostWarning']);
-        if (!check) return;
+/**
+ * Opens a file dialog to read a .clp file and loads it into sessionStorage.
+ * @param {string} [defaultFileName] 
+ */
+function readParameters(defaultFileName) {
+    if (currentPage === 'editor.php') {
+        const confirmLeave = confirm(LanguageDict['GeneralFileLostWarning']);
+        if (!confirmLeave) return;
     }
 
     if (!sessionStorage.getItem('API')) {
         sessionStorage.setItem('API', 'GeneralDefault_API_1.clp');
     }
 
-    alert('1');
-
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = '.clp';
     input.onchange = e => {
-        alert('2');
         const file = e.target.files[0];
         if (!file) return;
         const reader = new FileReader();
@@ -136,113 +168,118 @@ function readParameters(DefaultFileName) {
 
             // Build UserParametersFileDict
             const lines = data.split('\n');
-            const UserParametersFileDict = {};
+            const userParametersFileDict = {};
             lines.forEach(line => {
                 const key = line.split(',')[0];
-                if (key) UserParametersFileDict[key] = line;
+                if (key) userParametersFileDict[key] = line;
             });
 
             location.href = 'editor.php';
-            // location.href = '../editor.php'; // Move this if you want to redirect after file is loaded
         };
     };
-    input.click(); // <-- This opens the file dialog and waits for user action
-    // location.href = 'public/editor.php'; // Move this if you want to redirect after file is loaded
+    input.click();
 }
 
-// Read default file via AJAX
-function readDefaultFile(Path) {
+/**
+ * Reads a default file via AJAX and loads it into sessionStorage.
+ * @param {string} path 
+ */
+function readDefaultFile(path) {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            sessionStorage.setItem('ParametersFileName', Path);
+            sessionStorage.setItem('ParametersFileName', path);
             sessionStorage.setItem('Parameters', this.responseText);
-            const File = this.responseText;
+            const fileContent = this.responseText;
 
             // Extract API version
-            let ApiVersion = '';
-            File.split('\n').forEach(line => {
+            let apiVersion = '';
+            fileContent.split('\n').forEach(line => {
                 if (line.split(',')[0] === '6') {
-                    ApiVersion = line.split(',')[3];
+                    apiVersion = line.split(',')[3];
                 }
             });
 
             // Build UserParametersFileDict
-            const UserParametersFileDict = {};
-            File.split('\n').forEach(line => {
+            const userParametersFileDict = {};
+            fileContent.split('\n').forEach(line => {
                 const key = line.split(',')[0];
-                if (key) UserParametersFileDict[key] = line;
+                if (key) userParametersFileDict[key] = line;
             });
 
             try {
-                if ('API-' + ApiVersion !== sessionStorage.getItem('APIV')) {
-                    alert('Api Version of this file is ' + ApiVersion + ' ');
+                if ('API-' + apiVersion !== sessionStorage.getItem('APIV')) {
+                    alert('Api Version of this file is ' + apiVersion + ' ');
                 }
 
                 // Prepare form for log registration
-                const EmptyDiv = document.createElement('div');
-                EmptyDiv.style.display = 'none';
+                const emptyDiv = document.createElement('div');
+                emptyDiv.style.display = 'none';
 
-                const Form = document.createElement('form');
-                Form.action = '../includes/openfile.php';
-                Form.method = 'POST';
-                Form.name = 'LogRegForm';
+                const form = document.createElement('form');
+                form.action = '../includes/openfile.php';
+                form.method = 'POST';
+                form.name = 'LogRegForm';
 
-                const Model = document.createElement('input');
-                Model.type = 'text';
-                Model.name = 'Model';
-                Model.value = (UserParametersFileDict[2] || '').split(',')[3] || '';
-                Form.appendChild(Model);
+                const modelInput = document.createElement('input');
+                modelInput.type = 'text';
+                modelInput.name = 'Model';
+                modelInput.value = (userParametersFileDict[2] || '').split(',')[3] || '';
+                form.appendChild(modelInput);
 
-                const FileName = document.createElement('input');
-                FileName.type = 'text';
-                FileName.name = 'FileName';
-                FileName.value = Path.split('/').pop();
-                Form.appendChild(FileName);
+                const fileNameInput = document.createElement('input');
+                fileNameInput.type = 'text';
+                fileNameInput.name = 'FileName';
+                fileNameInput.value = path.split('/').pop();
+                form.appendChild(fileNameInput);
 
-                const SerialNumber = document.createElement('input');
-                SerialNumber.type = 'text';
-                SerialNumber.name = 'SerialNumber';
-                SerialNumber.value = (UserParametersFileDict[4] || '').split(',')[3] || '';
-                Form.appendChild(SerialNumber);
+                const serialNumberInput = document.createElement('input');
+                serialNumberInput.type = 'text';
+                serialNumberInput.name = 'SerialNumber';
+                serialNumberInput.value = (userParametersFileDict[4] || '').split(',')[3] || '';
+                form.appendChild(serialNumberInput);
 
-                const UserName = document.createElement('input');
-                UserName.type = 'text';
-                UserName.name = 'Username';
-                UserName.value = sessionStorage.getItem('loggedinusername') || '';
-                Form.appendChild(UserName);
+                const userNameInput = document.createElement('input');
+                userNameInput.type = 'text';
+                userNameInput.name = 'Username';
+                userNameInput.value = sessionStorage.getItem('loggedinusername') || '';
+                form.appendChild(userNameInput);
 
-                const AccessLevel = document.createElement('input');
-                AccessLevel.type = 'text';
-                AccessLevel.name = 'AccessLevel';
-                AccessLevel.value = sessionStorage.getItem('AccessLevel') || '';
-                Form.appendChild(AccessLevel);
+                const accessLevelInput = document.createElement('input');
+                accessLevelInput.type = 'text';
+                accessLevelInput.name = 'AccessLevel';
+                accessLevelInput.value = sessionStorage.getItem('AccessLevel') || '';
+                form.appendChild(accessLevelInput);
 
-                const ActionInput = document.createElement('input');
-                ActionInput.type = 'text';
-                ActionInput.name = 'ActionInput';
-                ActionInput.value = 'Opened New File';
-                Form.appendChild(ActionInput);
+                const actionInput = document.createElement('input');
+                actionInput.type = 'text';
+                actionInput.name = 'ActionInput';
+                actionInput.value = 'Opened New File';
+                form.appendChild(actionInput);
 
-                const SubmitForm = document.createElement('input');
-                SubmitForm.type = 'submit';
-                Form.appendChild(SubmitForm);
+                const submitForm = document.createElement('input');
+                submitForm.type = 'submit';
+                form.appendChild(submitForm);
 
-                EmptyDiv.appendChild(Form);
+                emptyDiv.appendChild(form);
                 const topnav = document.getElementById('myTopnav');
-                if (topnav) topnav.appendChild(EmptyDiv);
+                if (topnav) topnav.appendChild(emptyDiv);
 
-                SubmitForm.click();
+                submitForm.click();
             } catch (err) {
                 alert('Combi General Error - Log 404');
             }
         }
     };
-    xhttp.open("GET", Path, true);
+    xhttp.open("GET", path, true);
     xhttp.send();
 }
 
-// Download file utility
+/**
+ * Downloads a file using a data URI.
+ * @param {string} filename 
+ * @param {string} text 
+ */
 function download(filename, text) {
     const element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
@@ -253,36 +290,42 @@ function download(filename, text) {
     document.body.removeChild(element);
 }
 
-// Download file with error checks
-function WebDownloadFile() {
-    if (typeof MinError !== 'undefined' && MinError.length !== 0 ||
-        typeof MaxError !== 'undefined' && MaxError.length !== 0) {
-        const UserAuth = confirm('Errors still exist on this file - are you sure you want to download?');
-        if (!UserAuth) return;
+/**
+ * Downloads the file after checking for errors and removed parameters.
+ */
+function webDownloadFileWithChecks() {
+    if ((typeof MinError !== 'undefined' && MinError.length !== 0) ||
+        (typeof MaxError !== 'undefined' && MaxError.length !== 0)) {
+        const userAuth = confirm('Errors still exist on this file - are you sure you want to download?');
+        if (!userAuth) return;
     }
 
     if (typeof removedParametersCounters !== 'undefined' && removedParametersCounters.length !== 0) {
         removedParametersCounters.forEach(counter => {
-            let NewPar = sessionStorage.getItem('Parameters').replace(counter + '\n', '');
-            sessionStorage.setItem('Parameters', NewPar);
+            let newPar = sessionStorage.getItem('Parameters').replace(counter + '\n', '');
+            sessionStorage.setItem('Parameters', newPar);
         });
     }
 
     location.href = 'Download.php';
-    ChangesMadePreDownload = false;
+    changesMadePreDownload = false;
 }
 
-// Close file dialog with unsaved changes warning
-function CloseFileDialog() {
-    if (ChangesMadePreDownload) {
-        const check = confirm(LanguageDict['GeneralFileLostWarning']);
-        if (!check) return;
+/**
+ * Closes the file dialog, warning if there are unsaved changes.
+ */
+function closeFileDialog() {
+    if (changesMadePreDownload) {
+        const confirmLeave = confirm(LanguageDict['GeneralFileLostWarning']);
+        if (!confirmLeave) return;
     }
     location.href = sessionStorage.getItem('ServerPath') || '';
 }
 
-// Compare dialog UI
-function CompareDialog() {
+/**
+ * Opens the compare dialog UI.
+ */
+function compareDialog() {
     const topDefineTable = document.getElementById('topDefineTable');
     const topDefineDescription = document.getElementById('topDefineDescription');
     if (!topDefineTable || !topDefineDescription) return;
@@ -290,62 +333,64 @@ function CompareDialog() {
     topDefineTable.innerHTML = '';
     topDefineDescription.innerHTML = '';
 
-    const WorkSpaceTitle = document.createElement('p');
-    WorkSpaceTitle.id = 'WorkSpaceTitle';
-    WorkSpaceTitle.innerHTML = LanguageDict["CompareTitle"];
+    const workSpaceTitle = document.createElement('p');
+    workSpaceTitle.id = 'WorkSpaceTitle';
+    workSpaceTitle.innerHTML = LanguageDict["CompareTitle"];
 
-    const DescriptionArea = document.createElement('tr');
-    const Description = document.createElement('p');
-    Description.innerHTML = LanguageDict["CompareDescription"];
-    Description.id = 'description';
+    const descriptionArea = document.createElement('tr');
+    const description = document.createElement('p');
+    description.innerHTML = LanguageDict["CompareDescription"];
+    description.id = 'description';
 
-    const UnorderedList = document.createElement('ul');
-    const ListItemOne = document.createElement('li');
-    const ListItemTwo = document.createElement('li');
+    const unorderedList = document.createElement('ul');
+    const listItemOne = document.createElement('li');
+    const listItemTwo = document.createElement('li');
 
-    const FileButton = document.createElement('input');
-    FileButton.type = 'submit';
-    FileButton.value = 'Choose File to compare with';
-    FileButton.onclick = PostCompareFile;
-    FileButton.id = 'FileActionsButtonWorkSpace';
+    const fileButton = document.createElement('input');
+    fileButton.type = 'submit';
+    fileButton.value = 'Choose File to compare with';
+    fileButton.onclick = PostCompareFile;
+    fileButton.id = 'FileActionsButtonWorkSpace';
 
-    const CompareBTN = document.createElement('input');
-    CompareBTN.type = 'submit';
-    CompareBTN.value = 'Compare Files';
-    CompareBTN.onclick = Compare;
-    CompareBTN.id = 'FileActionsButtonWorkSpace';
+    const compareBtn = document.createElement('input');
+    compareBtn.type = 'submit';
+    compareBtn.value = 'Compare Files';
+    compareBtn.onclick = Compare;
+    compareBtn.id = 'FileActionsButtonWorkSpace';
 
-    const Results = document.createElement('div');
-    Results.id = 'results';
+    const results = document.createElement('div');
+    results.id = 'results';
 
-    const Log = document.createElement('div');
+    const log = document.createElement('div');
     try {
-        Log.innerHTML = CurentFileActionLog;
+        log.innerHTML = CurentFileActionLog;
     } catch (err) {
-        // CurrentFileActionLog Doesn't exist
+        // CurentFileActionLog may not exist
     }
-    Log.id = 'SpecialBlockLog';
+    log.id = 'SpecialBlockLog';
 
-    topDefineDescription.appendChild(WorkSpaceTitle);
-    topDefineDescription.appendChild(DescriptionArea);
-    topDefineDescription.appendChild(UnorderedList);
-    topDefineDescription.appendChild(Log);
-    topDefineDescription.appendChild(Results);
+    topDefineDescription.appendChild(workSpaceTitle);
+    topDefineDescription.appendChild(descriptionArea);
+    topDefineDescription.appendChild(unorderedList);
+    topDefineDescription.appendChild(log);
+    topDefineDescription.appendChild(results);
 
-    UnorderedList.appendChild(ListItemOne);
-    UnorderedList.appendChild(ListItemTwo);
-    ListItemOne.appendChild(FileButton);
-    ListItemTwo.appendChild(CompareBTN);
-    DescriptionArea.appendChild(Description);
+    unorderedList.appendChild(listItemOne);
+    unorderedList.appendChild(listItemTwo);
+    listItemOne.appendChild(fileButton);
+    listItemTwo.appendChild(compareBtn);
+    descriptionArea.appendChild(description);
 
     $("#CompareDialog").dialog();
 }
 
-// New file dialog with unsaved changes warning
-function NewFile() {
-    if (ChangesMadePreDownload) {
-        const check = confirm(LanguageDict['GeneralFileLostWarning']);
-        if (!check) return;
+/**
+ * Opens the new file dialog, warning if there are unsaved changes.
+ */
+function newFile() {
+    if (changesMadePreDownload) {
+        const confirmLeave = confirm(LanguageDict['GeneralFileLostWarning']);
+        if (!confirmLeave) return;
     }
     $("#DefaultFileList").dialog();
 }

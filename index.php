@@ -61,8 +61,8 @@ function display_user_roles()
     $string_kb = "nowledgebase";
     $string_combi = "ombilift.";
 
-    if (strpos($user_roles_raw, $string_kb) == true){
-        if (strpos($user_email_test, $string_combi) == true){
+    if (strpos($user_roles_raw, $string_kb) == true) {
+        if (strpos($user_email_test, $string_combi) == true) {
             $user_roles = '7';
         } else {
             $user_roles = '6';

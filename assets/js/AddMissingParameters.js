@@ -1,51 +1,68 @@
-function AddParmeterToClp(LineNumber){
-	//alert('Add Parameter To Clp Function Ran');
-	//console.log(LineNumber);
-	APIFile = sessionStorage.getItem('TemplateFile');
-	
-	counter = 0;
-	while(APIFile.split('\n')[counter] != undefined){
-		if(APIFile.split('\n')[counter].split(',')[0] == LineNumber.toString()){
-			RequestedParameter = APIFile.split('\n')[counter];
-		}
-		counter++;
-	}
-	
-	ParametersFile = sessionStorage.getItem('Parameters');
-	
-	counter = 0;
-	
-	while(ParametersFile.split('\n')[counter] != undefined){
-		if(Number(ParametersFile.split('\n')[counter].split(',')[0]) < Number(RequestedParameter.split(',')[0])){
-		}else{
-			AddHereCounter = counter;
-			break;
-		}
-		counter++;
-	}
-	
-	//Replace with new file
-	try{
-		NewFile =  sessionStorage.getItem('Parameters').replace(sessionStorage.getItem('Parameters').split('\n')[AddHereCounter], RequestedParameter + '\n' + sessionStorage.getItem('Parameters').split('\n')[AddHereCounter])
-		sessionStorage.setItem('Parameters',NewFile);
-		//console.log(NewFile);
-	}catch(err){
-		//console.log('Adding counter problem');
-	}
-	
-	if(document.getElementById(LineNumber).getAttribute('onclick').split('(')[0] == 'TreeViewClick'){
-		//document.getElementById(LineNumber).setAttribute('onclick','TreeViewClick(document.getElementById(' + LineNumber.toString()) + ',' + LineNumber.toString() + ')');
-		location.reload();
-		//TreeViewClick(document.getElementById(LineNumber.toString()),LineNumber.toString());
-	}else{
-		if(ParametersPresent[LineNumber] != undefined){
-					
-			//console.log(document.getElementById(LineNumber));
-			//location.reload();
-			document.getElementById(LineNumber).setAttribute('onclick','MenuParametersOnclick(`' + RequestedParameter + '`,document.getElementById(' + LineNumber + '))');
-			MenuParametersOnclick(RequestedParameter,document.getElementById(LineNumber));
-		}else{
-			MenuParametersOnclick(`empty`,document.getElementById(LineNumber));
-		}
-	}
+/**
+ * Adds a missing parameter to the CLP file in sessionStorage at the correct position.
+ * Updates the UI and sessionStorage accordingly.
+ * 
+ * @param {number|string} lineNumber - The line number (or parameter ID) to add.
+ */
+function addParameterToClp(lineNumber) {
+    // Retrieve the template file and parameters file from sessionStorage
+    const templateFile = sessionStorage.getItem('TemplateFile');
+    const parametersFile = sessionStorage.getItem('Parameters');
+
+    if (!templateFile || !parametersFile) {
+        console.error('TemplateFile or Parameters not found in sessionStorage.');
+        return;
+    }
+
+    // Find the requested parameter line in the template file
+    const templateLines = templateFile.split('\n');
+    let requestedParameter = null;
+    for (const line of templateLines) {
+        if (line.split(',')[0] === lineNumber.toString()) {
+            requestedParameter = line;
+            break;
+        }
+    }
+
+    if (!requestedParameter) {
+        console.error('Requested parameter not found in TemplateFile.');
+        return;
+    }
+
+    // Find the correct insertion index in the parameters file
+    const parameterLines = parametersFile.split('\n');
+    let insertIndex = parameterLines.length; // Default to end if not found
+    for (let i = 0; i < parameterLines.length; i++) {
+        const paramId = parameterLines[i].split(',')[0];
+        if (Number(paramId) >= Number(lineNumber)) {
+            insertIndex = i;
+            break;
+        }
+    }
+
+    // Insert the new parameter at the correct position
+    parameterLines.splice(insertIndex, 0, requestedParameter);
+    const newParametersFile = parameterLines.join('\n');
+    sessionStorage.setItem('Parameters', newParametersFile);
+
+    // Update the UI
+    const element = document.getElementById(lineNumber);
+    if (!element) {
+        console.warn(`Element with id ${lineNumber} not found.`);
+        return;
+    }
+
+    // If the element's onclick is TreeViewClick, reload the page to update the view
+    if (element.getAttribute('onclick') && element.getAttribute('onclick').split('(')[0] === 'TreeViewClick') {
+        location.reload();
+    } else {
+        // If ParametersPresent is defined and has this lineNumber, update the onclick handler and call MenuParametersOnclick
+        if (typeof ParametersPresent !== 'undefined' && ParametersPresent[lineNumber] !== undefined) {
+            element.setAttribute('onclick', `MenuParametersOnclick('${requestedParameter}',document.getElementById(${lineNumber}))`);
+            MenuParametersOnclick(requestedParameter, element);
+        } else {
+            // Otherwise, call MenuParametersOnclick with 'empty'
+            MenuParametersOnclick('empty', element);
+        }
+    }
 }

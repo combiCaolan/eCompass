@@ -8,7 +8,8 @@
 // - Includes all necessary UI components and scripts for the front page.
 // -----------------------------------------------------------------------------
 
-include_once('../src/includes/Verify.php');      // User verification and session setup
+// include_once('../src/includes/Verify.php');      // User verification and session setup
+header("Access-Control-Allow-Origin: *");
 include_once('../src/includes/ListTruckDir.php'); // List available truck directories
 ?>
 

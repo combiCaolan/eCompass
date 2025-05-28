@@ -1,0 +1,23 @@
+{
+  "name": "ecompass",
+  "version": "1.0.0",
+  "description": "eCompass is a web-based application for managing, configuring, and activating parameters for Combilift vehicles. It provides a user-friendly interface for loading, editing, and saving parameter files, as well as activating special modules using MoCAS codes.",
+  "main": "UnsupportedBrowserCheck.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/combiCaolan/eCompass.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/combiCaolan/eCompass/issues"
+  },
+  "homepage": "https://github.com/combiCaolan/eCompass#readme"
+}

@@ -1,502 +1,273 @@
-/*START POSTLOAD.JS*/
+/**
+ * PostLoad.js
+ * 
+ * Handles post-load UI setup, menu closing, parameter integrity checks, and search functionality for eCompass.
+ * Uses best practices for variable naming, code structure, and documentation.
+ */
+
+/**
+ * Updates Bit label buttons with their current values.
+ */
 function BitLabelChecker() {
-	//1000AppendCurrentValue
-	try {
-
-		ACV1000 = ["220", "238", "256", "274", "292", "310", "328", "346", "364", "382", "400"];
-
-		ACVCounter1000 = 0;
-		while (ACV1000[ACVCounter1000] != undefined) {
-
-			TabId = document.getElementById(ACV1000[ACVCounter1000]).parentNode.id.replace('out', '').replace('in', '');
-
-			CurrentValue = UserParametersFileDict[ACV1000[ACVCounter1000]].split(',')[1];
-
-			MidVal = CurrentValue & 255;
-
-
-			FinalVal = DropDownOptionsDict['11_' + MidVal];
-
-			if (document.getElementById('HeadTitle' + TabId).innerHTML.includes('+')) {
-				document.getElementById('HeadTitle' + TabId).innerHTML = '+ ' + FinalVal;
-			} else {
-				document.getElementById('HeadTitle' + TabId).innerHTML = '- ' + FinalVal;
-			}
-			ACVCounter1000++;
-		}
-	} catch (err) {
-		//console.log('1000 Tag Append - ERROR');
-	}
+    try {
+        const ACV1000 = ["220", "238", "256", "274", "292", "310", "328", "346", "364", "382", "400"];
+        let ACVCounter1000 = 0;
+        while (ACV1000[ACVCounter1000] !== undefined) {
+            const TabId = document.getElementById(ACV1000[ACVCounter1000]).parentNode.id.replace('out', '').replace('in', '');
+            const CurrentValue = UserParametersFileDict[ACV1000[ACVCounter1000]].split(',')[1];
+            const MidVal = CurrentValue & 255;
+            const FinalVal = DropDownOptionsDict['11_' + MidVal];
+            const headTitleElem = document.getElementById('HeadTitle' + TabId);
+            if (headTitleElem.innerHTML.includes('+')) {
+                headTitleElem.innerHTML = '+ ' + FinalVal;
+            } else {
+                headTitleElem.innerHTML = '- ' + FinalVal;
+            }
+            ACVCounter1000++;
+        }
+    } catch (err) {
+        // console.log('1000 Tag Append - ERROR');
+    }
 }
 
-Parameters = sessionStorage.getItem('Parameters');
+// Normalize Parameters line endings and build ParametersPresent array
+let Parameters = sessionStorage.getItem('Parameters');
 if (Parameters.includes('\r')) {
-	Parameters = Parameters.replace(/\r/g, '\n');
+    Parameters = Parameters.replace(/\r/g, '\n');
 }
-
-ParametersPresent = [];
-counter = 0;
-PostCheckFile = '';
+let ParametersPresent = [];
+let counter = 0;
+let PostCheckFile = '';
 while (Parameters.split('\n')[counter] !== undefined) {
-	ParametersPresent.push(Parameters.split('\n')[counter].split(',')[0]);
-	PostCheckFile = PostCheckFile + '\n' + Parameters.split('\n')[counter];
-	counter++;
+    ParametersPresent.push(Parameters.split('\n')[counter].split(',')[0]);
+    PostCheckFile += '\n' + Parameters.split('\n')[counter];
+    counter++;
 }
+sessionStorage.setItem('Parameters', PostCheckFile);
 
+/**
+ * Closes all menu sections in the UI.
+ */
 function CloseMenus() {
-
-
-	/*
-	
-	DropDownUni('A','DropDownMachineDetails');
-	DropDownUni('B','FileDetails');
-	DropDownUni('C','Software');
-	DropDownUni('D','Service');
-	DropDownUni('E','DropDownMoCAS');
-	DropDownUni('G','GDrop');
-	DropDownUni('H','HDrop');
-	DropDownUni('F','DropDownParameters');
-	DropDownUni('I','IDrop');
-	DropDownUni('J','JDrop');
-	*/
-
-	$("#A").slideUp();
-	$("#B").slideUp();
-	$("#C").slideUp();
-	$("#D").slideUp();
-	$("#E").slideUp();
-	$("#F").slideUp();
-	$("#G").slideUp();
-	$("#H").slideUp();
-	$("#I").slideUp();
-	$("#J").slideUp();
-
-
-	$("#G1").slideUp();
-	$("#G2").slideUp();
-	$("#G21").slideUp();
-	$("#G22").slideUp();
-	$("#G23").slideUp();
-	$("#G231").slideUp();
-	$("#G24").slideUp();
-	$("#G240a").slideUp();
-	$("#G240b").slideUp();
-	$("#G240c").slideUp();
-	$("#G240d").slideUp();
-	$("#G25").slideUp();
-	$("#G251").slideUp();
-	$("#G26").slideUp();
-	$("#G261").slideUp();
-	$("#G27").slideUp();
-	$("#G3").slideUp();
-	$("#G31").slideUp();
-	$("#G32").slideUp();
-	$("#G33").slideUp();
-	$("#G34").slideUp();
-	$("#G4").slideUp();
-	$("#G41").slideUp();
-	$("#G41in").slideUp();
-	$("#G41out").slideUp();
-	$("#G42").slideUp();
-	$("#G42in").slideUp();
-	$("#G42out").slideUp();
-	$("#G43").slideUp();
-	$("#G43in").slideUp();
-	$("#G43out").slideUp();
-	$("#G44").slideUp();
-	$("#G44in").slideUp();
-	$("#G44out").slideUp();
-	$("#G45").slideUp();
-	$("#G45in").slideUp();
-	$("#G45out").slideUp();
-	$("#G46").slideUp();
-	$("#G46in").slideUp();
-	$("#G46out").slideUp();
-	$("#G47").slideUp();
-	$("#G47in").slideUp();
-	$("#G47out").slideUp();
-	$("#G48").slideUp();
-	$("#G48in").slideUp();
-	$("#G48out").slideUp();
-	$("#G49").slideUp();
-	$("#G49in").slideUp();
-	$("#G49out").slideUp();
-	$("#G410").slideUp();
-	$("#G410in").slideUp();
-	$("#G410out").slideUp();
-	$("#G411").slideUp();
-	$("#G411in").slideUp();
-	$("#G411out").slideUp();
-	$("#G5").slideUp();
-	$("#G6").slideUp();
-	$("#G7").slideUp();
-	$("#G8").slideUp();
-	$("#G81").slideUp();
-	$("#G82").slideUp();
-	$("#G83").slideUp();
-	$("#G831").slideUp();
-	$("#G832").slideUp();
-	$("#G84").slideUp();
-	$("#G85").slideUp();
-	$("#G851").slideUp();
-	$("#G86").slideUp();
-	$("#G87").slideUp();
-	$("#G9").slideUp();
-	$("#G91").slideUp();
-	$("#G92").slideUp();
-	$("#G93").slideUp();
-	$("#G94").slideUp();
-	$("#G95").slideUp();
-	$("#G96").slideUp();
-	$("#G97").slideUp();
-	$("#G98").slideUp();
-	$("#G941").slideUp();
-	$("#G942").slideUp();
-	$("#G943").slideUp();
-	$("#G944").slideUp();
-	$("#G945").slideUp();
-	$("#G946").slideUp();
-	$("#G912").slideUp();
-	$("#G913").slideUp();
-	$("#G911").slideUp();
-	$("#G241").slideUp();
-	$("#G242").slideUp();
-	$("#G243").slideUp();
-	$("#G244").slideUp();
-	$("#G245").slideUp();
-	$("#G246").slideUp();
-	$("#G247").slideUp();
-	$("#G248").slideUp();
-	$("#G10").slideUp();
-	$("#G101").slideUp();
-	$("#G102").slideUp();
-	$("#G103").slideUp();
-	$("#G104").slideUp();
-	$("#G105").slideUp();
-	$("#G106").slideUp();
-	$("#G11").slideUp();
-	$("#G12").slideUp();
-	$("#G13").slideUp();
-	$("#GG1").slideUp();
-	$("#GG2").slideUp();
-	$("#GG3").slideUp();
-	$("#GG4").slideUp();
-	$("#GG5").slideUp();
-	$("#GG6").slideUp();
-	$("#GG7").slideUp();
-	$("#GG8").slideUp();
-	$("#GG9").slideUp();
-	$("#GH1").slideUp();
-	$("#GH2").slideUp();
+    const menuIds = [
+        "A","B","C","D","E","F","G","H","I","J",
+        "G1","G2","G21","G22","G23","G231","G24","G240a","G240b","G240c","G240d","G25","G251","G26","G261","G27","G3","G31","G32","G33","G34","G4","G41","G41in","G41out","G42","G42in","G42out","G43","G43in","G43out","G44","G44in","G44out","G45","G45in","G45out","G46","G46in","G46out","G47","G47in","G47out","G48","G48in","G48out","G49","G49in","G49out","G410","G410in","G410out","G411","G411in","G411out","G5","G6","G7","G8","G81","G82","G83","G831","G832","G84","G85","G851","G86","G87","G9","G91","G92","G93","G94","G95","G96","G97","G98","G941","G942","G943","G944","G945","G946","G912","G913","G911","G241","G242","G243","G244","G245","G246","G247","G248","G10","G101","G102","G103","G104","G105","G106","G11","G12","G13","GG1","GG2","GG3","GG4","GG5","GG6","GG7","GG8","GG9","GH1","GH2"
+    ];
+    menuIds.forEach(id => $("#" + id).slideUp());
 }
 
+/**
+ * Runs after the menu and UI are loaded, hides Bit parameters, and builds ParameterMainDict.
+ */
 function PostLoadedRun() {
-	CloseMenus();
-	$("#F").slideDown();
+    CloseMenus();
+    $("#F").slideDown();
 
-	try {
-		Style999Counter = 0;
-		while (BitParameters999[Style999Counter] != undefined && BitParameters999[Style999Counter] != "undefined" && BitParameters999[Style999Counter] != null) {
-			document.getElementById(BitParameters999[Style999Counter]).setAttribute('style', 'display:none;');
-			TreeViewClick(document.getElementById(BitParameters999[Style999Counter]), BitParameters999[Style999Counter], 'START');
-			Style999Counter++;
-		}
-	} catch (err) {
-		//		console.log('999 STYLE - ERROR');
-	}
+    try {
+        let Style999Counter = 0;
+        while (BitParameters999[Style999Counter] !== undefined && BitParameters999[Style999Counter] !== "undefined" && BitParameters999[Style999Counter] !== null) {
+            document.getElementById(BitParameters999[Style999Counter]).setAttribute('style', 'display:none;');
+            TreeViewClick(document.getElementById(BitParameters999[Style999Counter]), BitParameters999[Style999Counter], 'START');
+            Style999Counter++;
+        }
+    } catch (err) {}
 
-	try {
-		Style1000Counter = 0;
-		while (BitParameters1000[Style1000Counter] != undefined && BitParameters1000[Style1000Counter] != "undefined" && BitParameters1000[Style1000Counter] != null) {
-			document.getElementById(BitParameters1000[Style1000Counter]).setAttribute('style', 'display:none;');
-			TreeViewClick(document.getElementById(BitParameters1000[Style1000Counter]), BitParameters1000[Style1000Counter], 'START');
-			Style1000Counter++;
-		}
-	} catch (err) {
-		//		console.log('1000 STYLE - ERROR');
-	}
-	ParameterMainDict = {};
-	counter = 0;
-	while (ParameterMain.split('\n')[counter] != undefined) {
-		ParameterMainDict[ParameterMain.split('\n')[counter].split(',')[0]] = ParameterMain.split('\n')[counter];
-		counter++;
-	}
+    try {
+        let Style1000Counter = 0;
+        while (BitParameters1000[Style1000Counter] !== undefined && BitParameters1000[Style1000Counter] !== "undefined" && BitParameters1000[Style1000Counter] !== null) {
+            document.getElementById(BitParameters1000[Style1000Counter]).setAttribute('style', 'display:none;');
+            TreeViewClick(document.getElementById(BitParameters1000[Style1000Counter]), BitParameters1000[Style1000Counter], 'START');
+            Style1000Counter++;
+        }
+    } catch (err) {}
+
+    ParameterMainDict = {};
+    let counter = 0;
+    while (ParameterMain.split('\n')[counter] !== undefined) {
+        ParameterMainDict[ParameterMain.split('\n')[counter].split(',')[0]] = ParameterMain.split('\n')[counter];
+        counter++;
+    }
 }
 
-
-DropDownFile = sessionStorage.getItem('DropDownlist');
-
-DropDownLineNum = 0;
-DropDownOptionsDict = {};
-
-CurrentDropDownId = undefined;
-
+// Build DropDownOptionsDict from DropDownlist in sessionStorage
+let DropDownFile = sessionStorage.getItem('DropDownlist');
+let DropDownLineNum = 0;
+let DropDownOptionsDict = {};
+let CurrentDropDownId = undefined;
 try {
-	while (DropDownFile.split('\n')[DropDownLineNum] != undefined) {
-		if (DropDownFile.split('\n')[DropDownLineNum][0] == '#') {
-			//NEW DROPDOWN
-			CurrentDropDownId = DropDownFile.split('\n')[DropDownLineNum].replace('#', '');
-		} else {
-			DropDownOptionsDict[CurrentDropDownId + '_' + DropDownFile.split('\n')[DropDownLineNum].split(',')[1]] = DropDownFile.split('\n')[DropDownLineNum].split(',')[0];
-		}
-		DropDownLineNum++;
-	}
-} catch (err) { }
+    while (DropDownFile.split('\n')[DropDownLineNum] !== undefined) {
+        if (DropDownFile.split('\n')[DropDownLineNum][0] === '#') {
+            CurrentDropDownId = DropDownFile.split('\n')[DropDownLineNum].replace('#', '');
+        } else {
+            const parts = DropDownFile.split('\n')[DropDownLineNum].split(',');
+            DropDownOptionsDict[CurrentDropDownId + '_' + parts[1]] = parts[0];
+        }
+        DropDownLineNum++;
+    }
+} catch (err) {}
 
-AccessLevel = sessionStorage.getItem('AccessLevel');
-AccessLevelForUser = sessionStorage.getItem('AccessLevel');
+// Set access level variables
+let AccessLevel = sessionStorage.getItem('AccessLevel');
+let AccessLevelForUser = sessionStorage.getItem('AccessLevel');
 
-if (Number(AccessLevel) != 8) {
-	document.getElementById('G').remove();
-	document.getElementById('H').remove();
-	document.getElementById('I').remove();
-	document.getElementById('J').remove();
-
-	document.getElementsByClassName('GTreeTab')[0].remove();
-	document.getElementsByClassName('HTreeTab')[0].remove();
-	document.getElementsByClassName('ITreeTab')[0].remove();
-	document.getElementsByClassName('JTreeTab')[0].remove();
+// Hide certain menu sections for non-admin users
+if (Number(AccessLevel) !== 8) {
+    ['G', 'H', 'I', 'J'].forEach(id => {
+        const elem = document.getElementById(id);
+        if (elem) elem.remove();
+    });
+    ['GTreeTab', 'HTreeTab', 'ITreeTab', 'JTreeTab'].forEach(className => {
+        const elems = document.getElementsByClassName(className);
+        if (elems.length > 0) elems[0].remove();
+    });
 }
 
+// Set document title based on file name
+let FileTitle;
 if (sessionStorage.getItem('ParametersFileName').includes(sessionStorage.getItem('ServerPath'))) {
-	FileTitle = sessionStorage.getItem('ParametersFileName').split('/');
-	document.title = FileTitle[FileTitle.length - 1];
+    FileTitle = sessionStorage.getItem('ParametersFileName').split('/');
+    document.title = FileTitle[FileTitle.length - 1];
 } else {
-	FileTitle = sessionStorage.getItem('ParametersFileName').split('\\');
-	document.title = FileTitle[FileTitle.length - 1];
+    FileTitle = sessionStorage.getItem('ParametersFileName').split('\\');
+    document.title = FileTitle[FileTitle.length - 1];
 }
 
-//ERROR CHECK ON STARTUP
-
-//alert(ParametersPresent);
+/**
+ * Checks parameter file integrity and alerts user if issues are found.
+ */
 function IntegrityCheckOnStartup() {
-	if (ParametersPresent.includes('1') && ParametersPresent.includes('1500')) {
-		Parameters = sessionStorage.getItem('Parameters');
-
-		counter = 0;
-		while (Parameters.split('\n')[counter] != undefined) {
-			if (Parameters.split('\n')[counter] != '') {
-
-
-				//Checking for decimal Values in whole line
-				CheckerLineOne = Parameters.split('\n')[counter].replace(/,/g, '');
-				CheckerLineTwo = Number(CheckerLineOne);
-				//console.log(CheckerLine);
-				if (CheckerLineOne.includes('.')) {
-					alert('there was an unkown parameter loaded in this file, redirecting now (Either a decimal or value over 1500)');
-					//alert(Parameters.split('\n')[counter].split(',')[0]);
-					location.href = 'index.php';
-					break;
-				}
-
-				if (Number(Parameters.split('\n')[counter].split(',')[0]) > 1500 || Number.isInteger(Number(Parameters.split('\n')[counter].split(',')[0])) == false) {
-					alert('there was an unkown parameter loaded in this file, redirecting now (Either a decimal or value over 1500)');
-					//alert(Parameters.split('\n')[counter].split(',')[0]);
-					location.href = 'index.php';
-					break;
-				}
-
-				//Checking For Illegal Characters
-				if (isNaN(Number(Parameters.split('\n')[counter].replace(/,/g, '').replace(/-/g, ''))) == true) {
-					alert('there was some illegal characters in this clp file, redirecting now');
-					location.href = 'index.php';
-					break;
-				}
-
-				//Check for 11 Values
-				if (Parameters.split('\n')[counter].includes(',') == true) {
-					if (Parameters.split('\n')[counter].split(',').length != 11) {
-						alert('This file has a line without 11 values');
-						location.href = 'index.php';
-						break;
-					}
-				}
-			}
-			counter++;
-		}
-
-	} else {
-		alert('Necessary Parameters for basic operation are not included in this file - will not allow changes to be made')
-		//location.href= 'index.php';
-	}
-	NecessaryParameters = ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22'];
-	Missingtwentytwoparameters = [];
-
-	counter = 0;
-	while (NecessaryParameters[counter] != undefined) {
-		if (ParametersPresent.includes(NecessaryParameters[counter])) {
-			//console.log('Pre 22 parameter is present : ' + NecessaryParameters[counter]);
-		} else {
-			//alert('Be aware - you are missing this parameter' + LabelDict[Number(NecessaryParameters[counter])]);
-			Missingtwentytwoparameters.push(LabelDict[Number(NecessaryParameters[counter])]);
-		}
-		counter++;
-	}
-
-	if (Missingtwentytwoparameters != '') {
-		alert('You are missing the following parameters in your pre 22 parameters - ' + Missingtwentytwoparameters);
-	}
+    if (ParametersPresent.includes('1') && ParametersPresent.includes('1500')) {
+        let Parameters = sessionStorage.getItem('Parameters');
+        let counter = 0;
+        while (Parameters.split('\n')[counter] !== undefined) {
+            if (Parameters.split('\n')[counter] !== '') {
+                const CheckerLineOne = Parameters.split('\n')[counter].replace(/,/g, '');
+                if (CheckerLineOne.includes('.')) {
+                    alert('There was an unknown parameter loaded in this file, redirecting now (Either a decimal or value over 1500)');
+                    location.href = 'index.php';
+                    break;
+                }
+                if (Number(Parameters.split('\n')[counter].split(',')[0]) > 1500 || !Number.isInteger(Number(Parameters.split('\n')[counter].split(',')[0]))) {
+                    alert('There was an unknown parameter loaded in this file, redirecting now (Either a decimal or value over 1500)');
+                    location.href = 'index.php';
+                    break;
+                }
+                if (isNaN(Number(Parameters.split('\n')[counter].replace(/,/g, '').replace(/-/g, '')))) {
+                    alert('There were some illegal characters in this clp file, redirecting now');
+                    location.href = 'index.php';
+                    break;
+                }
+                if (Parameters.split('\n')[counter].includes(',') && Parameters.split('\n')[counter].split(',').length !== 11) {
+                    alert('This file has a line without 11 values');
+                    location.href = 'index.php';
+                    break;
+                }
+            }
+            counter++;
+        }
+    } else {
+        alert('Necessary Parameters for basic operation are not included in this file - will not allow changes to be made');
+    }
+    const NecessaryParameters = ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22'];
+    let Missingtwentytwoparameters = [];
+    let counter = 0;
+    while (NecessaryParameters[counter] !== undefined) {
+        if (!ParametersPresent.includes(NecessaryParameters[counter])) {
+            Missingtwentytwoparameters.push(LabelDict[Number(NecessaryParameters[counter])]);
+        }
+        counter++;
+    }
+    if (Missingtwentytwoparameters.length > 0) {
+        alert('You are missing the following parameters in your pre 22 parameters - ' + Missingtwentytwoparameters);
+    }
 }
 
+// Search bar filtering for parameters
 $(document).ready(function () {
-	$("#SEARCHBAR").on("keyup", function () {
-		var value = $(this).val().toLowerCase();
-		$("#ParametersSearchList a").filter(function () {
-			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-		});
-	});
+    $("#SEARCHBAR").on("keyup", function () {
+        const value = $(this).val().toLowerCase();
+        $("#ParametersSearchList a").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
+    });
 });
 
+/**
+ * Opens the menu and tree view for a given parameter index.
+ * @param {string|number} Index - The parameter index to open.
+ */
 function DynamicMenuOpenTool(Index) {
-	CloseMenus();
-	$("#F").slideDown();
-
-	ToOpen = ParameterMainDict[Index].split(',')[1].split(' ');
-
-	//console.log(ToOpen);
-
-	counter = 1;
-	while (ToOpen[counter] != undefined) {
-		//console.log(ToOpen[counter]);
-		InvertSymbolStyle(ToOpen[counter].toString());
-		counter++;
-	}
-
-	if (ParameterMainDict[Index].split(',')[2] != '999' && ParameterMainDict[Index].split(',')[2] != '1000') {
-		document.getElementById(Index.toString()).click();
-	}
+    CloseMenus();
+    $("#F").slideDown();
+    const ToOpen = ParameterMainDict[Index].split(',')[1].split(' ');
+    let counter = 1;
+    while (ToOpen[counter] !== undefined) {
+        InvertSymbolStyle(ToOpen[counter].toString());
+        counter++;
+    }
+    if (ParameterMainDict[Index].split(',')[2] !== '999' && ParameterMainDict[Index].split(',')[2] !== '1000') {
+        document.getElementById(Index.toString()).click();
+    }
 }
 
-function OLDSearchFunctionOptions() {
-
-
-
-	document.getElementById('ParametersSearchList').innerHTML = '';
-	//START SEARCH DIALOG
-	counter = 1;
-
-	ContinueUntil = Object.keys(LabelDict).length - 1;
-
-	while (counter != ContinueUntil) {
-		if (LabelDict[counter] != undefined) {
-			//console.log(LabelDict[counter]);
-			Option = document.createElement('a');
-			//let AimId = '#' + document.getElementById(counter).parentNode.id;
-			if (counter > 64) {
-				Option.setAttribute('onclick', '$(' + counter + ').slideToggle(); TreeViewClick(document.getElementById(`' + counter + '`),' + counter + ');');
-			} else {
-				Option.setAttribute('onclick', 'DynamicMenuOpenTool(' + counter + '); MenuParametersOnclick(`' + UserParametersFileDict[counter] + '`,document.getElementById(`' + counter + '`));');
-			}
-			Option.setAttribute('id', 'SearchDialogMessageOption');
-			Option.innerHTML = LabelDict[counter] + '	';
-			if (LabelDict[counter].includes('+')) {
-				//console.log('not displaying this.');
-			} else {
-				//console.log(document.getElementById(counter));
-				if (document.getElementById(counter) != null && UserParametersFileDict[counter] != undefined && counter > 64) {
-					document.getElementById('ParametersSearchList').appendChild(Option);
-				}
-			}
-			counter++;
-		} else {
-			counter++;
-		}
-	}
-	//END SEARCH DIALOG
-}
-
-
-
-
-
-
+/**
+ * Populates the search dialog with parameter options.
+ */
 function SearchFunctionOptions() {
+    document.getElementById('ParametersSearchList').innerHTML = '';
+    let counter = 0;
+    while (sessionStorage.getItem('ParameterMain').split('\n')[counter] !== undefined) {
+        const CurrentLine = sessionStorage.getItem('ParameterMain').split('\n')[counter];
+        if (CurrentLine.split(',')[2] !== '999' && CurrentLine.split(',')[2] !== '1000') {
+            const Option = document.createElement('a');
+            if (Number(CurrentLine.split(',')[0]) > 64) {
+                Option.setAttribute('onclick', 'DynamicMenuOpenTool(' + Number(CurrentLine.split(',')[0]) + '); TreeViewClick(document.getElementById(`' + CurrentLine.split(',')[0] + '`),' + Number(CurrentLine.split(',')[0]) + ');');
+            }
+            Option.setAttribute('id', 'SearchDialogMessageOption');
+            Option.innerHTML = CurrentLine.split(',')[3] + '	';
+            if (Number(CurrentLine.split(',')[0]) > 64) {
+                document.getElementById('ParametersSearchList').appendChild(Option);
+            }
+        }
+        counter++;
+    }
 
-	document.getElementById('ParametersSearchList').innerHTML = '';
-	//START SEARCH DIALOG
-	counter = 0;
+    // Bit999 search options
+    counter = 0;
+    let CurrentIndex = undefined;
+    while (sessionStorage.getItem('Bit999').split('\n')[counter] !== undefined) {
+        const CurrentLine = sessionStorage.getItem('Bit999').split('\n')[counter];
+        if (CurrentLine[0] === '#') {
+            CurrentIndex = CurrentLine.replace('#', '');
+        } else {
+            const Option = document.createElement('a');
+            Option.setAttribute('onclick', 'document.getElementById("constant' + CurrentIndex + '").childNodes[0].childNodes[' + CurrentLine.split(",")[0] + '].childNodes[0].click(); DynamicMenuOpenTool(' + Number(CurrentIndex) + ')');
+            Option.setAttribute('id', 'SearchDialogMessageOption');
+            Option.innerHTML = CurrentLine.split(',')[2] + '	';
+            document.getElementById('ParametersSearchList').appendChild(Option);
+        }
+        counter++;
+    }
 
-	while (sessionStorage.getItem('ParameterMain').split('\n')[counter] != undefined) {
-		CurrentLine = sessionStorage.getItem('ParameterMain').split('\n')[counter];
-
-		if (CurrentLine.split(',')[2] != '999' && CurrentLine.split(',')[2] != '1000') {
-			Option = document.createElement('a');
-			//let AimId = '#' + document.getElementById(counter).parentNode.id;
-			if (Number(CurrentLine.split(',')[0]) > 64) {
-				Option.setAttribute('onclick', 'DynamicMenuOpenTool(' + Number(CurrentLine.split(',')[0]) + '); TreeViewClick(document.getElementById(`' + CurrentLine.split(',')[0] + '`),' + Number(CurrentLine.split(',')[0]) + ');');
-			}
-			Option.setAttribute('id', 'SearchDialogMessageOption');
-			Option.innerHTML = CurrentLine.split(',')[3] + '	';
-
-			//console.log(document.getElementById(counter));
-			if (Number(CurrentLine.split(',')[0]) > 64) {
-				document.getElementById('ParametersSearchList').appendChild(Option);
-				//console.log(CurrentLine);
-			}
-
-		}
-
-		counter++;
-	}
-
-
-
-	counter = 0;
-
-	CurrentIndex = undefined;
-
-	while (sessionStorage.getItem('Bit999').split('\n')[counter] != undefined) {
-		CurrentLine = sessionStorage.getItem('Bit999').split('\n')[counter];
-
-		if (CurrentLine[0] == '#') {
-			CurrentIndex = CurrentLine.replace('#', '');
-		} else {
-			Option = document.createElement('a');
-			//let AimId = '#' + document.getElementById(counter).parentNode.id;
-			//CurrentIndex
-			//FirstNumber
-			//document.getElementById('constant' + CurrentIndex).childNodes[0].childNodes[CurrentLine.split(',')[0]].childNodes[0].click();
-			Option.setAttribute('onclick', 'document.getElementById("constant' + CurrentIndex + '").childNodes[0].childNodes[' + CurrentLine.split(",")[0] + '].childNodes[0].click(); DynamicMenuOpenTool(' + Number(CurrentIndex) + ')');
-			Option.setAttribute('id', 'SearchDialogMessageOption');
-			Option.innerHTML = CurrentLine.split(',')[2] + '	';
-
-
-			document.getElementById('ParametersSearchList').appendChild(Option);
-		}
-		counter++;
-		//END SEARCH DIALOG
-	}
-
-
-
-	counter = 0;
-
-	CurrentIndex = undefined;
-
-	thirdCounter = 1;
-
-	while (sessionStorage.getItem('Bit1000').split('\n')[counter] != undefined) {
-		CurrentLine = sessionStorage.getItem('Bit1000').split('\n')[counter];
-
-		if (CurrentLine[0] == '#') {
-			CurrentIndex = CurrentLine.replace('#', '');
-			secondCounter = 0;
-			thirdCounter++;
-		} else {
-
-			Option = document.createElement('a');
-			Option.setAttribute('onclick', 'document.getElementById("constant' + CurrentIndex + '").childNodes[0].childNodes[' + secondCounter + '].childNodes[0].click(); DynamicMenuOpenTool(' + Number(CurrentIndex) + ')');
-			Option.setAttribute('id', 'SearchDialogMessageOption');
-
-			Option.innerHTML = 'Hyd ' + Math.floor((thirdCounter + 1) / 3) + ' | ' + CurrentLine.split(',')[3] + '	';
-
-
-			document.getElementById('ParametersSearchList').appendChild(Option);
-			secondCounter++;
-		}
-		counter++;
-		//END SEARCH DIALOG
-	}
-
-	/*END POSTLOAD.JS*/
+    // Bit1000 search options
+    counter = 0;
+    CurrentIndex = undefined;
+    let thirdCounter = 1;
+    let secondCounter = 0;
+    while (sessionStorage.getItem('Bit1000').split('\n')[counter] !== undefined) {
+        const CurrentLine = sessionStorage.getItem('Bit1000').split('\n')[counter];
+        if (CurrentLine[0] === '#') {
+            CurrentIndex = CurrentLine.replace('#', '');
+            secondCounter = 0;
+            thirdCounter++;
+        } else {
+            const Option = document.createElement('a');
+            Option.setAttribute('onclick', 'document.getElementById("constant' + CurrentIndex + '").childNodes[0].childNodes[' + secondCounter + '].childNodes[0].click(); DynamicMenuOpenTool(' + Number(CurrentIndex) + ')');
+            Option.setAttribute('id', 'SearchDialogMessageOption');
+            Option.innerHTML = 'Hyd ' + Math.floor((thirdCounter + 1) / 3) + ' | ' + CurrentLine.split(',')[3] + '	';
+            document.getElementById('ParametersSearchList').appendChild(Option);
+            secondCounter++;
+        }
+        counter++;
+    }
 }
