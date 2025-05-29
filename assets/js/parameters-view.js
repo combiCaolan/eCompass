@@ -47,7 +47,7 @@ function showParameterNotPresent(lineNumber, htmlObject) {
     addParameterButton.type = 'submit';
     addParameterButton.value = `Add "${htmlObject.innerHTML}" to this file?`;
     addParameterButton.onclick = function () {
-        AddParmeterToClp(lineNumber, htmlObject);
+        addParameterToClp(lineNumber, htmlObject);
     };
 
     container.appendChild(workSpaceTitle);

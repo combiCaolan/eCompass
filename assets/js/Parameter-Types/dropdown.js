@@ -18,9 +18,9 @@ function dropDownFunction(parameterLine, object) {
     console.log(parameterLine)
     console.log(object);
     
-    if(object == null || object == undefined){
-        return;
-    }
+    // if(object == null || object == undefined){
+    //     return;
+    // }
 
     title.innerHTML = object.innerHTML;
     document.getElementById('topDefineTable').appendChild(title);

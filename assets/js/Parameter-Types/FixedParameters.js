@@ -1,3 +1,5 @@
+const { expect } = require("chai");
+
 /**
  * Clears the workspace UI by removing all content from the main description and table areas.
  */
@@ -65,8 +67,12 @@ function MenuParametersOnclick(Line, HTMLObject) {
 	//Description
 	descriptionArea = document.createElement('tr');
 	DescriptionText = document.createElement('p');
-	console.log(HTMLObject)
-	DescriptionText.innerHTML = MainDescriptionsDict[Number(HTMLObject.id)].replace('#' + HTMLObject.id, '');
+	// console.log(HTMLObject)
+	try{
+		DescriptionText.innerHTML = MainDescriptionsDict[Number(HTMLObject.id)].replace('#' + HTMLObject.id, '');
+	}catch(err){
+		DescriptionText.innerHTML = 'No description available';
+	}
 	DescriptionText.setAttribute('id', 'description');
 	descriptionArea.appendChild(DescriptionText);
 

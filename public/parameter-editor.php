@@ -1,105 +1,54 @@
 <!DOCTYPE html>
 <!--
-    editor.php
+    parameter-editor.php
     ----------------------------------------------------------------------------
     Main parameter editor page for the eCompass web application.
     - Loads the UI for editing/viewing truck parameters.
     - Includes dynamic tree navigation for different parameter sections.
-    - Loads dialogs, headers, and supporting scripts.
     ----------------------------------------------------------------------------
 -->
-<html>
-
+<html lang="en">
 <head>
-    <!-- Include common <head> contents (meta tags, styles, scripts, etc.) -->
     <?php include_once('../src/includes/HeadIncludes.html'); ?>
+    <title>Parameter Editor - eCompass</title>
 </head>
-
 <body>
-    <!-- Include modal dialogs for user interactions -->
     <?php include_once('../src/includes/DialogTemplates.html'); ?>
 
-    <!-- Loading screen shown while the app is initializing -->
-    <div id="LoadingScreen">
-        <div class="loader"></div>
-    </div>
+    <div id="LoadingScreen"><div class="loader"></div></div>
 
     <div id="Container">
-        <!-- Main web header/navigation bar -->
         <?php include_once('../src/includes/MainHeader.html'); ?>
 
         <!-- Tree navigation for parameter sections -->
         <ul class="tree">
-            <!-- Each <li> represents a collapsible section in the parameter tree -->
-            <li id="Treetab" style="margin-top:81px;">
-                <input type="button" style="float:right;" id="DropDownMachineDetails"
-                    onclick="DropDownUni('A','DropDownMachineDetails');" value="&#x25bc;" />
-                <p onclick="DropDownUni('A','DropDownMachineDetails');" id="TruckDetailsID"></p>
-            </li>
-            <div id="A"></div>
-
-            <li id="Treetab">
-                <input type="button" style="float:right;" id="FileDetails" onclick="DropDownUni('B','FileDetails');"
-                    value="&#x25bc;" />
-                <p onclick="DropDownUni('B','FileDetails');" id="FileDetailsID"></p>
-            </li>
-            <div id="B"></div>
-
-            <li id="Treetab">
-                <input type="button" style="float:right;" id="Software" onclick="DropDownUni('C','Software');"
-                    value="&#x25bc;" />
-                <p onclick="DropDownUni('C','Software');" id="SoftwareID"></p>
-            </li>
-            <div id="C"></div>
-
-            <li id="Treetab">
-                <input type="button" style="float:right;" id="Service" onclick="DropDownUni('D','Service');"
-                    value="&#x25bc;" />
-                <p onclick="DropDownUni('D','Service');" id="ServiceID"></p>
-            </li>
-            <div id="D"></div>
-
-            <li id="Treetab">
-                <input type="button" style="float:right;" id="DropDownMoCAS" onclick="DropDownUni('E','DropDownMoCAS');"
-                    value="&#x25bc;" />
-                <p onclick="DropDownUni('E','DropDownMoCAS');" id="MoCASID"></p>
-            </li>
-            <div id="E"></div>
-
-            <li id="Treetab">
-                <input type="button" style="float:right;" id="DropDownParameters"
-                    onclick="DropDownUni('F','DropDownParameters');" value="&#x25b2;" />
-                <p onclick="DropDownUni('F','DropDownParameters');" id="ParametersID"></p>
-            </li>
-            <div id="F"></div>
-
-            <li id="Treetab" class="GTreeTab">
-                <input type="button" style="float:right;" id="GDrop" onclick="DropDownUni('G','GDrop');"
-                    value="&#x25bc;" />
-                <p onclick="DropDownUni('G','GDrop');" id="FactoryID"></p>
-            </li>
-            <div id="G"></div>
-
-            <li id="Treetab" class="HTreeTab">
-                <input type="button" style="float:right;" id="HDrop" onclick="DropDownUni('H','HDrop');"
-                    value="&#x25bc;" />
-                <p onclick="DropDownUni('H','HDrop');" id="DeveloperID"></p>
-            </li>
-            <div id="H"></div>
-
-            <li id="Treetab" class="ITreeTab">
-                <input type="button" style="float:right;" id="IDrop" onclick="DropDownUni('I','IDrop');"
-                    value="&#x25bc;" />
-                <p onclick="DropDownUni('I','IDrop');" id="NotAssignedID"></p>
-            </li>
-            <div id="I"></div>
-
-            <li id="Treetab" class="JTreeTab">
-                <input type="button" style="float:right;" id="JDrop" onclick="DropDownUni('J','JDrop');"
-                    value="&#x25bc;" />
-                <p onclick="DropDownUni('J','JDrop');" id="SpecialID"></p>
-            </li>
-            <div id="J"></div>
+            <?php
+            // Define tree sections as an array for maintainability
+            $treeSections = [
+                ['A', 'DropDownMachineDetails', 'TruckDetailsID'],
+                ['B', 'FileDetails', 'FileDetailsID'],
+                ['C', 'Software', 'SoftwareID'],
+                ['D', 'Service', 'ServiceID'],
+                ['E', 'DropDownMoCAS', 'MoCASID'],
+                ['F', 'DropDownParameters', 'ParametersID', '&#x25b2;'],
+                ['G', 'GDrop', 'FactoryID', '&#x25bc;', 'GTreeTab'],
+                ['H', 'HDrop', 'DeveloperID', '&#x25bc;', 'HTreeTab'],
+                ['I', 'IDrop', 'NotAssignedID', '&#x25bc;', 'ITreeTab'],
+                ['J', 'JDrop', 'SpecialID', '&#x25bc;', 'JTreeTab'],
+            ];
+            foreach ($treeSections as $section) {
+                $letter = $section[0];
+                $buttonId = $section[1];
+                $labelId = $section[2];
+                $arrow = $section[3] ?? '&#x25bc;';
+                // $extraClass = $section[4] ?? '';
+                echo "<li id='Treetab'" . ($letter === 'A' ? " style='margin-top:81px;'" : "") . ">";
+                echo "<input type='button' style='float:right;' id='{$buttonId}' onclick=\"DropDownUni('{$letter}','{$buttonId}');\"> </button>";
+                echo "<p onclick=\"DropDownUni('{$letter}','{$buttonId}');\" id='{$labelId}'></span>";
+                echo "</li>";
+                echo "<div id='{$letter}'></div>";
+            }
+            ?>
         </ul>
 
         <!-- Main parameter viewer/editor area -->
@@ -116,15 +65,14 @@
         </div>
     </div>
 
-    <!-- List of available truck directories (for file selection/navigation) -->
     <?php include_once('../src/includes/ListTruckDirectories.php'); ?>
-
-    <!-- Include all required JavaScript for the editor page -->
-    <?php include_once('../src/includes/GlobalScripts.html') ?>
+    <?php include_once('../src/includes/GlobalScripts.html'); ?>
     <script>
-        SetLanguage();
-        updateBitLabels()
+        // Ensure language and bit labels are set after all resources are loaded
+        window.onload = function () {
+            SetLanguage();
+            updateBitLabels();
+        };
     </script>
 </body>
-
 </html>

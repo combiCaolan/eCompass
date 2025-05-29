@@ -56,8 +56,8 @@ function PostLoadedRun() {
     $("#F").slideDown();
 
     // Hide BitParameters999
-    if (Array.isArray(BitParameters999)) {
-        BitParameters999.forEach(id => {
+    if (Array.isArray(bitParameters999)) {
+        bitParameters999.forEach(id => {
             const elem = document.getElementById(id);
             if (elem) {
                 elem.style.display = 'none';
@@ -67,8 +67,8 @@ function PostLoadedRun() {
     }
 
     // Hide BitParameters1000
-    if (Array.isArray(BitParameters1000)) {
-        BitParameters1000.forEach(id => {
+    if (Array.isArray(bitParameters1000)) {
+        bitParameters1000.forEach(id => {
             const elem = document.getElementById(id);
             if (elem) {
                 elem.style.display = 'none';
