@@ -8,14 +8,29 @@
     ----------------------------------------------------------------------------
 -->
 <html lang="en">
+
 <head>
     <?php include_once('../src/includes/HeadIncludes.html'); ?>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <title>Parameter Editor - eCompass</title>
 </head>
+
 <body>
     <?php include_once('../src/includes/DialogTemplates.html'); ?>
 
-    <div id="LoadingScreen"><div class="loader"></div></div>
+    <div id="LoadingScreen">
+        <div class="loader"></div>
+    </div>
+
+
+    <!-- Mobile Device Alert -->
+    <div id="MobileAlert">
+        <h1>Device Screen too small</h1>
+        <p>eCompass is designed to work on a bigger resolution.</p>
+        <p>Please use a larger resolution.</p>
+        <p>If viewing in a mobile device, choose view "Desktop Site" in the browser settings.</p>
+    </div>
 
     <div id="Container">
         <?php include_once('../src/includes/MainHeader.html'); ?>
@@ -75,4 +90,5 @@
         };
     </script>
 </body>
+
 </html>
