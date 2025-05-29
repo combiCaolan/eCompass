@@ -102,4 +102,6 @@ function updateBitLabels() {
 	}
 }
 
-module.exports = { SetLanguage };
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+	module.exports = { SetLanguage };
+}

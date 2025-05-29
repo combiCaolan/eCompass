@@ -15,6 +15,7 @@ function dropDownFunction(parameterLine, object) {
     // Title
     const title = document.createElement('p');
     title.id = 'WorkSpaceTitle';
+    console.log(object);
     title.innerHTML = object.innerHTML;
     document.getElementById('topDefineTable').appendChild(title);
 

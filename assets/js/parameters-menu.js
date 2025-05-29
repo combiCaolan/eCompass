@@ -1,248 +1,206 @@
-function InvertSymbolStyle(id){
-	try{
-		if(document.getElementById('HeadTitle' + id).innerHTML.includes('-')){
-			NewText = document.getElementById('HeadTitle' + id).innerHTML.replace('-','+');
-			document.getElementById('HeadTitle' + id).innerHTML = NewText;
-		}else{
-			NewText = document.getElementById('HeadTitle' + id).innerHTML.replace('+','-');
-			document.getElementById('HeadTitle' + id).innerHTML = NewText;
-		}
-	}catch(err){}
-	$("#" + id).slideToggle();
+/**
+ * Toggle the symbol (+/-) for a menu section and slide the section open/closed.
+ * @param {string} id - The section ID.
+ */
+function invertSymbolStyle(id) {
+    try {
+        const btn = document.getElementById('HeadTitle' + id);
+        if (!btn) return;
+        btn.innerHTML = btn.innerHTML.includes('-')
+            ? btn.innerHTML.replace('-', '+')
+            : btn.innerHTML.replace('+', '-');
+    } catch (err) {
+        // Silent fail
+    }
+    const section = document.getElementById(id);
+    if (section) {
+        section.style.display = section.style.display === 'none' ? '' : 'none';
+    }
 }
 
-CurrentFile = sessionStorage.getItem('Parameters');
-PostCheckFile = '';
-NoPermissionMessage = '';
-/*counter = 0;
-ParametersPresent = [];
-while(CurrentFile.split('\n')[counter] !== undefined){
-	//if(Number(AccessLevelForUser) >= Number(CurrentFile.split('\n')[counter].split(',')[8])){
-		ParametersPresent.push(CurrentFile.split('\n')[counter].split(',')[0]);
-		PostCheckFile = PostCheckFile + '\n' + CurrentFile.split('\n')[counter];
-	//}else{
-	//	NoPermissionMessage = NoPermissionMessage + '\n' + "user shouldn't have access to this file : " +  CurrentFile.split('\n')[counter].split(',')[0];
-	//}
-	counter++;
-}*/
-
-Parameters = sessionStorage.getItem('Parameters');
-if(Parameters.includes('\r')){
-	Parameters = Parameters.replace(/\r/g,'\n');
+/**
+ * Hide all menu sections and reset their toggle symbols.
+ */
+function hideAllMenus() {
+    // Hide all menu sections (IDs: A-J, G911, etc.)
+    const ids = [
+        ...'ABCDEFGHIJ',
+        'G911', 'G912', 'G913', 'G941', 'G942', 'G943', 'G944', 'G945', 'G946'
+    ];
+    ids.forEach(id => {
+        const section = document.getElementById(id);
+        if (section) section.style.display = 'none';
+        const btn = document.getElementById('HeadTitle' + id);
+        if (btn) btn.innerHTML = btn.innerHTML.replace('-', '+');
+    });
 }
 
-ParametersPresent = [];
-counter = 0;
-PostCheckFile = '';
-while(Parameters.split('\n')[counter] !== undefined){
-	ParametersPresent.push(Parameters.split('\n')[counter].split(',')[0]);
-	PostCheckFile = PostCheckFile + '\n' + Parameters.split('\n')[counter];
-	counter++;
+/**
+ * Parse parameters from sessionStorage and return as array of arrays.
+ * @param {string} key - sessionStorage key.
+ * @returns {Array<Array<string>>}
+ */
+function getParametersArray(key) {
+    const raw = sessionStorage.getItem(key) || '';
+    return raw.replace(/\r/g, '\n').split('\n').filter(Boolean).map(line => line.split(','));
 }
 
-sessionStorage.setItem('Parameters',PostCheckFile);
+/**
+ * Build the menu structure from sessionStorage data.
+ */
+function makeMenu() {
+    // Build lookup for parameter locations
+    const parameterMainArr = getParametersArray('ParameterMain');
+    const parametersLocationList = {};
+    parameterMainArr.forEach(line => {
+        if (line.length >= 2) parametersLocationList[line[0]] = line[1];
+    });
 
-CurrentUserMadeChanges = sessionStorage.getItem('UserMadeChanges');
-sessionStorage.setItem('UserMadeChanges',CurrentUserMadeChanges + NoPermissionMessage);
+    // Build lookup for user's file parameters
+    const parametersArr = getParametersArray('Parameters');
+    const parametersDirForUsersFile = {};
+    parametersArr.forEach(line => {
+        if (line.length) parametersDirForUsersFile[line[0]] = line.join(',');
+    });
 
-function MakeMenu(){
-	ParametersLocationList = new Object();
-
-	ParametersLocationList = {};
-
-	MenuMakeUp = sessionStorage.getItem('ParameterMain').split('\n');
-	counter = 0;
-	while(MenuMakeUp[counter] != undefined){
-		ParametersLocationList[MenuMakeUp[counter].split(',')[0]] = MenuMakeUp[counter].split(',')[1];
-		counter++;
-	}
-
-	ParametersDirForUsersFile = new Object();
-
-	ParametersDirForUsersFile = {};
-
-	MenuMakeUp = sessionStorage.getItem('Parameters').split('\n');
-	counter = 0;
-	while(MenuMakeUp[counter] != undefined){
-		ParametersDirForUsersFile[MenuMakeUp[counter].split(',')[0]] = MenuMakeUp[counter];
-		counter++;
-	}
-	
-	AvailableApis = ['100','1.00','101','1.01'];
-	function RunFileApi(){
-		try{
+    // API version check
+    const availableApis = ['100', '1.00', '101', '1.01'];
+    let apiVersion = '100';
+    try {
+        // apiVersion = parametersArr[6]?.[3] || '100';
 		ApiVersion = ParametersDirForUsersFile[6].split(',')[3];
-		}catch(err){
-			ApiVersion = '100';
-		}
-		if(AvailableApis.includes(ApiVersion)){
-			CurrentApiVersion = sessionStorage.getItem('APIV').replace('API-','');
-			if(ApiVersion != CurrentApiVersion){
-				alert('Changing eCompass to the version of your file. Please reopen the file again.');
-				sessionStorage.setItem('APIV','API-' + ApiVersion);
-				location.href = 'index.php';
-			}else{
-				//console.log('Api Version Matches');
-			}
-		}else{
-			alert('The file you have loaded is requesting an api version that is not available on ecompass - please contact Combilift');
-		}
-	}
-	
-	RunFileApi();
+    } catch (err) {}
+    if (availableApis.includes(apiVersion)) {
+        const currentApiVersion = (sessionStorage.getItem('APIV') || '').replace('API-', '');
+        if (apiVersion !== currentApiVersion) {
+            alert('Changing eCompass to the version of your file. Please reopen the file again.');
+            sessionStorage.setItem('APIV', 'API-' + apiVersion);
+            location.href = 'index.php';
+            return;
+        }
+    } else {
+		const currentApiVersion = (sessionStorage.getItem('APIV') || '').replace('API-', '');
+		alert(currentApiVersion)
+		alert(apiVersion)
+        alert('The file you have loaded is requesting an API version that is not available on eCompass - please contact Combilift');
+    }
 
-	OrganiseMenu();
+    organiseMenu(parameterMainArr, parametersDirForUsersFile);
 }
 
-function OrganiseMenu(){
-	
-	ParameterMain = sessionStorage.getItem('ParameterMain');
-	counter = 0;
-	while(ParameterMain.split('\n')[counter] !== undefined){
-		CurrentLine = ParameterMain.split('\n')[counter].split(',');
-		Parameter = document.createElement('button');
-		Parameter.innerHTML = CurrentLine[3];
+/**
+ * Organise and render the menu structure.
+ * @param {Array<Array<string>>} parameterMainArr
+ * @param {Object} parametersDirForUsersFile
+ */
+function organiseMenu(parameterMainArr, parametersDirForUsersFile) {
+    parameterMainArr.forEach(line => {
+        if (!line.length) return;
+        const [id, group, , label, , , , , , access] = line;
+        const btn = document.createElement('button');
+        btn.innerHTML = label || '';
+        btn.id = id;
 
-		Parameter.setAttribute('id',CurrentLine[0]);
-		if(Number(CurrentLine[0]) <89 && CurrentLine[0] != 2 && CurrentLine[0] != 4){
-			if(ParametersDirForUsersFile[Number(CurrentLine[0])] == undefined){
-				Parameter.setAttribute('onclick','MenuParametersOnclick(`empty`,this)');
-			}else{
-				Parameter.setAttribute('onclick','MenuParametersOnclick(`' + ParametersDirForUsersFile[Number(ParameterMain.split('\n')[counter].split(',')[0])] + '`,this)');
-			}
-			Parameter.setAttribute('class','PreTreeButton');
-			ParameterDiv = document.createElement("div");
-			ParameterDiv.setAttribute('id','constant' + CurrentLine[0]);
-			if(document.getElementById(CurrentLine[1])){
-				document.getElementById(CurrentLine[1]).appendChild(Parameter);
-				document.getElementById(CurrentLine[1]).appendChild(ParameterDiv);
-			}
-		}else{
-			Parameter.setAttribute('onclick','treeViewClick(this,' + CurrentLine[0] + ')');
-			
-			if(CurrentLine[0] == 2 || CurrentLine[0] == 4){
-				Parameter.setAttribute('class','PreTreeButton');
-				ParameterDiv = document.createElement("div");
-				ParameterDiv.setAttribute('id','constant' + CurrentLine[0]);
-				if(document.getElementById(CurrentLine[1])){
-					document.getElementById(CurrentLine[1]).appendChild(Parameter);
-					document.getElementById(CurrentLine[1]).appendChild(ParameterDiv);
-				}
-			}else{
-				CurrentGroup = CurrentLine[1].split(' ');
-				if(CurrentGroup.length < 2){
-					Parameter.setAttribute('onclick','treeViewClick(this,' + CurrentLine[0] + ')');
-					Parameter.setAttribute('class','TreeButton');
-					ParameterDiv = document.createElement("div");
-					ParameterDiv.setAttribute('id','constant' + CurrentLine[0]);
-					if(document.getElementById(CurrentLine[1])){
-						document.getElementById(CurrentLine[1]).appendChild(Parameter);
-						document.getElementById(CurrentLine[1]).appendChild(ParameterDiv);
-					}
-				}else{
-					for(CurrentGroupCounter = 1; CurrentGroupCounter < CurrentGroup.length; CurrentGroupCounter++){
-						ParameterDiv = document.createElement("div");
-						SortingDiv = document.createElement("div");
-						A = CurrentGroupCounter - 1;
-						if(document.getElementById(CurrentGroup[CurrentGroupCounter]) == null){
-							HideButton = document.createElement('Button');
-							SortingDiv.setAttribute('id',CurrentGroup[CurrentGroupCounter]);
-							IndentNum = Number(CurrentGroup.length) - 1;
-							SortingDiv.setAttribute('class','MenuLevel' + IndentNum);
-							HideButton.setAttribute('class','TreeButton');
-							
-							
-							/*if(CurrentLine[1].split(' ')[CurrentGroupCounter].length == 4){
-								SortingDiv.setAttribute('style','margin-left:30px;');// background:yellow;')
-							}
-							
-							if(CurrentGroupCounter == 2){
-								SortingDiv.setAttribute('style','margin-left:25px;');
-								//console.log('2');
-							}
-							
-							if(CurrentLine[1].split(' ')[CurrentGroupCounter] == 'G24'){
-								SortingDiv.setAttribute('style','margin-left:50px;');
-							}
+        // Main menu logic
+        if (Number(id) < 89 && id !== '2' && id !== '4') {
+            btn.className = 'PreTreeButton';
+            btn.onclick = () => MenuParametersOnclick(parametersDirForUsersFile[id] || 'empty', btn);
+            const div = document.createElement('div');
+            div.id = 'constant' + id;
+            const parent = document.getElementById(group);
+            if (parent) {
+                parent.appendChild(btn);
+                parent.appendChild(div);
+            }
+        } else {
+            btn.onclick = () => treeViewClick(btn, id);
+            if (id === '2' || id === '4') {
+                btn.className = 'PreTreeButton';
+                const div = document.createElement('div');
+                div.id = 'constant' + id;
+                const parent = document.getElementById(group);
+                if (parent) {
+                    parent.appendChild(btn);
+                    parent.appendChild(div);
+                }
+            } else {
+                const groups = group.split(' ');
+                if (groups.length < 2) {
+                    btn.className = 'TreeButton';
+                    const div = document.createElement('div');
+                    div.id = 'constant' + id;
+                    const parent = document.getElementById(group);
+                    if (parent) {
+                        parent.appendChild(btn);
+                        parent.appendChild(div);
+                    }
+                } else {
+                    for (let i = 1; i < groups.length; i++) {
+                        if (!document.getElementById(groups[i])) {
+                            const sortingDiv = document.createElement('div');
+                            sortingDiv.id = groups[i];
+                            sortingDiv.className = 'MenuLevel' + (groups.length - 1);
+                            const hideBtn = document.createElement('button');
+                            hideBtn.className = 'TreeButton';
+                            hideBtn.id = 'HeadTitle' + groups[i];
+                            hideBtn.onclick = () => invertSymbolStyle(groups[i]);
+                            hideBtn.innerHTML = groups[i];
+                            try {
+                                document.getElementById(groups[i - 1]).appendChild(hideBtn);
+                                hideBtn.click();
+                                document.getElementById(groups[i - 1]).appendChild(sortingDiv);
+                            } catch (err) {}
+                        }
+                        if (i === groups.length - 1) {
+                            const div = document.createElement('div');
+                            div.id = 'constant' + id;
+                            btn.className = (line[2] === '999' || line[2] === '1000') ? 'BitTreeButton' : 'ThirdSubGroup';
+                            try {
+                                document.getElementById(groups[i]).appendChild(btn);
+                                document.getElementById(groups[i]).appendChild(div);
+                            } catch (err) {}
+                        }
+                    }
+                }
+            }
+        }
+    });
 
-							if(CurrentGroupCounter == 3){
-								//SortingDiv.setAttribute('style','margin-left:50px;');
-								//console.log('3');
-							}
-							*/
-							/*if(CurrentGroup[3] && CurrentGroup[3].length == 4){
-								if(CurrentGroup[3] == 'G9'){
-								}else{
-									console.log('Menu : ' + CurrentGroup[3]);
-									SortingDiv.setAttribute('style','margin-left:60px; background:gray;');
-								}
-							}*/
-							
-							HideButton.setAttribute('onclick','InvertSymbolStyle("' + CurrentGroup[CurrentGroupCounter] + '")');
-							//HideButton.setAttribute('onclick','$("#' + CurrentGroup[CurrentGroupCounter] + '").slideToggle()');
-							HideButton.setAttribute('id','HeadTitle' + CurrentGroup[CurrentGroupCounter]);
-							//HideButton.setAttribute('style','font-weight:500;');
-							if(CurrentGroup[CurrentGroupCounter] == 'G911' || CurrentGroup[CurrentGroupCounter] == 'G912' || CurrentGroup[CurrentGroupCounter] == 'G913' || CurrentGroup[CurrentGroupCounter] == 'G941' || CurrentGroup[CurrentGroupCounter] == 'G942' || CurrentGroup[CurrentGroupCounter] == 'G943' || CurrentGroup[CurrentGroupCounter] == 'G944' || CurrentGroup[CurrentGroupCounter] == 'G945' || CurrentGroup[CurrentGroupCounter] == 'G946'){
-								//HideButton.setAttribute('style','font-weight:500; margin-left:40px;');
-							}
-							if(CurrentGroupCounter == 2){
-								//HideButton.setAttribute('style','font-weight:500; margin-left:25px;');
-							}
-							HideButton.innerHTML = CurrentGroup[CurrentGroupCounter];
-							try{
-								document.getElementById(CurrentGroup[CurrentGroupCounter - 1]).appendChild(HideButton);
-								HideButton.click();
-								document.getElementById(CurrentGroup[A]).appendChild(SortingDiv);
-							}catch(err){}
-						}
-
-						if(CurrentGroupCounter == CurrentGroup.length - 1){
-							ParameterDiv.setAttribute('id','constant' + CurrentLine[0]);
-							if(CurrentLine[2] == '999' || CurrentLine[2] == '1000'){
-								Parameter.setAttribute('class','BitTreeButton');
-							}else{
-								Parameter.setAttribute('class','ThirdSubGroup');
-							}
-							try{
-								document.getElementById(CurrentGroup[CurrentGroupCounter]).appendChild(Parameter);
-								document.getElementById(CurrentGroup[CurrentGroupCounter]).appendChild(ParameterDiv);
-							}catch(err){}
-						}
-					}
-				}
-			}
-		}
-
-		
-
-		counter++;
-	}
-
-	loadDisplay();
-	HideAllMenus();
-	PostLoadedRun();
-	BitLabelChecker();
+    hideAllMenus();
+    PostLoadedRun();
+    BitLabelChecker();
 }
 
-MakeMenu();
-
-function CheckParameterReadAccess(){
-	ParCounter = 0;
-	//ParametersPresent = [];
-	Parameters = sessionStorage.getItem('Parameters').split('\n');
-	while(Parameters[ParCounter] !== undefined){
-		//ParametersPresent.push(Parameters[ParCounter].split(',')[0]);
-		if(Number(Parameters[ParCounter].split(',')[9]) <= Number(AccessLevelForUser)){
-			//Parameter Access is correct
-			//console.log('Parameter should be shown');
-		}else{
-			//console.log(Parameters[ParCounter].split(',')[0]);
-			if(document.getElementById(String(Parameters[ParCounter].split(',')[0])) && document.getElementById('constant' + String(Parameters[ParCounter].split(',')[0]))){
-				document.getElementById(String(Parameters[ParCounter].split(',')[0])).setAttribute('style','display:none;');
-				document.getElementById('constant' + String(Parameters[ParCounter].split(',')[0])).setAttribute('style','display:none;');
-				//console.log('set');
-			}
-		}
-		ParCounter++;
-	}
+/**
+ * Hide menu items the user does not have access to.
+ */
+function checkParameterReadAccess() {
+    const parametersArr = getParametersArray('Parameters');
+    parametersArr.forEach(line => {
+        if (!line.length) return;
+        const [id, , , , , , , , , access] = line;
+        if (Number(access) > Number(window.AccessLevelForUser)) {
+            const btn = document.getElementById(id);
+            const div = document.getElementById('constant' + id);
+            if (btn) btn.style.display = 'none';
+            if (div) div.style.display = 'none';
+        }
+    });
 }
+
+// Placeholder functions for compatibility with existing codebase
+// function menuParametersOnClick(param, btn) {
+//     // Implement as needed
+// }
+// function treeViewClick(btn, id) {
+//     // Implement as needed
+// }
+// function postLoadedRun() {
+//     // Implement as needed
+// }
+// function bitLabelChecker() {
+//     // Implement as needed
+// }
+
+// Initialize menu on load
+document.addEventListener('DOMContentLoaded', makeMenu);

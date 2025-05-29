@@ -1,11 +1,5 @@
 <?php
 
-$dbservername = 'localhost';
-$dbusername = 'uy32hp2gce6t3';
-$dbpassword = 'a7wxwt3asg3e';
-$dbname = "dbscnrqy755s5p";
-
-
 
 
 $serial = $_POST["SerialNumber"];
@@ -15,25 +9,25 @@ $useremail = $_POST["Useremail"];
 $access_level = $_POST["AccessLevel"];
 $module_id = $_POST["IndexNumber"];
 $module = $_POST["Module"];
-$comments= $_POST["Comments"];
+$comments = $_POST["Comments"];
 $timewindow_new = $_POST["TimeWindow"];
 $hilevel = $_POST["HiLevel"];
 $dispatch = $_POST["Dispatch"];
 
 
 $timewindow_mix = 0;
-$validation_code=1;
+$validation_code = 1;
 
-define("b0",  0x1); // 2^0
-define("b1",  0x2); // 2^1
-define("b2",  0x4); // 2^2
-define("b3",  0x8); // 2^3
-define("b4",  0x10); // 2^4
-define("b5",  0x20); // 2^5
-define("b6",  0x40); // 2^6
-define("b7",  0x80); // 2^7
-define("b8",  0x100); // 2^8
-define("b9",  0x200); // 2^9
+define("b0", 0x1); // 2^0
+define("b1", 0x2); // 2^1
+define("b2", 0x4); // 2^2
+define("b3", 0x8); // 2^3
+define("b4", 0x10); // 2^4
+define("b5", 0x20); // 2^5
+define("b6", 0x40); // 2^6
+define("b7", 0x80); // 2^7
+define("b8", 0x100); // 2^8
+define("b9", 0x200); // 2^9
 define("b10", 0x400); // 2^10
 define("b11", 0x800); // 2^11
 define("b12", 0x1000); // 2^12
@@ -189,111 +183,100 @@ $timewindow_mix = $timewindow_mix + $timewindow_new_b11 + $timewindow_new_b12 + 
 
 
 
-// Create connection to database
-//$conn = new mysqli($dbservername, $dbusername, $dbpassword, $dbname);
-// Check connection
-//if ($conn->connect_error) {
-//  die("Connection failed: " . $conn->connect_error);
-//}
+echo "New record created successfully";
 
 
-//$sql = "INSERT INTO mocas_main ". "(timestamp,serial,model,username,user_email,access_level,module_id,module,hilevel,dispatch,timewindow_new,validation_code,comments) ". "VALUES(NOW(),'$serial','$model','$username','$useremail','$access_level','$module_id','$module','$hilevel','$dispatch','$timewindow_new','$validation_code','$comments')";
 
-//if ($conn->query($sql) === TRUE) {
-  echo "New record created successfully";
-//} else {
-//  echo "Error: " . $sql . "<br>" . $conn->error;
-//}
-
-//$conn->close();
-
-
-	
 ?>
 
 
 <html>
+
 <head>
-		<style>
-			body,html{
-				margin:0;
-				padding:0;
-				background:ghostwhite;
-				padding-top:3%;
-			}
-			
-			#TopBar{
-				top: 0;
-				z-index: 3;
-				background-color: rgb(13, 105, 56);
-				width: 100%;
-				position: fixed;
-			}
-			
-			#LogoHead{
-				float:right;
-			}
-			
-			#ActivationModule{
-				font-family:sans-serif;
-				margin:10px;
-				font-size:15px;
-			}
-			
-			#Title,#returnButton{
-				font-family:sans-serif;
-				margin:10px;
-			}
-		</style>
+	<style>
+		body,
+		html {
+			margin: 0;
+			padding: 0;
+			background: ghostwhite;
+			padding-top: 3%;
+		}
+
+		#TopBar {
+			top: 0;
+			z-index: 3;
+			background-color: rgb(13, 105, 56);
+			width: 100%;
+			position: fixed;
+		}
+
+		#LogoHead {
+			float: right;
+		}
+
+		#ActivationModule {
+			font-family: sans-serif;
+			margin: 10px;
+			font-size: 15px;
+		}
+
+		#Title,
+		#returnButton {
+			font-family: sans-serif;
+			margin: 10px;
+		}
+	</style>
 </head>
-	<body>
-		<div id="TopBar"><img id="LogoHead" src="https://support.combilift.net/ecompass/assets/ecompassLogo.png"></div>
-		<h1 id="Title">MoCAS - HiLevel Update</h1>
-		<div id="ActivationModule"/>
 
-			<?php
-				echo ("Serial Number:" . $serial . "<br>");
-				echo ("Module:" . $module . "<br>");
-				echo ("Hi Level Request:" . $hilevel . "<br>");
-				echo ("Dispatch Status:" . $dispatch . "<br>");
-				echo ("Time window in sec:" . $timewindow_new . "<br>");
-				echo ("Validation Code:" . $validation_code . "<br>");
+<body>
+	<div id="TopBar"><img id="LogoHead" src="https://support.combilift.net/ecompass/assets/ecompassLogo.png"></div>
+	<h1 id="Title">MoCAS - HiLevel Update</h1>
+	<div id="ActivationModule" />
 
-				echo('<script> Validation_Code = ' . $validation_code . '</script>');
-				echo('<script> VarModuleID = ' . $module_id . '</script>');
-				echo('<script> TimeWindow = ' . $timewindow_new . '</script>');
-				echo('<script> TimeWindow_mix = ' . $timewindow_mix . '</script>');
-				echo('<script> HiLevel = ' . $hilevel . '</script>');
-				echo('<script> Dispatch = ' . $dispatch . '</script>');
+	<?php
+	echo ("Serial Number:" . $serial . "<br>");
+	echo ("Module:" . $module . "<br>");
+	echo ("Hi Level Request:" . $hilevel . "<br>");
+	echo ("Dispatch Status:" . $dispatch . "<br>");
+	echo ("Time window in sec:" . $timewindow_new . "<br>");
+	echo ("Validation Code:" . $validation_code . "<br>");
 
-			?>
-		</div>
-			<input type="submit" value="Return to editor" onclick="ChangeModules()"/>
-		<script>
-			function ChangeModules(){
-				ToFind = VarModuleID.toString();
-				Validation_Code_str = Validation_Code.toString();
-				HiLevel_str = HiLevel.toString();
-				Dispatch_str = Dispatch.toString();
-				TimeWindow_str = TimeWindow.toString();
-				TimeWindow_mix_str = TimeWindow_mix.toString();
-				counter = 0;
-				Parameters = sessionStorage.getItem('Parameters');
-				while(Parameters.split('\n')[counter] != undefined){
-					if(Parameters.split('\n')[counter].split(',')[0] == ToFind){
-						OldLine = Parameters.split('\n')[counter];
-						ParameterLine = Parameters.split('\n')[counter].split(',');
-						NewLine = ParameterLine[0] + ',' +  HiLevel_str + ',' + '0' + ',' + '1' + ',' + Dispatch_str + ','+ TimeWindow_str + ','+ TimeWindow_mix_str + ','+ Validation_Code_str + ','+ ParameterLine[8] + ','+ ParameterLine[9] + ','+ ParameterLine[10];
-						NewSession = sessionStorage.getItem('Parameters').replace(OldLine,NewLine);
-						sessionStorage.setItem('Parameters',NewSession);
-						location.href = '../editor.php';
-						break;
-					}else{
-						counter++;
-					}
+	echo ('<script> Validation_Code = ' . $validation_code . '</script>');
+	echo ('<script> VarModuleID = ' . $module_id . '</script>');
+	echo ('<script> TimeWindow = ' . $timewindow_new . '</script>');
+	echo ('<script> TimeWindow_mix = ' . $timewindow_mix . '</script>');
+	echo ('<script> HiLevel = ' . $hilevel . '</script>');
+	echo ('<script> Dispatch = ' . $dispatch . '</script>');
+
+	?>
+	</div>
+	<input type="submit" value="Return to editor" onclick="ChangeModules()" />
+	<script>
+		function ChangeModules() {
+			ToFind = VarModuleID.toString();
+			Validation_Code_str = Validation_Code.toString();
+			HiLevel_str = HiLevel.toString();
+			Dispatch_str = Dispatch.toString();
+			TimeWindow_str = TimeWindow.toString();
+			TimeWindow_mix_str = TimeWindow_mix.toString();
+			counter = 0;
+			Parameters = sessionStorage.getItem('Parameters');
+			while (Parameters.split('\n')[counter] != undefined) {
+				if (Parameters.split('\n')[counter].split(',')[0] == ToFind) {
+					OldLine = Parameters.split('\n')[counter];
+					ParameterLine = Parameters.split('\n')[counter].split(',');
+					NewLine = ParameterLine[0] + ',' + HiLevel_str + ',' + '0' + ',' + '1' + ',' + Dispatch_str + ',' + TimeWindow_str + ',' + TimeWindow_mix_str + ',' + Validation_Code_str + ',' + ParameterLine[8] + ',' + ParameterLine[9] + ',' + ParameterLine[10];
+					NewSession = sessionStorage.getItem('Parameters').replace(OldLine, NewLine);
+					sessionStorage.setItem('Parameters', NewSession);
+					location.href = '../editor.php';
+					break;
+				} else {
+					counter++;
 				}
 			}
+		}
 
-</script>
-	</body>
+	</script>
+</body>
+
 </html>

@@ -2,10 +2,10 @@
  * Clears the workspace UI by removing all content from the main description and table areas.
  */
 function ClearWorkSpace() {
-    const tableElem = document.getElementById('topDefineTable');
-    if (tableElem) tableElem.innerHTML = '';
-    const descElem = document.getElementById('topDefineDescription');
-    if (descElem) descElem.innerHTML = '';
+	const tableElem = document.getElementById('topDefineTable');
+	if (tableElem) tableElem.innerHTML = '';
+	const descElem = document.getElementById('topDefineDescription');
+	if (descElem) descElem.innerHTML = '';
 }
 
 /**
@@ -13,89 +13,89 @@ function ClearWorkSpace() {
  * @param {HTMLElement} htmlObject - The parameter button or element clicked.
  */
 function AddFixedParameter(htmlObject) {
-    const workSpaceTitle = document.createElement('p');
-    workSpaceTitle.id = 'WorkSpaceTitle';
-    workSpaceTitle.innerHTML = htmlObject.innerHTML;
+	const workSpaceTitle = document.createElement('p');
+	workSpaceTitle.id = 'WorkSpaceTitle';
+	workSpaceTitle.innerHTML = htmlObject.innerHTML;
 
-    const description = document.createElement('p');
-    description.id = 'description';
-    if (MainDescriptionsDict[htmlObject.id] !== undefined) {
-        description.innerHTML = MainDescriptionsDict[htmlObject.id].replace('#' + htmlObject.id, '');
-    }
+	const description = document.createElement('p');
+	description.id = 'description';
+	if (MainDescriptionsDict[htmlObject.id] !== undefined) {
+		description.innerHTML = MainDescriptionsDict[htmlObject.id].replace('#' + htmlObject.id, '');
+	}
 
-    const parameterMsg = document.createElement('p');
-    parameterMsg.setAttribute('value', 'This Parameter is not present on this file');
+	const parameterMsg = document.createElement('p');
+	parameterMsg.setAttribute('value', 'This Parameter is not present on this file');
 
-    const addParameterButton = document.createElement('input');
-    addParameterButton.id = 'AddParameterButton';
-    addParameterButton.type = 'submit';
-    addParameterButton.value = `Add ${htmlObject.innerHTML} to this file?`;
-    addParameterButton.onclick = function () {
-        AddParmeterToClp(htmlObject.id.toString(), htmlObject);
-    };
+	const addParameterButton = document.createElement('input');
+	addParameterButton.id = 'AddParameterButton';
+	addParameterButton.type = 'submit';
+	addParameterButton.value = `Add ${htmlObject.innerHTML} to this file?`;
+	addParameterButton.onclick = function () {
+		AddParmeterToClp(htmlObject.id.toString(), htmlObject);
+	};
 
-    const descElem = document.getElementById('topDefineDescription');
-    descElem.appendChild(workSpaceTitle);
-    descElem.appendChild(description);
-    descElem.appendChild(parameterMsg);
-    descElem.appendChild(addParameterButton);
+	const descElem = document.getElementById('topDefineDescription');
+	descElem.appendChild(workSpaceTitle);
+	descElem.appendChild(description);
+	descElem.appendChild(parameterMsg);
+	descElem.appendChild(addParameterButton);
 }
 
-function MenuParametersOnclick(Line,HTMLObject){
-	if(Line == 'empty'){
+function MenuParametersOnclick(Line, HTMLObject) {
+	if (Line == 'empty') {
 		ClearWorkSpace();
 		AddFixedParameter(HTMLObject);
 		return;
 	}
 	$('#topDefineDescription').fadeIn();
 	LineNumber = Line.split(',')[0];
-	
+
 	ClearWorkSpace();
-	
+
 	Parameters = sessionStorage.getItem('Parameters').split('\n');
 	parcounter = 0;
-	while(Parameters[parcounter] != undefined){
-		if(LineNumber == Parameters[parcounter].split(',')[0]){
+	while (Parameters[parcounter] != undefined) {
+		if (LineNumber == Parameters[parcounter].split(',')[0]) {
 			Line = Parameters[parcounter].split(',');
 			break;
 		}
 		parcounter++;
 	}
-	
+
 	//Description
 	descriptionArea = document.createElement('tr');
 	DescriptionText = document.createElement('p');
-	DescriptionText.innerHTML = MainDescriptionsDict[Number(HTMLObject.id)].replace('#' + HTMLObject.id,'');
-	DescriptionText.setAttribute('id','description');
+	DescriptionText.innerHTML = MainDescriptionsDict[Number(HTMLObject.id)].replace('#' + HTMLObject.id, '');
+	DescriptionText.setAttribute('id', 'description');
 	descriptionArea.appendChild(DescriptionText);
-	
-	
+
+
 	//Update Mode
-	if(LineNumber == 1){
-		
+	if (LineNumber == 1) {
+
 		Table = document.getElementById('topDefineDescription');
-		
+
 		TH = document.createElement('p');
-		TH.setAttribute('id','WorkSpaceTitle');
+		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
 
-		
+
 		TR = document.createElement('tr');
 		Table.appendChild(TR);
 		MoCASLeft_1 = document.createElement('td');
 		TR.appendChild(MoCASLeft_1);
-		
-		if(Number(sessionStorage.getItem('AccessLevel')) >= 8){
+
+		if (Number(sessionStorage.getItem('AccessLevel')) >= 8) {
 			CheckLine = Line.toString();
 
 			FormDiv_1 = document.createElement('div');
-			FormDiv_1.setAttribute('id','MocasDivArea');
+			FormDiv_1.setAttribute('id', 'MocasDivArea');
 			Form_1 = document.createElement('form');
-			Form_1.setAttribute('action','MoCAS/MoCAS_high.php');
-			Form_1.setAttribute('method','POST');
-			Form_1.setAttribute('name','MocasVerifyForm');
+			Form_1.setAttribute('action', 'MoCAS/MoCAS_high.php');
+			Form_1.setAttribute('method', 'POST');
+			Form_1.setAttribute('name', 'MocasVerifyForm');
 
 			//create elements for the form
 			SerialNumberField_1 = document.createElement('input');
@@ -117,7 +117,7 @@ function MenuParametersOnclick(Line,HTMLObject){
 			TimeWindow_label_1 = document.createElement('label');
 			HiLevel_label_1 = document.createElement('label');
 			Dispatch_label_1 = document.createElement('label');
-			
+
 
 			//define the types for each element
 			SerialNumberField_1.type = 'text';
@@ -134,17 +134,17 @@ function MenuParametersOnclick(Line,HTMLObject){
 			SubmitButton_1.type = 'submit';
 
 			//create element names for POST
-			SerialNumberField_1.setAttribute('name','SerialNumber');
-			ModelField_1.setAttribute('name','Model');
-			UsernameField_1.setAttribute('name','Username');
-			UseremailField_1.setAttribute('name','Useremail');			
-			AccessLevelField_1.setAttribute('name','AccessLevel');
-			IndexField_1.setAttribute('name','IndexNumber');
-			ModuleField_1.setAttribute('name','Module');
-			HiLevel_1.setAttribute('name','HiLevel');
-			Dispatch_1.setAttribute('name','Dispatch');
-			TimeWindow_1.setAttribute('name','TimeWindow');
-			TextareaField_1.setAttribute('name','Comments');
+			SerialNumberField_1.setAttribute('name', 'SerialNumber');
+			ModelField_1.setAttribute('name', 'Model');
+			UsernameField_1.setAttribute('name', 'Username');
+			UseremailField_1.setAttribute('name', 'Useremail');
+			AccessLevelField_1.setAttribute('name', 'AccessLevel');
+			IndexField_1.setAttribute('name', 'IndexNumber');
+			ModuleField_1.setAttribute('name', 'Module');
+			HiLevel_1.setAttribute('name', 'HiLevel');
+			Dispatch_1.setAttribute('name', 'Dispatch');
+			TimeWindow_1.setAttribute('name', 'TimeWindow');
+			TextareaField_1.setAttribute('name', 'Comments');
 
 
 			SerialNumberField_label_1.innerHTML = "<BR>Machine Serial Number<BR>";
@@ -154,41 +154,41 @@ function MenuParametersOnclick(Line,HTMLObject){
 			Dispatch_label_1.innerHTML = "<BR>Dispatch Status: 0 not done, 1 dispatch done<BR>";
 
 
-			SerialNumberField_1.setAttribute('value',UserParametersFileDict[4].split(',')[3]);
-			ModelField_1.setAttribute('value',UserParametersFileDict[2].split(',')[3]);
-			UsernameField_1.setAttribute('value',sessionStorage.getItem('loggedinusername'));
-			UseremailField_1.setAttribute('value',sessionStorage.getItem('loggedinemail'));
-			AccessLevelField_1.setAttribute('value',sessionStorage.getItem('AccessLevel'));
-			IndexField_1.setAttribute('value',LineNumber);
-			ModuleField_1.setAttribute('value',document.getElementById('WorkSpaceTitle').innerHTML);
-			HiLevel_1.setAttribute('value',CheckLine.split(',')[1]);
-			Dispatch_1.setAttribute('value',CheckLine.split(',')[4]);
-			TimeWindow_1.setAttribute('value',CheckLine.split(',')[5]);
-				
+			SerialNumberField_1.setAttribute('value', UserParametersFileDict[4].split(',')[3]);
+			ModelField_1.setAttribute('value', UserParametersFileDict[2].split(',')[3]);
+			UsernameField_1.setAttribute('value', sessionStorage.getItem('loggedinusername'));
+			UseremailField_1.setAttribute('value', sessionStorage.getItem('loggedinemail'));
+			AccessLevelField_1.setAttribute('value', sessionStorage.getItem('AccessLevel'));
+			IndexField_1.setAttribute('value', LineNumber);
+			ModuleField_1.setAttribute('value', document.getElementById('WorkSpaceTitle').innerHTML);
+			HiLevel_1.setAttribute('value', CheckLine.split(',')[1]);
+			Dispatch_1.setAttribute('value', CheckLine.split(',')[4]);
+			TimeWindow_1.setAttribute('value', CheckLine.split(',')[5]);
 
-			SerialNumberField_1.setAttribute('readonly','readonly');
-			ModelField_1.setAttribute('readonly','readonly');
-			UsernameField_1.setAttribute('readonly','readonly');
-			AccessLevelField_1.setAttribute('readonly','readonly');
-			IndexField_1.setAttribute('readonly','readonly');
-			ModuleField_1.setAttribute('readonly','readonly');
-			
-			UseremailField_1.setAttribute('style','display:none;');				
-			ModelField_1.setAttribute('style','display:none;');
-			IndexField_1.setAttribute('style','display:none;');
-			ModuleField_1.setAttribute('style','display:none;');
-			AccessLevelField_1.setAttribute('style','display:none;');
-				
-			SerialNumberField_1.setAttribute('id','MocasFormSerialInput');
-			UsernameField_1.setAttribute('id','MocasFormUsernameInput');
-			TimeWindow_1.setAttribute('id','MocasFormTimeWindowInput');
-			HiLevel_1.setAttribute('id','MocasFormHiLevelInput');
-			Dispatch_1.setAttribute('id','MocasFormDispatchInput');
-			TextareaField_1.setAttribute('id','MocasFormTEXTInput');
-			SubmitButton_1.setAttribute('id','MocasFormInputSubmit');
-				
-			TextareaField_1.setAttribute('placeholder',LanguageDict['Comments']);
-				
+
+			SerialNumberField_1.setAttribute('readonly', 'readonly');
+			ModelField_1.setAttribute('readonly', 'readonly');
+			UsernameField_1.setAttribute('readonly', 'readonly');
+			AccessLevelField_1.setAttribute('readonly', 'readonly');
+			IndexField_1.setAttribute('readonly', 'readonly');
+			ModuleField_1.setAttribute('readonly', 'readonly');
+
+			UseremailField_1.setAttribute('style', 'display:none;');
+			ModelField_1.setAttribute('style', 'display:none;');
+			IndexField_1.setAttribute('style', 'display:none;');
+			ModuleField_1.setAttribute('style', 'display:none;');
+			AccessLevelField_1.setAttribute('style', 'display:none;');
+
+			SerialNumberField_1.setAttribute('id', 'MocasFormSerialInput');
+			UsernameField_1.setAttribute('id', 'MocasFormUsernameInput');
+			TimeWindow_1.setAttribute('id', 'MocasFormTimeWindowInput');
+			HiLevel_1.setAttribute('id', 'MocasFormHiLevelInput');
+			Dispatch_1.setAttribute('id', 'MocasFormDispatchInput');
+			TextareaField_1.setAttribute('id', 'MocasFormTEXTInput');
+			SubmitButton_1.setAttribute('id', 'MocasFormInputSubmit');
+
+			TextareaField_1.setAttribute('placeholder', LanguageDict['Comments']);
+
 			Form_1.appendChild(ModelField_1);
 			Form_1.appendChild(IndexField_1);
 			Form_1.appendChild(ModuleField_1);
@@ -205,42 +205,42 @@ function MenuParametersOnclick(Line,HTMLObject){
 			Form_1.appendChild(TimeWindow_label_1);
 			Form_1.appendChild(TimeWindow_1);
 			Form_1.appendChild(TextareaField_1);
-			SubmitButton_1.setAttribute('value',LanguageDict['GetActivationCode']);
+			SubmitButton_1.setAttribute('value', LanguageDict['GetActivationCode']);
 			Form_1.appendChild(SubmitButton_1);
 
 			FormDiv_1.appendChild(Form_1);
 			document.getElementById('topDefineDescription').appendChild(FormDiv_1);
 
 			return;
-		
+
 		}
 
 	}
-	
+
 	//Truck Build Date
-	if(LineNumber == 5){
-		
+	if (LineNumber == 5) {
+
 		Table = document.getElementById('topDefineDescription');
-		
+
 		TH = document.createElement('p');
-		TH.setAttribute('id','WorkSpaceTitle');
+		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
-		
+
 		//Build Date
 		TR = document.createElement('tr');
 		Table.appendChild(TR);
 		TDLeft = document.createElement('p');
-		TDLeft.setAttribute('id','ReadTitle');
+		TDLeft.setAttribute('id', 'ReadTitle');
 		TDLeft.innerHTML = LanguageDict["TruckBuildDate"];
 		TR.appendChild(TDLeft);
 		TruckBuildDateText = document.createElement('p');
-		TruckBuildDateText.setAttribute('id','ReadResult');
+		TruckBuildDateText.setAttribute('id', 'ReadResult');
 		date = new Date(Line[3] * 1000);
-		if(date.getFullYear() == "1970"){
+		if (date.getFullYear() == "1970") {
 			TruckBuildDateText.innerHTML = 'NA';
-		}else{
+		} else {
 			month = Number(date.getMonth()) + 1;
 			TruckBuildDateText.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
 		}
@@ -248,34 +248,34 @@ function MenuParametersOnclick(Line,HTMLObject){
 
 		BottomTR = document.createElement('tr');
 		Table.appendChild(BottomTR);
-		if(AccessLevelForUser >= 8){
-			 DateInput = document.createElement('input');
-			DateInput.setAttribute('type','date');
-			DateInput.setAttribute('id','UpdateBuildDate');
-			DateInput.setAttribute('style','margin:15px;');
+		if (AccessLevelForUser >= 8) {
+			DateInput = document.createElement('input');
+			DateInput.setAttribute('type', 'date');
+			DateInput.setAttribute('id', 'UpdateBuildDate');
+			DateInput.setAttribute('style', 'margin:15px;');
 			BottomTR.appendChild(DateInput);
-		
-			 DateSubmit = document.createElement('input');
-			DateSubmit.setAttribute('type','submit');
-			DateSubmit.setAttribute('value','Update Truck Build Date');
-			DateSubmit.setAttribute('onclick','ChangeBuildDate()');
-			DateInput.setAttribute('style','margin:15px;');
+
+			DateSubmit = document.createElement('input');
+			DateSubmit.setAttribute('type', 'submit');
+			DateSubmit.setAttribute('value', 'Update Truck Build Date');
+			DateSubmit.setAttribute('onclick', 'ChangeBuildDate()');
+			DateInput.setAttribute('style', 'margin:15px;');
 			BottomTR.appendChild(DateSubmit);
 		}
-	
+
 		//Dealer Installation Date
 		TR = document.createElement('tr');
 		Table.appendChild(TR);
 		TDLeft = document.createElement('p');
-		TDLeft.setAttribute('id','ReadTitle');
+		TDLeft.setAttribute('id', 'ReadTitle');
 		TDLeft.innerHTML = LanguageDict["TruckDealerDate"];
 		TR.appendChild(TDLeft);
 		TruckBuildDateText = document.createElement('p');
-		TruckBuildDateText.setAttribute('id','ReadResult');
+		TruckBuildDateText.setAttribute('id', 'ReadResult');
 		date = new Date(Line[4] * 1000);
-		if(date.getFullYear() == "1970"){
+		if (date.getFullYear() == "1970") {
 			TruckBuildDateText.innerHTML = 'NA';
-		}else{
+		} else {
 			month = Number(date.getMonth()) + 1;
 			TruckBuildDateText.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
 		}
@@ -283,18 +283,18 @@ function MenuParametersOnclick(Line,HTMLObject){
 
 		BottomTR = document.createElement('tr');
 		Table.appendChild(BottomTR);
-		if(AccessLevelForUser >= 8){
+		if (AccessLevelForUser >= 8) {
 			DateInput = document.createElement('input');
-			DateInput.setAttribute('type','date');
-			DateInput.setAttribute('id','UpdateDealerDate');
-			DateInput.setAttribute('style','margin:15px;');
+			DateInput.setAttribute('type', 'date');
+			DateInput.setAttribute('id', 'UpdateDealerDate');
+			DateInput.setAttribute('style', 'margin:15px;');
 			BottomTR.appendChild(DateInput);
-		
+
 			DateSubmit = document.createElement('input');
-			DateSubmit.setAttribute('type','submit');
-			DateSubmit.setAttribute('value','Update Truck Dealer Date');
-			DateSubmit.setAttribute('onclick','ChangeDealerDate()');
-			DateInput.setAttribute('style','margin:15px;');
+			DateSubmit.setAttribute('type', 'submit');
+			DateSubmit.setAttribute('value', 'Update Truck Dealer Date');
+			DateSubmit.setAttribute('onclick', 'ChangeDealerDate()');
+			DateInput.setAttribute('style', 'margin:15px;');
 			BottomTR.appendChild(DateSubmit);
 		}
 
@@ -303,15 +303,15 @@ function MenuParametersOnclick(Line,HTMLObject){
 		TR = document.createElement('tr');
 		Table.appendChild(TR);
 		TDLeft = document.createElement('p');
-		TDLeft.setAttribute('id','ReadTitle');
+		TDLeft.setAttribute('id', 'ReadTitle');
 		TDLeft.innerHTML = LanguageDict["TruckCustomerDate"];
 		TR.appendChild(TDLeft);
 		TruckBuildDateText = document.createElement('p');
-		TruckBuildDateText.setAttribute('id','ReadResult');
+		TruckBuildDateText.setAttribute('id', 'ReadResult');
 		date = new Date(Line[5] * 1000);
-		if(date.getFullYear() == "1970"){
+		if (date.getFullYear() == "1970") {
 			TruckBuildDateText.innerHTML = 'NA';
-		}else{
+		} else {
 			month = Number(date.getMonth()) + 1;
 			TruckBuildDateText.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
 		}
@@ -319,215 +319,215 @@ function MenuParametersOnclick(Line,HTMLObject){
 
 		BottomTR = document.createElement('tr');
 		Table.appendChild(BottomTR);
-		if(AccessLevelForUser >= 8){
+		if (AccessLevelForUser >= 8) {
 			DateInput = document.createElement('input');
-			DateInput.setAttribute('type','date');
-			DateInput.setAttribute('id','UpdateCustomerDate');
-			DateInput.setAttribute('style','margin:15px;');
+			DateInput.setAttribute('type', 'date');
+			DateInput.setAttribute('id', 'UpdateCustomerDate');
+			DateInput.setAttribute('style', 'margin:15px;');
 			BottomTR.appendChild(DateInput);
-		
+
 			DateSubmit = document.createElement('input');
-			DateSubmit.setAttribute('type','submit');
-			DateSubmit.setAttribute('value','Update Truck Customer Date');
-			DateSubmit.setAttribute('onclick','ChangeCustomerDate()');
-			DateInput.setAttribute('style','margin:15px;');
+			DateSubmit.setAttribute('type', 'submit');
+			DateSubmit.setAttribute('value', 'Update Truck Customer Date');
+			DateSubmit.setAttribute('onclick', 'ChangeCustomerDate()');
+			DateInput.setAttribute('style', 'margin:15px;');
 			BottomTR.appendChild(DateSubmit);
 		}
-		
+
 		return;
 	}
-	
+
 	//Parameter File Version
-	if(LineNumber == 6){
-		
+	if (LineNumber == 6) {
+
 		Table = document.getElementById('topDefineDescription');
-		
+
 		TH = document.createElement('p');
-		TH.setAttribute('id','WorkSpaceTitle');
+		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
-		
+
 		TR = document.createElement('tr');
 		Table.appendChild(TR);
-		
-		
+
+
 		TDLeft = document.createElement('p');
-		TDLeft.setAttribute('id','ReadTitle');
+		TDLeft.setAttribute('id', 'ReadTitle');
 		TDLeft.innerHTML = LanguageDict["ApiVersion"];
 		TR.appendChild(TDLeft);
 		ParameterFileVersionText = document.createElement('p');
-		ParameterFileVersionText.setAttribute('id','ReadResult');
+		ParameterFileVersionText.setAttribute('id', 'ReadResult');
 		ParameterFileVersionText.innerHTML = Line[3];
 		TR.appendChild(ParameterFileVersionText);
 		return;
 	}
-	
+
 	//File Cloned Info // File Exported Info
-	if(LineNumber == 7 || LineNumber == 8){
-		
+	if (LineNumber == 7 || LineNumber == 8) {
+
 		Table = document.getElementById('topDefineDescription');
-		
+
 		TH = document.createElement('p');
-		TH.setAttribute('id','WorkSpaceTitle');
+		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
-		
+
 		TR = document.createElement('tr');
 		Table.appendChild(TR);
 		TDLeft = document.createElement('p');
-		TDLeft.setAttribute('id','ReadTitle');
+		TDLeft.setAttribute('id', 'ReadTitle');
 		TDLeft.innerHTML = LanguageDict["Timestamp"];
 		TR.appendChild(TDLeft);
 		TDRight = document.createElement('p');
-		TDRight.setAttribute('id','ReadResult');
+		TDRight.setAttribute('id', 'ReadResult');
 		date = new Date(Line[1] * 1000);
-		if(date.getFullYear() == '1970'){
+		if (date.getFullYear() == '1970') {
 			TDRight.innerHTML = 'NA';
-		}else{
+		} else {
 			month = Number(date.getMonth()) + 1;
 			TDRight.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
 		}
 		TR.appendChild(TDRight);
-		
-		if(AccessLevelForUser > 6){
-		
+
+		if (AccessLevelForUser > 6) {
+
 			DefaultTR = document.createElement('tr');
 			Table.appendChild(DefaultTR);
 			DefaultLeft = document.createElement('p');
-			DefaultLeft.setAttribute('id','ReadTitle');
+			DefaultLeft.setAttribute('id', 'ReadTitle');
 			DefaultLeft.innerHTML = LanguageDict["KeyswitchHourmeter"];
 			DefaultTR.appendChild(DefaultLeft);
 			DefaultRight = document.createElement('p');
-			DefaultRight.setAttribute('id','ReadResult');
+			DefaultRight.setAttribute('id', 'ReadResult');
 			DefaultRight.innerHTML = String(Line[2] / 3600).split('.')[0] + ' hr';
 			DefaultTR.appendChild(DefaultRight);
-			
-			
+
+
 			FactoryTR = document.createElement('tr');
 			Table.appendChild(FactoryTR);
 			FactoryLeft = document.createElement('p');
-			FactoryLeft.setAttribute('id','ReadTitle');
+			FactoryLeft.setAttribute('id', 'ReadTitle');
 			FactoryLeft.innerHTML = LanguageDict["InterlockHourmeter"];
 			FactoryTR.appendChild(FactoryLeft);
 			FactoryRight = document.createElement('p');
-			FactoryRight.setAttribute('id','ReadResult');
+			FactoryRight.setAttribute('id', 'ReadResult');
 			FactoryRight.innerHTML = String(Line[3] / 3600).split('.')[0] + ' hr';
 			FactoryTR.appendChild(FactoryRight);
-			
-			
+
+
 			MinTR = document.createElement('tr');
 			Table.appendChild(MinTR);
 			MinLeft = document.createElement('p');
-			MinLeft.setAttribute('id','ReadTitle');
+			MinLeft.setAttribute('id', 'ReadTitle');
 			MinLeft.innerHTML = LanguageDict["TractionHourmeter"];
 			MinTR.appendChild(MinLeft);
 			MinRight = document.createElement('p');
-			MinRight.setAttribute('id','ReadResult');
+			MinRight.setAttribute('id', 'ReadResult');
 			MinRight.innerHTML = String(Line[4] / 3600).split('.')[0] + ' hr';
 			MinTR.appendChild(MinRight);
-			
-			
+
+
 			MaxTR = document.createElement('tr');
 			Table.appendChild(MaxTR);
 			MaxLeft = document.createElement('p');
-			MaxLeft.setAttribute('id','ReadTitle');
+			MaxLeft.setAttribute('id', 'ReadTitle');
 			MaxLeft.innerHTML = LanguageDict["HydraulicHourmeter"];
 			MaxTR.appendChild(MaxLeft);
 			MaxRight = document.createElement('p');
-			MaxRight.setAttribute('id','ReadResult');
+			MaxRight.setAttribute('id', 'ReadResult');
 			MaxRight.innerHTML = String(Line[5] / 3600).split('.')[0] + ' hr';
 			MaxTR.appendChild(MaxRight);
-			
-			if(LineNumber == 7){
+
+			if (LineNumber == 7) {
 				ActiveUserTr = document.createElement('tr');
 				Table.appendChild(ActiveUserTr);
 				ActiveuserLeft = document.createElement('p');
-				ActiveuserLeft.setAttribute('id','ReadTitle');
+				ActiveuserLeft.setAttribute('id', 'ReadTitle');
 				ActiveuserLeft.innerHTML = LanguageDict["ActiveUser"];
 				ActiveUserTr.appendChild(ActiveuserLeft);
-			
-				if(Line[9] == 0){
-					 ActiveUserText = 'Generic Operator';
-				}else if(Line[9] == 1){
-					 ActiveUserText = 'Novice Operator';
-				}else if(Line[9] == 2){
-					 ActiveUserText = 'Standard Operator';
-				}else if(Line[9] == 3){
-					 ActiveUserText = 'Experienced Operator';
-				}else if(Line[9] == 4){
-					 ActiveUserText = 'Service';
-				}else if(Line[9] == 5){
-					 ActiveUserText = 'Manager';
-				}else if(Line[9] == 6){
-				 	ActiveUserText = 'Dealer';
-				}else if(Line[9] == 7){
-					 ActiveUserText = 'Combilift';
-				}else if(Line[9] == 8){
-					 ActiveUserText = 'Developer';
+
+				if (Line[9] == 0) {
+					ActiveUserText = 'Generic Operator';
+				} else if (Line[9] == 1) {
+					ActiveUserText = 'Novice Operator';
+				} else if (Line[9] == 2) {
+					ActiveUserText = 'Standard Operator';
+				} else if (Line[9] == 3) {
+					ActiveUserText = 'Experienced Operator';
+				} else if (Line[9] == 4) {
+					ActiveUserText = 'Service';
+				} else if (Line[9] == 5) {
+					ActiveUserText = 'Manager';
+				} else if (Line[9] == 6) {
+					ActiveUserText = 'Dealer';
+				} else if (Line[9] == 7) {
+					ActiveUserText = 'Combilift';
+				} else if (Line[9] == 8) {
+					ActiveUserText = 'Developer';
 				}
-				
+
 				ActiveUserRight = document.createElement('p');
-				ActiveUserRight.setAttribute('id','ReadResult');
+				ActiveUserRight.setAttribute('id', 'ReadResult');
 				ActiveUserRight.innerHTML = ActiveUserText;
 				ActiveUserTr.appendChild(ActiveUserRight);
 			}
 		}
-		
+
 		return;
 	}
-	
+
 	//First Service // Standard Service // Full Service
-	if(LineNumber == 9 || LineNumber == 10 || LineNumber == 11){
-		
+	if (LineNumber == 9 || LineNumber == 10 || LineNumber == 11) {
+
 		Table = document.getElementById('topDefineDescription');
-	
+
 		TH = document.createElement('p');
-		TH.setAttribute('id','WorkSpaceTitle');
+		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
-		
-		 TR = document.createElement('tr');
+
+		TR = document.createElement('tr');
 		Table.appendChild(TR);
-		 TDLeft = document.createElement('p');
-		 TDLeft.setAttribute('id','ReadTitle');
+		TDLeft = document.createElement('p');
+		TDLeft.setAttribute('id', 'ReadTitle');
 		TDLeft.innerHTML = LanguageDict["Timestamp"];
 		TR.appendChild(TDLeft);
-		 TDRight = document.createElement('p');
-		TDRight.setAttribute('id','ReadResult');
+		TDRight = document.createElement('p');
+		TDRight.setAttribute('id', 'ReadResult');
 		date = new Date(Line[1] * 1000);
-		if(date.getFullYear() == '1970'){
+		if (date.getFullYear() == '1970') {
 			TDRight.innerHTML = 'NA';
-		}else{
+		} else {
 			month = Number(date.getMonth()) + 1;
 			TDRight.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
 		}
 		TR.appendChild(TDRight);
-		
-		if(AccessLevelForUser > 6){	
+
+		if (AccessLevelForUser > 6) {
 			DefaultTR = document.createElement('tr');
 			Table.appendChild(DefaultTR);
 			DefaultLeft = document.createElement('p');
-			DefaultLeft.setAttribute('id','ReadTitle');
+			DefaultLeft.setAttribute('id', 'ReadTitle');
 			DefaultLeft.innerHTML = LanguageDict["KeyswitchHourmeter"];
 			DefaultTR.appendChild(DefaultLeft);
 			DefaultRight = document.createElement('p');
-			DefaultRight.setAttribute('id','ReadResult');			
+			DefaultRight.setAttribute('id', 'ReadResult');
 			DefaultRight.innerHTML = String(Line[2] / 3600).split('.')[0] + ' hr';
 			DefaultTR.appendChild(DefaultRight);
-		
-		
+
+
 			FactoryTR = document.createElement('tr');
 			Table.appendChild(FactoryTR);
 			FactoryLeft = document.createElement('p');
-			FactoryLeft.setAttribute('id','ReadTitle');
+			FactoryLeft.setAttribute('id', 'ReadTitle');
 			FactoryLeft.innerHTML = LanguageDict["InterlockHourmeter"];
 			FactoryTR.appendChild(FactoryLeft);
 			FactoryRight = document.createElement('p');
-			FactoryRight.setAttribute('id','ReadResult');
-			FactoryRight.setAttribute('id','ReadResult');
+			FactoryRight.setAttribute('id', 'ReadResult');
+			FactoryRight.setAttribute('id', 'ReadResult');
 			FactoryRight.innerHTML = String(Line[3] / 3600).split('.')[0] + ' hr';
 			FactoryTR.appendChild(FactoryRight);
 
@@ -535,164 +535,164 @@ function MenuParametersOnclick(Line,HTMLObject){
 			MinTR = document.createElement('tr');
 			Table.appendChild(MinTR);
 			MinLeft = document.createElement('p');
-			MinLeft.setAttribute('id','ReadTitle');
+			MinLeft.setAttribute('id', 'ReadTitle');
 			MinLeft.innerHTML = LanguageDict["TractionHourmeter"];
 			MinTR.appendChild(MinLeft);
 			MinRight = document.createElement('p');
-			MinRight.setAttribute('id','ReadResult');
+			MinRight.setAttribute('id', 'ReadResult');
 			MinRight.innerHTML = String(Line[4] / 3600).split('.')[0] + ' hr';
 			MinTR.appendChild(MinRight);
-			
-		
+
+
 			MaxTR = document.createElement('tr');
 			Table.appendChild(MaxTR);
 			MaxLeft = document.createElement('p');
-			MaxLeft.setAttribute('id','ReadTitle');
+			MaxLeft.setAttribute('id', 'ReadTitle');
 			MaxLeft.innerHTML = LanguageDict["HydraulicHourmeter"];
 			MaxTR.appendChild(MaxLeft);
 			MaxRight = document.createElement('p');
-			MaxRight.setAttribute('id','ReadResult');		
+			MaxRight.setAttribute('id', 'ReadResult');
 			MaxRight.innerHTML = String(Line[5] / 3600).split('.')[0] + ' hr';
 			MaxTR.appendChild(MaxRight);
-		}		
+		}
 		return;
 	}
-	
+
 	//Pump Controller Info // Traction Rear Right (TRR) Controller Info // Traction Rear Left (TRL) Controller Info // Traction Front Right (TFR) Controller Info // Traction Front Left (TFL) Controller Info
 	//Steer Rear Right (SRR) Controller Info // Steer Rear Left (SRL) Controller Info  // Steer Front Right (SFR) Controller Info  // Steer Front Left (SFL) Controller Info 
-	if(LineNumber == 12 || LineNumber == 13 || LineNumber == 14 || LineNumber == 15 || LineNumber == 16 || LineNumber == 17 || LineNumber == 18 || LineNumber == 19 || LineNumber == 20){
-		
+	if (LineNumber == 12 || LineNumber == 13 || LineNumber == 14 || LineNumber == 15 || LineNumber == 16 || LineNumber == 17 || LineNumber == 18 || LineNumber == 19 || LineNumber == 20) {
+
 		Table = document.getElementById('topDefineDescription');
-		
+
 		TH = document.createElement('p');
-		TH.setAttribute('id','WorkSpaceTitle');
+		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
 
-		if(LineNumber == 12 || LineNumber == 13 || LineNumber == 14 || LineNumber == 15 || LineNumber == 16){
+		if (LineNumber == 12 || LineNumber == 13 || LineNumber == 14 || LineNumber == 15 || LineNumber == 16) {
 			DefaultTR = document.createElement('tr');
 			Table.appendChild(DefaultTR);
 			DefaultLeft = document.createElement('p');
-			DefaultLeft.setAttribute('id','ReadTitle');
+			DefaultLeft.setAttribute('id', 'ReadTitle');
 			DefaultLeft.innerHTML = LanguageDict["VCLVersion"];
 			DefaultTR.appendChild(DefaultLeft);
 			DefaultRight = document.createElement('p');
-			DefaultRight.setAttribute('id','ReadResult');
-			DefaultRight.innerHTML =  Line[2];
-			DefaultRight.setAttribute('id','ReadResult');
+			DefaultRight.setAttribute('id', 'ReadResult');
+			DefaultRight.innerHTML = Line[2];
+			DefaultRight.setAttribute('id', 'ReadResult');
 			DefaultTR.appendChild(DefaultRight);
 		}
 
 		MinTR = document.createElement('tr');
 		Table.appendChild(MinTR);
 		MinLeft = document.createElement('p');
-		MinLeft.setAttribute('id','ReadTitle');
+		MinLeft.setAttribute('id', 'ReadTitle');
 		MinLeft.innerHTML = LanguageDict["OSVersion"];
 		MinTR.appendChild(MinLeft);
 		MinRight = document.createElement('p');
-		MinRight.setAttribute('id','ReadResult');
+		MinRight.setAttribute('id', 'ReadResult');
 		MinRight.innerHTML = Line[4];
-		MinRight.setAttribute('id','ReadResult');
+		MinRight.setAttribute('id', 'ReadResult');
 		MinTR.appendChild(MinRight);
-			
-			
+
+
 		MaxTR = document.createElement('tr');
 		Table.appendChild(MaxTR);
 		MaxLeft = document.createElement('p');
-		MaxLeft.setAttribute('id','ReadTitle');
+		MaxLeft.setAttribute('id', 'ReadTitle');
 		MaxLeft.innerHTML = LanguageDict["OSBuild"];
 		MaxTR.appendChild(MaxLeft);
 		MaxRight = document.createElement('p');
-		MaxRight.setAttribute('id','ReadResult');
+		MaxRight.setAttribute('id', 'ReadResult');
 		MaxRight.innerHTML = Line[5];
-		MaxRight.setAttribute('id','ReadResult');
+		MaxRight.setAttribute('id', 'ReadResult');
 		MaxTR.appendChild(MaxRight);
 
 
 		UnitsTR = document.createElement('tr');
 		Table.appendChild(UnitsTR);
 		UnitsLeft = document.createElement('p');
-		UnitsLeft.setAttribute('id','ReadTitle');
+		UnitsLeft.setAttribute('id', 'ReadTitle');
 		UnitsLeft.innerHTML = LanguageDict["ModelNumber"];
 		UnitsTR.appendChild(UnitsLeft);
 		UnitsRight = document.createElement('p');
-		UnitsRight.setAttribute('id','ReadResult');
+		UnitsRight.setAttribute('id', 'ReadResult');
 		UnitsRight.innerHTML = Line[6];
-		UnitsRight.setAttribute('id','ReadResult');
+		UnitsRight.setAttribute('id', 'ReadResult');
 		UnitsTR.appendChild(UnitsRight);
-			
-			
+
+
 		ScaleTR = document.createElement('tr');
 		Table.appendChild(ScaleTR);
 		ScaleLeft = document.createElement('p');
-		ScaleLeft.setAttribute('id','ReadTitle');
-		if(LineNumber == 12){
+		ScaleLeft.setAttribute('id', 'ReadTitle');
+		if (LineNumber == 12) {
 			ScaleLeft.innerHTML = LanguageDict['SerialNumber'];
-		}else{
+		} else {
 			ScaleLeft.innerHTML = LanguageDict["OSBuild"];
 		}
 		ScaleTR.appendChild(ScaleLeft);
 		ScaleRight = document.createElement('p');
-		ScaleRight.setAttribute('id','ReadResult');
+		ScaleRight.setAttribute('id', 'ReadResult');
 		ScaleRight.innerHTML = Line[7];
-		ScaleRight.setAttribute('id','ReadResult');
+		ScaleRight.setAttribute('id', 'ReadResult');
 		ScaleTR.appendChild(ScaleRight);
 
-		 TR = document.createElement('tr');
+		TR = document.createElement('tr');
 		Table.appendChild(TR);
-		 TDLeft = document.createElement('p');
-		TDLeft.setAttribute('id','ReadTitle');
+		TDLeft = document.createElement('p');
+		TDLeft.setAttribute('id', 'ReadTitle');
 		TDLeft.innerHTML = LanguageDict["Timestamp"];
 		TR.appendChild(TDLeft);
 		TDRight = document.createElement('p');
-		TDRight.setAttribute('id','ReadResult');
+		TDRight.setAttribute('id', 'ReadResult');
 		date = new Date(Line[1] * 1000);
-		if(Line[1] == 0){
+		if (Line[1] == 0) {
 			TDRight.innerHTML = 'NA';
-		}else{
+		} else {
 			month = Number(date.getMonth()) + 1;
 			TDRight.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
 		}
 		TR.appendChild(TDRight);
 
-		
+
 		return;
 	}
-	
-	
+
+
 	//PLC Info
-	if(LineNumber == 21){
+	if (LineNumber == 21) {
 
 		Table = document.getElementById('topDefineDescription');
-		
+
 		TH = document.createElement('p');
-		TH.setAttribute('id','WorkSpaceTitle');
+		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
-		
+
 		TR = document.createElement('tr');
 		Table.appendChild(TR);
 		TDLeft = document.createElement('p');
-		TDLeft.setAttribute('id','ReadTitle');
+		TDLeft.setAttribute('id', 'ReadTitle');
 		TDLeft.innerHTML = LanguageDict["AppInfo"];
 		TR.appendChild(TDLeft);
 		TDRight = document.createElement('p');
-		TDRight.setAttribute('id','ReadResult');
-		TDRight.setAttribute('id','ReadResult');
+		TDRight.setAttribute('id', 'ReadResult');
+		TDRight.setAttribute('id', 'ReadResult');
 		TDRight.innerHTML = Line[2] + '.' + Line[3] + '.' + Line[4] + '.' + Line[5];
 		TR.appendChild(TDRight);
-		
-		
+
+
 		DefaultTR = document.createElement('tr');
 		Table.appendChild(DefaultTR);
 		DefaultLeft = document.createElement('p');
-		DefaultLeft.setAttribute('id','ReadTitle');
+		DefaultLeft.setAttribute('id', 'ReadTitle');
 		DefaultLeft.innerHTML = LanguageDict["RTSInfo"];
 		DefaultTR.appendChild(DefaultLeft);
 		DefaultRight = document.createElement('p');
-		DefaultRight.setAttribute('id','ReadResult');
+		DefaultRight.setAttribute('id', 'ReadResult');
 		DefaultRight.innerHTML = Line[6] + '.' + Line[7] + '.' + Line[8];
 		DefaultTR.appendChild(DefaultRight);
 
@@ -700,60 +700,60 @@ function MenuParametersOnclick(Line,HTMLObject){
 		TR = document.createElement('tr');
 		Table.appendChild(TR);
 		TDLeft = document.createElement('p');
-		TDLeft.setAttribute('id','ReadTitle');
+		TDLeft.setAttribute('id', 'ReadTitle');
 		TDLeft.innerHTML = LanguageDict["Timestamp"];
 		TR.appendChild(TDLeft);
 		TDRight = document.createElement('p');
-		TDRight.setAttribute('id','ReadResult');
+		TDRight.setAttribute('id', 'ReadResult');
 		date = new Date(Line[1] * 1000);
-		if(Line[1] == 0){
+		if (Line[1] == 0) {
 			TDRight.innerHTML = 'NA';
-		}else{
+		} else {
 			month = Number(date.getMonth()) + 1;
 			TDRight.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
 		}
 		TR.appendChild(TDRight);
 
-		
+
 		return;
 	}
-	
-	
+
+
 	//Screen Info
-	if(LineNumber == 22){
+	if (LineNumber == 22) {
 		Table = document.getElementById('topDefineDescription');
-		
+
 		TH = document.createElement('p');
-		TH.setAttribute('id','WorkSpaceTitle');
+		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
-		
+
 		TR = document.createElement('tr');
 		Table.appendChild(TR);
 		TDLeft = document.createElement('p');
-		TDLeft.setAttribute('id','ReadTitle');
+		TDLeft.setAttribute('id', 'ReadTitle');
 		TDLeft.innerHTML = LanguageDict["AppInfo"];
 		TR.appendChild(TDLeft);
 		TDRight = document.createElement('p');
-		TDRight.setAttribute('id','ReadResult');
-		TDRight.setAttribute('id','ReadResult');
+		TDRight.setAttribute('id', 'ReadResult');
+		TDRight.setAttribute('id', 'ReadResult');
 		TDRight.innerHTML = Line[4] + '.' + Line[5] + '.' + Line[6] + '.' + Line[7];
 		TR.appendChild(TDRight);
-		
+
 
 		TR = document.createElement('tr');
 		Table.appendChild(TR);
 		TDLeft = document.createElement('p');
-		TDLeft.setAttribute('id','ReadTitle');
+		TDLeft.setAttribute('id', 'ReadTitle');
 		TDLeft.innerHTML = LanguageDict["Timestamp"];
 		TR.appendChild(TDLeft);
 		TDRight = document.createElement('p');
-		TDRight.setAttribute('id','ReadResult');
+		TDRight.setAttribute('id', 'ReadResult');
 		date = new Date(Line[1] * 1000);
-		if(Line[1] == 0){
+		if (Line[1] == 0) {
 			TDRight.innerHTML = 'NA';
-		}else{
+		} else {
 			month = Number(date.getMonth()) + 1;
 			TDRight.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
 		}
@@ -763,33 +763,33 @@ function MenuParametersOnclick(Line,HTMLObject){
 	}
 
 
-	
+
 	//Set Hourmeters
-	if(LineNumber == 32 || LineNumber == 33 || LineNumber == 34 || LineNumber == 35 || LineNumber == 36){
+	if (LineNumber == 32 || LineNumber == 33 || LineNumber == 34 || LineNumber == 35 || LineNumber == 36) {
 
 		Table = document.getElementById('topDefineDescription');
-		
+
 		TH = document.createElement('p');
-		TH.setAttribute('id','WorkSpaceTitle');
+		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
 
-		
+
 		TR = document.createElement('tr');
 		Table.appendChild(TR);
 		MoCASLeft_2 = document.createElement('td');
 		TR.appendChild(MoCASLeft_2);
-		
-		if(Number(sessionStorage.getItem('AccessLevel')) >= 8){
+
+		if (Number(sessionStorage.getItem('AccessLevel')) >= 8) {
 			CheckLine = Line.toString();
 
 			FormDiv_2 = document.createElement('div');
-			FormDiv_2.setAttribute('id','MocasDivArea');
+			FormDiv_2.setAttribute('id', 'MocasDivArea');
 			Form_2 = document.createElement('form');
-			Form_2.setAttribute('action','MoCAS/MoCAS_hourmeter.php');
-			Form_2.setAttribute('method','POST');
-			Form_2.setAttribute('name','MocasVerifyForm');
+			Form_2.setAttribute('action', 'MoCAS/MoCAS_hourmeter.php');
+			Form_2.setAttribute('method', 'POST');
+			Form_2.setAttribute('name', 'MocasVerifyForm');
 
 			//create elements for the form
 			SerialNumberField_2 = document.createElement('input');
@@ -810,7 +810,7 @@ function MenuParametersOnclick(Line,HTMLObject){
 			UsernameField_label_2 = document.createElement('label');
 			TimeWindow_label_2 = document.createElement('label');
 			Hourmeter_label_2 = document.createElement('label');
-			
+
 			//define the types for each element
 			SerialNumberField_2.type = 'text';
 			ModelField_2.type = 'text';
@@ -824,20 +824,20 @@ function MenuParametersOnclick(Line,HTMLObject){
 			SubmitButton_2.type = 'submit';
 
 			Hourmeter_2.type = 'text';
-				
+
 
 			//create element names for POST
-			SerialNumberField_2.setAttribute('name','SerialNumber');
-			ModelField_2.setAttribute('name','Model');
-			UsernameField_2.setAttribute('name','Username');
-			UseremailField_2.setAttribute('name','Useremail');
-			AccessLevelField_2.setAttribute('name','AccessLevel');
-			IndexField_2.setAttribute('name','IndexNumber');
-			ModuleField_2.setAttribute('name','Module');
-			TimeWindow_2.setAttribute('name','TimeWindow');
-			TextareaField_2.setAttribute('name','Comments');
+			SerialNumberField_2.setAttribute('name', 'SerialNumber');
+			ModelField_2.setAttribute('name', 'Model');
+			UsernameField_2.setAttribute('name', 'Username');
+			UseremailField_2.setAttribute('name', 'Useremail');
+			AccessLevelField_2.setAttribute('name', 'AccessLevel');
+			IndexField_2.setAttribute('name', 'IndexNumber');
+			ModuleField_2.setAttribute('name', 'Module');
+			TimeWindow_2.setAttribute('name', 'TimeWindow');
+			TextareaField_2.setAttribute('name', 'Comments');
 
-			Hourmeter_2.setAttribute('name','Hourmeter');
+			Hourmeter_2.setAttribute('name', 'Hourmeter');
 
 
 			SerialNumberField_label_2.innerHTML = "<BR>Machine Serial Number<BR>";
@@ -846,40 +846,40 @@ function MenuParametersOnclick(Line,HTMLObject){
 			Hourmeter_label_2.innerHTML = "<BR>New Hourmeter value in seconds<BR>";
 
 
-			SerialNumberField_2.setAttribute('value',UserParametersFileDict[4].split(',')[3]);
-			ModelField_2.setAttribute('value',UserParametersFileDict[2].split(',')[3]);
-			UsernameField_2.setAttribute('value',sessionStorage.getItem('loggedinusername'));
-			UseremailField_2.setAttribute('value',sessionStorage.getItem('loggedinemail'));			
-			AccessLevelField_2.setAttribute('value',sessionStorage.getItem('AccessLevel'));
-			IndexField_2.setAttribute('value',LineNumber);
-			ModuleField_2.setAttribute('value',document.getElementById('WorkSpaceTitle').innerHTML);
-			TimeWindow_2.setAttribute('value',CheckLine.split(',')[5]);
+			SerialNumberField_2.setAttribute('value', UserParametersFileDict[4].split(',')[3]);
+			ModelField_2.setAttribute('value', UserParametersFileDict[2].split(',')[3]);
+			UsernameField_2.setAttribute('value', sessionStorage.getItem('loggedinusername'));
+			UseremailField_2.setAttribute('value', sessionStorage.getItem('loggedinemail'));
+			AccessLevelField_2.setAttribute('value', sessionStorage.getItem('AccessLevel'));
+			IndexField_2.setAttribute('value', LineNumber);
+			ModuleField_2.setAttribute('value', document.getElementById('WorkSpaceTitle').innerHTML);
+			TimeWindow_2.setAttribute('value', CheckLine.split(',')[5]);
 
-			Hourmeter_2.setAttribute('value',CheckLine.split(',')[2]);
+			Hourmeter_2.setAttribute('value', CheckLine.split(',')[2]);
 
 
-			SerialNumberField_2.setAttribute('readonly','readonly');
-			ModelField_2.setAttribute('readonly','readonly');
-			UsernameField_2.setAttribute('readonly','readonly');
-			AccessLevelField_2.setAttribute('readonly','readonly');
-			IndexField_2.setAttribute('readonly','readonly');
-			ModuleField_2.setAttribute('readonly','readonly');
+			SerialNumberField_2.setAttribute('readonly', 'readonly');
+			ModelField_2.setAttribute('readonly', 'readonly');
+			UsernameField_2.setAttribute('readonly', 'readonly');
+			AccessLevelField_2.setAttribute('readonly', 'readonly');
+			IndexField_2.setAttribute('readonly', 'readonly');
+			ModuleField_2.setAttribute('readonly', 'readonly');
 
-			UseremailField_2.setAttribute('style','display:none;');
-			ModelField_2.setAttribute('style','display:none;');
-			IndexField_2.setAttribute('style','display:none;');
-			ModuleField_2.setAttribute('style','display:none;');
-			AccessLevelField_2.setAttribute('style','display:none;');
-				
-			SerialNumberField_2.setAttribute('id','MocasFormSerialInput');
-			UsernameField_2.setAttribute('id','MocasFormUsernameInput');
-			TimeWindow_2.setAttribute('id','MocasFormTimeWindowInput');
-			Hourmeter_2.setAttribute('id','MocasFormHourmeterInput');
-			TextareaField_2.setAttribute('id','MocasFormTEXTInput');
-			SubmitButton_2.setAttribute('id','MocasFormInputSubmit');
-				
-			TextareaField_2.setAttribute('placeholder',LanguageDict['Comments']);
-				
+			UseremailField_2.setAttribute('style', 'display:none;');
+			ModelField_2.setAttribute('style', 'display:none;');
+			IndexField_2.setAttribute('style', 'display:none;');
+			ModuleField_2.setAttribute('style', 'display:none;');
+			AccessLevelField_2.setAttribute('style', 'display:none;');
+
+			SerialNumberField_2.setAttribute('id', 'MocasFormSerialInput');
+			UsernameField_2.setAttribute('id', 'MocasFormUsernameInput');
+			TimeWindow_2.setAttribute('id', 'MocasFormTimeWindowInput');
+			Hourmeter_2.setAttribute('id', 'MocasFormHourmeterInput');
+			TextareaField_2.setAttribute('id', 'MocasFormTEXTInput');
+			SubmitButton_2.setAttribute('id', 'MocasFormInputSubmit');
+
+			TextareaField_2.setAttribute('placeholder', LanguageDict['Comments']);
+
 			Form_2.appendChild(ModelField_2);
 			Form_2.appendChild(IndexField_2);
 			Form_2.appendChild(ModuleField_2);
@@ -887,87 +887,87 @@ function MenuParametersOnclick(Line,HTMLObject){
 			Form_2.appendChild(SerialNumberField_2);
 			Form_2.appendChild(UsernameField_label_2);
 			Form_2.appendChild(UsernameField_2);
-			Form_2.appendChild(UseremailField_2);			
+			Form_2.appendChild(UseremailField_2);
 			Form_2.appendChild(AccessLevelField_2);
 			Form_2.appendChild(TimeWindow_label_2);
 			Form_2.appendChild(TimeWindow_2);
 			Form_2.appendChild(Hourmeter_label_2);
 			Form_2.appendChild(Hourmeter_2);
 			Form_2.appendChild(TextareaField_2);
-			SubmitButton_2.setAttribute('value',LanguageDict['GetActivationCode']);
+			SubmitButton_2.setAttribute('value', LanguageDict['GetActivationCode']);
 			Form_2.appendChild(SubmitButton_2);
 
 			FormDiv_2.appendChild(Form_2);
 			document.getElementById('topDefineDescription').appendChild(FormDiv_2);
 
 			return;
-		
+
 		}
 
 	}
 
 
-	
+
 	//MoCAS Values
-	if(moCAS.includes(LineNumber)){
+	if (moCAS.includes(LineNumber)) {
 		Table = document.getElementById('topDefineDescription');
-		
+
 		TH = document.createElement('p');
-		TH.setAttribute('id','WorkSpaceTitle');
+		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
-		
-		 TR = document.createElement('tr');
+
+		TR = document.createElement('tr');
 		Table.appendChild(TR);
-		 MoCASLeft = document.createElement('td');
+		MoCASLeft = document.createElement('td');
 		TR.appendChild(MoCASLeft);
-		
-		if(Number(UserParametersFileDict[Number(LineNumber)].split(',')[2]) == 1 && Number(UserParametersFileDict[Number(LineNumber)].split(',')[9]) <= Number(sessionStorage.getItem('AccessLevel'))){
-			try{
+
+		if (Number(UserParametersFileDict[Number(LineNumber)].split(',')[2]) == 1 && Number(UserParametersFileDict[Number(LineNumber)].split(',')[9]) <= Number(sessionStorage.getItem('AccessLevel'))) {
+			try {
 				document.getElementById('DropDownDivOption').innerHTML = '';
 			}
-			catch(err){
+			catch (err) {
 			}
 			CheckLine = Line.toString();
 			MoCASDropDownDiv = document.createElement('div');
-			MoCASDropDownDiv.setAttribute('id','DropDownDivOption');
-			
+			MoCASDropDownDiv.setAttribute('id', 'DropDownDivOption');
+
 			MoCASDropDown = document.createElement('select');
-			MoCASDropDown.setAttribute('id','CurrentDropDownValue');
-			MoCASDropDown.setAttribute('onchange','MocasUpdate(`' + CheckLine + '`)');
-			
+			MoCASDropDown.setAttribute('id', 'CurrentDropDownValue');
+			MoCASDropDown.setAttribute('onchange', 'MocasUpdate(`' + CheckLine + '`)');
+
 			MoCASDropDownOptionOn = document.createElement('option');
 			MoCASDropDownOptionOn.innerHTML = LanguageDict['MocasOn'];
 			MoCASDropDownOptionOn.value = '1';
-			
+
 			MoCASDropDownOptionOff = document.createElement('option');
 			MoCASDropDownOptionOff.innerHTML = LanguageDict['MocasOff'];
 			MoCASDropDownOptionOff.value = '0';
-			
+
 			MoCASDropDown.appendChild(MoCASDropDownOptionOn);
 			MoCASDropDown.appendChild(MoCASDropDownOptionOff);
-			
+
 			MoCASDropDown.value = CheckLine.split(',')[1];
 			//console.log('current value ' + CheckLine.split(',')[1]);
-			
+
 			MoCASDropDownDiv.appendChild(MoCASDropDown);
 			document.getElementById('topDefineDescription').appendChild(MoCASDropDownDiv);
 			return;
-		}else{
-			if(Number(UserParametersFileDict[Number(LineNumber)].split(',')[2]) == 0 && Number(sessionStorage.getItem('AccessLevel')) >= 8){
-				
-				try{
+		} else {
+			if (Number(UserParametersFileDict[Number(LineNumber)].split(',')[2]) == 0 && Number(sessionStorage.getItem('AccessLevel')) >= 8) {
+
+				try {
 					document.getElementById('MocasDivArea').innerHTML = '';
-				} catch(err){
+				} catch (err) {
 				}
-				
+
 				FormDiv = document.createElement('div');
-				FormDiv.setAttribute('id','MocasDivArea');
+				FormDiv.setAttribute('id', 'MocasDivArea');
 				Form = document.createElement('form');
-				Form.setAttribute('action','MoCAS/MoCAS.php');
-				Form.setAttribute('method','POST');
-				Form.setAttribute('name','MocasVerifyForm');
+				Form.setAttribute('action', 'MoCAS/MoCAS.php');
+				Form.setAttribute('method', 'POST');
+				Form.setAttribute('name', 'MocasVerifyForm');
 
 
 				//create elements for the form
@@ -998,46 +998,46 @@ function MenuParametersOnclick(Line,HTMLObject){
 				SubmitButton.type = 'submit';
 
 				//create element names for POST	
-				SerialNumberField.setAttribute('name','SerialNumber');
-				ModelField.setAttribute('name','Model');
-				UsernameField.setAttribute('name','Username');
-				UseremailField.setAttribute('name','Useremail');				
-				AccessLevelField.setAttribute('name','AccessLevel');
-				IndexField.setAttribute('name','IndexNumber');
-				ModuleField.setAttribute('name','Module');
-				TextareaField.setAttribute('name','Comments');
+				SerialNumberField.setAttribute('name', 'SerialNumber');
+				ModelField.setAttribute('name', 'Model');
+				UsernameField.setAttribute('name', 'Username');
+				UseremailField.setAttribute('name', 'Useremail');
+				AccessLevelField.setAttribute('name', 'AccessLevel');
+				IndexField.setAttribute('name', 'IndexNumber');
+				ModuleField.setAttribute('name', 'Module');
+				TextareaField.setAttribute('name', 'Comments');
 
 				SerialNumberField_label.innerHTML = "<BR>Machine Serial Number<BR>";
 				UsernameField_label.innerHTML = "<BR>Username<BR>";
-				
-				SerialNumberField.setAttribute('value',UserParametersFileDict[4].split(',')[3]);
-				ModelField.setAttribute('value',UserParametersFileDict[2].split(',')[3]);
-				UsernameField.setAttribute('value',sessionStorage.getItem('loggedinusername'));
-				UseremailField.setAttribute('value',sessionStorage.getItem('loggedinemail'));
-				AccessLevelField.setAttribute('value',sessionStorage.getItem('AccessLevel'));
-				IndexField.setAttribute('value',LineNumber);
-				ModuleField.setAttribute('value',document.getElementById('WorkSpaceTitle').innerHTML);
+
+				SerialNumberField.setAttribute('value', UserParametersFileDict[4].split(',')[3]);
+				ModelField.setAttribute('value', UserParametersFileDict[2].split(',')[3]);
+				UsernameField.setAttribute('value', sessionStorage.getItem('loggedinusername'));
+				UseremailField.setAttribute('value', sessionStorage.getItem('loggedinemail'));
+				AccessLevelField.setAttribute('value', sessionStorage.getItem('AccessLevel'));
+				IndexField.setAttribute('value', LineNumber);
+				ModuleField.setAttribute('value', document.getElementById('WorkSpaceTitle').innerHTML);
 
 
-				SerialNumberField.setAttribute('readonly','readonly');
-				ModelField.setAttribute('readonly','readonly');
-				UsernameField.setAttribute('readonly','readonly');
-				AccessLevelField.setAttribute('readonly','readonly');
-				IndexField.setAttribute('readonly','readonly');
-				ModuleField.setAttribute('readonly','readonly');
+				SerialNumberField.setAttribute('readonly', 'readonly');
+				ModelField.setAttribute('readonly', 'readonly');
+				UsernameField.setAttribute('readonly', 'readonly');
+				AccessLevelField.setAttribute('readonly', 'readonly');
+				IndexField.setAttribute('readonly', 'readonly');
+				ModuleField.setAttribute('readonly', 'readonly');
 
-				UseremailField.setAttribute('style','display:none;');				
-				ModelField.setAttribute('style','display:none;');
-				IndexField.setAttribute('style','display:none;');
-				ModuleField.setAttribute('style','display:none;');
-				AccessLevelField.setAttribute('style','display:none;');
-				
-				SerialNumberField.setAttribute('id','MocasFormSerialInput');
-				UsernameField.setAttribute('id','MocasFormUsernameInput');
-				TextareaField.setAttribute('id','MocasFormTEXTInput');
-				SubmitButton.setAttribute('id','MocasFormInputSubmit');
-				
-				TextareaField.setAttribute('placeholder',LanguageDict['Comments']);
+				UseremailField.setAttribute('style', 'display:none;');
+				ModelField.setAttribute('style', 'display:none;');
+				IndexField.setAttribute('style', 'display:none;');
+				ModuleField.setAttribute('style', 'display:none;');
+				AccessLevelField.setAttribute('style', 'display:none;');
+
+				SerialNumberField.setAttribute('id', 'MocasFormSerialInput');
+				UsernameField.setAttribute('id', 'MocasFormUsernameInput');
+				TextareaField.setAttribute('id', 'MocasFormTEXTInput');
+				SubmitButton.setAttribute('id', 'MocasFormInputSubmit');
+
+				TextareaField.setAttribute('placeholder', LanguageDict['Comments']);
 
 
 				Form.appendChild(ModelField);
@@ -1047,10 +1047,10 @@ function MenuParametersOnclick(Line,HTMLObject){
 				Form.appendChild(SerialNumberField);
 				Form.appendChild(UsernameField_label);
 				Form.appendChild(UsernameField);
-				Form.appendChild(UseremailField);				
+				Form.appendChild(UseremailField);
 				Form.appendChild(AccessLevelField);
 				Form.appendChild(TextareaField);
-				SubmitButton.setAttribute('value',LanguageDict['GetActivationCode']);
+				SubmitButton.setAttribute('value', LanguageDict['GetActivationCode']);
 				Form.appendChild(SubmitButton);
 
 				FormDiv.appendChild(Form);
@@ -1059,21 +1059,23 @@ function MenuParametersOnclick(Line,HTMLObject){
 				//Form.submit();
 
 				return;
-			}else{
-			
+			} else {
+
 				MoCASRight = document.createElement('P');
-				MoCASRight.setAttribute('id','MocasReadResult');
-				if(Line[2] == 0){
+				MoCASRight.setAttribute('id', 'MocasReadResult');
+				if (Line[2] == 0) {
 					MoCASRight.innerHTML = 'Off';
-				}else if(Line[2] == 1){
+				} else if (Line[2] == 1) {
 					MoCASRight.innerHTML = 'On';
 				}
-				MoCASLeft.appendChild(MoCASRight);	
+				MoCASLeft.appendChild(MoCASRight);
 				return;
 			}
 		}
-	
+
 	}
 }
 
-module.exports = { ClearWorkSpace, AddFixedParameter };
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+	module.exports = { ClearWorkSpace, AddFixedParameter };
+}

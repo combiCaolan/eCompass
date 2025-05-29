@@ -83,8 +83,8 @@ function PostLoadedRun() {
 
     ParameterMainDict = {};
     let counter = 0;
-    while (ParameterMain.split('\n')[counter] !== undefined) {
-        ParameterMainDict[ParameterMain.split('\n')[counter].split(',')[0]] = ParameterMain.split('\n')[counter];
+    while (parameterMain.split('\n')[counter] !== undefined) {
+        ParameterMainDict[parameterMain.split('\n')[counter].split(',')[0]] = parameterMain.split('\n')[counter];
         counter++;
     }
 }

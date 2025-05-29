@@ -231,6 +231,7 @@ input {
 /* Loading screen and spinner */
 #LoadingScreen {
     text-align: center;
+    display: none;
 }
 
 .loader {
@@ -613,10 +614,6 @@ a.ui-button:active,
     border-top-left-radius: 10px;
 }
 
-#Container {
-    display: none;
-}
-
 #tree-visable {
     margin-top: 0;
 }
@@ -882,10 +879,6 @@ input[type=number] {
     float: left;
     top: 85px;
     position: fixed;
-}
-
-#Container {
-    display: none;
 }
 
 /* -----------------------------------------------------------------------------

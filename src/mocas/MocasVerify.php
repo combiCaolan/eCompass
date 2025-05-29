@@ -1,53 +1,54 @@
 <?php
-	$serial = $_POST["SerialNumber"];
-	$username = $_POST["Username"];
-	$access_level = $_POST["AccessLevel"];
-	$module_id = $_POST["IndexNumber"];
-	$module = $_POST["Module"];
-
-	#echo ( "Serial Number" . $serial);
-	#echo ("Username" . $username);
-	#echo ("Access Level" . $access_level);
-	#echo ("Module Id" . $module_id);
-	#echo ("Module " . $module);
-	
+    // Sanitize and fetch POST variables
+    $serial      = isset($_POST["SerialNumber"]) ? $_POST["SerialNumber"] : '';
+    $username    = isset($_POST["Username"]) ? $_POST["Username"] : '';
+    $accessLevel = isset($_POST["AccessLevel"]) ? $_POST["AccessLevel"] : '';
+    $moduleId    = isset($_POST["IndexNumber"]) ? $_POST["IndexNumber"] : '';
+    $module      = isset($_POST["Module"]) ? $_POST["Module"] : '';
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MOcAS Verify</title>
+</head>
+<body>
+    <div id="HeaderMockup">
+        <?php
+            echo "<strong>Serial Number:</strong> " . htmlspecialchars($serial) . "<br>";
+            // Pass moduleId to JS safely
+            echo "<script>const NewVarCaolan = " . json_encode($moduleId) . ";</script>";
+        ?>
+    </div>
+    <input type="submit" value="Finished" onclick="changeModules()" />
 
-<html>
-	<body>
-		<div id="HeaderMockup"/>
-			<?php
-				echo ( "Serial Number" . $serial);
-				$newParametersValue = 'helloworld';
-				
-				//echo('<script> sessionStorage.setItem("TruckModel","HelloWorld"); location.href = "../editor.php";</script>');
-				
-				echo('<script> NewVarCaolan = ' . $module_id . '</script>');
-			?>
-		</div>
-			<input type="submit" value="Finished" onclick="ChangeModules()"/>
-		<script>
-			function ChangeModules(){
-				ToFind = NewVarCaolan.toString();
+    <script>
+        function changeModules() {
+            const toFind = String(NewVarCaolan);
+            const parameters = sessionStorage.getItem('Parameters') || '';
+            const lines = parameters.split('\n');
+            let updated = false;
 
-				counter = 0;
-				Parameters = sessionStorage.getItem('Parameters');
-				while(Parameters.split('\n')[counter] != undefined){
-					if(Parameters.split('\n')[counter].split(',')[0] == ToFind){
-						OldLine = Parameters.split('\n')[counter];
-						ParameterLine = Parameters.split('\n')[counter].split(',');
-						NewLine = ParameterLine[0] + ',' +  '1' + ',' + '1' + ',' + ParameterLine[3] + ',' + ParameterLine[4] + ','+ ParameterLine[5] + ','+ ParameterLine[6] + ','+ ParameterLine[7] + ','+ ParameterLine[8] + ','+ ParameterLine[9] + ','+ ParameterLine[10];
-						console.log(NewLine);
-						NewSession = sessionStorage.getItem('Parameters').replace(OldLine,NewLine);
-						sessionStorage.setItem('Parameters',NewSession);
-						location.href = '../editor.php';
-						break;
-					}else{
-						counter++;
-					}
-				}
-			}
+            for (let i = 0; i < lines.length; i++) {
+                const parts = lines[i].split(',');
+                if (parts[0] === toFind) {
+                    // Update the line as needed
+                    const newLine = [
+                        parts[0], '1', '1', parts[3], parts[4], parts[5], parts[6], parts[7], parts[8], parts[9], parts[10]
+                    ].join(',');
+                    lines[i] = newLine;
+                    updated = true;
+                    break;
+                }
+            }
 
-</script>
-	</body>
+            if (updated) {
+                sessionStorage.setItem('Parameters', lines.join('\n'));
+                location.href = '../editor.php';
+            } else {
+                alert('Module not found in parameters.');
+            }
+        }
+    </script>
+</body>
 </html>
