@@ -31,7 +31,7 @@ function AddFixedParameter(htmlObject) {
 	addParameterButton.type = 'submit';
 	addParameterButton.value = `Add ${htmlObject.innerHTML} to this file?`;
 	addParameterButton.onclick = function () {
-		AddParmeterToClp(htmlObject.id.toString(), htmlObject);
+		addParameterToClp(htmlObject.id.toString(), htmlObject);
 	};
 
 	const descElem = document.getElementById('topDefineDescription');
@@ -65,6 +65,7 @@ function MenuParametersOnclick(Line, HTMLObject) {
 	//Description
 	descriptionArea = document.createElement('tr');
 	DescriptionText = document.createElement('p');
+	console.log(HTMLObject)
 	DescriptionText.innerHTML = MainDescriptionsDict[Number(HTMLObject.id)].replace('#' + HTMLObject.id, '');
 	DescriptionText.setAttribute('id', 'description');
 	descriptionArea.appendChild(DescriptionText);
@@ -154,8 +155,8 @@ function MenuParametersOnclick(Line, HTMLObject) {
 			Dispatch_label_1.innerHTML = "<BR>Dispatch Status: 0 not done, 1 dispatch done<BR>";
 
 
-			SerialNumberField_1.setAttribute('value', UserParametersFileDict[4].split(',')[3]);
-			ModelField_1.setAttribute('value', UserParametersFileDict[2].split(',')[3]);
+			SerialNumberField_1.setAttribute('value', userParametersFileDict[4].split(',')[3]);
+			ModelField_1.setAttribute('value', userParametersFileDict[2].split(',')[3]);
 			UsernameField_1.setAttribute('value', sessionStorage.getItem('loggedinusername'));
 			UseremailField_1.setAttribute('value', sessionStorage.getItem('loggedinemail'));
 			AccessLevelField_1.setAttribute('value', sessionStorage.getItem('AccessLevel'));
@@ -846,8 +847,8 @@ function MenuParametersOnclick(Line, HTMLObject) {
 			Hourmeter_label_2.innerHTML = "<BR>New Hourmeter value in seconds<BR>";
 
 
-			SerialNumberField_2.setAttribute('value', UserParametersFileDict[4].split(',')[3]);
-			ModelField_2.setAttribute('value', UserParametersFileDict[2].split(',')[3]);
+			SerialNumberField_2.setAttribute('value', userParametersFileDict[4].split(',')[3]);
+			ModelField_2.setAttribute('value', userParametersFileDict[2].split(',')[3]);
 			UsernameField_2.setAttribute('value', sessionStorage.getItem('loggedinusername'));
 			UseremailField_2.setAttribute('value', sessionStorage.getItem('loggedinemail'));
 			AccessLevelField_2.setAttribute('value', sessionStorage.getItem('AccessLevel'));
@@ -923,7 +924,7 @@ function MenuParametersOnclick(Line, HTMLObject) {
 		MoCASLeft = document.createElement('td');
 		TR.appendChild(MoCASLeft);
 
-		if (Number(UserParametersFileDict[Number(LineNumber)].split(',')[2]) == 1 && Number(UserParametersFileDict[Number(LineNumber)].split(',')[9]) <= Number(sessionStorage.getItem('AccessLevel'))) {
+		if (Number(userParametersFileDict[Number(LineNumber)].split(',')[2]) == 1 && Number(userParametersFileDict[Number(LineNumber)].split(',')[9]) <= Number(sessionStorage.getItem('AccessLevel'))) {
 			try {
 				document.getElementById('DropDownDivOption').innerHTML = '';
 			}
@@ -955,7 +956,7 @@ function MenuParametersOnclick(Line, HTMLObject) {
 			document.getElementById('topDefineDescription').appendChild(MoCASDropDownDiv);
 			return;
 		} else {
-			if (Number(UserParametersFileDict[Number(LineNumber)].split(',')[2]) == 0 && Number(sessionStorage.getItem('AccessLevel')) >= 8) {
+			if (Number(userParametersFileDict[Number(LineNumber)].split(',')[2]) == 0 && Number(sessionStorage.getItem('AccessLevel')) >= 8) {
 
 				try {
 					document.getElementById('MocasDivArea').innerHTML = '';
@@ -1010,8 +1011,8 @@ function MenuParametersOnclick(Line, HTMLObject) {
 				SerialNumberField_label.innerHTML = "<BR>Machine Serial Number<BR>";
 				UsernameField_label.innerHTML = "<BR>Username<BR>";
 
-				SerialNumberField.setAttribute('value', UserParametersFileDict[4].split(',')[3]);
-				ModelField.setAttribute('value', UserParametersFileDict[2].split(',')[3]);
+				SerialNumberField.setAttribute('value', userParametersFileDict[4].split(',')[3]);
+				ModelField.setAttribute('value', userParametersFileDict[2].split(',')[3]);
 				UsernameField.setAttribute('value', sessionStorage.getItem('loggedinusername'));
 				UseremailField.setAttribute('value', sessionStorage.getItem('loggedinemail'));
 				AccessLevelField.setAttribute('value', sessionStorage.getItem('AccessLevel'));

@@ -15,7 +15,13 @@ function dropDownFunction(parameterLine, object) {
     // Title
     const title = document.createElement('p');
     title.id = 'WorkSpaceTitle';
+    console.log(parameterLine)
     console.log(object);
+    
+    if(object == null || object == undefined){
+        return;
+    }
+
     title.innerHTML = object.innerHTML;
     document.getElementById('topDefineTable').appendChild(title);
 
@@ -252,7 +258,7 @@ function dropDownOnChange(parameterLine) {
     const parameters = sessionStorage.getItem('Parameters').replace(parameterLine.join(','), newLine);
     sessionStorage.setItem('Parameters', parameters);
     ChangesMadePreDownload = true;
-    TreeViewClick(document.getElementById(parameterLine[0]), parameterLine[0]);
+    treeViewClick(document.getElementById(parameterLine[0]), parameterLine[0]);
 }
 
 /**
@@ -284,7 +290,7 @@ function defaultDropDownOnChange(parameterLine) {
 
     const parameters = sessionStorage.getItem('Parameters').replace(parameterLine.join(','), newLine);
     sessionStorage.setItem('Parameters', parameters);
-    TreeViewClick(document.getElementById(parameterLine[0]), parameterLine[0]);
+    treeViewClick(document.getElementById(parameterLine[0]), parameterLine[0]);
 }
 
 /**
@@ -316,5 +322,5 @@ function factoryDropDownOnChange(parameterLine) {
 
     const parameters = sessionStorage.getItem('Parameters').replace(parameterLine.join(','), newLine);
     sessionStorage.setItem('Parameters', parameters);
-    TreeViewClick(document.getElementById(parameterLine[0]), parameterLine[0]);
+    treeViewClick(document.getElementById(parameterLine[0]), parameterLine[0]);
 }

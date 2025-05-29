@@ -3,6 +3,7 @@
  * Updates ParametersPresent and calls the display function.
  */
 function AddParameter(LineNumber) {
+    alert('this is who we are trying to add');
     alert(LineNumber);
 
     const GeneralDefaultPath = 'http://167.71.128.196/API-Comparison/GeneralDefault.clp';
