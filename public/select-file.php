@@ -30,12 +30,12 @@ include_once('../src/includes/ListTruckDirectories.php'); // List available truc
 	<div id="row_usr">
 		<div id="right_row">
 			<!-- Welcome message and username display -->
-			<h1 style="font-weight:100;" id="WelcomeBack">
+			<h1 style="font-weight:100; font-size: 1.8rem;" id="WelcomeBack">
 				Welcome Back,
-				<h1 style="font-weight:100;" id="ConcatName"></h1>
+				<h1 style="font-weight:100; font-size: 1.8rem;" id="ConcatName"></h1>
 			</h1>
 			<!-- Prompt to open a parameter file -->
-			<h1 id="PleaseOpenMessage" style="font-weight:100; font-size:17px;">
+			<h1 id="PleaseOpenMessage" style="font-weight:100; font-size: 1.2rem;">
 				Please open a combilift parameters file(.clp file).
 			</h1>
 		</div>
