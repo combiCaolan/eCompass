@@ -64,7 +64,6 @@
         <div class="loader"></div>
     </div>
 
-
     <!-- Mobile Device Alert -->
     <div id="MobileAlert">
         <h1>Device Screen too small</h1>
