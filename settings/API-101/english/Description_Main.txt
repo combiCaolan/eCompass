@@ -42,6 +42,8 @@ Information about the Steer Front Left (SFL) Motor Controller. <BR>Information i
 Information about the PLC software version.  <BR>Information is valid at the date shown in the timestamp.
 #22
 Information about the Screen software version.  <BR>Information is valid at the date shown in the timestamp.
+#23
+test description
 #32
 Keyswitch hourmeter set. <BR>A MoCAS code will be asked for this action when loading the file.
 #33

@@ -1,4 +1,7 @@
-const { expect } = require("chai");
+// Only require chai when running in a Node.js/testing environment
+if (typeof module !== 'undefined' && typeof require !== 'undefined') {
+    const { expect } = require("chai");
+}
 
 /**
  * Clears the workspace UI by removing all content from the main description and table areas.
@@ -44,16 +47,19 @@ function AddFixedParameter(htmlObject) {
 }
 
 function MenuParametersOnclick(Line, HTMLObject) {
+	// alert('start');
 	if (Line == 'empty') {
 		ClearWorkSpace();
 		AddFixedParameter(HTMLObject);
+		alert('1');
 		return;
 	}
+
 	$('#topDefineDescription').fadeIn();
 	LineNumber = Line.split(',')[0];
 
 	ClearWorkSpace();
-
+	// alert('2');
 	Parameters = sessionStorage.getItem('Parameters').split('\n');
 	parcounter = 0;
 	while (Parameters[parcounter] != undefined) {
@@ -63,7 +69,7 @@ function MenuParametersOnclick(Line, HTMLObject) {
 		}
 		parcounter++;
 	}
-
+	// alert('3');
 	//Description
 	descriptionArea = document.createElement('tr');
 	DescriptionText = document.createElement('p');
@@ -217,9 +223,7 @@ function MenuParametersOnclick(Line, HTMLObject) {
 
 			FormDiv_1.appendChild(Form_1);
 			document.getElementById('topDefineDescription').appendChild(FormDiv_1);
-
 			return;
-
 		}
 
 	}
@@ -972,7 +976,7 @@ function MenuParametersOnclick(Line, HTMLObject) {
 				FormDiv = document.createElement('div');
 				FormDiv.setAttribute('id', 'MocasDivArea');
 				Form = document.createElement('form');
-				Form.setAttribute('action', 'MoCAS/MoCAS.php');
+				Form.setAttribute('action', '../src/mocas/MoCAS.php');
 				Form.setAttribute('method', 'POST');
 				Form.setAttribute('name', 'MocasVerifyForm');
 

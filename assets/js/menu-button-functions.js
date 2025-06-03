@@ -142,7 +142,7 @@ function parametersMenuToggle() {
  * @param {string} [defaultFileName] 
  */
 function readParameters(defaultFileName) {
-    if (currentPage === 'editor.php') {
+    if (currentPage === 'parameter-editor.php') {
         const confirmLeave = confirm(LanguageDict['GeneralFileLostWarning']);
         if (!confirmLeave) return;
     }

@@ -185,7 +185,7 @@ function BitDropDown1000(ParentParameterIndex, Bit, DropDownIndex, NameOfParentP
 
 	document.getElementById('topDefineDescription').appendChild(Description);
 
-	DropDownFile = sessionStorage.getItem('DropDownlist');
+	const DropDownFile = sessionStorage.getItem('DropDownlist');
 
 	counter = 0;
 	while (DropDownFile.split('\n')[counter] !== undefined) {

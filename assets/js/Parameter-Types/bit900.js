@@ -124,8 +124,10 @@ function BitDropDown999(
 
     // Highlight selected
     const whichNumber = Number(bitButtonCounter) - 1;
+    // alert("parentParameterIndex:" + String(parentParameterIndex));
+    // alert("whichNumber:" + String(whichNumber))
     document.getElementById("constant" + parentParameterIndex)
-        .childNodes[0].childNodes[whichNumber].className = 'SelectedThirdSubGroup';
+        .childNodes[0].childNodes[(whichNumber-1)].className = 'SelectedThirdSubGroup';
 
     // Clear UI
     document.getElementById('topDefineDescription').innerHTML = '';

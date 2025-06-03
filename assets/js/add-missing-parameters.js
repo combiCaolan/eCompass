@@ -5,6 +5,7 @@
  * @param {number|string} lineNumber - The line number (or parameter ID) to add.
  */
 function addParameterToClp(lineNumber) {
+    console.log('start');
     // Retrieve the template file and parameters file from sessionStorage
     const templateFile = sessionStorage.getItem('TemplateFile');
     const parametersFile = sessionStorage.getItem('Parameters');
@@ -65,4 +66,11 @@ function addParameterToClp(lineNumber) {
             MenuParametersOnclick('empty', element);
         }
     }
+
+
+    console.log('end');
+
+    location.reload();
+
+
 }

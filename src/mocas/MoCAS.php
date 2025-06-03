@@ -218,7 +218,7 @@ $validation_code = $validation_code + b13;
 						NewLine = ParameterLine[0] + ',' +  '1' + ',' + '1' + ',' + ParameterLine[3] + ',' + ParameterLine[4] + ','+ ParameterLine[5] + ','+ ParameterLine[6] + ','+ Validation_Code_str + ','+ ParameterLine[8] + ','+ ParameterLine[9] + ','+ ParameterLine[10];
 						NewSession = sessionStorage.getItem('Parameters').replace(OldLine,NewLine);
 						sessionStorage.setItem('Parameters',NewSession);
-						location.href = '../editor.php';
+						location.href = '../../public/parameter-editor.php';
 						break;
 					}else{
 						counter++;

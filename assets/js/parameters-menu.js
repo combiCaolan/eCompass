@@ -93,8 +93,11 @@ function makeMenu() {
  * @param {Array<Array<string>>} parameterMainArr
  * @param {Object} parametersDirForUsersFile
  */
-function organiseMenu(parameterMainArr, parametersDirForUsersFile) {
+function organiseMenu(parameterMainArr, parametresDirForUsersFile) {
+    console.log(parameterMainArr);
+    console.log(parametresDirForUsersFile);
     parameterMainArr.forEach(line => {
+        console.log(line);
         if (!line.length) return;
         const [id, group, , label, , , , , , access] = line;
         const btn = document.createElement('button');
@@ -104,7 +107,11 @@ function organiseMenu(parameterMainArr, parametersDirForUsersFile) {
         // Main menu logic
         if (Number(id) < 89 && id !== '2' && id !== '4') {
             btn.className = 'PreTreeButton';
-            btn.onclick = () => MenuParametersOnclick(parametersDirForUsersFile[id] || 'empty', btn);
+            console.log('below');
+            console.log(parametresDirForUsersFile);
+            // btn.onclick = () => alert('hello world');
+            console.log(parametresDirForUsersFile);
+            btn.onclick = () => MenuParametersOnclick(parametresDirForUsersFile[id] || 'empty', btn);
             const div = document.createElement('div');
             div.id = 'constant' + id;
             const parent = document.getElementById(group);
@@ -114,6 +121,8 @@ function organiseMenu(parameterMainArr, parametersDirForUsersFile) {
             }
         } else {
             btn.onclick = () => treeViewClick(btn, id);
+            // btn.setAttribute('onclick','treeViewClick(' + btn + ',' +  String(id) + ')')
+            // console.log(btn);
             if (id === '2' || id === '4') {
                 btn.className = 'PreTreeButton';
                 const div = document.createElement('div');
@@ -164,6 +173,26 @@ function organiseMenu(parameterMainArr, parametersDirForUsersFile) {
                 }
             }
         }
+    });
+
+     // --- Add buttons for parameters in parametresDirForUsersFile not in parameterMainArr ---
+    // Build a set of IDs from parameterMainArr for quick lookup
+    const mainArrIds = new Set(parameterMainArr.map(line => line[0]));
+
+    Object.entries(parametresDirForUsersFile).forEach(([id, lineStr]) => {
+        if (mainArrIds.has(id)) return; // Already handled above
+
+        // Create or select the element for this id
+        let btn = document.getElementById(id);
+        if (!btn) {
+            btn = document.createElement('button');
+            btn.id = id;
+            btn.innerHTML = `Parameter ${id}`;
+            // You can customize the label as needed
+            // Optionally, append to a default parent or a special section
+            document.body.appendChild(btn); // Change this to your desired parent
+        }
+        btn.onclick = () => MenuParametersOnclick(parametresDirForUsersFile[id], btn);
     });
 
     hideAllMenus();

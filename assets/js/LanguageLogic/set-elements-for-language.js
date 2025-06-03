@@ -96,7 +96,7 @@ function updateBitLabels() {
 	if (typeof CurrentPage == 'undefined') {
 		const CurrentPage = window.location.pathname.split('/')[window.location.pathname.split('/').length - 1];
 	} else {
-		if (CurrentPage == 'editor.php') {
+		if (CurrentPage == 'parameter-editor.php') {
 			BitLabelChecker();
 		}
 	}

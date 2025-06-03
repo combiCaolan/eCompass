@@ -48,6 +48,7 @@ function showParameterNotPresent(lineNumber, htmlObject) {
     addParameterButton.value = `Add "${htmlObject.innerHTML}" to this file?`;
     addParameterButton.onclick = function () {
         addParameterToClp(lineNumber, htmlObject);
+        location.reload();
     };
 
     container.appendChild(workSpaceTitle);
@@ -143,6 +144,7 @@ function treeViewClick(value, objectId, msg) {
         dropDownFunction(lineArr, value);
         return;
     }
+
 
     RegularParameter(value, objectId, lineArr);
 }
