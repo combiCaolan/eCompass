@@ -1,0 +1,874 @@
+#24
+ ,,,,,,,,,,,,,,,,,
+#25
+ Field Value: Keyswitch_counter Field Default: Brake_release_counter Field Factory: Seat_Floor_counter Field Min: Seatbelt_Door_counter Field Max: AxisFR_Mode_Change_counter Field Units: AxisLR_Mode_Change_counter Field Scale: Crab_Mode_counter Field User Read: Height_Assist_counter Field User Write: Tilt_Assist_counter,,,,,,,,,,,,,,,,,
+#26
+ Field Value: Pump_Contactor_counter Field Default: Traction_Contactor_counter Field Factory: Battery_Charging_cycles_counter Field Min: Current_Traction_inbalance_counter,,,,,,,,,,,,,,,,,
+#27
+ Time in seconds. Field Value: driving in Forks direction Field Default: driving in Reverse of Forks direction Field Factory: driving in Left of Forks direction Field Min: driving in Right of Forks direction Field Max: driving in Crab or Offset mode Field Units: driving with speed less than 20% of max speed Field Scale: driving with speed between 20 to 40% of max speed Field User Read: driving with speed between 40 to 60% of max speed Field User Write: driving with speed between 60 to 80% of max speed,,,,,,,,,,,,,,,,,
+#28
+ Time in seconds. Field Value: driving with speed higher than 80% of max speed Field Default: total traction current less than 10% of max Field Factory: total traction current between 10 to 20% of max Field Min: total traction current between 20 to 30% of max Field Max: total traction current between 30 to 40% of max Field Units: total traction current between 40 to 50% of max Field Scale: total traction current between 50 to 60% of max Field User Read: total traction current between 60 to 70% of max Field User Write: total traction current between 70 to 80% of max,,,,,,,,,,,,,,,,,
+#29
+ Time in seconds. Field Value: total traction current between 80 to 90% of max Field Default: total traction current higher than 90% of max Field Factory: total pump current less than 10% of max Field Min: total pump current between 10 to 20% of max Field Max: total pump current between 20 to 30% of max Field Units: total pump current between 30 to 40% of max Field Scale: total pump current between 40 to 50% of max Field User Read: total pump current between 50 to 60% of max Field User Write: total pump current between 60 to 70% of max,,,,,,,,,,,,,,,,,
+#30
+ Time in seconds. Field Value: total pump current between 70 to 80% of max Field Default: total pump current between 80 to 90% of max Field Factory: total pump current higher than 90% of max Field Min: total steer current less than 10% of max Field Max: total steer current between 10 to 20% of max Field Units: total steer current between 20 to 30% of max Field Scale: total steer current between 30 to 40% of max Field User Read: total steer current between 40 to 50% of max Field User Write: total steer current between 50 to 60% of max,,,,,,,,,,,,,,,,,
+#31
+ Time in seconds. Field Value: total steer current between 60 to 70% of max Field Default: total steer current between 70 to 80% of max Field Factory: total steer current between 80 to 90% of max Field Min: total steer current higher than 90% of max,,,,,,,,,,,,,,,,,
+#64
+ ,,,,,,,,,,,,,,,,,
+#65
+ ,,,,,,,,,,,,,,,,,
+#66
+ ,,,,,,,,,,,,,,,,,
+#67
+ ,,,,,,,,,,,,,,,,,
+#68
+ ,,,,,,,,,,,,,,,,,
+#69
+ ,,,,,,,,,,,,,,,,,
+#70
+ ,,,,,,,,,,,,,,,,,
+#71
+ ,,,,,,,,,,,,,,,,,
+#72
+ ,,,,,,,,,,,,,,,,,
+#73
+ ,,,,,,,,,,,,,,,,,
+#74
+ ,,,,,,,,,,,,,,,,,
+#75
+ ,,,,,,,,,,,,,,,,,
+#76
+ ,,,,,,,,,,,,,,,,,
+#77
+ ,,,,,,,,,,,,,,,,,
+#78
+ ,,,,,,,,,,,,,,,,,
+#79
+ ,,,,,,,,,,,,,,,,,
+#80
+ Gives hardware info about the Pump Motor Controller. The info is read on every keyswitch to reflect any changes made.  Field Value: Timestamp Field Default: Serial,,,,,,,,,,,,,,,,,
+#81
+ Gives Hardware info about the Traction Rear Right (TRR) Motor Controller. Same format of info as the Pump Controller Info,,,,,,,,,,,,,,,,,
+#82
+ Gives Hardware info about the Traction Rear Left (TRL) Motor Controller. Same format of info as the Pump Controller Info,,,,,,,,,,,,,,,,,
+#83
+ Gives Hardware info about the Traction Front Right (TFR) Motor Controller. Same format of info as the Pump Controller Info,,,,,,,,,,,,,,,,,
+#84
+ Gives Hardware info about the Traction Font Left (TFL) Motor Controller. Same format of info as the Pump Controller Info,,,,,,,,,,,,,,,,,
+#85
+ Gives Hardware info about the Steer Rear Right (SRR) Motor Controller. The Hardware info is read on every keyswitch to reflect any changes made.  Field Value: Timestamp Field Default: Serial,,,,,,,,,,,,,,,,,
+#86
+ Gives Hardware info about the Steer Rear Left (SRL) Motor Controller. Same format of info as the Steer Rear Right (SRR) Controller Info,,,,,,,,,,,,,,,,,
+#87
+ Gives Hardware info about the Steer Front Right (SFR) Motor Controller. Same format of info as the Steer Rear Right (SRR) Controller Info,,,,,,,,,,,,,,,,,
+#88
+ Gives Hardware info about the Steer Front Left (SFL) Motor Controller. Same format of info as the Steer Rear Right (SRR) Controller Info,,,,,,,,,,,,,,,,,
+#89
+ Reserved index for sending override info from screen to controller.,,,,,,,,,,,,,,,,,
+#90
+ Fixed setting needed to enable the CAN parameter update in the Curtis controller,,,,,,,,,,,,,,,,,
+#90
+ Fixed setting needed to enable the CAN parameter update in the Curtis controller,,,,,,,,,,,,,,,,,
+#92
+ Fixed setting needed to enable the CAN parameter update in the Curtis controller,,,,,,,,,,,,,,,,,
+#93
+ Fixed setting needed to enable the CAN parameter update in the Curtis controller,,,,,,,,,,,,,,,,,
+#94
+ Fixed setting needed to enable the CAN parameter update in the Curtis controller,,,,,,,,,,,,,,,,,
+#95
+ Fixed setting needed to enable the CAN parameter update in the Curtis controller,,,,,,,,,,,,,,,,,
+#96
+ Fixed setting needed to enable the CAN parameter update in the Curtis controller,,,,,,,,,,,,,,,,,
+#97
+ Fixed setting needed to enable the CAN parameter update in the Curtis controller,,,,,,,,,,,,,,,,,
+#98
+ Fixed setting needed to enable the CAN parameter update in the Curtis controller,,,,,,,,,,,,,,,,,
+#99
+ Fixed setting needed to enable the CAN parameter update in the Curtis controller,,,,,,,,,,,,,,,,,
+#104
+ Defines User 1 access password. User 1 is at Operator Level. Default value is 1. This parameter is not included in an exported CLP file. ,,,,,,,,,,,,,,,,,
+#105
+ Defines User 2 access password. User 2 is at Operator Level. Default value is 22. This parameter is not included in an exported CLP file. ,,,,,,,,,,,,,,,,,
+#106
+ Defines User 3 access password. User 3 is at Operator Level. Default value is 333. This parameter is not included in an exported CLP file. ,,,,,,,,,,,,,,,,,
+#107
+ Defines User 4 access password. User 4 is at Service Level. Default value is 4440. This parameter is not included in an exported CLP file. ,,,,,,,,,,,,,,,,,
+#108
+ Defines User 5 access password. User 5 is at Manager Level. Default value is 5551. This parameter is not included in an exported CLP file. ,,,,,,,,,,,,,,,,,
+#109
+ Defines User 6 access password. User 6 is at Dealer Level. Default value is 61234. This parameter is not included in an exported CLP file. ,,,,,,,,,,,,,,,,,
+#110
+ Defines User 7 access password. User 7 is at Combilift Level. Default value is 754321. This parameter is not included in an exported CLP file. ,,,,,,,,,,,,,,,,,
+#111
+ Defines User 8 access password. User 8 is at Developer Level. Default value is 801234. This parameter is not included in an exported CLP file. ,,,,,,,,,,,,,,,,,
+#116
+ Time interval to completely shtudown the screen,,,,,,,,,,,,,,,,1,1
+#117
+ Defines which modules will have sound enabled. Info is stored at bit level.  bit 0 - Height Assist bit 1 - Tilt Assist ,,,,,,,,,,,,,,,,1,1
+#118
+ Defines the volume of the speaker,,,,,,,,,,,,,,,,1,1
+#119
+ ,,,,,,,,,,,,,,,,,
+#121
+ ,,,,,,,,,,,,,,,,,
+#122
+ Defines the time interval until next Service, to display the Service warning based on date.,,,,,,,,,,,,,,,,,
+#128
+ Defines the time interval for the Standard Service of the truck based on date.,,,,,,,,,,,,,,,,1,
+#129
+ Defines the time interval for the Full Service of the truck based on date.,,,,,,,,,,,,,,,,1,
+#133
+ The current applied to the hydraulic coils when not being used.,,,,,,,,,,,,,,,,,
+#134
+ The PWM applied to the hydraulic coils when not being used.,,,,,,,,,,,,,,,,,
+#149
+ ,,,,,,,,,,,,,,,,,
+#418
+ ,,,,,,,,,,,,,,,,,
+#419
+ ,,,,,,,,,,,,,,,,,
+#502
+ Defines how OSCam 1 will work. Info is stored at bit level. .0 Cam enable - Disable/Enable globally the use of OSCam1. .1 Front - Disable/Enable the use of OSCam1 when driving in Forks direction. .2 Reverse - Disable/Enable the use of OSCam1 when driving in Reverse of Forks direction. .3 Left - Disable/Enable the use of OSCam1 when driving in Left of Forks direction. .4 Right - Disable/Enable the use of OSCam1 when driving in Right of Forks direction. .5 Forks - Disable/Enable the use of OSCam1 when using any hydraulic function. .6 Hi Forks - Disable/Enable the use of OSCam1 when using any hydraulic function above pre-defined height. .7 Assist - Disable/Enable the use of OSCam1 when using any the Assist modules. .8 Hline - Disable/Enable the display of an horizontal line in OSCam1 image.,,,,,,,,,,,,,,,,,
+#503
+ Defines how OSCam2 will work. Info is stored at bit level. .0 Cam enable - Disable/Enable globally the use of OSCam2. .1 Front - Disable/Enable the use of OSCam2 when driving in Forks direction. .2 Reverse - Disable/Enable the use of OSCam2 when driving in Reverse of Forks direction. .3 Left - Disable/Enable the use of OSCam2 when driving in Left of Forks direction. .4 Right - Disable/Enable the use of OSCam2 when driving in Right of Forks direction. .5 Forks - Disable/Enable the use of OSCam2 when using any hydraulic function. .6 Hi Forks - Disable/Enable the use of OSCam2 when using any hydraulic function above pre-defined height. .7 Assist - Disable/Enable the use of OSCam2 when using any the Assist modules. .8 Hline - Disable/Enable the display of an horizontal line in OSCam2 image.,,,,,,,,,,,,,,,,,
+#504
+ Defines how OSCam3 will work. Info is stored at bit level. .0 Cam enable - Disable/Enable globally the use of OSCam3. .1 Front - Disable/Enable the use of OSCam3 when driving in Forks direction. .2 Reverse - Disable/Enable the use of OSCam3 when driving in Reverse of Forks direction. .3 Left - Disable/Enable the use of OSCam3 when driving in Left of Forks direction. .4 Right - Disable/Enable the use of OSCam3 when driving in Right of Forks direction. .5 Forks - Disable/Enable the use of OSCam3 when using any hydraulic function. .6 Hi Forks - Disable/Enable the use of OSCam3 when using any hydraulic function above pre-defined height. .7 Assist - Disable/Enable the use of OSCam3 when using any the Assist modules. .8 Hline - Disable/Enable the display of an horizontal line in OSCam3 image.,,,,,,,,,,,,,,,,,
+#599
+ ,,,,,,,,,,,,,,,,,
+#1015
+ Defines the lowest access level that is allowed to see and change different hourmeters.,,,,,,,,,,,,,,,,,
+#1016
+ bit0 - Enable platform usage bit1 - Enable arms usage,,,,,,,,,,,,,,,,,
+#1017
+ Sensor Deadband to allow movement during operation,,,,,,,,,,,,,,,,,
+#1018
+ Maximum platform sensor value from zero position to maximum position,,,,,,,,,,,,,,,,,
+#1019
+ Maximum Arms sensor value from zero position to maximum position,,,,,,,,,,,,,,,,,
+#1075
+ Defines the Load position to be used if enabled in setup,,,,,,,,,,,,,,,,,
+#1076
+ Defines the Platform position to be used if enabled in setup,,,,,,,,,,,,,,,,,
+#1077
+ Defines the position deadband to be used in position control,,,,,,,,,,,,,,,,,
+#1078
+ Defines the maximum reach position to consider that the carriage is IN,,,,,,,,,,,,,,,,,
+#1079
+ Defines the minimum reach position to consider that the carriage is OUT in zone A,,,,,,,,,,,,,,,,,
+#1080
+ Defines the minimum reach position to consider that the carriage is OUT in zone B,,,,,,,,,,,,,,,,,
+#1081
+ Defines the minimum reach position to consider that the carriage is OUT in zone C,,,,,,,,,,,,,,,,,
+#1082
+ Defines how Tilt Assist will work. Info is stored at bit level. 0 – Off  1 – On  Bit 0 – On/Off – Tilt Assist is Available to use or not. Bit 1 – Input – If TRUE, input from screen. If FALSE, input from external module. Bit 2 – Auto - If TRUE, tilt function will be activated automatically Bit 3 – Tilt 1 – If TRUE, use the Tilt 1 angle setting to stop tilt Bit 4 – Tilt 2 – If TRUE, use the Tilt 2 angle setting to stop tilt Bit 5 – to be selected if Slow Down is inverted ,,,,,,,,,,,,,,,,,
+#1083
+ Tilt Assist pump speed in rpm,,,,,,,,,,,,,,,,,
+#1084
+ Defines the Tilt 1 angle to be used if enabled in setup,,,,,,,,,,,,,,,,,
+#1085
+ Defines the Tilt 2 angle to be used if enabled in setup,,,,,,,,,,,,,,,,,
+#1086
+ Defines the angle deadband to be used in angle control,,,,,,,,,,,,,,,,,
+#1087
+ ENABLE_MODULE      : BYTE:=0; (* 0 - disabled  1 - enabled *)  AD_SENSOR_TYPE      : BYTE:=1; (* 0 - digital   1 - analog *)  SD_SENSOR_TYPE      : BYTE:=2; (* 0 - digital   1 - analog *)  OD_SENSOR_TYPE      : BYTE:=3; (* 0 - digital   1 - analog *)  STOP_SENSOR_TYPE     : BYTE:=4; (* 0 - digital   1 - analog *)  GUIDE_SENSOR_TYPE     : BYTE:=5; (* 0 - digital   1 - analog *)  ENABLE_OUT_ALARM     : BYTE:=6; (* 0 - disabled  1 - enabled *)  ENABLE_IN_ALARM      : BYTE:=7; (* 0 - disabled  1 - enabled *)  ENABLE_OVERRIDE      : BYTE:=8; (* 0 - disabled  1 - enabled *)  ENABLE_ACK_IN      : BYTE:=9; (* 0 - disabled  1 - enabled *)  ENABLE_ACK_OUT      : BYTE:=10; (* 0 - disabled  1 - enabled *)  ENABLE_LIGHT_RIGHT     : BYTE:=11; (* 0 - disabled  1 - enabled *)  ENABLE_LIGHT_LEFT     : BYTE:=12; (* 0 - disabled  1 - enabled *)  ENABLE_LIGHT_AXIS     : BYTE:=13; (* 0 - disabled  1 - enabled *)  CHANGEOVER_TYPE      : BYTE:=14; (* 0 - manual   1 - auto *),,,,,,,,,,,,,,,,,
+#1088
+ AD_RR   : BYTE:=0;  AD_RL   : BYTE:=1;  AD_FR   : BYTE:=2;  AD_FL   : BYTE:=3;  SD_RR   : BYTE:=4;  SD_RL   : BYTE:=5;  SD_FR   : BYTE:=6;  SD_FL   : BYTE:=7;  OD_R   : BYTE:=8;  OD_L   : BYTE:=9;  STOP_R   : BYTE:=10;  STOP_L   : BYTE:=11;  G_RR   : BYTE:=12;  G_RL   : BYTE:=13;  G_FR   : BYTE:=14;  G_FL   : BYTE:=15;,,,,,,,,,,,,,,,,,
+#1089
+ Allignment type to be used in CINAS Centre - Aisle must be detected in both sides (front and rear of the machine).  Front - Aisle only needs to be detected in the front of the machine.  Rear - Aisle only needs to be detected in the rear of the machine.,,,,,,,,,,,,,,,,,
+#1090
+ Enter Aisle Mode to be used in CINAS All Sensors ON - All the configured sensors need to be detecting the aisle to change mode into Aisle Mode. Leading Sensors ON - Only the configured leading sensors need to be detecting the aisle to change mode into Aisle Mode. ,,,,,,,,,,,,,,,,,
+#1091
+ Exit Aisle Mode to be used in CINAS All Sensors OFF - All the configured sensors need to be cleared to exit from Aisle Mode.  Leading Sensors OFF - Only the configured leading sensors need to be cleared to exit from Aisle Mode.  Any Leading Sensor OFF - Any of the configured leading sensors when cleared will exit Aisle Mode.,,,,,,,,,,,,,,,,,
+#1092
+ Maximum speed when in CINAS Aisle Mode,,,,,,,,,,,,,,,,,
+#1093
+ Maximum speed when in CINAS Slow Down Mode,,,,,,,,,,,,,,,,,
+#1094
+ Maximum speed when in CINAS  Object Detected,,,,,,,,,,,,,,,,,
+#1095
+ Steer Reduction factor to be applied in CINAS Aisle Mode,,,,,,,,,,,,,,,,,
+#1096
+ Detection distance to be used in CINAS,,,,,,,,,,,,,,,,,
+#1097
+ ,,,,,,,,,,,,,,,,,
+#1098
+ ,,,,,,,,,,,,,,,,,
+#1099
+ ,,,,,,,,,,,,,,,,,
+#1161
+ Proportional PID gain for Lift in Assist Functions,,,,,,,,,,,,,,,,,
+#1162
+ Proportional PID gain for Lower in Assist Functions,,,,,,,,,,,,,,,,,
+#1163
+ Integral PID gain for Lift in Assist Functions,,,,,,,,,,,,,,,,,
+#1164
+ Proportional PID gain for Reach In in Assist Functions,,,,,,,,,,,,,,,,,
+#1165
+ Proportional PID gain for Reach Out Assist Functions,,,,,,,,,,,,,,,,,
+#1166
+ Integral PID gain for Reach In Assist Functions,,,,,,,,,,,,,,,,,
+#1167
+ Proportional PID gain for Tilt In in Assist Functions,,,,,,,,,,,,,,,,,
+#1168
+ Proportional PID gain for Tilt Out in Assist Functions,,,,,,,,,,,,,,,,,
+#1169
+ Integral PID gain for Tilt In Assist Functions,,,,,,,,,,,,,,,,,
+#1170
+ Integral PID gain for Lower in Assist Functions,,,,,,,,,,,,,,,,,
+#1171
+ Integral PID gain for Reach Out in Assist Functions,,,,,,,,,,,,,,,,,
+#1172
+ Integral PID gain for Tilt Out in Assist Functions,,,,,,,,,,,,,,,,,
+#1173
+ To be defined,,,,,,,,,,,,,,,,,
+#1174
+ To be defined,,,,,,,,,,,,,,,,,
+#1175
+ To be defined,,,,,,,,,,,,,,,,,
+#1176
+ To be defined,,,,,,,,,,,,,,,,,
+#1177
+ To be defined,,,,,,,,,,,,,,,,,
+#1178
+ To be defined,,,,,,,,,,,,,,,,,
+#1179
+ To be defined,,,,,,,,,,,,,,,,,
+#1180
+ To be defined,,,,,,,,,,,,,,,,,
+#1181
+ ,,,,,,,,,,,,,,,,,
+#1182
+ ,,,,,,,,,,,,,,,,,
+#1183
+ ,,,,,,,,,,,,,,,,,
+#1184
+ ,,,,,,,,,,,,,,,,,
+#1185
+ ,,,,,,,,,,,,,,,,,
+#1186
+ ,,,,,,,,,,,,,,,,,
+#1187
+ ,,,,,,,,,,,,,,,,,
+#1188
+ ,,,,,,,,,,,,,,,,,
+#1189
+ ,,,,,,,,,,,,,,,,,
+#1190
+ The Proportional gain of the Mode Change PWM when changing to Side Mode.,,,,,,,,,,,,,,,,,
+#1191
+ The Integral gain of the Mode Change PWM when changing to Side Mode.,,,,,,,,,,,,,,,,,
+#1192
+ The Proportional gain of the Mode Change PWM when changing to Frontal Mode.,,,,,,,,,,,,,,,,,
+#1193
+ The Integralgain of the Mode Change PWM when changing to Frontal Mode.,,,,,,,,,,,,,,,,,
+#1194
+ The Proportional gain for steer position control,,,,,,,,,,,,,,,,,
+#1195
+ The Integral gain for steer position control,,,,,,,,,,,,,,,,,
+#1196
+ The Proportional gain for steer velocity control,,,,,,,,,,,,,,,,,
+#1197
+ The Integral gain for steer velocity control,,,,,,,,,,,,,,,,,
+#1198
+ The feedforward value for steer control,,,,,,,,,,,,,,,,,
+#1199
+ The Proportional gain for steer position control,,,,,,,,,,,,,,,,,
+#1200
+ The Integral gain for steer position control,,,,,,,,,,,,,,,,,
+#1201
+ The Proportional gain for steer velocity control,,,,,,,,,,,,,,,,,
+#1202
+ The Integral gain for steer velocity control,,,,,,,,,,,,,,,,,
+#1203
+ The feedforward value for steer control,,,,,,,,,,,,,,,,,
+#1204
+ The Proportional gain for steer position control,,,,,,,,,,,,,,,,,
+#1205
+ The Integral gain for steer position control,,,,,,,,,,,,,,,,,
+#1206
+ The Proportional gain for steer velocity control,,,,,,,,,,,,,,,,,
+#1207
+ The Integral gain for steer velocity control,,,,,,,,,,,,,,,,,
+#1208
+ The feedforward value for steer control,,,,,,,,,,,,,,,,,
+#1209
+ The Proportional gain for steer position control,,,,,,,,,,,,,,,,,
+#1210
+ The Integral gain for steer position control,,,,,,,,,,,,,,,,,
+#1211
+ The Proportional gain for steer velocity control,,,,,,,,,,,,,,,,,
+#1212
+ The Integral gain for steer velocity control,,,,,,,,,,,,,,,,,
+#1213
+ The feedforward value for steer control,,,,,,,,,,,,,,,,,
+#1214
+ FR Full Accel Rate HS ,,,,,,,,,,,,,,,,,
+#1215
+ FR Full Accel Rate LS,,,,,,,,,,,,,,,,,
+#1216
+ FR Neutral Decel Rate HS,,,,,,,,,,,,,,,,,
+#1217
+ FR Neutral Decel Rate LS,,,,,,,,,,,,,,,,,
+#1218
+ FR Full Brake Rate HS,,,,,,,,,,,,,,,,,
+#1219
+ FR Full Brake Rate LS,,,,,,,,,,,,,,,,,
+#1220
+ LR Full Accel Rate HS,,,,,,,,,,,,,,,,,
+#1221
+ LR Full Accel Rate LS,,,,,,,,,,,,,,,,,
+#1222
+ LR Neutral Decel Rate HS,,,,,,,,,,,,,,,,,
+#1224
+ LR Full Brake Rate HS,,,,,,,,,,,,,,,,,
+#1225
+ LR Full Brake Rate LS,,,,,,,,,,,,,,,,,
+#1226
+ ,,,,,,,,,,,,,,,,,
+#1227
+ ,,,,,,,,,,,,,,,,,
+#1228
+ ,,,,,,,,,,,,,,,,,
+#1229
+ ,,,,,,,,,,,,,,,,,
+#1230
+ ,,,,,,,,,,,,,,,,,
+#1231
+ ,,,,,,,,,,,,,,,,,
+#1232
+ ,,,,,,,,,,,,,,,,,
+#1233
+ ,,,,,,,,,,,,,,,,,
+#1234
+ ,,,,,,,,,,,,,,,,,
+#1235
+ ,,,,,,,,,,,,,,,,,
+#1236
+ ,,,,,,,,,,,,,,,,,
+#1237
+ ,,,,,,,,,,,,,,,,,
+#1238
+ ,,,,,,,,,,,,,,,,,
+#1239
+ ,,,,,,,,,,,,,,,,,
+#1240
+ ,,,,,,,,,,,,,,,,,
+#1241
+ ,,,,,,,,,,,,,,,,,
+#1242
+ ,,,,,,,,,,,,,,,,,
+#1243
+ ,,,,,,,,,,,,,,,,,
+#1244
+ ,,,,,,,,,,,,,,,,,
+#1245
+ ,,,,,,,,,,,,,,,,,
+#1246
+ ,,,,,,,,,,,,,,,,,
+#1247
+ ,,,,,,,,,,,,,,,,,
+#1248
+ ,,,,,,,,,,,,,,,,,
+#1249
+ ,,,,,,,,,,,,,,,,,
+#1250
+ ,,,,,,,,,,,,,,,,,
+#1251
+ ,,,,,,,,,,,,,,,,,
+#1252
+ ,,,,,,,,,,,,,,,,,
+#1253
+ ,,,,,,,,,,,,,,,,,
+#1254
+ ,,,,,,,,,,,,,,,,,
+#1255
+ ,,,,,,,,,,,,,,,,,
+#1256
+ ,,,,,,,,,,,,,,,,,
+#1257
+ ,,,,,,,,,,,,,,,,,
+#1258
+ ,,,,,,,,,,,,,,,,,
+#1259
+ ,,,,,,,,,,,,,,,,,
+#1260
+ ,,,,,,,,,,,,,,,,,
+#1261
+ ,,,,,,,,,,,,,,,,,
+#1262
+ ,,,,,,,,,,,,,,,,,
+#1263
+ ,,,,,,,,,,,,,,,,,
+#1264
+ ,,,,,,,,,,,,,,,,,
+#1265
+ ,,,,,,,,,,,,,,,,,
+#1266
+ ,,,,,,,,,,,,,,,,,
+#1267
+ ,,,,,,,,,,,,,,,,,
+#1268
+ ,,,,,,,,,,,,,,,,,
+#1269
+ ,,,,,,,,,,,,,,,,,
+#1270
+ ,,,,,,,,,,,,,,,,,
+#1271
+ ,,,,,,,,,,,,,,,,,
+#1272
+ ,,,,,,,,,,,,,,,,,
+#1273
+ ,,,,,,,,,,,,,,,,,
+#1274
+ ,,,,,,,,,,,,,,,,,
+#1275
+ ,,,,,,,,,,,,,,,,,
+#1276
+ ,,,,,,,,,,,,,,,,,
+#1277
+ ,,,,,,,,,,,,,,,,,
+#1278
+ ,,,,,,,,,,,,,,,,,
+#1279
+ ,,,,,,,,,,,,,,,,,
+#1280
+ ,,,,,,,,,,,,,,,,,
+#1281
+ ,,,,,,,,,,,,,,,,,
+#1282
+ ,,,,,,,,,,,,,,,,,
+#1283
+ ,,,,,,,,,,,,,,,,,
+#1284
+ ,,,,,,,,,,,,,,,,,
+#1285
+ ,,,,,,,,,,,,,,,,,
+#1286
+ ,,,,,,,,,,,,,,,,,
+#1287
+ ,,,,,,,,,,,,,,,,,
+#1288
+ ,,,,,,,,,,,,,,,,,
+#1289
+ ,,,,,,,,,,,,,,,,,
+#1290
+ ,,,,,,,,,,,,,,,,,
+#1291
+ ,,,,,,,,,,,,,,,,,
+#1292
+ ,,,,,,,,,,,,,,,,,
+#1293
+ ,,,,,,,,,,,,,,,,,
+#1294
+ ,,,,,,,,,,,,,,,,,
+#1295
+ ,,,,,,,,,,,,,,,,,
+#1296
+ ,,,,,,,,,,,,,,,,,
+#1297
+ ,,,,,,,,,,,,,,,,,
+#1298
+ ,,,,,,,,,,,,,,,,,
+#1299
+ ,,,,,,,,,,,,,,,,,
+#1300
+ ,,,,,,,,,,,,,,,,,
+#1301
+ ,,,,,,,,,,,,,,,,,
+#1302
+ ,,,,,,,,,,,,,,,,,
+#1303
+ ,,,,,,,,,,,,,,,,,
+#1304
+ ,,,,,,,,,,,,,,,,,
+#1305
+ ,,,,,,,,,,,,,,,,,
+#1306
+ ,,,,,,,,,,,,,,,,,
+#1307
+ ,,,,,,,,,,,,,,,,,
+#1308
+ Defines some battery options. Stored at bit level.  bit0 --> Battery Charging plug. (0 – switch is normally CLOSED to operate,  1 –  switch is Normally OPEN to operate) bit1 --> Battery in Place Switch.  (0 – switch is normally CLOSED to operate,  1 –  switch is Normally OPEN to operate),,,,,,,,,,,,,,,,,
+#1309
+ ,,,,,,,,,,,,,,,,,
+#1310
+ Bit0 --> Enable the Combi Wire Guidance System (0- System OFF,  1- System ON),,,,,,,,,,,,,,,,,
+#1311
+ Max Speed to find the guidance wire OR When exiting the Aisle.,,,,,,,,,,,,,,,,,
+#1312
+ Max Speed when travelling in Auto Steer Mode.,,,,,,,,,,,,,,,,,
+#1313
+ ,,,,,,,,,,,,,,,,,
+#1314
+ ,,,,,,,,,,,,,,,,,
+#1315
+ ,,,,,,,,,,,,,,,,,
+#1316
+ ,,,,,,,,,,,,,,,,,
+#1317
+ ,,,,,,,,,,,,,,,,,
+#1318
+ ,,,,,,,,,,,,,,,,,
+#1319
+ ,,,,,,,,,,,,,,,,,
+#1320
+ ,,,,,,,,,,,,,,,,,
+#1321
+ ,,,,,,,,,,,,,,,,,
+#1322
+ ,,,,,,,,,,,,,,,,,
+#1323
+ ,,,,,,,,,,,,,,,,,
+#1324
+ ,,,,,,,,,,,,,,,,,
+#1325
+ ,,,,,,,,,,,,,,,,,
+#1326
+ ,,,,,,,,,,,,,,,,,
+#1327
+ ,,,,,,,,,,,,,,,,,
+#1328
+ ,,,,,,,,,,,,,,,,,
+#1329
+ ,,,,,,,,,,,,,,,,,
+#1330
+ ,,,,,,,,,,,,,,,,,
+#1331
+ ,,,,,,,,,,,,,,,,,
+#1332
+ ,,,,,,,,,,,,,,,,,
+#1333
+ ,,,,,,,,,,,,,,,,,
+#1334
+ ,,,,,,,,,,,,,,,,,
+#1335
+ ,,,,,,,,,,,,,,,,,
+#1336
+ ,,,,,,,,,,,,,,,,,
+#1337
+ ,,,,,,,,,,,,,,,,,
+#1338
+ ,,,,,,,,,,,,,,,,,
+#1339
+ ,,,,,,,,,,,,,,,,,
+#1340
+ ,,,,,,,,,,,,,,,,,
+#1341
+ ,,,,,,,,,,,,,,,,,
+#1342
+ ,,,,,,,,,,,,,,,,,
+#1343
+ ,,,,,,,,,,,,,,,,,
+#1344
+ ,,,,,,,,,,,,,,,,,
+#1345
+ ,,,,,,,,,,,,,,,,,
+#1346
+ ,,,,,,,,,,,,,,,,,
+#1347
+ ,,,,,,,,,,,,,,,,,
+#1348
+ ,,,,,,,,,,,,,,,,,
+#1349
+ ,,,,,,,,,,,,,,,,,
+#1350
+ ,,,,,,,,,,,,,,,,,
+#1351
+ ,,,,,,,,,,,,,,,,,
+#1352
+ ,,,,,,,,,,,,,,,,,
+#1353
+ ,,,,,,,,,,,,,,,,,
+#1354
+ ,,,,,,,,,,,,,,,,,
+#1355
+ ,,,,,,,,,,,,,,,,,
+#1356
+ ,,,,,,,,,,,,,,,,,
+#1357
+ ,,,,,,,,,,,,,,,,,
+#1358
+ ,,,,,,,,,,,,,,,,,
+#1359
+ ,,,,,,,,,,,,,,,,,
+#1360
+ ,,,,,,,,,,,,,,,,,
+#1361
+ ,,,,,,,,,,,,,,,,,
+#1362
+ ,,,,,,,,,,,,,,,,,
+#1363
+ ,,,,,,,,,,,,,,,,,
+#1364
+ ,,,,,,,,,,,,,,,,,
+#1365
+ ,,,,,,,,,,,,,,,,,
+#1366
+ ,,,,,,,,,,,,,,,,,
+#1367
+ ,,,,,,,,,,,,,,,,,
+#1368
+ ,,,,,,,,,,,,,,,,,
+#1369
+ ,,,,,,,,,,,,,,,,,
+#1370
+ ,,,,,,,,,,,,,,,,,
+#1371
+ ,,,,,,,,,,,,,,,,,
+#1372
+ ,,,,,,,,,,,,,,,,,
+#1373
+ ,,,,,,,,,,,,,,,,,
+#1374
+ ,,,,,,,,,,,,,,,,,
+#1375
+ ,,,,,,,,,,,,,,,,,
+#1376
+ ,,,,,,,,,,,,,,,,,
+#1377
+ ,,,,,,,,,,,,,,,,,
+#1378
+ ,,,,,,,,,,,,,,,,,
+#1379
+ ,,,,,,,,,,,,,,,,,
+#1380
+ ,,,,,,,,,,,,,,,,,
+#1381
+ ,,,,,,,,,,,,,,,,,
+#1382
+ ,,,,,,,,,,,,,,,,,
+#1383
+ ,,,,,,,,,,,,,,,,,
+#1384
+ ,,,,,,,,,,,,,,,,,
+#1385
+ ,,,,,,,,,,,,,,,,,
+#1386
+ ,,,,,,,,,,,,,,,,,
+#1387
+ ,,,,,,,,,,,,,,,,,
+#1388
+ ,,,,,,,,,,,,,,,,,
+#1389
+ ,,,,,,,,,,,,,,,,,
+#1390
+ ,,,,,,,,,,,,,,,,,
+#1391
+ ,,,,,,,,,,,,,,,,,
+#1392
+ ,,,,,,,,,,,,,,,,,
+#1393
+ ,,,,,,,,,,,,,,,,,
+#1394
+ ,,,,,,,,,,,,,,,,,
+#1395
+ ,,,,,,,,,,,,,,,,,
+#1396
+ ,,,,,,,,,,,,,,,,,
+#1397
+ ,,,,,,,,,,,,,,,,,
+#1398
+ ,,,,,,,,,,,,,,,,,
+#1399
+ ,,,,,,,,,,,,,,,,,
+#1400
+ ,,,,,,,,,,,,,,,,,
+#1401
+ ,,,,,,,,,,,,,,,,,
+#1402
+ ,,,,,,,,,,,,,,,,,
+#1403
+ ,,,,,,,,,,,,,,,,,
+#1404
+ ,,,,,,,,,,,,,,,,,
+#1405
+ ,,,,,,,,,,,,,,,,,
+#1406
+ ,,,,,,,,,,,,,,,,,
+#1407
+ ,,,,,,,,,,,,,,,,,
+#1408
+ ,,,,,,,,,,,,,,,,,
+#1409
+ ,,,,,,,,,,,,,,,,,
+#1410
+ ,,,,,,,,,,,,,,,,,
+#1411
+ ,,,,,,,,,,,,,,,,,
+#1412
+ ,,,,,,,,,,,,,,,,,
+#1413
+ ,,,,,,,,,,,,,,,,,
+#1414
+ ,,,,,,,,,,,,,,,,,
+#1415
+ ,,,,,,,,,,,,,,,,,
+#1416
+ ,,,,,,,,,,,,,,,,,
+#1417
+ ,,,,,,,,,,,,,,,,,
+#1418
+ ,,,,,,,,,,,,,,,,,
+#1419
+ ,,,,,,,,,,,,,,,,,
+#1420
+ ,,,,,,,,,,,,,,,,,
+#1421
+ ,,,,,,,,,,,,,,,,,
+#1422
+ ,,,,,,,,,,,,,,,,,
+#1423
+ ,,,,,,,,,,,,,,,,,
+#1424
+ ,,,,,,,,,,,,,,,,,
+#1425
+ ,,,,,,,,,,,,,,,,,
+#1426
+ ,,,,,,,,,,,,,,,,,
+#1427
+ ,,,,,,,,,,,,,,,,,
+#1428
+ ,,,,,,,,,,,,,,,,,
+#1429
+ ,,,,,,,,,,,,,,,,,
+#1430
+ ,,,,,,,,,,,,,,,,,
+#1431
+ ,,,,,,,,,,,,,,,,,
+#1432
+ ,,,,,,,,,,,,,,,,,
+#1433
+ ,,,,,,,,,,,,,,,,,
+#1434
+ ,,,,,,,,,,,,,,,,,
+#1435
+ ,,,,,,,,,,,,,,,,,
+#1436
+ ,,,,,,,,,,,,,,,,,
+#1437
+ ,,,,,,,,,,,,,,,,,
+#1438
+ ,,,,,,,,,,,,,,,,,
+#1439
+ ,,,,,,,,,,,,,,,,,
+#1440
+ ,,,,,,,,,,,,,,,,,
+#1441
+ ,,,,,,,,,,,,,,,,,
+#1442
+ ,,,,,,,,,,,,,,,,,
+#1443
+ ,,,,,,,,,,,,,,,,,
+#1444
+ ,,,,,,,,,,,,,,,,,
+#1445
+ ,,,,,,,,,,,,,,,,,
+#1446
+ ,,,,,,,,,,,,,,,,,
+#1447
+ ,,,,,,,,,,,,,,,,,
+#1448
+ ,,,,,,,,,,,,,,,,,
+#1449
+ ,,,,,,,,,,,,,,,,,
+#1450
+ ,,,,,,,,,,,,,,,,,
+#1451
+ ,,,,,,,,,,,,,,,,,
+#1452
+ ,,,,,,,,,,,,,,,,,
+#1453
+ ,,,,,,,,,,,,,,,,,
+#1454
+ ,,,,,,,,,,,,,,,,,
+#1455
+ ,,,,,,,,,,,,,,,,,
+#1456
+ ,,,,,,,,,,,,,,,,,
+#1457
+ ,,,,,,,,,,,,,,,,,
+#1458
+ ,,,,,,,,,,,,,,,,,
+#1459
+ ,,,,,,,,,,,,,,,,,
+#1460
+ ,,,,,,,,,,,,,,,,,
+#1461
+ ,,,,,,,,,,,,,,,,,
+#1462
+ ,,,,,,,,,,,,,,,,,
+#1463
+ ,,,,,,,,,,,,,,,,,
+#1464
+ ,,,,,,,,,,,,,,,,,
+#1465
+ ,,,,,,,,,,,,,,,,,
+#1466
+ ,,,,,,,,,,,,,,,,,
+#1467
+ ,,,,,,,,,,,,,,,,,
+#1468
+ ,,,,,,,,,,,,,,,,,
+#1469
+ ,,,,,,,,,,,,,,,,,
+#1470
+ ,,,,,,,,,,,,,,,,,
+#1471
+ ,,,,,,,,,,,,,,,,,
+#1472
+ ,,,,,,,,,,,,,,,,,
+#1473
+ ,,,,,,,,,,,,,,,,,
+#1474
+ ,,,,,,,,,,,,,,,,,
+#1475
+ ,,,,,,,,,,,,,,,,,
+#1476
+ ,,,,,,,,,,,,,,,,,
+#1477
+ ,,,,,,,,,,,,,,,,,
+#1478
+ ,,,,,,,,,,,,,,,,,
+#1479
+ ,,,,,,,,,,,,,,,,,
+#1480
+ ,,,,,,,,,,,,,,,,,
+#1481
+ ,,,,,,,,,,,,,,,,,
+#1482
+ ,,,,,,,,,,,,,,,,,
+#1483
+ ,,,,,,,,,,,,,,,,,
+#1484
+ ,,,,,,,,,,,,,,,,,
+#1485
+ ,,,,,,,,,,,,,,,,,
+#1486
+ ,,,,,,,,,,,,,,,,,
+#1487
+ ,,,,,,,,,,,,,,,,,
+#1488
+ ,,,,,,,,,,,,,,,,,
+#1489
+ ,,,,,,,,,,,,,,,,,
+#1490
+ ,,,,,,,,,,,,,,,,,
+#1491
+ ,,,,,,,,,,,,,,,,,
+#1492
+ ,,,,,,,,,,,,,,,,,
+#1493
+ ,,,,,,,,,,,,,,,,,
+#1494
+ ,,,,,,,,,,,,,,,,,
+#1495
+ ,,,,,,,,,,,,,,,,,
+#1496
+ ,,,,,,,,,,,,,,,,,
+#1497
+ ,,,,,,,,,,,,,,,,,
+#1498
+ ,,,,,,,,,,,,,,,,,
+#1499
+ ,,,,,,,,,,,,,,,,,

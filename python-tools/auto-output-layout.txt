@@ -1,0 +1,437 @@
+24,I,0,reserved
+25,I,0,STAT_COUNTERS_1
+26,I,0,STAT_COUNTERS_2
+27,I,0,STAT_TIMERS_1
+28,I,0,STAT_TIMERS_2
+29,I,0,STAT_TIMERS_3
+30,I,0,STAT_TIMERS_4
+31,I,0,STAT_TIMERS_5
+64,I,0,reserved
+65,I,0,reserved
+66,I,0,reserved
+67,I,0,reserved
+68,I,0,reserved
+69,I,0,reserved
+70,I,0,reserved
+71,I,0,reserved
+72,I,0,reserved
+73,I,0,reserved
+74,I,0,reserved
+75,I,0,reserved
+76,I,0,reserved
+77,I,0,reserved
+78,I,0,reserved
+79,I,0,reserved
+80,I,0,PUMP Hardware info
+81,I,0,TRR Hardware info
+82,I,0,TRL Hardware info
+83,I,0,TFR Hardware info
+84,I,0,TFL Hardware info
+85,I,0,SRR Hardware info
+86,I,0,SRL Hardware info
+87,I,0,SFR Hardware info
+88,I,0,SFL Hardware info
+89,I,0,DAP_override
+90,I,0,P_PAR_write_enable
+90,I,0,TRR_PAR_write_enable
+92,I,0,TRL_PAR_write_enable
+93,I,0,TFR_PAR_write_enable
+94,I,0,TFL_PAR_write_enable
+95,I,0,SRR_PAR_write_enable
+96,I,0,SRL_PAR_write_enable
+97,I,0,SFR_PAR_write_enable
+98,I,0,SFL_PAR_write_enable
+99,I,0,EXP_PAR_write_enable
+104,I,0,User 1 Password
+105,I,0,User 2 Password
+106,I,0,User 3 Password
+107,I,0,User 4 Password
+108,I,0,User 5 Password
+109,I,0,User 6 Password
+110,I,0,User 7 Password
+111,I,0,User 8 Password
+116,I,0,Screen_Shutdown_time
+117,I,0,Sound_Setup
+118,I,0,Sound_Volume
+119,I,0,free
+121,I,0,free
+122,I,0,Service Warning Display Days
+128,I,0,Standard Service date
+129,I,0,Full Service date
+133,I,0,Minimum Holding Current
+134,I,0,Minimum Holding PWM
+149,I,0,free
+418,I,0,free
+419,I,0,free
+502,I,0,OSCAM1_SETUP
+503,I,0,OSCAM2_SETUP
+504,I,0,OSCAM1_SETUP
+599,I,0,free
+1015,I,0,Hourmeters Access Level
+1016,I,0,PED Ride ON Setup
+1017,I,0,PED Ride ON Deadband
+1018,I,0,PED Ride ON Platform Max Disp
+1019,I,0,PED Ride ON Arms Max Disp
+1075,I,0,Heigh Assist Platform Load Position
+1076,I,0,Heigh Assist Platform Platform Position
+1077,I,0,HEIGHT_ASSIST_POS_MARGIN
+1078,I,0,Carriage In Deadband Position
+1079,I,0,Carriage Out Deadband Position Zone A
+1080,I,0,Carriage Out Deadband Position Zone B
+1081,I,0,Carriage Out Deadband Position Zone C
+1082,I,0,Tilt Assist Setup
+1083,I,0,Tilt Assist  Speed rpm
+1084,I,0,Tilt Assist  Angle 1
+1085,I,0,Tilt Assist  Angle 2
+1086,I,0,TILT_ASSIST_ANGLE_MARGIN
+1087,I,0,CINAS_SETUP
+1088,I,0,CINAS_ACTIVE_SENSORS
+1089,I,0,CINAS_ALIGN_TYPE
+1090,I,0,CINAS_OUT_IN_MODE
+1091,I,0,CINAS_IN_OUT_MODE
+1092,I,0,CINAS_AISLE_SPEED
+1093,I,0,CINAS_SD_SPEED
+1094,I,0,CINAS_OD_SPEED
+1095,I,0,CINAS_STEER_REDUCTION
+1096,I,0,CINAS_DISTANCE_TO_RAIL
+1097,I,0,OSCAM1_HLINE_OFFSET
+1098,I,0,OSCAM2_HLINE_OFFSET
+1099,I,0,OSCAM3_HLINE_OFFSET
+1161,I,0,LIFT_ASSIST_KP
+1162,I,0,LOWER_ASSIST_KP
+1163,I,0,LIFT_KI
+1164,I,0,REACH_IN_ASSIST_KP
+1165,I,0,REACH_OUT_ASSIST_KP
+1166,I,0,REACH_IN_KI
+1167,I,0,TILT_IN_ASSIST_KP
+1168,I,0,TILT_OUT_ASSIST_KP
+1169,I,0,TILT_IN_KI
+1170,I,0,LOWER_KI
+1171,I,0,REACH_OUT_KI
+1172,I,0,TILT_OUT_KI
+1173,I,0,Tilt_Limit_Setup
+1174,I,0,Tilt_Limit_Angle_Fwd
+1175,I,0,Tilt_Limit_Angle_Back
+1176,I,0,Tilt_Speed_Bottom
+1177,I,0,Tilt_Speed_Top
+1178,I,0,Min_Height_Tilt_Limit
+1179,I,0,Max_Height_Tilt_Limit
+1180,I,0,Tilt_Forward_Limited_Weight
+1181,I,0,BUTTON_0_DESIGNATION
+1182,I,0,BUTTON_1_DESIGNATION
+1183,I,0,BUTTON_2_DESIGNATION
+1184,I,0,BUTTON_3_DESIGNATION
+1185,I,0,BUTTON_4_DESIGNATION
+1186,I,0,BUTTON_5_DESIGNATION
+1187,I,0,free
+1188,I,0,free
+1189,I,0,free
+1190,I,0,Mode Change Kp CW
+1191,I,0,Mode Change Ki CW
+1192,I,0,Mode Change Kp CCW
+1193,I,0,Mode Change Ki CCW
+1194,I,0,SRR PID POS KP
+1195,I,0,SRR PID POS KI
+1196,I,0,SRR PID VEL KP
+1197,I,0,SRR PID VEL KI
+1198,I,0,SRR PID FEEDFORWARD
+1199,I,0,SRL PID POS KP
+1200,I,0,SRL PID POS KI
+1201,I,0,SRL PID VEL KP
+1202,I,0,SRL PID VEL KI
+1203,I,0,SRL PID FEEDFORWARD
+1204,I,0,SFR PID POS KP
+1205,I,0,SFR PID POS KI
+1206,I,0,SFR PID VEL KP
+1207,I,0,SFR PID VEL KI
+1208,I,0,SFR PID FEEDFORWARD
+1209,I,0,SFL PID POS KP
+1210,I,0,SFL PID POS KI
+1211,I,0,SFL PID VEL KP
+1212,I,0,SFL PID VEL KI
+1213,I,0,SFL PID FEEDFORWARD
+1214,I,0,FR Full Accel Rate HS
+1215,I,0,FR Full Accel Rate LS
+1216,I,0,FR Neutral Decel Rate HS
+1217,I,0,FR Neutral Decel Rate LS
+1218,I,0,FR Full Brake Rate HS
+1219,I,0,FR Full Brake Rate LS
+1220,I,0,LR Full Accel Rate HS
+1221,I,0,LR Full Accel Rate LS
+1222,I,0,LR Neutral Decel Rate HS
+1224,I,0,LR Full Brake Rate HS
+1225,I,0,LR Full Brake Rate LS
+1226,I,0,free
+1227,I,0,free
+1228,I,0,free
+1229,I,0,free
+1230,I,0,free
+1231,I,0,free
+1232,I,0,free
+1233,I,0,free
+1234,I,0,free
+1235,I,0,free
+1236,I,0,free
+1237,I,0,free
+1238,I,0,free
+1239,I,0,free
+1240,I,0,free
+1241,I,0,free
+1242,I,0,free
+1243,I,0,free
+1244,I,0,free
+1245,I,0,free
+1246,I,0,free
+1247,I,0,free
+1248,I,0,free
+1249,I,0,free
+1250,I,0,free
+1251,I,0,free
+1252,I,0,free
+1253,I,0,free
+1254,I,0,free
+1255,I,0,free
+1256,I,0,free
+1257,I,0,free
+1258,I,0,free
+1259,I,0,free
+1260,I,0,free
+1261,I,0,free
+1262,I,0,free
+1263,I,0,free
+1264,I,0,free
+1265,I,0,free
+1266,I,0,free
+1267,I,0,free
+1268,I,0,free
+1269,I,0,free
+1270,I,0,free
+1271,I,0,free
+1272,I,0,free
+1273,I,0,free
+1274,I,0,free
+1275,I,0,free
+1276,I,0,free
+1277,I,0,free
+1278,I,0,free
+1279,I,0,free
+1280,I,0,free
+1281,I,0,free
+1282,I,0,free
+1283,I,0,free
+1284,I,0,free
+1285,I,0,free
+1286,I,0,free
+1287,I,0,free
+1288,I,0,free
+1289,I,0,free
+1290,I,0,free
+1291,I,0,free
+1292,I,0,free
+1293,I,0,free
+1294,I,0,free
+1295,I,0,free
+1296,I,0,free
+1297,I,0,free
+1298,I,0,free
+1299,I,0,free
+1300,I,0,free
+1301,I,0,free
+1302,I,0,free
+1303,I,0,free
+1304,I,0,free
+1305,I,0,free
+1306,I,0,free
+1307,I,0,free
+1308,I,0,BATTERY_OPTIONS
+1309,I,0,free
+1310,I,0,Combi Auto Guidance Enable
+1311,I,0,Combi Auto Guidance Acquisition Speed
+1312,I,0,Combi Auto Guidance Aisle Speed
+1313,I,0,free
+1314,I,0,free
+1315,I,0,free
+1316,I,0,free
+1317,I,0,free
+1318,I,0,free
+1319,I,0,free
+1320,I,0,free
+1321,I,0,free
+1322,I,0,free
+1323,I,0,free
+1324,I,0,free
+1325,I,0,free
+1326,I,0,free
+1327,I,0,free
+1328,I,0,free
+1329,I,0,free
+1330,I,0,free
+1331,I,0,free
+1332,I,0,free
+1333,I,0,free
+1334,I,0,free
+1335,I,0,free
+1336,I,0,free
+1337,I,0,free
+1338,I,0,free
+1339,I,0,free
+1340,I,0,free
+1341,I,0,free
+1342,I,0,free
+1343,I,0,free
+1344,I,0,free
+1345,I,0,free
+1346,I,0,free
+1347,I,0,free
+1348,I,0,free
+1349,I,0,free
+1350,I,0,free
+1351,I,0,free
+1352,I,0,free
+1353,I,0,free
+1354,I,0,free
+1355,I,0,free
+1356,I,0,free
+1357,I,0,free
+1358,I,0,free
+1359,I,0,free
+1360,I,0,free
+1361,I,0,free
+1362,I,0,free
+1363,I,0,free
+1364,I,0,free
+1365,I,0,free
+1366,I,0,free
+1367,I,0,free
+1368,I,0,free
+1369,I,0,free
+1370,I,0,free
+1371,I,0,free
+1372,I,0,free
+1373,I,0,free
+1374,I,0,free
+1375,I,0,free
+1376,I,0,free
+1377,I,0,free
+1378,I,0,free
+1379,I,0,free
+1380,I,0,free
+1381,I,0,free
+1382,I,0,free
+1383,I,0,free
+1384,I,0,free
+1385,I,0,free
+1386,I,0,free
+1387,I,0,free
+1388,I,0,free
+1389,I,0,free
+1390,I,0,free
+1391,I,0,free
+1392,I,0,free
+1393,I,0,free
+1394,I,0,free
+1395,I,0,free
+1396,I,0,free
+1397,I,0,free
+1398,I,0,free
+1399,I,0,free
+1400,I,0,free
+1401,I,0,free
+1402,I,0,free
+1403,I,0,free
+1404,I,0,free
+1405,I,0,free
+1406,I,0,free
+1407,I,0,free
+1408,I,0,free
+1409,I,0,free
+1410,I,0,free
+1411,I,0,free
+1412,I,0,free
+1413,I,0,free
+1414,I,0,free
+1415,I,0,free
+1416,I,0,free
+1417,I,0,free
+1418,I,0,free
+1419,I,0,free
+1420,I,0,free
+1421,I,0,free
+1422,I,0,free
+1423,I,0,free
+1424,I,0,free
+1425,I,0,free
+1426,I,0,free
+1427,I,0,free
+1428,I,0,free
+1429,I,0,free
+1430,I,0,free
+1431,I,0,free
+1432,I,0,free
+1433,I,0,free
+1434,I,0,free
+1435,I,0,free
+1436,I,0,free
+1437,I,0,free
+1438,I,0,free
+1439,I,0,free
+1440,I,0,TRR Steer Raw
+1441,I,0,TRL Steer Raw
+1442,I,0,TFR Steer Raw
+1443,I,0,TFL Steer Raw
+1444,I,0,APP Family ID
+1445,I,0,APP Device ID
+1446,I,0,APP Major ID
+1447,I,0,APP Minor ID
+1448,I,0,RTS Major
+1449,I,0,RTS Minor
+1450,I,0,RTS Patch Level
+1451,I,0,G4 - Analog Input 20
+1452,I,0,F4 - Analog Input 21
+1453,I,0,J4 - Analog I/O 00
+1454,I,0,H4 - Analog I/O 01
+1455,I,0,E4 - Analog I/O 10
+1456,I,0,D4 - Analog I/O 11
+1457,I,0,C4 - Analog I/O 12
+1458,I,0,B4 - Analog I/O 13
+1459,I,0,A4 - Analog I/O 14
+1460,I,0,A3 - Analog I/O 15
+1461,I,0,B1 - Digital Low Side Output 10
+1462,I,0,A1 - Digital Low Side Output 11
+1463,I,0,H1 - PWM High Side Output 00
+1464,I,0,G1 - PWM High Side Output 01
+1465,I,0,F1 - PWM High Side Output 02
+1466,I,0,E1 - PWM High Side Output 03
+1467,I,0,D1 - PWM High Side Output 04
+1468,I,0,C1 - PWM High Side Output 05
+1469,I,0,K1 - PWM High Side Output 10
+1470,I,0,J1 - PWM High Side Output 11
+1471,I,0,K2 - PVG Output 00
+1472,I,0,J2 - PVG Output 01
+1473,I,0,H2 - PVG Output 02
+1474,I,0,G2 - PVG Output 03
+1475,I,0,F2 - PVG Output 04
+1476,I,0,E2 - PVG Output 05
+1477,I,0,E3 - Timer Input 00
+1478,I,0,D3 - Timer Input 01
+1479,I,0,C3 - Timer Input 02
+1480,I,0,B3 - Timer Input 03
+1481,I,0,reserved
+1482,I,0,reserved
+1483,I,0,reserved
+1484,I,0,reserved
+1485,I,0,reserved
+1486,I,0,reserved
+1487,I,0,reserved
+1488,I,0,reserved
+1489,I,0,reserved
+1490,I,0,P_PAR_write_disable
+1491,I,0,TRR_PAR_write_disable
+1492,I,0,TRL_PAR_write_disable
+1493,I,0,TFR_PAR_write_disable
+1494,I,0,TFL_PAR_write_disable
+1495,I,0,SRR_PAR_write_disable
+1496,I,0,SRL_PAR_write_disable
+1497,I,0,SFR_PAR_write_disable
+1498,I,0,SFL_PAR_write_disable
+1499,I,0,EXP_PAR_write_disable

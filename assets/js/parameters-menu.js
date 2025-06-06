@@ -97,7 +97,7 @@ function organiseMenu(parameterMainArr, parametresDirForUsersFile) {
     console.log(parameterMainArr);
     console.log(parametresDirForUsersFile);
     parameterMainArr.forEach(line => {
-        console.log(line);
+        // console.log(line);
         if (!line.length) return;
         const [id, group, , label, , , , , , access] = line;
         const btn = document.createElement('button');
@@ -110,7 +110,7 @@ function organiseMenu(parameterMainArr, parametresDirForUsersFile) {
             console.log('below');
             console.log(parametresDirForUsersFile);
             // btn.onclick = () => alert('hello world');
-            console.log(parametresDirForUsersFile);
+            // console.log(parametresDirForUsersFile);
             btn.onclick = () => MenuParametersOnclick(parametresDirForUsersFile[id] || 'empty', btn);
             const div = document.createElement('div');
             div.id = 'constant' + id;

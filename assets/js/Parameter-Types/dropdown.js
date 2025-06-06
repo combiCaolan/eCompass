@@ -18,12 +18,13 @@ function dropDownFunction(parameterLine, object) {
     console.log(parameterLine)
     console.log(object);
     
-    // if(object == null || object == undefined){
-    //     return;
-    // }
-
-    title.innerHTML = object.innerHTML;
-    document.getElementById('topDefineTable').appendChild(title);
+    try{
+        title.innerHTML = object.innerHTML;
+        document.getElementById('topDefineTable').appendChild(title);
+    }catch(err){
+        title.innerHTML = 'undefined';
+        document.getElementById('topDefineTable').appendChild(title);
+    }
 
     // Find OptionIndex
     let optionIndex = null;
