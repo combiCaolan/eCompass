@@ -70,7 +70,7 @@ parametersArr.forEach(line => {
 /**
  * Handles clicking on a parameter in the tree view.
  */
-function treeViewClick(value, objectId, msg) {
+export function treeViewClick(value, objectId, msg) {
     const pre64 = ['2', '4'];
     try {
         const parentId = document.getElementById(objectId).parentNode.id;

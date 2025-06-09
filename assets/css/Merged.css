@@ -4,10 +4,10 @@
    Styles for different menu nesting levels in the parameter tree.
    Each level increases the left margin and border for visual hierarchy.
 ----------------------------------------------------------------------------- */
-.MenuLevel1 { margin-left: 15px; border-left: 1px solid lightgray; }
-.MenuLevel2 { margin-left: 25px; border-left: 1px solid lightgray; }
-.MenuLevel3 { margin-left: 35px; border-left: 1px solid lightgray; }
-.MenuLevel4 { margin-left: 45px; border-left: 1px solid lightgray; }
+.MenuLevel1 { margin-left: 15px; border-left: 2px dotted darkgray; }
+.MenuLevel2 { margin-left: 25px; border-left: 2px dotted darkgray; }
+.MenuLevel3 { margin-left: 35px; border-left: 2px dotted darkgray; }
+.MenuLevel4 { margin-left: 45px; border-left: 2px dotted darkgray; }
 
 /* -----------------------------------------------------------------------------
    GENERAL FONT STYLES
@@ -896,7 +896,7 @@ input[type=number] {
     overflow: auto;
     display: block;
     width: 78%;
-    padding: 10px;
+    padding: 0px;
     overflow: auto;
     margin: 10px 0 10px 21%;
     background: gainsboro;
@@ -908,12 +908,23 @@ input[type=number] {
     color: green;
 }
 
-#logs-title{
+#log-area-output ul li {
+    padding: 3px;
+    margin:3px;
+    margin-left: 0;
+}
+
+#logs-title {
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     background: white;
     color: black;
     margin:0;
     padding: 7px;
+    border: 1px solid black;
+    border-left: 0;
+    border-right:0;
+    position: fixed;
+    width: 77%;
 }
 
 /* -----------------------------------------------------------------------------

@@ -1,3 +1,8 @@
+// parameters-menu.js
+import { treeViewClick } from './parameters-view.js';
+window.treeViewClick = treeViewClick; // Now available globally
+
+// import { MenuParametersOnclick, treeViewClick } from './parameters-view.js';
 /**
  * Toggle the symbol (+/-) for a menu section and slide the section open/closed.
  * @param {string} id - The section ID.

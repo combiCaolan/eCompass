@@ -46,13 +46,13 @@ function AddFixedParameter(htmlObject) {
 	descElem.appendChild(addParameterButton);
 }
 
-function MenuParametersOnclick(Line, HTMLObject) {
+export function MenuParametersOnclick(Line, HTMLObject) {
 	// alert('start');
 	console.log(Line);
 	if (Line == 'empty') {
 		ClearWorkSpace();
 		AddFixedParameter(HTMLObject);
-		alert('1');
+		// alert('1');
 		return;
 	}
 
