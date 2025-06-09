@@ -113,6 +113,13 @@
                 <table id="topDefineDescription"></table>
             </div>
         </div>
+        
+        <div id="log-area">
+            <p id="logs-title">User Logs</p>
+            <div id="log-area-output">
+                
+            </div>
+        </div>
 
         <!-- Error reporting area -->
         <div id="ErrorReport">
@@ -160,6 +167,25 @@
     <script src="../assets/js/Parameter-Types/bit1000.js"></script>
     <script src="../assets/js/Parameter-Types/SerialNumberLogic.js"></script>
     <script src="../assets/js/parameters-view.js"></script>
+    <script>
+        var intervalId = window.setInterval(function () {
+            var logArea = document.getElementById('log-area-output');
+            var changes = sessionStorage.getItem('UserMadeChanges');
+            if (!changes) {
+                logArea.innerHTML = "<ul><li>No changes recorded.</li></ul>";
+                return;
+            }
+            var lines = changes.split('\n').filter(line => line.trim() !== '');
+            var ul = document.createElement('ul');
+            lines.forEach(function (line) {
+                var li = document.createElement('li');
+                li.textContent = line;
+                ul.appendChild(li);
+            });
+            logArea.innerHTML = '';
+            logArea.appendChild(ul);
+        }, 1000);
+    </script>
     <script>
         /*START OF COLLAPSEDIV.JS*/
 

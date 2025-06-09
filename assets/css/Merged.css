@@ -223,7 +223,7 @@ input {
     opacity:0.8;
 }
 
-@media screen and (max-width: 961px) {
+/* @media screen and (max-width: 961px) {
     #MobileAlert {
         display: unset;
     }
@@ -231,7 +231,7 @@ input {
     #Container{
         display: none;
     }
-}
+} */
 
 /* Loading screen and spinner */
 #LoadingScreen {
@@ -816,7 +816,7 @@ input[type=number] {
 /* Table and description containers */
 #topDefineTable,
 #topDefineDescription {
-    width: 100%;
+    width: 97%;
 }
 
 /* Dropdowns for Bit999 and Bit1000 */
@@ -890,6 +890,30 @@ input[type=number] {
     float: left;
     top: 85px;
     position: fixed;
+}
+
+#log-area{
+    overflow: auto;
+    display: block;
+    width: 78%;
+    padding: 10px;
+    overflow: auto;
+    margin: 10px 0 10px 21%;
+    background: gainsboro;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    height: 16%;
+    float: left;
+    bottom: 9px;
+    position: fixed;
+    color: green;
+}
+
+#logs-title{
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    background: white;
+    color: black;
+    margin:0;
+    padding: 7px;
 }
 
 /* -----------------------------------------------------------------------------
@@ -1021,11 +1045,13 @@ input[type=number] {
 
 #LogoArea {
     float: right;
+    max-width: 70%;
 }
 
 #LogoHead {
     height: 56px;
     margin: 5px 19px 5px 5px;
+    width: 90%;
 }
 
 #eLogoTitle {
@@ -1090,6 +1116,7 @@ body {
 
 .topnav .icon {
     display: none;
+
 }
 
 .dropdown {
@@ -1164,8 +1191,10 @@ body {
         display: none;
     }
     .topnav a.icon {
-        float: right;
+        /* float: right; */
         display: block;
+        float: left;
+        font-size: 31px;
     }
     .topnav.responsive {
         position: relative;

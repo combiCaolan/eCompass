@@ -90,6 +90,7 @@ function webDownloadFile(filename, text) {
  * Toggles the mobile menu.
  */
 function mobileMenuFunction() {
+    alert('Mobile Menu Function Called');
     const nav = document.getElementById("myTopnav");
     if (!nav) return;
     if (nav.className === "topnav") {
