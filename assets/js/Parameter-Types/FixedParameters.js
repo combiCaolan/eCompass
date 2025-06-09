@@ -1,6 +1,6 @@
 // Only require chai when running in a Node.js/testing environment
 if (typeof module !== 'undefined' && typeof require !== 'undefined') {
-    const { expect } = require("chai");
+	const { expect } = require("chai");
 }
 
 /**
@@ -20,7 +20,7 @@ function ClearWorkSpace() {
 function AddFixedParameter(htmlObject) {
 	const workSpaceTitle = document.createElement('p');
 	workSpaceTitle.id = 'WorkSpaceTitle';
-	workSpaceTitle.innerHTML = htmlObject.innerHTML;
+	workSpaceTitle.innerHTML = htmlObject.innerHTML.replace('-','') || 'unkown';
 
 	const description = document.createElement('p');
 	description.id = 'description';
@@ -48,6 +48,7 @@ function AddFixedParameter(htmlObject) {
 
 function MenuParametersOnclick(Line, HTMLObject) {
 	// alert('start');
+	console.log(Line);
 	if (Line == 'empty') {
 		ClearWorkSpace();
 		AddFixedParameter(HTMLObject);
@@ -74,9 +75,9 @@ function MenuParametersOnclick(Line, HTMLObject) {
 	descriptionArea = document.createElement('tr');
 	DescriptionText = document.createElement('p');
 	// console.log(HTMLObject)
-	try{
+	try {
 		DescriptionText.innerHTML = MainDescriptionsDict[Number(HTMLObject.id)].replace('#' + HTMLObject.id, '');
-	}catch(err){
+	} catch (err) {
 		DescriptionText.innerHTML = 'No description available';
 	}
 	DescriptionText.setAttribute('id', 'description');
@@ -1085,6 +1086,44 @@ function MenuParametersOnclick(Line, HTMLObject) {
 		}
 
 	}
+
+	Table = document.getElementById('topDefineDescription');
+
+	TH = document.createElement('p');
+	TH.setAttribute('id', 'WorkSpaceTitle');
+	TH.innerHTML = HTMLObject.innerHTML;
+	Table.appendChild(TH);
+	document.getElementById('topDefineDescription').appendChild(descriptionArea);
+
+	TR = document.createElement('tr');
+	Table.appendChild(TR);
+	TDLeft = document.createElement('p');
+	TDLeft.setAttribute('id', 'ReadTitle');
+	TDLeft.innerHTML = LanguageDict["AppInfo"];
+	TR.appendChild(TDLeft);
+	TDRight = document.createElement('p');
+	TDRight.setAttribute('id', 'ReadResult');
+	TDRight.setAttribute('id', 'ReadResult');
+	TDRight.innerHTML = Line[4] + '.' + Line[5] + '.' + Line[6] + '.' + Line[7];
+	TR.appendChild(TDRight);
+
+
+	TR = document.createElement('tr');
+	Table.appendChild(TR);
+	TDLeft = document.createElement('p');
+	TDLeft.setAttribute('id', 'ReadTitle');
+	TDLeft.innerHTML = LanguageDict["Timestamp"];
+	TR.appendChild(TDLeft);
+	TDRight = document.createElement('p');
+	TDRight.setAttribute('id', 'ReadResult');
+	date = new Date(Line[1] * 1000);
+	if (Line[1] == 0) {
+		TDRight.innerHTML = 'NA';
+	} else {
+		month = Number(date.getMonth()) + 1;
+		TDRight.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
+	}
+	TR.appendChild(TDRight);
 }
 
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {

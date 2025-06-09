@@ -167,12 +167,12 @@ body {
 select {
     outline: none;
     margin: 5px 0 5px 10px;
-    padding: 10px;
+    padding: 1px;
     width: 50%;
 }
 
 input {
-    padding: 10px;
+    padding: 1px;
     font-size: 15px;
 }
 
@@ -759,6 +759,9 @@ th {
 
 /* Export section */
 #Export {
+    font-weight: 100;
+    font-style: italic;
+    color: blue;
     margin: 10px;
 }
 
@@ -768,11 +771,11 @@ th {
 }
 
 #ReadResult {
-    background: white;
-    padding-bottom: 0;
-    margin: 10px 10px 0 10px;
-    font-size: 16px;
-    margin-top: 15px;
+    width: 100%;
+    background: whitesmoke;
+    padding: 5px;
+    margin: 0;
+    margin-top: 10px;
 }
 
 #ReadTitle {
@@ -781,7 +784,7 @@ th {
     margin-top: 15px;
     font-weight: 400;
     font-size: 15px;
-    margin-bottom: -15px;
+    margin-bottom: 15px;
 }
 
 #DropDownReadTitle {
@@ -794,17 +797,19 @@ th {
 #description {
     min-height: 45px;
     padding: 10px;
-    background: whitesmoke;
+    background: lightgoldenrodyellow;
     font-size: 16px;
+    font-style: italic;
 }
 
 /* Label and input styles */
 label {
     font-size: 16px;
+    font-weight: 600;
 }
 
 input[type=number] {
-    padding: 10px;
+    padding: 1px;
     font-size: 16px;
 }
 
@@ -881,7 +886,7 @@ input[type=number] {
     margin: 10px 0 10px 21%;
     background: white;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    height: 90%;
+    height: 88%;
     float: left;
     top: 85px;
     position: fixed;
@@ -912,6 +917,7 @@ input[type=number] {
     background: transparent;
     margin-bottom: 3px;
     font-size: 16px;
+    font-weight: 500;
 }
 
 .ThirdSubGroup,
@@ -983,6 +989,8 @@ input[type=number] {
     margin: 0;
     font-size: 16px;
     margin-left: 5px;
+    font-weight: 500;
+    font-style: italic;
 }
 
 #DropDownMachineDetails, #FileDetails, #Software, #Service, #DropDownMoCAS, #DropDownParameters, #JDrop, #IDrop, #HDrop, #GDrop {
@@ -1017,7 +1025,7 @@ input[type=number] {
 
 #LogoHead {
     height: 56px;
-    margin: 5px 20px 5px 5px;
+    margin: 5px 19px 5px 5px;
 }
 
 #eLogoTitle {

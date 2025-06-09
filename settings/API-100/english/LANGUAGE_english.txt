@@ -192,37 +192,37 @@ G32:+ Motion Alarm
 G33:+ Warning Lights 
 G34:+ Pre Operation Check 
 G4:+ Hydraulics 
-G41:+  
+G41:+  ONE
 G41in:+ Input settings 
 G41out:+ Output settings 
-G42:+  
+G42:+  TWO
 G42in:+ Input settings 
 G42out:+ Output settings 
-G43:+  
+G43:+  THREE
 G43in:+ Input settings 
 G43out:+ Output settings  
-G44:+  
+G44:+  FOUR
 G44in:+ Input settings 
 G44out:+ Output settings  
-G45:+  
+G45:+  FIVE
 G45in:+ Input settings 
 G45out:+ Output settings  
-G46:+  
+G46:+  SIX
 G46in:+ Input settings 
 G46out:+ Output settings  
-G47:+  
+G47:+  SEVEN
 G47in:+ Input settings 
 G47out:+ Output settings  
-G48:+  
+G48:+  EIGHT
 G48in:+ Input settings 
 G48out:+ Output settings  
-G49:+  
+G49:+  NINE
 G49in:+ Input settings 
 G49out:+ Output settings  
-G410:+  
+G410:+  TEN
 G410in:+ Input settings 
 G410out:+ Output settings  
-G411:+  
+G411:+  ELEVEN
 G411in:+ Input settings 
 G411out:+ Output settings  
 G5:+ Battery 

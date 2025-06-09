@@ -38,6 +38,7 @@ include_once('../src/includes/ListTruckDirectories.php'); // List available truc
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
 
 	<!-- External resources: FontAwesome, jQuery, jQuery UI -->
 	<!-- <script src='https://kit.fontawesome.com/a076d05399.js'></script> -->

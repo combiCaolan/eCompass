@@ -31,7 +31,7 @@ function showParameterNotPresent(lineNumber, htmlObject) {
 
     const workSpaceTitle = document.createElement('p');
     workSpaceTitle.id = 'WorkSpaceTitle';
-    workSpaceTitle.innerHTML = htmlObject.innerHTML || '';
+    workSpaceTitle.innerHTML = htmlObject.innerHTML.replace('-','') || 'unknown';
 
     const description = document.createElement('p');
     description.id = 'description';
@@ -48,7 +48,7 @@ function showParameterNotPresent(lineNumber, htmlObject) {
     addParameterButton.value = `Add "${htmlObject.innerHTML}" to this file?`;
     addParameterButton.onclick = function () {
         addParameterToClp(lineNumber, htmlObject);
-        location.reload();
+        // location.reload();
     };
 
     container.appendChild(workSpaceTitle);
@@ -74,7 +74,7 @@ function treeViewClick(value, objectId, msg) {
     const pre64 = ['2', '4'];
     try {
         const parentId = document.getElementById(objectId).parentNode.id;
-        const selectedClass = parentId[0] === 'G' ? 'ThirdSubGroup' : 'TreeButton';
+        const selectedClass = parentId[0] === 'G' ? 'ThirdSubGroup' : 'PreTreeButton';
         const selectedElem = document.getElementsByClassName('SelectedThirdSubGroup')[0];
         if (selectedElem) selectedElem.setAttribute('class', selectedClass);
     } catch (err) {}

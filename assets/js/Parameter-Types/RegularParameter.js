@@ -56,19 +56,20 @@ function RegularParameter(value, object, lineArr) {
     function createValueField(labelText, value, id, onChangeType, editable, unit, scale, index) {
         const unitLabel = document.createElement("label");
         if (unit !== 'no units') unitLabel.innerHTML = '&nbsp;&nbsp;' + unit;
-        unitLabel.style = 'float:right;';
+        unitLabel.style = 'float:left;';
 
         const div = document.createElement("div");
-        div.style = editable
-            ? 'margin:10px; padding:15px;'
-            : 'margin:10px; padding:15px; background:whitesmoke;';
+        // div.style = editable
+        //     ? 'margin:10px; padding:15px;'
+        //     : 'margin:10px; padding:15px; background:whitesmoke;';
         document.getElementById('topDefineDescription').appendChild(div);
 
-        const table = document.createElement("table");
-        const tr = document.createElement("tr");
-        const label = document.createElement("label");
-        label.style = 'float:left;';
-        label.innerHTML = labelText + '<br>';
+        // const table = document.createElement("table");
+        // const tr = document.createElement("tr");
+        const label = document.createElement("p");
+        // label.style = 'float:left;';
+        label.setAttribute('id','ReadResult');
+        label.innerHTML = labelText;
 
         let input;
         if (editable) {
@@ -77,7 +78,7 @@ function RegularParameter(value, object, lineArr) {
             input.value = scale !== 1 ? value / scale : value;
             input.setAttribute("scale", scale !== 1 ? "true" : "false");
             input.type = 'number';
-            input.style = 'float:left; text-align:right;';
+            input.style = 'float:left; text-align:right; margin-left:10px;';
             input.id = id;
             input.onchange = function () {
                 parameterchange(
@@ -100,12 +101,12 @@ function RegularParameter(value, object, lineArr) {
 
         const parInd = document.createElement(editable ? 'p' : 'label');
         parInd.innerHTML = '&nbsp;&nbsp;&nbsp;';
-        parInd.style = editable ? 'float:right;' : 'float:left;';
+        // parInd.style = editable ? 'float:right;' : 'float:left;';
 
-        div.appendChild(table);
-        table.appendChild(tr);
-        tr.appendChild(label);
-        label.appendChild(parInd);
+        // div.appendChild(table);
+        // table.appendChild(tr);
+        div.appendChild(label);
+        div.appendChild(parInd);
         parInd.appendChild(input);
         parInd.appendChild(unitLabel);
     }

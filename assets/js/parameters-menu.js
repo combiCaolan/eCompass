@@ -101,7 +101,7 @@ function organiseMenu(parameterMainArr, parametresDirForUsersFile) {
         if (!line.length) return;
         const [id, group, , label, , , , , , access] = line;
         const btn = document.createElement('button');
-        btn.innerHTML = label || '';
+        btn.innerHTML = '- ' + label || '';
         btn.id = id;
 
         // Main menu logic
@@ -135,7 +135,7 @@ function organiseMenu(parameterMainArr, parametresDirForUsersFile) {
             } else {
                 const groups = group.split(' ');
                 if (groups.length < 2) {
-                    btn.className = 'TreeButton';
+                    btn.className = 'PreTreeButton';
                     const div = document.createElement('div');
                     div.id = 'constant' + id;
                     const parent = document.getElementById(group);
@@ -150,7 +150,7 @@ function organiseMenu(parameterMainArr, parametresDirForUsersFile) {
                             sortingDiv.id = groups[i];
                             sortingDiv.className = 'MenuLevel' + (groups.length - 1);
                             const hideBtn = document.createElement('button');
-                            hideBtn.className = 'TreeButton';
+                            hideBtn.className = 'PreTreeButton';
                             hideBtn.id = 'HeadTitle' + groups[i];
                             hideBtn.onclick = () => invertSymbolStyle(groups[i]);
                             hideBtn.innerHTML = groups[i];

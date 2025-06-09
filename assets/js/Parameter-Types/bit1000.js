@@ -168,7 +168,7 @@ function BitDropDown1000(ParentParameterIndex, Bit, DropDownIndex, NameOfParentP
 
 	Title = document.createElement('p');
 	Title.setAttribute('id', 'WorkSpaceTitle');
-	Title.innerHTML = NameOfParameterBit;
+	Title.innerHTML = '- ' + NameOfParameterBit;
 
 	document.getElementById('topDefineTable').appendChild(Title);
 
@@ -201,7 +201,7 @@ function BitDropDown1000(ParentParameterIndex, Bit, DropDownIndex, NameOfParentP
 		counter++;
 	}
 
-	if (Number(WritePermissionDict[ParentParameterIndex]) <= Number(AccessLevelForUser)) {
+	if (Number(writePermissionDict[ParentParameterIndex]) <= Number(AccessLevelForUser)) {
 		DropDown = document.createElement('select');
 		DropDown.setAttribute('id', 'CurrentBitDropValue');
 
@@ -240,7 +240,7 @@ function BitDropDown1000(ParentParameterIndex, Bit, DropDownIndex, NameOfParentP
 
 		OptionsDict[DropDownFile.split('\n')[DropDownLineNum].split(',')[1]] = DropDownFile.split('\n')[DropDownLineNum].split(',')[0];
 
-		if (Number(WritePermissionDict[ParentParameterIndex]) <= Number(AccessLevelForUser)) {
+		if (Number(writePermissionDict[ParentParameterIndex]) <= Number(AccessLevelForUser)) {
 			DropDown.appendChild(Option);
 		}
 		if (Number(AccessLevelForUser) < 8) {
@@ -276,7 +276,7 @@ function BitDropDown1000(ParentParameterIndex, Bit, DropDownIndex, NameOfParentP
 	FactoryLabel.innerHTML = LanguageDict['FactoryValue'];
 
 	document.getElementById('topDefineDescription').appendChild(CurrentLabel);
-	if (Number(WritePermissionDict[ParentParameterIndex]) <= Number(AccessLevelForUser)) {
+	if (Number(writePermissionDict[ParentParameterIndex]) <= Number(AccessLevelForUser)) {
 		DropDown.value = ByteMakeup(OriginalBitResults, StartBit, EndBit);
 		DefaultDropDown.value = ByteMakeup(DefaultBitResults, StartBit, EndBit);
 		FactoryDropDown.value = ByteMakeup(FactoryBitResults, StartBit, EndBit);
@@ -294,7 +294,7 @@ function BitDropDown1000(ParentParameterIndex, Bit, DropDownIndex, NameOfParentP
 	document.getElementById('topDefineDescription').appendChild(FactoryLabel);
 	//document.getElementById('topDefineDescription').appendChild(FactoryLabelResult);
 	document.getElementById('topDefineDescription').appendChild(FactoryDropDown);
-	if (Number(WritePermissionDict[ParentParameterIndex]) <= Number(AccessLevelForUser)) {
+	if (Number(writePermissionDict[ParentParameterIndex]) <= Number(AccessLevelForUser)) {
 		DropDown.setAttribute('onchange', 'BitDropDownChange1000("' + StartBit + '","' + EndBit + '","' + OriginalBitResults + '","' + ParentParameterIndex + '","Current","' + BitNumberId + '")');
 		DefaultDropDown.setAttribute('onchange', 'BitDropDownChange1000("' + StartBit + '","' + EndBit + '","' + OriginalBitResults + '","' + ParentParameterIndex + '","Default","' + BitNumberId + '")');
 		FactoryDropDown.setAttribute('onchange', 'BitDropDownChange1000("' + StartBit + '","' + EndBit + '","' + OriginalBitResults + '","' + ParentParameterIndex + '","Factory","' + BitNumberId + '")');
