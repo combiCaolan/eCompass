@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# 1. Remove .php from URLs (internally rewrite)
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^/]+)$ $1.php [L]
+
+# 2. Redirect folders without index.php to home
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_FILENAME}/index.php !-f
+RewriteRule ^(.*)/$ / [R=302,L]

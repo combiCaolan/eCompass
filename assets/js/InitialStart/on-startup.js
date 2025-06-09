@@ -1,23 +1,23 @@
 // --- Utility Functions ---
 
-function fetchFileSync(url) {
+export function fetchFileSync(url) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", url, false);
     xhr.send(null);
     return (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 0)) ? xhr.responseText : '';
 }
 
-function clearSessionKeys(keys) {
+export function clearSessionKeys(keys) {
     keys.forEach(key => sessionStorage.removeItem(key));
 }
 
-function setDefaultLanguage() {
+export function setDefaultLanguage() {
     if (!localStorage.getItem('Language')) {
         localStorage.setItem('Language', 'english');
     }
 }
 
-function setDefaultApi() {
+export function setDefaultApi() {
     const DefaultApi = 'API-100';
     if (!sessionStorage.getItem('APIV')) {
         sessionStorage.setItem('APIV', DefaultApi);
@@ -27,7 +27,7 @@ function setDefaultApi() {
 
 // --- Startup Logic ---
 
-function onStartup() {
+export function onStartup() {
     setDefaultApi();
     setDefaultLanguage();
 
@@ -119,7 +119,7 @@ function onStartup() {
 
 // --- Helper Parsers ---
 
-function parseDescriptionDict(text) {
+export function parseDescriptionDict(text) {
     const dict = {};
     if (!text) return dict;
     const lines = text.split('\n');
@@ -141,7 +141,7 @@ function parseDescriptionDict(text) {
     return dict;
 }
 
-function parseSpecialDescriptionDict(text) {
+export function parseSpecialDescriptionDict(text) {
     const dict = {};
     if (!text) return dict;
     const lines = text.split('\n');

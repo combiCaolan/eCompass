@@ -1,5 +1,6 @@
 // parameters-menu.js
 import { treeViewClick } from './parameters-view.js';
+import { MenuParametersOnclick } from './Parameter-Types/FixedParameters.js';
 window.treeViewClick = treeViewClick; // Now available globally
 
 // import { MenuParametersOnclick, treeViewClick } from './parameters-view.js';

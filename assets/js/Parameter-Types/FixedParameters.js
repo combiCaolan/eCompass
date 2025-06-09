@@ -1127,5 +1127,5 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 }
 
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-	module.exports = { ClearWorkSpace, AddFixedParameter };
+	module.exports = { ClearWorkSpace, AddFixedParameter, MenuParametersOnclick };
 }
