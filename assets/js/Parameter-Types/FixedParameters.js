@@ -57,12 +57,12 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 	}
 
 	$('#topDefineDescription').fadeIn();
-	LineNumber = Line.split(',')[0];
+	let LineNumber = Line.split(',')[0];
 
 	ClearWorkSpace();
 	// alert('2');
 	Parameters = sessionStorage.getItem('Parameters').split('\n');
-	parcounter = 0;
+	let parcounter = 0;
 	while (Parameters[parcounter] != undefined) {
 		if (LineNumber == Parameters[parcounter].split(',')[0]) {
 			Line = Parameters[parcounter].split(',');
@@ -72,8 +72,8 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 	}
 	// alert('3');
 	//Description
-	descriptionArea = document.createElement('tr');
-	DescriptionText = document.createElement('p');
+	let descriptionArea = document.createElement('tr');
+	let DescriptionText = document.createElement('p');
 	// console.log(HTMLObject)
 	try {
 		DescriptionText.innerHTML = MainDescriptionsDict[Number(HTMLObject.id)].replace('#' + HTMLObject.id, '');
@@ -232,42 +232,42 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 	//Truck Build Date
 	if (LineNumber == 5) {
 
-		Table = document.getElementById('topDefineDescription');
+		let Table = document.getElementById('topDefineDescription');
 
-		TH = document.createElement('p');
+		let TH = document.createElement('p');
 		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
 
 		//Build Date
-		TR = document.createElement('tr');
+		let TR = document.createElement('tr');
 		Table.appendChild(TR);
-		TDLeft = document.createElement('p');
+		let TDLeft = document.createElement('p');
 		TDLeft.setAttribute('id', 'ReadTitle');
 		TDLeft.innerHTML = LanguageDict["TruckBuildDate"];
 		TR.appendChild(TDLeft);
-		TruckBuildDateText = document.createElement('p');
+		let TruckBuildDateText = document.createElement('p');
 		TruckBuildDateText.setAttribute('id', 'ReadResult');
-		date = new Date(Line[3] * 1000);
+		let date = new Date(Line[3] * 1000);
 		if (date.getFullYear() == "1970") {
 			TruckBuildDateText.innerHTML = 'NA';
 		} else {
-			month = Number(date.getMonth()) + 1;
+			let month = Number(date.getMonth()) + 1;
 			TruckBuildDateText.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
 		}
 		TDLeft.appendChild(TruckBuildDateText);
 
-		BottomTR = document.createElement('tr');
+		let BottomTR = document.createElement('tr');
 		Table.appendChild(BottomTR);
 		if (AccessLevelForUser >= 8) {
-			DateInput = document.createElement('input');
+			let DateInput = document.createElement('input');
 			DateInput.setAttribute('type', 'date');
 			DateInput.setAttribute('id', 'UpdateBuildDate');
 			DateInput.setAttribute('style', 'margin:15px;');
 			BottomTR.appendChild(DateInput);
 
-			DateSubmit = document.createElement('input');
+			let DateSubmit = document.createElement('input');
 			DateSubmit.setAttribute('type', 'submit');
 			DateSubmit.setAttribute('value', 'Update Truck Build Date');
 			DateSubmit.setAttribute('onclick', 'ChangeBuildDate()');
@@ -296,13 +296,13 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 		BottomTR = document.createElement('tr');
 		Table.appendChild(BottomTR);
 		if (AccessLevelForUser >= 8) {
-			DateInput = document.createElement('input');
+			let DateInput = document.createElement('input');
 			DateInput.setAttribute('type', 'date');
 			DateInput.setAttribute('id', 'UpdateDealerDate');
 			DateInput.setAttribute('style', 'margin:15px;');
 			BottomTR.appendChild(DateInput);
 
-			DateSubmit = document.createElement('input');
+			let DateSubmit = document.createElement('input');
 			DateSubmit.setAttribute('type', 'submit');
 			DateSubmit.setAttribute('value', 'Update Truck Dealer Date');
 			DateSubmit.setAttribute('onclick', 'ChangeDealerDate()');
@@ -332,13 +332,13 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 		BottomTR = document.createElement('tr');
 		Table.appendChild(BottomTR);
 		if (AccessLevelForUser >= 8) {
-			DateInput = document.createElement('input');
+			let DateInput = document.createElement('input');
 			DateInput.setAttribute('type', 'date');
 			DateInput.setAttribute('id', 'UpdateCustomerDate');
 			DateInput.setAttribute('style', 'margin:15px;');
 			BottomTR.appendChild(DateInput);
 
-			DateSubmit = document.createElement('input');
+			let DateSubmit = document.createElement('input');
 			DateSubmit.setAttribute('type', 'submit');
 			DateSubmit.setAttribute('value', 'Update Truck Customer Date');
 			DateSubmit.setAttribute('onclick', 'ChangeCustomerDate()');
@@ -352,23 +352,23 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 	//Parameter File Version
 	if (LineNumber == 6) {
 
-		Table = document.getElementById('topDefineDescription');
+		let Table = document.getElementById('topDefineDescription');
 
-		TH = document.createElement('p');
+		let TH = document.createElement('p');
 		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
 
-		TR = document.createElement('tr');
+		let TR = document.createElement('tr');
 		Table.appendChild(TR);
 
 
-		TDLeft = document.createElement('p');
+		let TDLeft = document.createElement('p');
 		TDLeft.setAttribute('id', 'ReadTitle');
 		TDLeft.innerHTML = LanguageDict["ApiVersion"];
 		TR.appendChild(TDLeft);
-		ParameterFileVersionText = document.createElement('p');
+		let ParameterFileVersionText = document.createElement('p');
 		ParameterFileVersionText.setAttribute('id', 'ReadResult');
 		ParameterFileVersionText.innerHTML = Line[3];
 		TR.appendChild(ParameterFileVersionText);
@@ -493,21 +493,21 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 	//First Service // Standard Service // Full Service
 	if (LineNumber == 9 || LineNumber == 10 || LineNumber == 11) {
 
-		Table = document.getElementById('topDefineDescription');
+		let Table = document.getElementById('topDefineDescription');
 
-		TH = document.createElement('p');
+		let TH = document.createElement('p');
 		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
 
-		TR = document.createElement('tr');
+		let TR = document.createElement('tr');
 		Table.appendChild(TR);
-		TDLeft = document.createElement('p');
+		let TDLeft = document.createElement('p');
 		TDLeft.setAttribute('id', 'ReadTitle');
 		TDLeft.innerHTML = LanguageDict["Timestamp"];
 		TR.appendChild(TDLeft);
-		TDRight = document.createElement('p');
+		let TDRight = document.createElement('p');
 		TDRight.setAttribute('id', 'ReadResult');
 		date = new Date(Line[1] * 1000);
 		if (date.getFullYear() == '1970') {
@@ -519,38 +519,38 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 		TR.appendChild(TDRight);
 
 		if (AccessLevelForUser > 6) {
-			DefaultTR = document.createElement('tr');
+			let DefaultTR = document.createElement('tr');
 			Table.appendChild(DefaultTR);
-			DefaultLeft = document.createElement('p');
+			let DefaultLeft = document.createElement('p');
 			DefaultLeft.setAttribute('id', 'ReadTitle');
 			DefaultLeft.innerHTML = LanguageDict["KeyswitchHourmeter"];
 			DefaultTR.appendChild(DefaultLeft);
-			DefaultRight = document.createElement('p');
+			let DefaultRight = document.createElement('p');
 			DefaultRight.setAttribute('id', 'ReadResult');
 			DefaultRight.innerHTML = String(Line[2] / 3600).split('.')[0] + ' hr';
 			DefaultTR.appendChild(DefaultRight);
 
 
-			FactoryTR = document.createElement('tr');
+			let FactoryTR = document.createElement('tr');
 			Table.appendChild(FactoryTR);
-			FactoryLeft = document.createElement('p');
+			let FactoryLeft = document.createElement('p');
 			FactoryLeft.setAttribute('id', 'ReadTitle');
 			FactoryLeft.innerHTML = LanguageDict["InterlockHourmeter"];
 			FactoryTR.appendChild(FactoryLeft);
-			FactoryRight = document.createElement('p');
+			let FactoryRight = document.createElement('p');
 			FactoryRight.setAttribute('id', 'ReadResult');
 			FactoryRight.setAttribute('id', 'ReadResult');
 			FactoryRight.innerHTML = String(Line[3] / 3600).split('.')[0] + ' hr';
 			FactoryTR.appendChild(FactoryRight);
 
 
-			MinTR = document.createElement('tr');
+			let MinTR = document.createElement('tr');
 			Table.appendChild(MinTR);
-			MinLeft = document.createElement('p');
+			let MinLeft = document.createElement('p');
 			MinLeft.setAttribute('id', 'ReadTitle');
 			MinLeft.innerHTML = LanguageDict["TractionHourmeter"];
 			MinTR.appendChild(MinLeft);
-			MinRight = document.createElement('p');
+			let MinRight = document.createElement('p');
 			MinRight.setAttribute('id', 'ReadResult');
 			MinRight.innerHTML = String(Line[4] / 3600).split('.')[0] + ' hr';
 			MinTR.appendChild(MinRight);
@@ -574,70 +574,70 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 	//Steer Rear Right (SRR) Controller Info // Steer Rear Left (SRL) Controller Info  // Steer Front Right (SFR) Controller Info  // Steer Front Left (SFL) Controller Info 
 	if (LineNumber == 12 || LineNumber == 13 || LineNumber == 14 || LineNumber == 15 || LineNumber == 16 || LineNumber == 17 || LineNumber == 18 || LineNumber == 19 || LineNumber == 20) {
 
-		Table = document.getElementById('topDefineDescription');
+		let Table = document.getElementById('topDefineDescription');
 
-		TH = document.createElement('p');
+		let TH = document.createElement('p');
 		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
 
 		if (LineNumber == 12 || LineNumber == 13 || LineNumber == 14 || LineNumber == 15 || LineNumber == 16) {
-			DefaultTR = document.createElement('tr');
+			let DefaultTR = document.createElement('tr');
 			Table.appendChild(DefaultTR);
-			DefaultLeft = document.createElement('p');
+			let DefaultLeft = document.createElement('p');
 			DefaultLeft.setAttribute('id', 'ReadTitle');
 			DefaultLeft.innerHTML = LanguageDict["VCLVersion"];
 			DefaultTR.appendChild(DefaultLeft);
-			DefaultRight = document.createElement('p');
+			let DefaultRight = document.createElement('p');
 			DefaultRight.setAttribute('id', 'ReadResult');
 			DefaultRight.innerHTML = Line[2];
 			DefaultRight.setAttribute('id', 'ReadResult');
 			DefaultTR.appendChild(DefaultRight);
 		}
 
-		MinTR = document.createElement('tr');
+		let MinTR = document.createElement('tr');
 		Table.appendChild(MinTR);
-		MinLeft = document.createElement('p');
+		let MinLeft = document.createElement('p');
 		MinLeft.setAttribute('id', 'ReadTitle');
 		MinLeft.innerHTML = LanguageDict["OSVersion"];
 		MinTR.appendChild(MinLeft);
-		MinRight = document.createElement('p');
+		let MinRight = document.createElement('p');
 		MinRight.setAttribute('id', 'ReadResult');
 		MinRight.innerHTML = Line[4];
 		MinRight.setAttribute('id', 'ReadResult');
 		MinTR.appendChild(MinRight);
 
 
-		MaxTR = document.createElement('tr');
+		let MaxTR = document.createElement('tr');
 		Table.appendChild(MaxTR);
-		MaxLeft = document.createElement('p');
+		let MaxLeft = document.createElement('p');
 		MaxLeft.setAttribute('id', 'ReadTitle');
 		MaxLeft.innerHTML = LanguageDict["OSBuild"];
 		MaxTR.appendChild(MaxLeft);
-		MaxRight = document.createElement('p');
+		let MaxRight = document.createElement('p');
 		MaxRight.setAttribute('id', 'ReadResult');
 		MaxRight.innerHTML = Line[5];
 		MaxRight.setAttribute('id', 'ReadResult');
 		MaxTR.appendChild(MaxRight);
 
 
-		UnitsTR = document.createElement('tr');
+		let UnitsTR = document.createElement('tr');
 		Table.appendChild(UnitsTR);
 		UnitsLeft = document.createElement('p');
 		UnitsLeft.setAttribute('id', 'ReadTitle');
 		UnitsLeft.innerHTML = LanguageDict["ModelNumber"];
 		UnitsTR.appendChild(UnitsLeft);
-		UnitsRight = document.createElement('p');
+		let UnitsRight = document.createElement('p');
 		UnitsRight.setAttribute('id', 'ReadResult');
 		UnitsRight.innerHTML = Line[6];
 		UnitsRight.setAttribute('id', 'ReadResult');
 		UnitsTR.appendChild(UnitsRight);
 
 
-		ScaleTR = document.createElement('tr');
+		let ScaleTR = document.createElement('tr');
 		Table.appendChild(ScaleTR);
-		ScaleLeft = document.createElement('p');
+		let ScaleLeft = document.createElement('p');
 		ScaleLeft.setAttribute('id', 'ReadTitle');
 		if (LineNumber == 12) {
 			ScaleLeft.innerHTML = LanguageDict['SerialNumber'];
@@ -645,19 +645,19 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 			ScaleLeft.innerHTML = LanguageDict["OSBuild"];
 		}
 		ScaleTR.appendChild(ScaleLeft);
-		ScaleRight = document.createElement('p');
+		let ScaleRight = document.createElement('p');
 		ScaleRight.setAttribute('id', 'ReadResult');
 		ScaleRight.innerHTML = Line[7];
 		ScaleRight.setAttribute('id', 'ReadResult');
 		ScaleTR.appendChild(ScaleRight);
 
-		TR = document.createElement('tr');
+		let TR = document.createElement('tr');
 		Table.appendChild(TR);
 		TDLeft = document.createElement('p');
 		TDLeft.setAttribute('id', 'ReadTitle');
 		TDLeft.innerHTML = LanguageDict["Timestamp"];
 		TR.appendChild(TDLeft);
-		TDRight = document.createElement('p');
+		let TDRight = document.createElement('p');
 		TDRight.setAttribute('id', 'ReadResult');
 		date = new Date(Line[1] * 1000);
 		if (Line[1] == 0) {
