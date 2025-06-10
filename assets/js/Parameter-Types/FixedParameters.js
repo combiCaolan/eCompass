@@ -1,4 +1,5 @@
 import sessionStorageService from "../modules/sessionStorageService.js";
+import { moCAS, hydFunctionsInputSetup, passwordList, hydFunctionIdList } from "../main.js";
 
 // Only require chai when running in a Node.js/testing environment
 if (typeof module !== 'undefined' && typeof require !== 'undefined') {

@@ -33,31 +33,31 @@ window.removedParametersCounters = [];
 window.ParametersToBeRemoved = [];
 
 // Custom parameter lists
-const customParametersSwitch = [
+export const customParametersSwitch = [
     '115', '130', '135', '138', '141', '143', '145', '146', '147', '148', '159', '160', '175', '205', '221', '222', '239', '240', '257', '258', '275', '276', '293', '294', '311', '312', '329', '330', '347', '348', '365', '366', '383', '384', '401', '402', '472', '487', '505', '506', '522', '527', '552', '553', '600', '617', '646', '654', '663', '665', '690', '703', '716', '729', '742', '755', '941'
 ];
 
-const hydraulicBitCustomList = [
+export const hydraulicBitCustomList = [
     '221', '222', '239', '240', '257', '258', '275', '276', '293', '294', '311', '312', '329', '330', '347', '348', '365', '366', '383', '384', '401', '402', '565'
 ];
 
-const hydFunctionIdList = [
+export const hydFunctionIdList = [
     '220', '238', '256', '274', '292', '310', '328', '346', '364', '382', '400'
 ];
 
-const passwordList = [
+export const passwordList = [
     '104', '105', '106', '107', '108', '109', '110', '111'
 ];
 
-const hydFunctionsOutputSetup = [
+export const hydFunctionsOutputSetup = [
     '222', '240', '258', '276', '294', '312', '330', '348', '366', '384', '402', '565'
 ];
 
-const hydFunctionsInputSetup = [
+export const hydFunctionsInputSetup = [
     '221', '239', '257', '275', '293', '311', '329', '347', '365', '383', '401'
 ];
 
-const moCAS = [
+export const moCAS = [
     '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48'
 ];
 
