@@ -1,3 +1,5 @@
+import sessionStorageService from "../modules/sessionStorageService.js";
+
 // Only require chai when running in a Node.js/testing environment
 if (typeof module !== 'undefined' && typeof require !== 'undefined') {
 	const { expect } = require("chai");
@@ -61,7 +63,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 
 	ClearWorkSpace();
 	// alert('2');
-	Parameters = sessionStorage.getItem('Parameters').split('\n');
+	let Parameters = sessionStorageService.get('Parameters').split('\n');
 	let parcounter = 0;
 	while (Parameters[parcounter] != undefined) {
 		if (LineNumber == Parameters[parcounter].split(',')[0]) {
@@ -101,7 +103,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 		MoCASLeft_1 = document.createElement('td');
 		TR.appendChild(MoCASLeft_1);
 
-		if (Number(sessionStorage.getItem('AccessLevel')) >= 8) {
+		if (Number(sessionStorageService.get('AccessLevel')) >= 8) {
 			CheckLine = Line.toString();
 
 			FormDiv_1 = document.createElement('div');
@@ -260,7 +262,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 
 		let BottomTR = document.createElement('tr');
 		Table.appendChild(BottomTR);
-		if (AccessLevelForUser >= 8) {
+		if (Number(sessionStorageService.get('AccessLevel')) >= 8) {
 			let DateInput = document.createElement('input');
 			DateInput.setAttribute('type', 'date');
 			DateInput.setAttribute('id', 'UpdateBuildDate');
@@ -520,7 +522,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 		}
 		TR.appendChild(TDRight);
 
-		if (AccessLevelForUser > 6) {
+		if (Number(sessionStorageService.get('AccessLevel')) > 6) {
 			let DefaultTR = document.createElement('tr');
 			Table.appendChild(DefaultTR);
 			let DefaultLeft = document.createElement('p');

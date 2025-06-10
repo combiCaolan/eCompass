@@ -163,9 +163,9 @@
     <script src="../assets/js/Parameter-Manipulation/add-parameters.js"></script>
     <!-- <script src="../assets/js/Parameter-Types/password.js"></script> -->
     <script src="../assets/js/Parameter-Manipulation/UpdateParameters/parameter-change.js"></script>
-    <script src="../assets/js/Parameter-Types/bit900.js"></script>
-    <script src="../assets/js/Parameter-Types/bit1000.js"></script>
-    <script src="../assets/js/Parameter-Types/SerialNumberLogic.js"></script>
+    <script type="module" src="../assets/js/Parameter-Types/bit900.js"></script>
+    <script type="module" src="../assets/js/Parameter-Types/bit1000.js"></script>
+    <script type="module" src="../assets/js/Parameter-Types/SerialNumberLogic.js"></script>
     <script type="module" src="../assets/js/parameters-view.js"></script>
     <script>
         var intervalId = window.setInterval(function () {
@@ -221,7 +221,7 @@
     <script>
         // Initialize the tree view and perform integrity checks on startup
 
-        import {treeViewClick} from '../assets/js/parameters-view.js';
+        import { treeViewClick } from '../assets/js/parameters-view.js';
 
         treeViewClick(document.getElementById('2'), 2);
         IntegrityCheckOnStartup();

@@ -1,8 +1,10 @@
+import sessionStorageService from "../../modules/sessionStorageService.js";
+
 /**
  * Handles parameter changes in the workspace UI.
  * Cleans up UI, validates, scales, and updates session storage.
  */
-function parameterchange(lineNumber, parameterType, oldValue, line) {
+export function parameterchange(lineNumber, parameterType, oldValue, line) {
     let newLine = null;
     let logMsgParType;
     const currentLineSplit = line.split(',');
@@ -62,8 +64,8 @@ function parameterchange(lineNumber, parameterType, oldValue, line) {
         return false;
     }
 
-    if (Number(AccessLevelForUser) === 8) {
-        if (checkEmpty('WorkSpaceCurrentValue', 1, ErrorMessageUpdateIssue)) return;
+    if (Number(sessionStorageService.get('AccessLevel')) === 8) {
+        // if (checkEmpty('WorkSpaceCurrentValue', 1, ErrorMessageUpdateIssue)) return;
         if (checkEmpty('WorkSpaceMaxValue', 5, 'Max Value is empty? Setting Back to Previous Value')) return;
         if (checkEmpty('WorkSpaceMinValue', 4, 'Min Value is empty? Setting Back to Previous Value')) return;
         if (checkEmpty('WorkSpaceDefaultValue', 2, 'Default Value is empty? Setting Back to Previous Value')) return;
@@ -117,7 +119,7 @@ function parameterchange(lineNumber, parameterType, oldValue, line) {
         return JSON.stringify(values.join(','));
     }
 
-    if (Number(AccessLevelForUser) === 8) {
+    if (Number(sessionStorageService.get('AccessLevel')) === 8) {
         switch (parameterType) {
             case 'CurrentValue':
                 newLine = buildLine([

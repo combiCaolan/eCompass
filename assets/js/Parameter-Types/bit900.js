@@ -1,9 +1,11 @@
+// import sessionStorageService from "../modules/sessionStorageService.js";
+
 /**
  * Displays bit options for a Bit999 parameter, allowing the user to select and update bit values.
  * @param {string} line - The parameter line (CSV string).
  * @param {HTMLElement} clickedButton - The button that was clicked.
  */
-function Bit999DisplayOptionsFunction(line, clickedButton) {
+export function Bit999DisplayOptionsFunction(line, clickedButton) {
     const descElem = document.getElementById('topDefineDescription');
     descElem.innerHTML = '';
 
@@ -104,7 +106,7 @@ function Bit999DisplayOptionsFunction(line, clickedButton) {
  * Handles the selection of a bit option for Bit999 parameters.
  * Updates the parameter value in sessionStorage and refreshes the UI.
  */
-function BitDropDown999(
+export function BitDropDown999(
     parentParameterIndex,
     bit,
     dropDownIndex,
@@ -176,7 +178,7 @@ function BitDropDown999(
     // Build dropdowns or readonly fields
     const optionsDict = {};
     let dropDown, defaultValue, factoryValue;
-    if (Number(writePermissionDict[parentParameterIndex]) <= Number(AccessLevelForUser)) {
+    if (Number(writePermissionDict[parentParameterIndex]) <= Number(sessionStorageService.get('AccessLevel'))) {
         dropDown = document.createElement('select');
         defaultValue = document.createElement('select');
         factoryValue = document.createElement('select');
@@ -251,7 +253,7 @@ function BitDropDown999(
  * @param {string|number} lineNumber - The parameter index.
  * @param {string} updateType - "Current", "Default", or "Factory".
  */
-function BitDropDownChange999(bitResults, bit, lineNumber, updateType) {
+export function BitDropDownChange999(bitResults, bit, lineNumber, updateType) {
     const currentBits = Array.isArray(bitResults) ? bitResults.slice() : bitResults.split(',');
     let desiredBit;
     if (updateType === 'Current') {

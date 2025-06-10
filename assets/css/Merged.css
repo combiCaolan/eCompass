@@ -822,8 +822,14 @@ input[type=number] {
 /* Dropdowns for Bit999 and Bit1000 */
 #Bit999DropDownDiv,
 #Bit1000DropDownDiv {
-    margin-left: -40px;
+    border-left: 2px dotted darkgray;
+    margin-left: 0px;
     list-style-type: none;
+    padding-left: 10px;
+}
+
+div[id^="constant"]{
+    margin-left: 17px;
 }
 
 /* Parameter file version input */

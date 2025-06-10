@@ -1,6 +1,9 @@
 import { RegularParameter } from "./Parameter-Types/RegularParameter.js";
 import { bitParameters1000, bitParameters999, customParametersDropDown } from "./main.js";
 import { dropDownFunction } from "./Parameter-Types/dropdown.js";
+import { SerialNumberFunction } from "./Parameter-Types/SerialNumberLogic.js";
+import { Bit999DisplayOptionsFunction } from "./Parameter-Types/bit900.js";
+import { Bit1000DisplayOptionsFunction } from "./Parameter-Types/bit1000.js";
 
 // import sessionStorageService from './modules/sessionStorageService.js';
 

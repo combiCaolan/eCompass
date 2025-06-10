@@ -1,9 +1,11 @@
+import sessionStorageService from "../modules/sessionStorageService.js";
+
 /**
  * Display and handle the serial number parameter UI.
  * @param {Array} lineArr - The parameter line array.
  * @param {HTMLElement} object - The DOM element (not used, always gets id '4').
  */
-function SerialNumberFunction(lineArr, object) {
+export function SerialNumberFunction(lineArr, object) {
     const serialId = '4';
     const topDefineTable = document.getElementById('topDefineTable');
     topDefineTable.innerHTML = ''; // Clear previous content
@@ -42,7 +44,7 @@ function SerialNumberFunction(lineArr, object) {
     serialLabel.id = 'ReadTitle';
     serialLabel.innerHTML = `${LanguageDict["TruckSerialNumber"]}<br/>`;
 
-    if (Number(writePermissionDict[serialId]) <= Number(AccessLevelForUser)) {
+    if (Number(writePermissionDict[serialId]) <= Number(sessionStorageService.get('AccessLevel'))) {
         const serialInput = document.createElement('input');
         serialInput.id = 'SerialInput';
         serialInput.type = 'number';

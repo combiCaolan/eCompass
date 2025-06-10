@@ -1,4 +1,8 @@
-function ByteMakeup(PassedBits, StartBit, EndBit) {
+// import sessionStorageService from "../modules/sessionStorageService.js";
+
+import sessionStorageService from "../modules/sessionStorageService.js";
+
+export function ByteMakeup(PassedBits, StartBit, EndBit) {
 
 	bit = PassedBits.split(',');
 	bit.reverse();
@@ -91,7 +95,7 @@ function ByteMakeup(PassedBits, StartBit, EndBit) {
 }
 
 
-function BitDropDownChange1000(StartBit, EndBit, BitResult, ParentIndex, BitType, ClickedButton) {
+export function BitDropDownChange1000(StartBit, EndBit, BitResult, ParentIndex, BitType, ClickedButton) {
 
 	//console.log('Start ' + StartBit);
 	//console.log('End ' + EndBit);
@@ -146,7 +150,7 @@ function BitDropDownChange1000(StartBit, EndBit, BitResult, ParentIndex, BitType
 
 
 
-function BitDropDown1000(ParentParameterIndex, Bit, DropDownIndex, NameOfParentParameter, NameOfParameterBit, BitResults, StartBit, EndBit, BitNumberId, DefaultBitResults, FactoryBitResults) {
+export function BitDropDown1000(ParentParameterIndex, Bit, DropDownIndex, NameOfParentParameter, NameOfParameterBit, BitResults, StartBit, EndBit, BitNumberId, DefaultBitResults, FactoryBitResults) {
 
 	try {
 		counter = 0;
@@ -201,7 +205,7 @@ function BitDropDown1000(ParentParameterIndex, Bit, DropDownIndex, NameOfParentP
 		counter++;
 	}
 
-	if (Number(writePermissionDict[ParentParameterIndex]) <= Number(AccessLevelForUser)) {
+	if (Number(writePermissionDict[ParentParameterIndex]) <= Number(sessionStorageService.get('AccessLevel'))) {
 		DropDown = document.createElement('select');
 		DropDown.setAttribute('id', 'CurrentBitDropValue');
 
@@ -302,9 +306,9 @@ function BitDropDown1000(ParentParameterIndex, Bit, DropDownIndex, NameOfParentP
 }
 
 //1000 Parameter file
-function Bit1000DisplayOptionsFunction(Line, ClickedButton) {
+export function Bit1000DisplayOptionsFunction(Line, ClickedButton) {
 	document.getElementById('topDefineDescription').innerHTML = '';
-	Index = Line.split(',')[0];
+	let Index = Line.split(',')[0];
 
 	if (document.getElementById('constant' + Index).innerHTML == '') {
 	} else {
@@ -313,9 +317,9 @@ function Bit1000DisplayOptionsFunction(Line, ClickedButton) {
 	}
 
 
-	CurrentValue = Line.split(',')[1];
-	DefaultValue = Line.split(',')[2];
-	FactoryValue = Line.split(',')[3];
+	let CurrentValue = Line.split(',')[1];
+	let DefaultValue = Line.split(',')[2];
+	let FactoryValue = Line.split(',')[3];
 
 	var octet = CurrentValue;
 	var bits = [];
@@ -338,15 +342,15 @@ function Bit1000DisplayOptionsFunction(Line, ClickedButton) {
 		FactoryBits.push(bit);
 	}
 
-	bit1000Dir = sessionStorage.getItem('Bit1000').split('\n');
+	let bit1000Dir = sessionStorageService.get('Bit1000').split('\n');
 
-	counter = 0;
+	let counter = 0;
 	while (bit1000Dir[counter] !== undefined) {
 		if (bit1000Dir[counter][0] == '#') {
 			//console.log(JSON.stringify(bit1000Dir[counter].replace('#','').replace(/\r/g,'')));
 			if (bit1000Dir[counter].replace('#', '').replace(/\r/g, '') == Index) {
 				counter++;
-				BitLine = counter;
+				let BitLine = counter;
 				break;
 			}
 		}

@@ -1,5 +1,5 @@
 import sessionStorageService from "../modules/sessionStorageService.js";
-
+import { parameterchange } from "../Parameter-Manipulation/UpdateParameters/parameter-change.js";
 /**
  * Renders the regular parameter view with editable and read-only fields.
  * @param {HTMLElement} value - The DOM element representing the parameter (for label/title).
@@ -174,7 +174,7 @@ export function RegularParameter(value, object, lineArr) {
     );
 
     // Permissions
-    if (typeof writePermissionDict !== 'undefined' && Number(writePermissionDict[object]) > Number(AccessLevelForUser)) {
+    if (typeof writePermissionDict !== 'undefined' && Number(writePermissionDict[object]) > Number(sessionStorageService.get('AccessLevel'))) {
         try {
             document.getElementById('WorkSpaceCurrentValue').setAttribute('disabled', 'disabled');
             document.getElementById('WorkSpaceCurrentValue').onclick = null;
