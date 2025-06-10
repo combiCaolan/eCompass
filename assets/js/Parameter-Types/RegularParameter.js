@@ -1,10 +1,12 @@
+import sessionStorageService from "../modules/sessionStorageService.js";
+
 /**
  * Renders the regular parameter view with editable and read-only fields.
  * @param {HTMLElement} value - The DOM element representing the parameter (for label/title).
  * @param {string|number} object - The parameter ID.
  * @param {Array} lineArr - The parameter data array (e.g. [IndexNumber, Current, Default, Factory, Min, Max, ..., Scale, ...]).
  */
-function RegularParameter(value, object, lineArr) {
+export function RegularParameter(value, object, lineArr) {
     // Find and set units
     let unitForIndex = 'no units';
     const unitsDirectory = (sessionStorage.getItem('UnitsDirectory') || '').split('\n');
@@ -129,7 +131,7 @@ function RegularParameter(value, object, lineArr) {
         lineArr[5],
         'WorkSpaceMaxValue',
         'MaxValue',
-        Number(AccessLevelForUser) >= 8,
+        Number(sessionStorageService.get('AccessLevel')) >= 8,
         unitForIndex,
         lineArr[7],
         5
@@ -141,7 +143,7 @@ function RegularParameter(value, object, lineArr) {
         lineArr[4],
         'WorkSpaceMinValue',
         'MinValue',
-        Number(AccessLevelForUser) >= 8,
+        Number(sessionStorageService.get('AccessLevel')) >= 8,
         unitForIndex,
         lineArr[7],
         4
@@ -153,7 +155,7 @@ function RegularParameter(value, object, lineArr) {
         lineArr[2],
         'WorkSpaceDefaultValue',
         'DefaultValue',
-        Number(AccessLevelForUser) >= 8,
+        Number(sessionStorageService.get('AccessLevel')) >= 8,
         unitForIndex,
         lineArr[7],
         2
@@ -165,7 +167,7 @@ function RegularParameter(value, object, lineArr) {
         lineArr[3],
         'WorkSpaceFactoryValue',
         'FactoryValue',
-        Number(AccessLevelForUser) >= 8,
+        Number(sessionStorageService.get('AccessLevel')) >= 8,
         unitForIndex,
         lineArr[7],
         3

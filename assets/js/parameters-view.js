@@ -1,7 +1,15 @@
+import { RegularParameter } from "./Parameter-Types/RegularParameter.js";
+import { bitParameters1000, bitParameters999, customParametersDropDown } from "./main.js";
+import { dropDownFunction } from "./Parameter-Types/dropdown.js";
+
+// import sessionStorageService from './modules/sessionStorageService.js';
+
+// AccessLevelForUser = Number(sessionStorageService.get('AccessLevel'));
+
 /**
  * Display a "No Permission" message in the UI.
  */
-function showNoPermission() {
+export default function showNoPermission() {
     const container = document.getElementById('topDefineDescription');
     container.innerHTML = '';
 
@@ -25,7 +33,7 @@ function showNoPermission() {
 /**
  * Display UI for a parameter not present in the file.
  */
-function showParameterNotPresent(lineNumber, htmlObject) {
+export function showParameterNotPresent(lineNumber, htmlObject) {
     const container = document.getElementById('topDefineDescription');
     container.innerHTML = '';
 
@@ -114,8 +122,8 @@ export function treeViewClick(value, objectId, msg) {
     } catch (err) {}
 
     // Custom Bits Require Line in this format
-    const lineArr = userParametersFileDict[objectId].split(',');
-    const indexNumber = lineArr[0];
+    let lineArr = userParametersFileDict[objectId].split(',');
+    let indexNumber = lineArr[0];
 
     // Serial Number
     if (indexNumber === '4') {
@@ -130,21 +138,20 @@ export function treeViewClick(value, objectId, msg) {
         return;
     }
 
-    if (typeof bitParameters999 !== 'undefined' && bitParameters999.includes(indexNumber)) {
+    console.log(bitParameters999);
+    if (bitParameters999.includes(indexNumber)) {
         Bit999DisplayOptionsFunction(lineArr.toString(), document.getElementById(indexNumber));
         return;
     }
 
-    if (typeof bitParameters1000 !== 'undefined' && bitParameters1000.includes(indexNumber)) {
+    if (bitParameters1000.includes(indexNumber)) {
         Bit1000DisplayOptionsFunction(lineArr.toString(), document.getElementById(indexNumber));
         return;
     }
 
-    if (typeof customParametersDropDown !== 'undefined' && customParametersDropDown.includes(indexNumber)) {
+    if (customParametersDropDown.includes(indexNumber)) {
         dropDownFunction(lineArr, value);
         return;
     }
-
-
     RegularParameter(value, objectId, lineArr);
 }

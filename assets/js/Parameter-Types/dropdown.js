@@ -1,7 +1,14 @@
+// import sessionStorageService from './modules/sessionStorageService.js';
+
+import sessionStorageService from "../modules/sessionStorageService.js";
+
+let AccessLevelForUser = Number(sessionStorageService.get('AccessLevel'));
+
+
 /**
  * Handles dropdown parameter display and updates.
  */
-function dropDownFunction(parameterLine, object) {
+export function dropDownFunction(parameterLine, object) {
     // Clear previous description
     const descElem = document.getElementById('topDefineDescription');
     if (descElem) descElem.innerHTML = '';
@@ -116,7 +123,7 @@ function dropDownFunction(parameterLine, object) {
 
     // Default & Factory dropdowns for admin
     if (numberToFind !== 2) {
-        if (AccessLevelForUser == '8') {
+        if (Number(sessionStorageService.get('AccessLevel')) == '8') {
             // Default
             const defaultTag = document.createElement('p');
             defaultTag.id = 'ReadResult';
@@ -170,7 +177,7 @@ function dropDownFunction(parameterLine, object) {
     descElem.appendChild(exportDiv);
 
     // Permissions
-    if (typeof writePermissionDict !== 'undefined' && Number(writePermissionDict[numberToFind]) > Number(AccessLevelForUser)) {
+    if (typeof writePermissionDict !== 'undefined' && Number(writePermissionDict[numberToFind]) > Number(sessionStorageService.get('AccessLevel'))) {
         const dropDown = document.getElementById('CurrentDropDownValue');
         if (dropDown) {
             dropDown.disabled = true;
@@ -195,7 +202,7 @@ function dropDownFunction(parameterLine, object) {
 /**
  * Handles change for the main dropdown.
  */
-function dropDownOnChange(parameterLine) {
+export function dropDownOnChange(parameterLine) {
     // Optionally add a reason for update for certain parameters
     if (Number(parameterLine[0]) >= 37 && Number(parameterLine[0]) <= 63) {
         let divArea = document.getElementById('DivAreaMocas');
@@ -265,7 +272,7 @@ function dropDownOnChange(parameterLine) {
 /**
  * Handles change for the default value dropdown.
  */
-function defaultDropDownOnChange(parameterLine) {
+export function defaultDropDownOnChange(parameterLine) {
     const newLine = [
         parameterLine[0],
         parameterLine[1],
@@ -297,7 +304,7 @@ function defaultDropDownOnChange(parameterLine) {
 /**
  * Handles change for the factory value dropdown.
  */
-function factoryDropDownOnChange(parameterLine) {
+export function factoryDropDownOnChange(parameterLine) {
     const newLine = [
         parameterLine[0],
         parameterLine[1],

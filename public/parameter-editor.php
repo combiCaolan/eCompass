@@ -150,15 +150,15 @@
     <script src="../assets/js/description-dictionary.js"></script>
     <script src="../assets/js/add-missing-parameters.js"></script>
     <!--<script src="assets/js/ListTruckDir.js"></script>-->
-    <script src="../assets/js/Parameter-Types/RegularParameter.js"></script>
-    <script src="../assets/js/Parameter-Types/dropdown.js"></script>
+    <script type="module" src="../assets/js/Parameter-Types/RegularParameter.js"></script>
+    <script type="module" src="../assets/js/Parameter-Types/dropdown.js"></script>
     <script src="../assets/js/LanguageLogic/dynamic-language.js"></script>
-    <script src="../assets/js/post-load.js"></script>
+    <script type="module" src="../assets/js/post-load.js"></script>
     <!-- <script src="../assets/js/Compare.js"></script> -->
     <script src="../assets/js/Dialog.js"></script>
     <!--<script src="assets/js/Javascript-Style/MenuShowHideLogic.js"></script>-->
     <!-- <script src="../assets/js/Parameter-Types/HydInOut.js"></script> -->
-    <script src="../assets/js/main.js"></script>
+    <script type="module" src="../assets/js/main.js"></script>
     <script src="../assets/js/Parameter-Manipulation/remove-parameter.js"></script>
     <script src="../assets/js/Parameter-Manipulation/add-parameters.js"></script>
     <!-- <script src="../assets/js/Parameter-Types/password.js"></script> -->
@@ -166,7 +166,7 @@
     <script src="../assets/js/Parameter-Types/bit900.js"></script>
     <script src="../assets/js/Parameter-Types/bit1000.js"></script>
     <script src="../assets/js/Parameter-Types/SerialNumberLogic.js"></script>
-    <script src="../assets/js/parameters-view.js"></script>
+    <script type="module" src="../assets/js/parameters-view.js"></script>
     <script>
         var intervalId = window.setInterval(function () {
             var logArea = document.getElementById('log-area-output');
@@ -179,7 +179,7 @@
             var ul = document.createElement('ul');
             lines.forEach(function (line) {
                 var li = document.createElement('li');
-                li.innerHTML = line + '<a id="undobtn">&#8617;</a>';
+                li.innerHTML = line + '&nbsp;&nbsp;  <a id="undobtn">&#8617;</a>';
                 ul.appendChild(li);
             });
             logArea.innerHTML = '';
@@ -207,7 +207,7 @@
         /*END OF COLLAPSEDIV.JS*/
 
     </script>
-    <script src="../assets/js/Parameter-Types/FixedParameters.js"></script>
+    <script type="module" src="../assets/js/Parameter-Types/FixedParameters.js"></script>
     <script type="module" src="../assets/js/parameters-menu.js"></script>
     <script src="../assets/js/Parameter-Manipulation/UpdateParameters/update-parameters.js"></script>
     <script src="../assets/js/Parameter-Manipulation/UpdateParameters/change-build-date.js"></script>
@@ -220,6 +220,9 @@
 
     <script>
         // Initialize the tree view and perform integrity checks on startup
+
+        import {treeViewClick} from '../assets/js/parameters-view.js';
+
         treeViewClick(document.getElementById('2'), 2);
         IntegrityCheckOnStartup();
     </script>

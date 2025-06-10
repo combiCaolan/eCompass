@@ -1,14 +1,11 @@
-// Periodically check for session tampering
-setInterval(() => {
-    if (sessionStorage.getItem('AccessLevel') !== String(AccessLevelForUser)) {
-        alert('Variables necessary for basic functionality have been altered.');
-        location.reload();
-    }
-}, 10 * 1000); // 10 seconds
+// main.js
+import ParameterManager from './modules/parameterManager.js';
+import sessionStorageService from './modules/sessionStorageService.js';
+import uiService from './modules/uiService.js';
 
 
 // Redirect if parameters are missing
-if (!sessionStorage.getItem('Parameters')) {
+if (!sessionStorageService.get('Parameters')) {
     location = '../'
 }
 
@@ -65,8 +62,9 @@ const moCAS = [
 ];
 
 // 999 Parameters File
-const bitParameters999 = [];
-const nineFile = sessionStorage.getItem('Bit999') || '';
+export const bitParameters999 = [];
+const nineFile = sessionStorageService.get('Bit999') || '';
+
 nineFile.split('\n').forEach(line => {
     if (line.startsWith('#')) {
         bitParameters999.push(line.replace('#', '').replace(/\r/g, ''));
@@ -74,8 +72,8 @@ nineFile.split('\n').forEach(line => {
 });
 
 // 1000 Parameters File
-const bitParameters1000 = [];
-const thousandFile = sessionStorage.getItem('Bit1000') || '';
+export const bitParameters1000 = [];
+const thousandFile = sessionStorageService.get('Bit1000') || '';
 thousandFile.split('\n').forEach(line => {
     if (line.startsWith('#')) {
         bitParameters1000.push(line.replace('#', '').replace(/\r/g, ''));
@@ -83,8 +81,8 @@ thousandFile.split('\n').forEach(line => {
 });
 
 // Custom Parameters Dropdown
-const customParametersDropDown = [];
-const parameterMain = sessionStorage.getItem('ParameterMain') || '';
+export const customParametersDropDown = [];
+const parameterMain = sessionStorageService.get('ParameterMain') || '';
 parameterMain.split('\n').forEach(line => {
     const parts = line.split(',');
     if (parts[2] !== '0') {

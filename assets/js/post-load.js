@@ -3,11 +3,14 @@
  * Handles post-load UI setup, menu closing, parameter integrity checks, and search functionality for eCompass.
  * Uses best practices for variable naming, code structure, and documentation.
  */
+import ParameterManager from './modules/parameterManager.js';
+import sessionStorageService from './modules/sessionStorageService.js';
+import uiService from './modules/uiService.js';
 
 /**
  * Updates Bit label buttons with their current values.
  */
-function BitLabelChecker() {
+export function BitLabelChecker() {
     try {
         const ACV1000 = ["220", "238", "256", "274", "292", "310", "328", "346", "364", "382", "400"];
         ACV1000.forEach(id => {
@@ -28,16 +31,16 @@ function BitLabelChecker() {
 }
 
 // Normalize Parameters line endings and build ParametersPresent array
-let Parameters = sessionStorage.getItem('Parameters') || '';
+let Parameters = sessionStorageService.get('Parameters') || '';
 Parameters = Parameters.replace(/\r/g, '\n');
 const ParametersLines = Parameters.split('\n').filter(line => line.trim() !== '');
 const ParametersPresent = ParametersLines.map(line => line.split(',')[0]);
-sessionStorage.setItem('Parameters', '\n' + ParametersLines.join('\n'));
+sessionStorageService.set('Parameters', '\n' + ParametersLines.join('\n'));
 
 /**
  * Closes all menu sections in the UI.
  */
-function CloseMenus() {
+export function CloseMenus() {
     const menuIds = [
         "A","B","C","D","E","F","G","H","I","J",
         "G1","G2","G21","G22","G23","G231","G24","G240a","G240b","G240c","G240d","G25","G251","G26","G261","G27","G3","G31","G32","G33","G34","G4","G41","G41in","G41out","G42","G42in","G42out","G43","G43in","G43out","G44","G44in","G44out","G45","G45in","G45out","G46","G46in","G46out","G47","G47in","G47out","G48","G48in","G48out","G49","G49in","G49out","G410","G410in","G410out","G411","G411in","G411out","G5","G6","G7","G8","G81","G82","G83","G831","G832","G84","G85","G851","G86","G87","G9","G91","G92","G93","G94","G95","G96","G97","G98","G941","G942","G943","G944","G945","G946","G912","G913","G911","G241","G242","G243","G244","G245","G246","G247","G248","G10","G101","G102","G103","G104","G105","G106","G11","G12","G13","GG1","GG2","GG3","GG4","GG5","GG6","GG7","GG8","GG9","GH1","GH2"
@@ -51,12 +54,12 @@ function CloseMenus() {
 /**
  * Runs after the menu and UI are loaded, hides Bit parameters, and builds ParameterMainDict.
  */
-function PostLoadedRun() {
+export function PostLoadedRun() {
     CloseMenus();
     $("#F").slideDown();
 
     // Hide BitParameters999
-    if (Array.isArray(bitParameters999)) {
+    if (Array.isArray(sessionStorageService.get('bitParameters999'))) {
         bitParameters999.forEach(id => {
             const elem = document.getElementById(id);
             if (elem) {
@@ -67,7 +70,7 @@ function PostLoadedRun() {
     }
 
     // Hide BitParameters1000
-    if (Array.isArray(bitParameters1000)) {
+    if (Array.isArray(sessionStorageService.get('bitParameters1000'))) {
         bitParameters1000.forEach(id => {
             const elem = document.getElementById(id);
             if (elem) {
@@ -79,7 +82,7 @@ function PostLoadedRun() {
 
     // Build ParameterMainDict
     window.ParameterMainDict = {};
-    const parameterMain = sessionStorage.getItem('ParameterMain') || '';
+    const parameterMain = sessionStorageService.get('ParameterMain') || '';
     parameterMain.split('\n').forEach(line => {
         if (line.trim() !== '') {
             const parts = line.split(',');
@@ -89,7 +92,7 @@ function PostLoadedRun() {
 }
 
 // Build DropDownOptionsDict from DropDownlist in sessionStorage
-const DropDownFile = sessionStorage.getItem('DropDownlist') || '';
+const DropDownFile = sessionStorageService.get('DropDownlist') || '';
 const DropDownLines = DropDownFile.split('\n');
 const DropDownOptionsDict = {};
 let CurrentDropDownId = undefined;
@@ -132,7 +135,7 @@ document.title = FileTitleArr[FileTitleArr.length - 1] || 'eCompass';
 /**
  * Checks parameter file integrity and alerts user if issues are found.
  */
-function IntegrityCheckOnStartup() {
+export function IntegrityCheckOnStartup() {
     if (ParametersPresent.includes('1') && ParametersPresent.includes('1500')) {
         for (const line of ParametersLines) {
             if (line !== '') {
@@ -184,7 +187,7 @@ $(document).ready(function () {
  * Opens the menu and tree view for a given parameter index.
  * @param {string|number} Index - The parameter index to open.
  */
-function DynamicMenuOpenTool(Index) {
+export function DynamicMenuOpenTool(Index) {
     CloseMenus();
     $("#F").slideDown();
     const ToOpen = ParameterMainDict[Index].split(',')[1].split(' ');
@@ -201,7 +204,7 @@ function DynamicMenuOpenTool(Index) {
 /**
  * Populates the search dialog with parameter options.
  */
-function SearchFunctionOptions() {
+export function SearchFunctionOptions() {
     const searchList = document.getElementById('ParametersSearchList');
     if (!searchList) return;
     searchList.innerHTML = '';
