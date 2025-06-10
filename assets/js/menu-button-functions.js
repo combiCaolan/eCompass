@@ -169,7 +169,7 @@ function readParameters(defaultFileName) {
 
             // Build UserParametersFileDict
             const lines = data.split('\n');
-            const userParametersFileDict = {};
+            var userParametersFileDict = {};
             lines.forEach(line => {
                 const key = line.split(',')[0];
                 if (key) userParametersFileDict[key] = line;

@@ -836,6 +836,7 @@ input[type=number] {
 #AddParameterButton {
     margin: 10px;
     width: 95%;
+    padding: 10px;
 }
 
 /* Titles */
@@ -993,6 +994,7 @@ input[type=number] {
 .PreTreeButton {
     font-size: 14px;
     font-style: normal;
+    text-decoration: underline;
 }
 
 .PreTreeButton:hover {

@@ -378,109 +378,111 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 	//File Cloned Info // File Exported Info
 	if (LineNumber == 7 || LineNumber == 8) {
 
-		Table = document.getElementById('topDefineDescription');
+		let Table = document.getElementById('topDefineDescription');
 
-		TH = document.createElement('p');
+		let TH = document.createElement('p');
 		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
 
-		TR = document.createElement('tr');
+		let TR = document.createElement('tr');
 		Table.appendChild(TR);
-		TDLeft = document.createElement('p');
+		let TDLeft = document.createElement('p');
 		TDLeft.setAttribute('id', 'ReadTitle');
 		TDLeft.innerHTML = LanguageDict["Timestamp"];
 		TR.appendChild(TDLeft);
-		TDRight = document.createElement('p');
+		let TDRight = document.createElement('p');
 		TDRight.setAttribute('id', 'ReadResult');
-		date = new Date(Line[1] * 1000);
+		let date = new Date(Line[1] * 1000);
 		if (date.getFullYear() == '1970') {
 			TDRight.innerHTML = 'NA';
 		} else {
-			month = Number(date.getMonth()) + 1;
+			let month = Number(date.getMonth()) + 1;
 			TDRight.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
 		}
 		TR.appendChild(TDRight);
 
 		if (AccessLevelForUser > 6) {
 
-			DefaultTR = document.createElement('tr');
+			let DefaultTR = document.createElement('tr');
 			Table.appendChild(DefaultTR);
-			DefaultLeft = document.createElement('p');
+			let DefaultLeft = document.createElement('p');
 			DefaultLeft.setAttribute('id', 'ReadTitle');
 			DefaultLeft.innerHTML = LanguageDict["KeyswitchHourmeter"];
 			DefaultTR.appendChild(DefaultLeft);
-			DefaultRight = document.createElement('p');
+			let DefaultRight = document.createElement('p');
 			DefaultRight.setAttribute('id', 'ReadResult');
 			DefaultRight.innerHTML = String(Line[2] / 3600).split('.')[0] + ' hr';
 			DefaultTR.appendChild(DefaultRight);
 
 
-			FactoryTR = document.createElement('tr');
+			let FactoryTR = document.createElement('tr');
 			Table.appendChild(FactoryTR);
-			FactoryLeft = document.createElement('p');
+			let FactoryLeft = document.createElement('p');
 			FactoryLeft.setAttribute('id', 'ReadTitle');
 			FactoryLeft.innerHTML = LanguageDict["InterlockHourmeter"];
 			FactoryTR.appendChild(FactoryLeft);
-			FactoryRight = document.createElement('p');
+			let FactoryRight = document.createElement('p');
 			FactoryRight.setAttribute('id', 'ReadResult');
 			FactoryRight.innerHTML = String(Line[3] / 3600).split('.')[0] + ' hr';
 			FactoryTR.appendChild(FactoryRight);
 
 
-			MinTR = document.createElement('tr');
+			let MinTR = document.createElement('tr');
 			Table.appendChild(MinTR);
-			MinLeft = document.createElement('p');
+			let MinLeft = document.createElement('p');
 			MinLeft.setAttribute('id', 'ReadTitle');
 			MinLeft.innerHTML = LanguageDict["TractionHourmeter"];
 			MinTR.appendChild(MinLeft);
-			MinRight = document.createElement('p');
+			let MinRight = document.createElement('p');
 			MinRight.setAttribute('id', 'ReadResult');
 			MinRight.innerHTML = String(Line[4] / 3600).split('.')[0] + ' hr';
 			MinTR.appendChild(MinRight);
 
 
-			MaxTR = document.createElement('tr');
+			let MaxTR = document.createElement('tr');
 			Table.appendChild(MaxTR);
-			MaxLeft = document.createElement('p');
+			let MaxLeft = document.createElement('p');
 			MaxLeft.setAttribute('id', 'ReadTitle');
 			MaxLeft.innerHTML = LanguageDict["HydraulicHourmeter"];
 			MaxTR.appendChild(MaxLeft);
-			MaxRight = document.createElement('p');
+			let MaxRight = document.createElement('p');
 			MaxRight.setAttribute('id', 'ReadResult');
 			MaxRight.innerHTML = String(Line[5] / 3600).split('.')[0] + ' hr';
 			MaxTR.appendChild(MaxRight);
 
 			if (LineNumber == 7) {
-				ActiveUserTr = document.createElement('tr');
+				let ActiveUserTr = document.createElement('tr');
 				Table.appendChild(ActiveUserTr);
-				ActiveuserLeft = document.createElement('p');
+				let ActiveuserLeft = document.createElement('p');
 				ActiveuserLeft.setAttribute('id', 'ReadTitle');
 				ActiveuserLeft.innerHTML = LanguageDict["ActiveUser"];
 				ActiveUserTr.appendChild(ActiveuserLeft);
 
+				let ActiveUserText = 'unkown';
+
 				if (Line[9] == 0) {
-					ActiveUserText = 'Generic Operator';
+					let ActiveUserText = 'Generic Operator';
 				} else if (Line[9] == 1) {
-					ActiveUserText = 'Novice Operator';
+					let ActiveUserText = 'Novice Operator';
 				} else if (Line[9] == 2) {
-					ActiveUserText = 'Standard Operator';
+					let ActiveUserText = 'Standard Operator';
 				} else if (Line[9] == 3) {
-					ActiveUserText = 'Experienced Operator';
+					let ActiveUserText = 'Experienced Operator';
 				} else if (Line[9] == 4) {
-					ActiveUserText = 'Service';
+					let ActiveUserText = 'Service';
 				} else if (Line[9] == 5) {
-					ActiveUserText = 'Manager';
+					let ActiveUserText = 'Manager';
 				} else if (Line[9] == 6) {
-					ActiveUserText = 'Dealer';
+					let ActiveUserText = 'Dealer';
 				} else if (Line[9] == 7) {
-					ActiveUserText = 'Combilift';
+					let ActiveUserText = 'Combilift';
 				} else if (Line[9] == 8) {
-					ActiveUserText = 'Developer';
+					let ActiveUserText = 'Developer';
 				}
 
-				ActiveUserRight = document.createElement('p');
+				let ActiveUserRight = document.createElement('p');
 				ActiveUserRight.setAttribute('id', 'ReadResult');
 				ActiveUserRight.innerHTML = ActiveUserText;
 				ActiveUserTr.appendChild(ActiveUserRight);
@@ -509,7 +511,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 		TR.appendChild(TDLeft);
 		let TDRight = document.createElement('p');
 		TDRight.setAttribute('id', 'ReadResult');
-		date = new Date(Line[1] * 1000);
+		let date = new Date(Line[1] * 1000);
 		if (date.getFullYear() == '1970') {
 			TDRight.innerHTML = 'NA';
 		} else {
@@ -556,7 +558,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 			MinTR.appendChild(MinRight);
 
 
-			MaxTR = document.createElement('tr');
+			let MaxTR = document.createElement('tr');
 			Table.appendChild(MaxTR);
 			MaxLeft = document.createElement('p');
 			MaxLeft.setAttribute('id', 'ReadTitle');
@@ -624,7 +626,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 
 		let UnitsTR = document.createElement('tr');
 		Table.appendChild(UnitsTR);
-		UnitsLeft = document.createElement('p');
+		let UnitsLeft = document.createElement('p');
 		UnitsLeft.setAttribute('id', 'ReadTitle');
 		UnitsLeft.innerHTML = LanguageDict["ModelNumber"];
 		UnitsTR.appendChild(UnitsLeft);
@@ -676,7 +678,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 	//PLC Info
 	if (LineNumber == 21) {
 
-		Table = document.getElementById('topDefineDescription');
+		let Table = document.getElementById('topDefineDescription');
 
 		TH = document.createElement('p');
 		TH.setAttribute('id', 'WorkSpaceTitle');
@@ -922,17 +924,17 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 
 	//MoCAS Values
 	if (moCAS.includes(LineNumber)) {
-		Table = document.getElementById('topDefineDescription');
+		let Table = document.getElementById('topDefineDescription');
 
-		TH = document.createElement('p');
+		let TH = document.createElement('p');
 		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
 
-		TR = document.createElement('tr');
+		let TR = document.createElement('tr');
 		Table.appendChild(TR);
-		MoCASLeft = document.createElement('td');
+		let MoCASLeft = document.createElement('td');
 		TR.appendChild(MoCASLeft);
 
 		if (Number(userParametersFileDict[Number(LineNumber)].split(',')[2]) == 1 && Number(userParametersFileDict[Number(LineNumber)].split(',')[9]) <= Number(sessionStorage.getItem('AccessLevel'))) {
