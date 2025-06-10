@@ -90,7 +90,6 @@ function webDownloadFile(filename, text) {
  * Toggles the mobile menu.
  */
 function mobileMenuFunction() {
-    alert('Mobile Menu Function Called');
     const nav = document.getElementById("myTopnav");
     if (!nav) return;
     if (nav.className === "topnav") {
@@ -169,7 +168,7 @@ function readParameters(defaultFileName) {
 
             // Build UserParametersFileDict
             const lines = data.split('\n');
-            var userParametersFileDict = {};
+            const userParametersFileDict = {};
             lines.forEach(line => {
                 const key = line.split(',')[0];
                 if (key) userParametersFileDict[key] = line;

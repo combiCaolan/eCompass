@@ -560,11 +560,11 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 
 			let MaxTR = document.createElement('tr');
 			Table.appendChild(MaxTR);
-			MaxLeft = document.createElement('p');
+			let MaxLeft = document.createElement('p');
 			MaxLeft.setAttribute('id', 'ReadTitle');
 			MaxLeft.innerHTML = LanguageDict["HydraulicHourmeter"];
 			MaxTR.appendChild(MaxLeft);
-			MaxRight = document.createElement('p');
+			let MaxRight = document.createElement('p');
 			MaxRight.setAttribute('id', 'ReadResult');
 			MaxRight.innerHTML = String(Line[5] / 3600).split('.')[0] + ' hr';
 			MaxTR.appendChild(MaxRight);
@@ -655,17 +655,17 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 
 		let TR = document.createElement('tr');
 		Table.appendChild(TR);
-		TDLeft = document.createElement('p');
+		let TDLeft = document.createElement('p');
 		TDLeft.setAttribute('id', 'ReadTitle');
 		TDLeft.innerHTML = LanguageDict["Timestamp"];
 		TR.appendChild(TDLeft);
 		let TDRight = document.createElement('p');
 		TDRight.setAttribute('id', 'ReadResult');
-		date = new Date(Line[1] * 1000);
+		let date = new Date(Line[1] * 1000);
 		if (Line[1] == 0) {
 			TDRight.innerHTML = 'NA';
 		} else {
-			month = Number(date.getMonth()) + 1;
+			let month = Number(date.getMonth()) + 1;
 			TDRight.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
 		}
 		TR.appendChild(TDRight);
@@ -680,32 +680,32 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 
 		let Table = document.getElementById('topDefineDescription');
 
-		TH = document.createElement('p');
+		let TH = document.createElement('p');
 		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
 
-		TR = document.createElement('tr');
+		let TR = document.createElement('tr');
 		Table.appendChild(TR);
-		TDLeft = document.createElement('p');
+		let TDLeft = document.createElement('p');
 		TDLeft.setAttribute('id', 'ReadTitle');
 		TDLeft.innerHTML = LanguageDict["AppInfo"];
 		TR.appendChild(TDLeft);
-		TDRight = document.createElement('p');
+		let TDRight = document.createElement('p');
 		TDRight.setAttribute('id', 'ReadResult');
 		TDRight.setAttribute('id', 'ReadResult');
 		TDRight.innerHTML = Line[2] + '.' + Line[3] + '.' + Line[4] + '.' + Line[5];
 		TR.appendChild(TDRight);
 
 
-		DefaultTR = document.createElement('tr');
+		let DefaultTR = document.createElement('tr');
 		Table.appendChild(DefaultTR);
-		DefaultLeft = document.createElement('p');
+		let DefaultLeft = document.createElement('p');
 		DefaultLeft.setAttribute('id', 'ReadTitle');
 		DefaultLeft.innerHTML = LanguageDict["RTSInfo"];
 		DefaultTR.appendChild(DefaultLeft);
-		DefaultRight = document.createElement('p');
+		let DefaultRight = document.createElement('p');
 		DefaultRight.setAttribute('id', 'ReadResult');
 		DefaultRight.innerHTML = Line[6] + '.' + Line[7] + '.' + Line[8];
 		DefaultTR.appendChild(DefaultRight);
@@ -719,11 +719,11 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 		TR.appendChild(TDLeft);
 		TDRight = document.createElement('p');
 		TDRight.setAttribute('id', 'ReadResult');
-		date = new Date(Line[1] * 1000);
+		let date = new Date(Line[1] * 1000);
 		if (Line[1] == 0) {
 			TDRight.innerHTML = 'NA';
 		} else {
-			month = Number(date.getMonth()) + 1;
+			let month = Number(date.getMonth()) + 1;
 			TDRight.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
 		}
 		TR.appendChild(TDRight);
@@ -735,21 +735,21 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 
 	//Screen Info
 	if (LineNumber == 22) {
-		Table = document.getElementById('topDefineDescription');
+		let Table = document.getElementById('topDefineDescription');
 
-		TH = document.createElement('p');
+		let TH = document.createElement('p');
 		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
 
-		TR = document.createElement('tr');
+		let TR = document.createElement('tr');
 		Table.appendChild(TR);
-		TDLeft = document.createElement('p');
+		let TDLeft = document.createElement('p');
 		TDLeft.setAttribute('id', 'ReadTitle');
 		TDLeft.innerHTML = LanguageDict["AppInfo"];
 		TR.appendChild(TDLeft);
-		TDRight = document.createElement('p');
+		let TDRight = document.createElement('p');
 		TDRight.setAttribute('id', 'ReadResult');
 		TDRight.setAttribute('id', 'ReadResult');
 		TDRight.innerHTML = Line[4] + '.' + Line[5] + '.' + Line[6] + '.' + Line[7];
@@ -764,11 +764,11 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 		TR.appendChild(TDLeft);
 		TDRight = document.createElement('p');
 		TDRight.setAttribute('id', 'ReadResult');
-		date = new Date(Line[1] * 1000);
+		let date = new Date(Line[1] * 1000);
 		if (Line[1] == 0) {
 			TDRight.innerHTML = 'NA';
 		} else {
-			month = Number(date.getMonth()) + 1;
+			let month = Number(date.getMonth()) + 1;
 			TDRight.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
 		}
 		TR.appendChild(TDRight);

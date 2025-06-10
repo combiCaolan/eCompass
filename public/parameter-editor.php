@@ -179,7 +179,7 @@
             var ul = document.createElement('ul');
             lines.forEach(function (line) {
                 var li = document.createElement('li');
-                li.textContent = line;
+                li.innerHTML = line + '<a id="undobtn">&#8617;</a>';
                 ul.appendChild(li);
             });
             logArea.innerHTML = '';
