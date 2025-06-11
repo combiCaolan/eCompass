@@ -22,8 +22,6 @@ export function dropDownFunction(parameterLine, object) {
     // Title
     const title = document.createElement('p');
     title.id = 'WorkSpaceTitle';
-    console.log(parameterLine)
-    console.log(object);
     
     try{
         title.innerHTML = object.innerHTML;

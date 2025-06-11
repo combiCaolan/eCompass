@@ -110,7 +110,6 @@ function organiseMenu(parameterMainArr, parametresDirForUsersFile) {
     console.log(parameterMainArr);
     console.log(parametresDirForUsersFile);
     parameterMainArr.forEach(line => {
-        console.log(line);
         // if (!line.length) return;
         const [id, group, , label, , , , , , access] = line;
         const btn = document.createElement('button');

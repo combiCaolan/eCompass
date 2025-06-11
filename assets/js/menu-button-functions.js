@@ -326,7 +326,7 @@ export function closeFileDialog() {
         const confirmLeave = confirm(LanguageDict['GeneralFileLostWarning']);
         if (!confirmLeave) return;
     }
-    location.href = sessionStorage.getItem('ServerPath') || '';
+    location.href = localStorage.getItem('ServerPath') || '';
 }
 
 /**

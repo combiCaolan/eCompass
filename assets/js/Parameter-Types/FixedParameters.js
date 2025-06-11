@@ -50,7 +50,6 @@ function AddFixedParameter(htmlObject) {
 }
 
 export function MenuParametersOnclick(Line, HTMLObject) {
-	console.log(Line);
 	if (Line == 'empty') {
 		ClearWorkSpace();
 		AddFixedParameter(HTMLObject);

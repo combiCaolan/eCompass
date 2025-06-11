@@ -333,7 +333,6 @@ export function Bit1000DisplayOptionsFunction(Line, ClickedButton) {
 	let counter = 0;
 	while (bit1000Dir[counter] !== undefined) {
 		if (bit1000Dir[counter][0] == '#') {
-			//console.log(JSON.stringify(bit1000Dir[counter].replace('#','').replace(/\r/g,'')));
 			if (bit1000Dir[counter].replace('#', '').replace(/\r/g, '') == Index) {
 				counter++;
 				let BitLine = counter;
@@ -354,7 +353,7 @@ export function Bit1000DisplayOptionsFunction(Line, ClickedButton) {
 	Description.setAttribute('id', 'description');
 
 	//Find Description of parameter
-	let ParameterDescription = sessionStorageService.getItem('DescriptionMain');
+	let ParameterDescription = sessionStorageService.get('DescriptionMain');
 
 	Description.innerHTML = MainDescriptionsDict[Index];
 
