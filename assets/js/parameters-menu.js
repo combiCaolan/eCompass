@@ -108,6 +108,7 @@ function organiseMenu(parameterMainArr, parametresDirForUsersFile) {
         if (!line.length) return;
         const [id, group, , label, , , , , , access] = line;
         const btn = document.createElement('button');
+        console.log(btn)
         btn.innerHTML = '- ' + label || '';
         btn.id = id;
 

@@ -16,29 +16,28 @@ $test_mode = true; // Set to true for test mode
 header("Access-Control-Allow-Origin: *");
 session_start();
 
+$user_data = [
+    "mode" => $test_mode ? "test" : "prod"
+];
+
 if ($test_mode) {
     // Test credentials and data for local development
-    $full_name = "Caolán Maguire";
-    $logged_user_email = "caolan.maguire@combilift.com";
-    $access_level = "8";
-
-    // Set language and server path in local/session storage
-    echo "<script>localStorage.setItem('Language','English')</script>";
-    echo "<script>sessionStorage.setItem('ServerPath','http://localhost:8000');</script>";
-
-    // Set user info and access level in session storage
-    echo '<script> sessionStorage.setItem("loggedinusername","' . $full_name . '"); sessionStorage.setItem("loggedinemail","' . $logged_user_email . '"); sessionStorage.setItem("AccessLevel","' . $access_level . '"); </script>';
+    $user_data["full_name"] = "Caolán Maguire";
+    $user_data["logged_user_email"] = "caolan.maguire@combilift.com";
+    $user_data["access_level"] = "8";
+    $user_data["language"] = "English";
+    $user_data["server_path"] = "http://localhost:8000";
 
     // Set PHP session variables for verification and access level
     $_SESSION["verify"] = "True";
-    $_SESSION["TrueAccessLevel"] = $access_level;
+    $_SESSION["TrueAccessLevel"] = $user_data["access_level"];
 
-    // Set access level in JS and load startup script
-    echo ('<script> var AccessLevelForUser = "8"; sessionStorage.setItem("AccessLevel","8");</script>');
-    echo ('<script type="module" src="assets/js/InitialStart/on-startup.js"></script>
-        import OnStartup from "assets/js/InitalStart/on-startup.js";
-        OnStartup();
-    ');
+    // Output user data as a JSON script tag
+    echo '<script id="user-data" type="application/json">'.json_encode($user_data).'</script>';
+
+    // Load main JavaScript module
+    echo '<script type="module" src="assets/js/InitialStart/on-startup.js"></script>';
+
     // Optionally, return or exit to prevent running the rest of the code
     return;
 }
@@ -81,32 +80,35 @@ function display_user_roles()
 if (!is_user_logged_in()) {
     header('location: https://support.combilift.net/login-selection/');
 } else {
-    // Set server path in session storage
-    echo '<script> sessionStorage.setItem("ServerPatah","' . $WebPath . '"); </script>';
     global $current_user;
     $current_user = wp_get_current_user();
     $full_name = $current_user->first_name . ' ' . $current_user->last_name;
     $logged_user_email = $current_user->user_email;
+    $WebPath = isset($WebPath) ? $WebPath : '';
 
-    // Set user info in session storage
-    echo '<script> sessionStorage.setItem("loggedinusername","' . $full_name . '"); sessionStorage.setItem("loggedinemail","' . $logged_user_email . '"); </script>';
-
-    // Assign access level for specific users or based on roles
+    // Prepare user data for JS
+    $user_data["full_name"] = $full_name;
+    $user_data["logged_user_email"] = $logged_user_email;
+    $user_data["server_path"] = $WebPath;
+    $user_data["language"] = "English";
     if (
         $logged_user_email == "caolan.maguire@combilift.com" ||
         $logged_user_email == "andrew.moffett@combilift.com" ||
         $logged_user_email == "antonio.patacho@combilift.com"
     ) {
-        echo ('<script> var AccessLevelForUser = "8"; sessionStorage.setItem("AccessLevel","8");</script>');
+        $user_data["access_level"] = "8";
     } else {
-        echo ('<script> var AccessLevelForUser = "' . display_user_roles() . '"; sessionStorage.setItem("AccessLevel","' . display_user_roles() . '");</script>');
+        $user_data["access_level"] = display_user_roles();
     }
 
     // Set PHP session variables for verification and access level
     $_SESSION["verify"] = "True";
-    $_SESSION["TrueAccessLevel"] = display_user_roles();
+    $_SESSION["TrueAccessLevel"] = $user_data["access_level"];
 
-    // Load initial startup JavaScript
-    echo ('<script src="assets/js/InitialStart/OnStartup.js"></script>');
+    // Output user data as a JSON script tag
+    echo '<script id="user-data" type="application/json">'.json_encode($user_data).'</script>';
+
+    // Load main JavaScript module
+    echo '<script type="module" src="assets/js/InitialStart/OnStartup.js"></script>';
 }
 ?>

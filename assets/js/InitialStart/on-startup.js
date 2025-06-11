@@ -1,22 +1,41 @@
 // --- Utility Functions ---
 
-export function fetchFileSync(url) {
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", url, false);
-    xhr.send(null);
-    return (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 0)) ? xhr.responseText : '';
+const userDataScript = document.getElementById('user-data');
+const userData = JSON.parse(userDataScript.textContent);
+
+localStorage.setItem('Language', userData.language);
+localStorage.setItem('ServerPath', userData.server_path);
+sessionStorage.setItem('loggedinusername', userData.full_name);
+sessionStorage.setItem('loggedinemail', userData.logged_user_email);
+sessionStorage.setItem('AccessLevel', userData.access_level);
+
+
+
+/** Asynchronously fetch a file and return its text, or empty string on failure */
+async function fetchFile(url) {
+    console.log(url);
+    try {
+        const response = await fetch(url);
+        if (!response.ok) return '';
+        return await response.text();
+    } catch {
+        return '';
+    }
 }
 
+/** Remove a set of keys from sessionStorage */
 export function clearSessionKeys(keys) {
     keys.forEach(key => sessionStorage.removeItem(key));
 }
 
+/** Set default language if not already set */
 export function setDefaultLanguage() {
     if (!localStorage.getItem('Language')) {
         localStorage.setItem('Language', 'english');
     }
 }
 
+/** Set default API version in sessionStorage if not set */
 export function setDefaultApi() {
     const DefaultApi = 'API-100';
     if (!sessionStorage.getItem('APIV')) {
@@ -25,9 +44,9 @@ export function setDefaultApi() {
     return sessionStorage.getItem('APIV');
 }
 
-// --- Startup Logic ---
+// --- Main Startup Logic ---
 
-export function onStartup() {
+export async function onStartup() {
     setDefaultApi();
     setDefaultLanguage();
 
@@ -38,37 +57,52 @@ export function onStartup() {
 
     sessionStorage.setItem('UserMadeChanges', new Date() + '\n');
 
-    const serverPath = sessionStorage.getItem('ServerPath');
+    const serverPath = localStorage.getItem('ServerPath');
     const apiVersion = sessionStorage.getItem('APIV');
     const language = localStorage.getItem('Language');
 
-    // Helper to build file paths
     const buildPath = (file) => `${serverPath}/settings/${apiVersion}/${language}/${file}`;
 
-    // Read and store various files
-    sessionStorage.setItem('API_Directory', fetchFileSync(buildPath('DefaultAddParameters.txt')));
-    sessionStorage.setItem('LanguageFileContents', fetchFileSync(buildPath(`LANGUAGE_${language}.txt`)));
-    sessionStorage.setItem('DropDownlist', fetchFileSync(buildPath('DropDown_list.txt')));
-    sessionStorage.setItem('UnitsDirectory', fetchFileSync(buildPath('UnitsDirectory.txt')));
-    sessionStorage.setItem('Bit999', fetchFileSync(buildPath('Parameter_999.txt')));
-    sessionStorage.setItem('Bit1000', fetchFileSync(buildPath('Parameter_1000.txt')));
-    sessionStorage.setItem('Description_special', fetchFileSync(buildPath('Description_special.txt')));
-    sessionStorage.setItem('ParameterMainTEMP', fetchFileSync(buildPath('Parameter_Main.txt')));
-    sessionStorage.setItem('Description_MainTEMP', fetchFileSync(buildPath('Description_Main.txt')));
-    sessionStorage.setItem('TemplateFile', fetchFileSync(buildPath('TemplateFile.clp')));
+    // Load all required files asynchronously
+    const [
+        API_Directory, LanguageFileContents, DropDownlist, UnitsDirectory,
+        Bit999, Bit1000, Description_special, ParameterMainTEMP, Description_MainTEMP, TemplateFile
+    ] = await Promise.all([
+        fetchFile(buildPath('DefaultAddParameters.txt')),
+        fetchFile(buildPath(`LANGUAGE_${language}.txt`)),
+        fetchFile(buildPath('DropDown_list.txt')),
+        fetchFile(buildPath('UnitsDirectory.txt')),
+        fetchFile(buildPath('Parameter_999.txt')),
+        fetchFile(buildPath('Parameter_1000.txt')),
+        fetchFile(buildPath('Description_special.txt')),
+        fetchFile(buildPath('Parameter_Main.txt')),
+        fetchFile(buildPath('Description_Main.txt')),
+        fetchFile(buildPath('TemplateFile.clp'))
+    ]);
 
-    // --- Parse and build dictionaries ---
-    window.MainDescriptionsDict = parseDescriptionDict(sessionStorage.getItem('Description_MainTEMP'));
-    window.SpecialDescriptionsDict = parseSpecialDescriptionDict(sessionStorage.getItem('Description_special'));
-    window.Bit999Dict = parseDescriptionDict(sessionStorage.getItem('Bit999'));
-    window.Bit1000Dict = parseDescriptionDict(sessionStorage.getItem('Bit1000'));
+    // Store loaded files in sessionStorage
+    sessionStorage.setItem('API_Directory', API_Directory);
+    sessionStorage.setItem('LanguageFileContents', LanguageFileContents);
+    sessionStorage.setItem('DropDownlist', DropDownlist);
+    sessionStorage.setItem('UnitsDirectory', UnitsDirectory);
+    sessionStorage.setItem('Bit999', Bit999);
+    sessionStorage.setItem('Bit1000', Bit1000);
+    sessionStorage.setItem('Description_special', Description_special);
+    sessionStorage.setItem('ParameterMainTEMP', ParameterMainTEMP);
+    sessionStorage.setItem('Description_MainTEMP', Description_MainTEMP);
+    sessionStorage.setItem('TemplateFile', TemplateFile);
+
+    // --- Parse and build dictionaries (in memory, not window) ---
+    const MainDescriptionsDict = parseDescriptionDict(Description_MainTEMP);
+    const SpecialDescriptionsDict = parseSpecialDescriptionDict(Description_special);
+    const Bit999Dict = parseDescriptionDict(Bit999);
+    const Bit1000Dict = parseDescriptionDict(Bit1000);
 
     // --- Permissions ---
-    window.ReadPermissionDict = {};
-    window.WritePermissionDict = {};
-    const Template = sessionStorage.getItem('TemplateFile');
-    if (Template) {
-        Template.split('\n').forEach(line => {
+    const ReadPermissionDict = {};
+    const WritePermissionDict = {};
+    if (TemplateFile) {
+        TemplateFile.split('\n').forEach(line => {
             const parts = line.split(',');
             if (parts.length > 9) {
                 ReadPermissionDict[parts[0]] = parts[8];
@@ -78,7 +112,6 @@ export function onStartup() {
     }
 
     // --- Filter and store main parameters and descriptions ---
-    const ParameterMainTEMP = sessionStorage.getItem('ParameterMainTEMP');
     let TempParMain = '', TempDescriptionMain = '', TempSpecialDescription = '', Bit999File = '', Bit1000File = '';
     if (ParameterMainTEMP) {
         ParameterMainTEMP.split('\n').forEach(line => {
@@ -106,18 +139,15 @@ export function onStartup() {
     sessionStorage.setItem('DescriptionMain', TempDescriptionMain);
     sessionStorage.setItem('Description_special', TempSpecialDescription);
 
-    // Clean up temp storage and global variables
+    // Clean up temp storage
     sessionStorage.removeItem('Description_MainTEMP');
     sessionStorage.removeItem('ParameterMainTEMP');
-    window.TempParMain = undefined;
-    window.TempDescriptionMain = undefined;
-    window.MainDescriptionsDict = undefined;
 
     // Redirect to front page
     location.href = '/public/select-file.php';
 }
 
-// --- Helper Parsers ---
+// --- Helper Parsers (unchanged, but should ideally move to a separate module) ---
 
 export function parseDescriptionDict(text) {
     const dict = {};

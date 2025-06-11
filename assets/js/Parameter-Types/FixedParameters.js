@@ -1,5 +1,6 @@
 import sessionStorageService from "../modules/sessionStorageService.js";
 import { moCAS, hydFunctionsInputSetup, passwordList, hydFunctionIdList } from "../main.js";
+// import { userParametersFileDict } from "../menu-button-functions.js"
 
 // Only require chai when running in a Node.js/testing environment
 if (typeof module !== 'undefined' && typeof require !== 'undefined') {
@@ -298,7 +299,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 
 		BottomTR = document.createElement('tr');
 		Table.appendChild(BottomTR);
-		if (AccessLevelForUser >= 8) {
+		if (Number(sessionStorageService.get('AccessLevel')) >= 8) {
 			let DateInput = document.createElement('input');
 			DateInput.setAttribute('type', 'date');
 			DateInput.setAttribute('id', 'UpdateDealerDate');
@@ -780,53 +781,53 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 	}
 
 
-
+	console.log(LineNumber);
 	//Set Hourmeters
 	if (LineNumber == 32 || LineNumber == 33 || LineNumber == 34 || LineNumber == 35 || LineNumber == 36) {
 
-		Table = document.getElementById('topDefineDescription');
+		let Table = document.getElementById('topDefineDescription');
 
-		TH = document.createElement('p');
+		let TH = document.createElement('p');
 		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
 
 
-		TR = document.createElement('tr');
+		let TR = document.createElement('tr');
 		Table.appendChild(TR);
-		MoCASLeft_2 = document.createElement('td');
+		let MoCASLeft_2 = document.createElement('td');
 		TR.appendChild(MoCASLeft_2);
 
 		if (Number(sessionStorage.getItem('AccessLevel')) >= 8) {
-			CheckLine = Line.toString();
+			let CheckLine = Line.toString();
 
-			FormDiv_2 = document.createElement('div');
+			let FormDiv_2 = document.createElement('div');
 			FormDiv_2.setAttribute('id', 'MocasDivArea');
-			Form_2 = document.createElement('form');
+			let Form_2 = document.createElement('form');
 			Form_2.setAttribute('action', 'MoCAS/MoCAS_hourmeter.php');
 			Form_2.setAttribute('method', 'POST');
 			Form_2.setAttribute('name', 'MocasVerifyForm');
 
 			//create elements for the form
-			SerialNumberField_2 = document.createElement('input');
-			ModelField_2 = document.createElement('input');
-			UsernameField_2 = document.createElement('input');
-			UseremailField_2 = document.createElement('input');
-			AccessLevelField_2 = document.createElement('input');
-			IndexField_2 = document.createElement('input');
-			ModuleField_2 = document.createElement('input');
-			TimeWindow_2 = document.createElement('input');
-			TextareaField_2 = document.createElement('textarea');
-			SubmitButton_2 = document.createElement('input');
+			let SerialNumberField_2 = document.createElement('input');
+			let ModelField_2 = document.createElement('input');
+			let UsernameField_2 = document.createElement('input');
+			let UseremailField_2 = document.createElement('input');
+			let AccessLevelField_2 = document.createElement('input');
+			let IndexField_2 = document.createElement('input');
+			let ModuleField_2 = document.createElement('input');
+			let TimeWindow_2 = document.createElement('input');
+			let TextareaField_2 = document.createElement('textarea');
+			let SubmitButton_2 = document.createElement('input');
 
-			Hourmeter_2 = document.createElement('input');
+			let Hourmeter_2 = document.createElement('input');
 
 			//create element labels for the ones showing in page
-			SerialNumberField_label_2 = document.createElement('label');
-			UsernameField_label_2 = document.createElement('label');
-			TimeWindow_label_2 = document.createElement('label');
-			Hourmeter_label_2 = document.createElement('label');
+			let SerialNumberField_label_2 = document.createElement('label');
+			let UsernameField_label_2 = document.createElement('label');
+			let TimeWindow_label_2 = document.createElement('label');
+			let Hourmeter_label_2 = document.createElement('label');
 
 			//define the types for each element
 			SerialNumberField_2.type = 'text';
@@ -837,7 +838,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 			IndexField_2.type = 'text';
 			ModuleField_2.type = 'text';
 			TimeWindow_2.type = 'text';
-			TextareaField_2.type = 'text';
+			// TextareaField_2.type = 'text';
 			SubmitButton_2.type = 'submit';
 
 			Hourmeter_2.type = 'text';
@@ -1092,21 +1093,21 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 
 	}
 
-	Table = document.getElementById('topDefineDescription');
+	let Table = document.getElementById('topDefineDescription');
 
-	TH = document.createElement('p');
+	let TH = document.createElement('p');
 	TH.setAttribute('id', 'WorkSpaceTitle');
 	TH.innerHTML = HTMLObject.innerHTML;
 	Table.appendChild(TH);
 	document.getElementById('topDefineDescription').appendChild(descriptionArea);
 
-	TR = document.createElement('tr');
+	let TR = document.createElement('tr');
 	Table.appendChild(TR);
-	TDLeft = document.createElement('p');
+	let TDLeft = document.createElement('p');
 	TDLeft.setAttribute('id', 'ReadTitle');
 	TDLeft.innerHTML = LanguageDict["AppInfo"];
 	TR.appendChild(TDLeft);
-	TDRight = document.createElement('p');
+	let TDRight = document.createElement('p');
 	TDRight.setAttribute('id', 'ReadResult');
 	TDRight.setAttribute('id', 'ReadResult');
 	TDRight.innerHTML = Line[4] + '.' + Line[5] + '.' + Line[6] + '.' + Line[7];
@@ -1121,11 +1122,11 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 	TR.appendChild(TDLeft);
 	TDRight = document.createElement('p');
 	TDRight.setAttribute('id', 'ReadResult');
-	date = new Date(Line[1] * 1000);
+	let date = new Date(Line[1] * 1000);
 	if (Line[1] == 0) {
 		TDRight.innerHTML = 'NA';
 	} else {
-		month = Number(date.getMonth()) + 1;
+		let month = Number(date.getMonth()) + 1;
 		TDRight.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
 	}
 	TR.appendChild(TDRight);

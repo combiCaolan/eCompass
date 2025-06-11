@@ -14,6 +14,8 @@
 // Utility: Get current page name
 const currentPage = window.location.pathname.split('/').pop();
 
+const userParametersFileDict = {};
+
 // Permissions dictionaries
 const readPermissionDict = {};
 const writePermissionDict = {};
@@ -55,7 +57,7 @@ let changesMadePreDownload = false;
  * Opens eCompass in a new tab and passes a name via localStorage.
  * @param {string} passName 
  */
-function openInNewTab(passName) {
+export function openInNewTab(passName) {
     localStorage.setItem('OpenInNewTab', passName);
     window.open('https://support.combilift.net/ecompass');
 }
@@ -63,7 +65,7 @@ function openInNewTab(passName) {
 /**
  * Opens a new file, warning if there are unsaved changes.
  */
-function openNewFile() {
+export function openNewFile() {
     if (changesMadePreDownload) {
         const confirmLeave = confirm(LanguageDict['GeneralFileLostWarning']);
         if (!confirmLeave) return;
@@ -76,7 +78,7 @@ function openNewFile() {
  * @param {string} filename 
  * @param {string} text 
  */
-function webDownloadFile(filename, text) {
+export function webDownloadFile(filename, text) {
     const element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename || 'COMBI_PAR.clp');
@@ -89,7 +91,7 @@ function webDownloadFile(filename, text) {
 /**
  * Toggles the mobile menu.
  */
-function mobileMenuFunction() {
+export function mobileMenuFunction() {
     const nav = document.getElementById("myTopnav");
     if (!nav) return;
     if (nav.className === "topnav") {
@@ -102,7 +104,7 @@ function mobileMenuFunction() {
 /**
  * Toggles the home menu and tree view.
  */
-function homeMenuClick() {
+export function homeMenuClick() {
     const tree = document.getElementsByClassName('tree')[0];
     if (!tree) return;
     if (tree.getAttribute('state') !== 'clicked' || tree.getAttribute('state') == null) {
@@ -121,7 +123,7 @@ function homeMenuClick() {
 /**
  * Toggles the parameters menu and viewer.
  */
-function parametersMenuToggle() {
+export function parametersMenuToggle() {
     const menuLink = document.getElementById('MenuLink');
     const mobileMenuText = document.getElementById('MobileMenuButtonForText');
     if (menuLink && mobileMenuText) {
@@ -141,7 +143,7 @@ function parametersMenuToggle() {
  * Opens a file dialog to read a .clp file and loads it into sessionStorage.
  * @param {string} [defaultFileName] 
  */
-function readParameters(defaultFileName) {
+export function readParameters(defaultFileName) {
     if (currentPage === 'parameter-editor.php') {
         const confirmLeave = confirm(LanguageDict['GeneralFileLostWarning']);
         if (!confirmLeave) return;
@@ -184,7 +186,7 @@ function readParameters(defaultFileName) {
  * Reads a default file via AJAX and loads it into sessionStorage.
  * @param {string} path 
  */
-function readDefaultFile(path) {
+export function readDefaultFile(path) {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
@@ -201,7 +203,7 @@ function readDefaultFile(path) {
             });
 
             // Build UserParametersFileDict
-            const userParametersFileDict = {};
+            let userParametersFileDict = {};
             fileContent.split('\n').forEach(line => {
                 const key = line.split(',')[0];
                 if (key) userParametersFileDict[key] = line;
@@ -280,7 +282,7 @@ function readDefaultFile(path) {
  * @param {string} filename 
  * @param {string} text 
  */
-function download(filename, text) {
+export function download(filename, text) {
     const element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename);
@@ -293,7 +295,7 @@ function download(filename, text) {
 /**
  * Downloads the file after checking for errors and removed parameters.
  */
-function webDownloadFileWithChecks() {
+export function webDownloadFileWithChecks() {
     if ((typeof MinError !== 'undefined' && MinError.length !== 0) ||
         (typeof MaxError !== 'undefined' && MaxError.length !== 0)) {
         const userAuth = confirm('Errors still exist on this file - are you sure you want to download?');
@@ -314,7 +316,7 @@ function webDownloadFileWithChecks() {
 /**
  * Closes the file dialog, warning if there are unsaved changes.
  */
-function closeFileDialog() {
+export function closeFileDialog() {
     if (changesMadePreDownload) {
         const confirmLeave = confirm(LanguageDict['GeneralFileLostWarning']);
         if (!confirmLeave) return;
@@ -325,7 +327,7 @@ function closeFileDialog() {
 /**
  * Opens the compare dialog UI.
  */
-function compareDialog() {
+export function compareDialog() {
     const topDefineTable = document.getElementById('topDefineTable');
     const topDefineDescription = document.getElementById('topDefineDescription');
     if (!topDefineTable || !topDefineDescription) return;
@@ -387,10 +389,33 @@ function compareDialog() {
 /**
  * Opens the new file dialog, warning if there are unsaved changes.
  */
-function newFile() {
+export function newFile() {
     if (changesMadePreDownload) {
         const confirmLeave = confirm(LanguageDict['GeneralFileLostWarning']);
         if (!confirmLeave) return;
     }
     $("#DefaultFileList").dialog();
 }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('#OpenFileButton').forEach(btn => {
+    console.log(btn);
+    btn.addEventListener('click', readParameters);
+  });
+
+  document.querySelectorAll('#NewFileButton').forEach(btn => {
+    console.log(btn);
+    btn.addEventListener('click', newFile);
+  });
+
+  document.querySelectorAll('#OpenInNewTab').forEach(btn => {
+    console.log(btn);
+    btn.addEventListener('click', openNewFile);
+  });
+
+  document.querySelectorAll('#CloseFileButton').forEach(btn => {
+    console.log(btn);
+    btn.addEventListener('click', closeFileDialog);
+  });
+});

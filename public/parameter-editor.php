@@ -162,7 +162,7 @@
     <script src="../assets/js/Parameter-Manipulation/remove-parameter.js"></script>
     <script src="../assets/js/Parameter-Manipulation/add-parameters.js"></script>
     <!-- <script src="../assets/js/Parameter-Types/password.js"></script> -->
-    <script src="../assets/js/Parameter-Manipulation/UpdateParameters/parameter-change.js"></script>
+    <script type="module" src="../assets/js/Parameter-Manipulation/UpdateParameters/parameter-change.js"></script>
     <script type="module" src="../assets/js/Parameter-Types/bit900.js"></script>
     <script type="module" src="../assets/js/Parameter-Types/bit1000.js"></script>
     <script type="module" src="../assets/js/Parameter-Types/SerialNumberLogic.js"></script>
@@ -214,14 +214,15 @@
     <!-- <script src="../assets/js/LanguageLogic/implement.js"></script> -->
     <script src="../assets/js/LanguageLogic/set-elements-for-language.js"></script>
     <!-- <script src="../assets/js/Api-Logic/Api-Change.js"></script> -->
-    <script src="../assets/js/menu-button-functions.js"></script>
+    <script type="module" src="../assets/js/menu-button-functions.js"></script>
     <script src="../assets/js/Error.js"></script>
     <script src="../assets/js/menu-logic.js"></script>
 
-    <script>
+    <script type="module">
         // Initialize the tree view and perform integrity checks on startup
 
         import { treeViewClick } from '../assets/js/parameters-view.js';
+        import { IntegrityCheckOnStartup } from '../assets/js/post-load.js';
 
         treeViewClick(document.getElementById('2'), 2);
         IntegrityCheckOnStartup();

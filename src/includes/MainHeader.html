@@ -57,11 +57,15 @@
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-            <a onclick="newFile()" id="NewFileButton">New</a>
-            <a onclick="readParameters()" id="OpenFileButton">Open</a>
-            <a onclick="OpenNewFile()" id="OpenInNewTab">Open new file in new tab</a>
+            <!-- newFile() -->
+            <a id="NewFileButton">New</a>
+            <!-- readParameters() -->
+            <button id="OpenFileButton">Open</button>
+            <!-- OpenNewFile() -->
+            <a id="OpenInNewTab">Open new file in new tab</a>
             <a onclick="location.href = 'Download.php';" id="SaveFileButton">Save</a>
-            <a onclick="closeFileDialog()" id="CloseFileButton">Close</a>
+            <!-- closeFileDialog() -->
+            <a id="CloseFileButton">Close</a>
         </div>
     </div>
 

@@ -1182,7 +1182,9 @@ body {
     z-index: 3;
 }
 
-.dropdown-content a {
+.dropdown-content a, .dropdown-content button {
+    background-color: transparent;
+    border: 0;
     float: none;
     color: black;
     padding: 15px;
