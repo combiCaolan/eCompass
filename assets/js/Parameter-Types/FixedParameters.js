@@ -335,7 +335,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 
 		BottomTR = document.createElement('tr');
 		Table.appendChild(BottomTR);
-		if (AccessLevelForUser >= 8) {
+		if (Number(sessionStorageService.get('AccessLevel')) >= 8) {
 			let DateInput = document.createElement('input');
 			DateInput.setAttribute('type', 'date');
 			DateInput.setAttribute('id', 'UpdateCustomerDate');
@@ -407,7 +407,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 		}
 		TR.appendChild(TDRight);
 
-		if (AccessLevelForUser > 6) {
+		if (Number(sessionStorageService.get('AccessLevel')) > 6) {
 
 			let DefaultTR = document.createElement('tr');
 			Table.appendChild(DefaultTR);
@@ -947,19 +947,19 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 			}
 			catch (err) {
 			}
-			CheckLine = Line.toString();
-			MoCASDropDownDiv = document.createElement('div');
+			let CheckLine = Line.toString();
+			let MoCASDropDownDiv = document.createElement('div');
 			MoCASDropDownDiv.setAttribute('id', 'DropDownDivOption');
 
-			MoCASDropDown = document.createElement('select');
+			let MoCASDropDown = document.createElement('select');
 			MoCASDropDown.setAttribute('id', 'CurrentDropDownValue');
 			MoCASDropDown.setAttribute('onchange', 'MocasUpdate(`' + CheckLine + '`)');
 
-			MoCASDropDownOptionOn = document.createElement('option');
+			let MoCASDropDownOptionOn = document.createElement('option');
 			MoCASDropDownOptionOn.innerHTML = LanguageDict['MocasOn'];
 			MoCASDropDownOptionOn.value = '1';
 
-			MoCASDropDownOptionOff = document.createElement('option');
+			let MoCASDropDownOptionOff = document.createElement('option');
 			MoCASDropDownOptionOff.innerHTML = LanguageDict['MocasOff'];
 			MoCASDropDownOptionOff.value = '0';
 
@@ -980,9 +980,9 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 				} catch (err) {
 				}
 
-				FormDiv = document.createElement('div');
+				let FormDiv = document.createElement('div');
 				FormDiv.setAttribute('id', 'MocasDivArea');
-				Form = document.createElement('form');
+				let Form = document.createElement('form');
 				Form.setAttribute('action', '../src/mocas/MoCAS.php');
 				Form.setAttribute('method', 'POST');
 				Form.setAttribute('name', 'MocasVerifyForm');

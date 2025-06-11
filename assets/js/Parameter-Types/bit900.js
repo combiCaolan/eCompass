@@ -1,4 +1,4 @@
-// import sessionStorageService from "../modules/sessionStorageService.js";
+import sessionStorageService from "../modules/sessionStorageService.js";
 
 /**
  * Displays bit options for a Bit999 parameter, allowing the user to select and update bit values.
@@ -199,7 +199,7 @@ export function BitDropDown999(
         const [optionText, optionValue] = [parts[0], parts[1]];
         optionsDict[optionValue] = optionText;
 
-        if (Number(writePermissionDict[parentParameterIndex]) <= Number(AccessLevelForUser)) {
+        if (Number(writePermissionDict[parentParameterIndex]) <= Number(sessionStorageService.get('AccessLevel'))) {
             const makeOption = (val, txt) => {
                 const opt = document.createElement('option');
                 opt.value = val;
@@ -209,7 +209,7 @@ export function BitDropDown999(
             dropDown.appendChild(makeOption(optionValue, optionText));
             defaultValue.appendChild(makeOption(optionValue, optionText));
             factoryValue.appendChild(makeOption(optionValue, optionText));
-            if (Number(AccessLevelForUser) < 8) {
+            if (Number(sessionStorageService.get('AccessLevel')) < 8) {
                 defaultValue.disabled = true;
                 factoryValue.disabled = true;
             }
@@ -221,7 +221,7 @@ export function BitDropDown999(
 
     // Set values or text
     const getBitVal = (arr, bit) => Array.isArray(arr) ? arr[bit] : arr.split(',')[bit];
-    if (Number(writePermissionDict[parentParameterIndex]) <= Number(AccessLevelForUser)) {
+    if (Number(writePermissionDict[parentParameterIndex]) <= Number(sessionStorageService.get('AccessLevel'))) {
         dropDown.value = getBitVal(bitResults, bit);
         defaultValue.value = getBitVal(defaultBitResults, bit);
         factoryValue.value = getBitVal(factoryBitResults, bit);
@@ -239,7 +239,7 @@ export function BitDropDown999(
     document.getElementById('topDefineDescription').appendChild(factoryValue);
 
     // Set onchange handlers if editable
-    if (Number(writePermissionDict[parentParameterIndex]) <= Number(AccessLevelForUser)) {
+    if (Number(writePermissionDict[parentParameterIndex]) <= Number(sessionStorageService.get('AccessLevel'))) {
         dropDown.onchange = () => BitDropDownChange999(bitResults, bit, parentParameterIndex, "Current");
         defaultValue.onchange = () => BitDropDownChange999(defaultBitResults, bit, parentParameterIndex, "Default");
         factoryValue.onchange = () => BitDropDownChange999(factoryBitResults, bit, parentParameterIndex, "Factory");

@@ -42,7 +42,7 @@ export function showParameterNotPresent(lineNumber, htmlObject) {
 
     const workSpaceTitle = document.createElement('p');
     workSpaceTitle.id = 'WorkSpaceTitle';
-    workSpaceTitle.innerHTML = htmlObject.innerHTML.replace('-','') || 'unknown';
+    workSpaceTitle.innerHTML = htmlObject.innerHTML || 'unknown';
 
     const description = document.createElement('p');
     description.id = 'description';
@@ -69,14 +69,14 @@ export function showParameterNotPresent(lineNumber, htmlObject) {
 }
 
 // Build a dictionary of user parameters from sessionStorage
-let userParametersFileDict = {};
-const parametersArr = (sessionStorage.getItem('Parameters') || '').split('\n');
-parametersArr.forEach(line => {
-    if (line) {
-        const parts = line.split(',');
-        userParametersFileDict[parts[0]] = line;
-    }
-});
+// let userParametersFileDict = {};
+// const parametersArr = (sessionStorage.getItem('Parameters') || '').split('\n');
+// parametersArr.forEach(line => {
+//     if (line) {
+//         const parts = line.split(',');
+//         userParametersFileDict[parts[0]] = line;
+//     }
+// });
 
 /**
  * Handles clicking on a parameter in the tree view.

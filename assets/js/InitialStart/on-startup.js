@@ -1,5 +1,7 @@
 // --- Utility Functions ---
 
+import sessionStorageService from "../modules/sessionStorageService.js";
+
 const userDataScript = document.getElementById('user-data');
 const userData = JSON.parse(userDataScript.textContent);
 
@@ -111,19 +113,22 @@ export async function onStartup() {
         });
     }
 
+    console.log('ReadPermissionDict:', ReadPermissionDict);
+    console.log('WritePermissionDict:', WritePermissionDict);
+
     // --- Filter and store main parameters and descriptions ---
     let TempParMain = '', TempDescriptionMain = '', TempSpecialDescription = '', Bit999File = '', Bit1000File = '';
     if (ParameterMainTEMP) {
         ParameterMainTEMP.split('\n').forEach(line => {
             const idx = line.split(',')[0];
-            if (!idx) return;
-            if (idx === '1' && Number(window.AccessLevelForUser) > 7) {
+            // if (!idx) return;
+            if (idx === '1' && Number(sessionStorageService.get('AccessLevel')) > 7) {
                 TempParMain += line + '\n';
                 TempDescriptionMain += MainDescriptionsDict[Number(idx)] || '';
             } else if (Number(idx) > 1 && Number(idx) < 64) {
                 TempParMain += line + '\n';
                 TempDescriptionMain += MainDescriptionsDict[Number(idx)] || '';
-            } else if (ReadPermissionDict[Number(idx)] <= Number(window.AccessLevelForUser)) {
+            } else if (ReadPermissionDict[Number(idx)] <= Number(sessionStorageService.get('AccessLevel'))) {
                 TempParMain += line + '\n';
                 TempDescriptionMain += MainDescriptionsDict[Number(idx)] || '';
                 if (Bit999Dict[Number(idx)]) Bit999File += Bit999Dict[Number(idx)];

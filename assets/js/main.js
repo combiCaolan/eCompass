@@ -13,7 +13,7 @@ window.ChangesMadePreDownload = false;
 window.ErrorCount = false;
 
 // Set up parameter description path
-const parameterDirectoryPath = `${sessionStorage.getItem('ServerPath')}/eCompass/settings/${sessionStorage.getItem('APIV')}/${localStorage.getItem('Language')}/Description_Main.txt`;
+const parameterDirectoryPath = `${localStorage.getItem('ServerPath')}/eCompass/settings/${sessionStorage.getItem('APIV')}/${localStorage.getItem('Language')}/Description_Main.txt`;
 const rawFile = new XMLHttpRequest();
 rawFile.open("GET", parameterDirectoryPath, false);
 rawFile.onreadystatechange = function () {

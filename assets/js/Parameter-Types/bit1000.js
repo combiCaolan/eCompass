@@ -358,21 +358,21 @@ export function Bit1000DisplayOptionsFunction(Line, ClickedButton) {
 	}
 
 	//Create the view and each option for the user
-	Title = document.createElement('p');
+	let Title = document.createElement('p');
 	Title.innerHTML = ClickedButton.innerHTML;
 	Title.setAttribute('id', 'WorkSpaceTitle');
 	//document.getElementById('topDefineDescription').appendChild(Title);
 
 	//start Description
-	Description = document.createElement('p');
+	let Description = document.createElement('p');
 	Description.setAttribute('id', 'description');
 
 	//Find Description of parameter
-	ParameterDescription = sessionStorage.getItem('DescriptionMain');
+	let ParameterDescription = sessionStorage.getItem('DescriptionMain');
 
 	Description.innerHTML = MainDescriptionsDict[Index];
 
-	unorderedList = document.createElement('ul');
+	let unorderedList = document.createElement('ul');
 	unorderedList.setAttribute('id', 'Bit1000DropDownDiv');
 
 	//Make Buttons for each option

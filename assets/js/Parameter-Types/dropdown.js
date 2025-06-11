@@ -42,7 +42,7 @@ export function dropDownFunction(parameterLine, object) {
 
     // Truck image for parameter 2
     if (numberToFind === 2) {
-        const imgUrl = `${sessionStorage.getItem('ServerPath')}/assets/truck-images/${parameterLine[3]}.png`;
+        const imgUrl = `${localStorage.getItem('ServerPath')}/assets/truck-images/${parameterLine[3]}.png`;
         const http = new XMLHttpRequest();
         http.open('HEAD', imgUrl, false);
         http.send();

@@ -2,6 +2,7 @@
 import { treeViewClick } from './parameters-view.js';
 import { MenuParametersOnclick } from './Parameter-Types/FixedParameters.js';
 import { PostLoadedRun, BitLabelChecker } from './post-load.js';
+import sessionStorageService from './modules/sessionStorageService.js';
 window.treeViewClick = treeViewClick; // Now available globally
 
 // import { MenuParametersOnclick, treeViewClick } from './parameters-view.js';
@@ -57,10 +58,15 @@ function getParametersArray(key) {
  */
 function makeMenu() {
     // Build lookup for parameter locations
+    console.log(sessionStorageService.get('ParameterMain'));
+    console.log(getParametersArray('ParameterMain'));
     const parameterMainArr = getParametersArray('ParameterMain');
     const parametersLocationList = {};
     parameterMainArr.forEach(line => {
-        if (line.length >= 2) parametersLocationList[line[0]] = line[1];
+        // if (line.length >= 2) 
+        parametersLocationList[line[0]] = line[1];
+        console.log('yellow')
+        console.log(line);
     });
 
     // Build lookup for user's file parameters
@@ -104,11 +110,10 @@ function organiseMenu(parameterMainArr, parametresDirForUsersFile) {
     console.log(parameterMainArr);
     console.log(parametresDirForUsersFile);
     parameterMainArr.forEach(line => {
-        // console.log(line);
-        if (!line.length) return;
+        console.log(line);
+        // if (!line.length) return;
         const [id, group, , label, , , , , , access] = line;
         const btn = document.createElement('button');
-        console.log(btn)
         btn.innerHTML = '- ' + label || '';
         btn.id = id;
 
@@ -187,6 +192,8 @@ function organiseMenu(parameterMainArr, parametresDirForUsersFile) {
     // Build a set of IDs from parameterMainArr for quick lookup
     const mainArrIds = new Set(parameterMainArr.map(line => line[0]));
 
+    console.log(mainArrIds);
+
     Object.entries(parametresDirForUsersFile).forEach(([id, lineStr]) => {
         if (mainArrIds.has(id)) return; // Already handled above
 
@@ -198,9 +205,11 @@ function organiseMenu(parameterMainArr, parametresDirForUsersFile) {
             btn.innerHTML = `Parameter ${id}`;
             // You can customize the label as needed
             // Optionally, append to a default parent or a special section
-            document.body.appendChild(btn); // Change this to your desired parent
+            document.getElementById('I').appendChild(btn);
+            // document.body.appendChild(btn); // Change this to your desired parent
         }
-        btn.onclick = () => MenuParametersOnclick(parametresDirForUsersFile[id], btn);
+        // btn.onclick = () => MenuParametersOnclick(parametresDirForUsersFile[id], btn);
+        btn.onclick = () => treeViewClick(document.getElementById(btn.id), btn);
     });
 
     hideAllMenus();
@@ -216,6 +225,7 @@ function checkParameterReadAccess() {
     parametersArr.forEach(line => {
         if (!line.length) return;
         const [id, , , , , , , , , access] = line;
+        alert(access)
         if (Number(access) > Number(window.AccessLevelForUser)) {
             const btn = document.getElementById(id);
             const div = document.getElementById('constant' + id);
@@ -241,3 +251,4 @@ function checkParameterReadAccess() {
 
 // Initialize menu on load
 document.addEventListener('DOMContentLoaded', makeMenu);
+// window.makeMenu = makeMenu;

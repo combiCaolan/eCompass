@@ -14,11 +14,11 @@
 // Utility: Get current page name
 const currentPage = window.location.pathname.split('/').pop();
 
-const userParametersFileDict = {};
+window.userParametersFileDict = window.userParametersFileDict || {};
 
 // Permissions dictionaries
-const readPermissionDict = {};
-const writePermissionDict = {};
+window.readPermissionDict = window.readPermissionDict || {};
+window.writePermissionDict = window.writePermissionDict || {};
 
 // Parse template permissions from sessionStorage
 const template = sessionStorage.getItem('TemplateFile');
@@ -170,11 +170,16 @@ export function readParameters(defaultFileName) {
 
             // Build UserParametersFileDict
             const lines = data.split('\n');
-            const userParametersFileDict = {};
+            console.log(lines);
+            // const userParametersFileDict = {};
             lines.forEach(line => {
                 const key = line.split(',')[0];
-                if (key) userParametersFileDict[key] = line;
+                console.log(key);
+                console.log(line);
+                if (key) window.userParametersFileDict[key] = line;
             });
+
+            console.log(userParametersFileDict);
 
             location.href = 'parameter-editor.php';
         };
