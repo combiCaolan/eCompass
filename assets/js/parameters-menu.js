@@ -49,7 +49,7 @@ function hideAllMenus() {
  * @returns {Array<Array<string>>}
  */
 function getParametersArray(key) {
-    const raw = sessionStorage.getItem(key) || '';
+    const raw = sessionStorageService.get(key) || '';
     return raw.replace(/\r/g, '\n').split('\n').filter(Boolean).map(line => line.split(','));
 }
 
@@ -84,15 +84,15 @@ function makeMenu() {
 		ApiVersion = ParametersDirForUsersFile[6].split(',')[3];
     } catch (err) {}
     if (availableApis.includes(apiVersion)) {
-        const currentApiVersion = (sessionStorage.getItem('APIV') || '').replace('API-', '');
+        const currentApiVersion = (sessionStorageService.get('APIV') || '').replace('API-', '');
         if (apiVersion !== currentApiVersion) {
             alert('Changing eCompass to the version of your file. Please reopen the file again.');
-            sessionStorage.setItem('APIV', 'API-' + apiVersion);
+            sessionStorageService.set('APIV', 'API-' + apiVersion);
             location.href = 'index.php';
             return;
         }
     } else {
-		const currentApiVersion = (sessionStorage.getItem('APIV') || '').replace('API-', '');
+		const currentApiVersion = (sessionStorageService.get('APIV') || '').replace('API-', '');
 		alert(currentApiVersion)
 		alert(apiVersion)
         alert('The file you have loaded is requesting an API version that is not available on eCompass - please contact Combilift');
@@ -234,21 +234,6 @@ function checkParameterReadAccess() {
         }
     });
 }
-
-// Placeholder functions for compatibility with existing codebase
-// function menuParametersOnClick(param, btn) {
-//     // Implement as needed
-// }
-// function treeViewClick(btn, id) {
-//     // Implement as needed
-// }
-// function postLoadedRun() {
-//     // Implement as needed
-// }
-// function bitLabelChecker() {
-//     // Implement as needed
-// }
-
 // Initialize menu on load
 document.addEventListener('DOMContentLoaded', makeMenu);
 // window.makeMenu = makeMenu;

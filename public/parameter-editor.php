@@ -209,7 +209,7 @@
     </script>
     <script type="module" src="../assets/js/Parameter-Types/FixedParameters.js"></script>
     <script type="module" src="../assets/js/parameters-menu.js"></script>
-    <script src="../assets/js/Parameter-Manipulation/UpdateParameters/update-parameters.js"></script>
+    <script type="module" src="../assets/js/Parameter-Manipulation/UpdateParameters/update-parameters.js"></script>
     <script src="../assets/js/Parameter-Manipulation/UpdateParameters/change-build-date.js"></script>
     <!-- <script src="../assets/js/LanguageLogic/implement.js"></script> -->
     <script src="../assets/js/LanguageLogic/set-elements-for-language.js"></script>

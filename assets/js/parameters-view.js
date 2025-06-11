@@ -4,6 +4,7 @@ import { dropDownFunction } from "./Parameter-Types/dropdown.js";
 import { SerialNumberFunction } from "./Parameter-Types/SerialNumberLogic.js";
 import { Bit999DisplayOptionsFunction } from "./Parameter-Types/bit900.js";
 import { Bit1000DisplayOptionsFunction } from "./Parameter-Types/bit1000.js";
+import sessionStorageService from "./modules/sessionStorageService.js";
 
 // import sessionStorageService from './modules/sessionStorageService.js';
 
@@ -103,7 +104,7 @@ export function treeViewClick(value, objectId, msg) {
     // Refresh userParametersFileDict if msg is undefined
     if (typeof msg === 'undefined') {
         userParametersFileDict = {};
-        (sessionStorage.getItem('Parameters') || '').split('\n').forEach(line => {
+        (sessionStorageService.get('Parameters') || '').split('\n').forEach(line => {
             if (line) {
                 const parts = line.split(',');
                 userParametersFileDict[parts[0]] = line;
@@ -141,7 +142,6 @@ export function treeViewClick(value, objectId, msg) {
         return;
     }
 
-    console.log(bitParameters999);
     if (bitParameters999.includes(indexNumber)) {
         Bit999DisplayOptionsFunction(lineArr.toString(), document.getElementById(indexNumber));
         return;

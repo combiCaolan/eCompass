@@ -1,9 +1,11 @@
+import { MenuParametersOnclick } from './Parameter-Types/FixedParameters.js';
+
 /**
  * Utility functions to update parameter values in sessionStorage.
  * Each function updates a specific parameter field by line number.
  */
 
-function updateParameter(lineNumber, fieldIndex, newValue) {
+export function updateParameter(lineNumber, fieldIndex, newValue) {
     const parameters = (sessionStorage.getItem('Parameters') || '').split('\n');
     let updated = false;
     for (let i = 0; i < parameters.length; i++) {
@@ -21,23 +23,23 @@ function updateParameter(lineNumber, fieldIndex, newValue) {
     }
 }
 
-function UpdateCurrentValue(lineNumber, newValue) {
+export function UpdateCurrentValue(lineNumber, newValue) {
     updateParameter(lineNumber, 1, newValue);
 }
 
-function UpdateDefaultValue(lineNumber, newValue) {
+export function UpdateDefaultValue(lineNumber, newValue) {
     updateParameter(lineNumber, 2, newValue);
 }
 
-function UpdateFactoryValue(lineNumber, newValue) {
+export function UpdateFactoryValue(lineNumber, newValue) {
     updateParameter(lineNumber, 3, newValue);
 }
 
-function UpdateMinValue(lineNumber, newValue) {
+export function UpdateMinValue(lineNumber, newValue) {
     updateParameter(lineNumber, 4, newValue);
 }
 
-function UpdateMaxValue(lineNumber, newValue) {
+export function UpdateMaxValue(lineNumber, newValue) {
     updateParameter(lineNumber, 5, newValue);
 }
 
@@ -45,7 +47,7 @@ function UpdateMaxValue(lineNumber, newValue) {
  * Updates the current value for a parameter using a dropdown and logs the change.
  * @param {string} parameterLine - The CSV line for the parameter.
  */
-function MocasUpdate(parameterLine) {
+export function MocasUpdate(parameterLine) {
     const fields = parameterLine.split(',');
     const paramId = fields[0];
     const dropdown = document.getElementById('CurrentDropDownValue');

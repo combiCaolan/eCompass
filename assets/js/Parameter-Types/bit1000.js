@@ -1,5 +1,3 @@
-// import sessionStorageService from "../modules/sessionStorageService.js";
-
 import sessionStorageService from "../modules/sessionStorageService.js";
 
 export function ByteMakeup(PassedBits, StartBit, EndBit) {
@@ -97,9 +95,6 @@ export function ByteMakeup(PassedBits, StartBit, EndBit) {
 
 export function BitDropDownChange1000(StartBit, EndBit, BitResult, ParentIndex, BitType, ClickedButton) {
 
-	//console.log('Start ' + StartBit);
-	//console.log('End ' + EndBit);
-
 	if (BitType == 'Current') {
 		ExistingValue = UserParametersFileDict[Number(ParentIndex)].split(',')[1];
 		DropDownValue = document.getElementById('CurrentBitDropValue').value;
@@ -111,19 +106,13 @@ export function BitDropDownChange1000(StartBit, EndBit, BitResult, ParentIndex, 
 		DropDownValue = document.getElementById('FactoryBitDropValue').value;
 	}
 
-	//alert(DropDownValue);
-	//alert(ExistingValue);
 	counter = StartBit;
 	while (counter <= EndBit) {
 		ExistingValue = ExistingValue & ~(1 << counter);
 		counter++;
-		//alert(ExistingValue);
 	}
 
 	UpdatedValue = Number(ExistingValue) + Number(DropDownValue);
-
-	//alert(UpdatedValue);
-
 	OldLine = UserParametersFileDict[Number(ParentIndex)].split(',');
 
 	if (BitType == 'Current') {
@@ -134,8 +123,8 @@ export function BitDropDownChange1000(StartBit, EndBit, BitResult, ParentIndex, 
 		NewLine = NewLine = OldLine[0] + ',' + OldLine[1] + ',' + OldLine[2] + ',' + UpdatedValue + ',' + OldLine[4] + ',' + OldLine[5] + ',' + OldLine[6] + ',' + OldLine[7] + ',' + OldLine[8] + ',' + OldLine[9] + ',' + OldLine[10];
 	}
 
-	NewFileRaw = sessionStorage.getItem('Parameters').replace(OldLine, NewLine);
-	sessionStorage.setItem('Parameters', NewFileRaw);
+	NewFileRaw = sessionStorageService.get('Parameters').replace(OldLine, NewLine);
+	sessionStorageService.set('Parameters', NewFileRaw);
 
 	ChangesMadePreDownload = true;
 	BitName = document.getElementById('WorkSpaceTitle').innerHTML;
@@ -159,11 +148,8 @@ export function BitDropDown1000(ParentParameterIndex, Bit, DropDownIndex, NameOf
 			counter++;
 		}
 	} catch (err) { }
-	//document.getElementsByName(NameOfParameterBit)[0].setAttribute('class','SelectedThirdSubGroup');
-	//console.log('constant' + ParentParameterIndex);
-	//console.log(BitNumberId);
+
 	WhichNumber = Number(BitNumberId) - 1;
-	//console.log(WhichNumber);
 	document.getElementById("constant" + ParentParameterIndex).childNodes[0].childNodes[WhichNumber].setAttribute('class', 'SelectedThirdSubGroup');
 
 	OriginalBitResults = BitResults;
@@ -189,7 +175,7 @@ export function BitDropDown1000(ParentParameterIndex, Bit, DropDownIndex, NameOf
 
 	document.getElementById('topDefineDescription').appendChild(Description);
 
-	const DropDownFile = sessionStorage.getItem('DropDownlist');
+	const DropDownFile = sessionStorageService.getItem('DropDownlist');
 
 	counter = 0;
 	while (DropDownFile.split('\n')[counter] !== undefined) {
@@ -368,7 +354,7 @@ export function Bit1000DisplayOptionsFunction(Line, ClickedButton) {
 	Description.setAttribute('id', 'description');
 
 	//Find Description of parameter
-	let ParameterDescription = sessionStorage.getItem('DescriptionMain');
+	let ParameterDescription = sessionStorageService.getItem('DescriptionMain');
 
 	Description.innerHTML = MainDescriptionsDict[Index];
 
@@ -376,7 +362,7 @@ export function Bit1000DisplayOptionsFunction(Line, ClickedButton) {
 	unorderedList.setAttribute('id', 'Bit1000DropDownDiv');
 
 	//Make Buttons for each option
-	ButtonIdCounter = 1;
+	let ButtonIdCounter = 1;
 	// console.log(BitLine);
 	try {
 		while (bit1000Dir[BitLine][0] !== '#') {

@@ -1,5 +1,4 @@
 // --- Utility Functions ---
-
 import sessionStorageService from "../modules/sessionStorageService.js";
 
 const userDataScript = document.getElementById('user-data');
