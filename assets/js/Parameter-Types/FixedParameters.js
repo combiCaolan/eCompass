@@ -1,8 +1,5 @@
 import sessionStorageService from "../modules/sessionStorageService.js";
 import { moCAS, hydFunctionsInputSetup, passwordList, hydFunctionIdList } from "../main.js";
-// import { MocasUpdate } from "../Parameter-Manipulation/UpdateParameters/update-parameters.js";
-
-// import { userParametersFileDict } from "../menu-button-functions.js"
 
 // Only require chai when running in a Node.js/testing environment
 if (typeof module !== 'undefined' && typeof require !== 'undefined') {
@@ -53,12 +50,10 @@ function AddFixedParameter(htmlObject) {
 }
 
 export function MenuParametersOnclick(Line, HTMLObject) {
-	// alert('start');
 	console.log(Line);
 	if (Line == 'empty') {
 		ClearWorkSpace();
 		AddFixedParameter(HTMLObject);
-		// alert('1');
 		return;
 	}
 
@@ -66,7 +61,6 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 	let LineNumber = Line.split(',')[0];
 
 	ClearWorkSpace();
-	// alert('2');
 	let Parameters = sessionStorageService.get('Parameters').split('\n');
 	let parcounter = 0;
 	while (Parameters[parcounter] != undefined) {
@@ -76,11 +70,11 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 		}
 		parcounter++;
 	}
-	// alert('3');
+
 	//Description
 	let descriptionArea = document.createElement('tr');
 	let DescriptionText = document.createElement('p');
-	// console.log(HTMLObject)
+
 	try {
 		DescriptionText.innerHTML = MainDescriptionsDict[Number(HTMLObject.id)].replace('#' + HTMLObject.id, '');
 	} catch (err) {
@@ -232,7 +226,6 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 			document.getElementById('topDefineDescription').appendChild(FormDiv_1);
 			return;
 		}
-
 	}
 
 	//Truck Build Date
