@@ -223,6 +223,11 @@ input {
     opacity:0.8;
 }
 
+.container-fluid {
+    margin:0;
+    padding:0;
+}
+
 /* @media screen and (max-width: 961px) {
     #MobileAlert {
         display: unset;
@@ -891,7 +896,7 @@ div[id^="constant"]{
    Consistent naming, formatting, and comments for main content viewer area.
 ----------------------------------------------------------------------------- */
 
-#viewer {
+/* #viewer {
     overflow: auto;
     display: block;
     width: 78%;
@@ -902,22 +907,24 @@ div[id^="constant"]{
     float: left;
     top: 85px;
     position: fixed;
+} */
+
+.bg-primary {
+    background-color: rgb(13, 105, 56)!important;
 }
 
 #log-area{
     overflow: auto;
     display: block;
-    width: 78%;
+    width: 74%;
     padding: 0px;
     overflow: auto;
-    margin: 10px 0 10px 21%;
     background: gainsboro;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     height: 16%;
     float: left;
     bottom: 9px;
     position: fixed;
-    color: green;
 }
 
 #log-area-output ul li {
@@ -1042,13 +1049,13 @@ div[id^="constant"]{
 }
 
 #DropDownMachineDetails, #FileDetails, #Software, #Service, #DropDownMoCAS, #DropDownParameters, #JDrop, #IDrop, #HDrop, #GDrop {
-    margin-right: -2px;
-    height: 30px;
+    margin-right: 0;
+    height: 21px;
     border: 0;
     outline: none;
     background: none;
     color: white;
-    font-size: 20px;
+    font-size: 10px;
 }
 
 #NotGroupedYet {
@@ -1118,24 +1125,33 @@ body {
     padding: 10px 20px;
 }
 
-.topnav {
+.topnav, .navbar {
     top: 0;
     z-index: 3;
-    background-color: rgb(13, 105, 56);
+    background-color: rgb(13, 105, 56)!important;
     width: 100%;
     position: fixed;
     padding: 5px 5px 5px 5px;
 }
 
 
-.topnav a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
+.topnav a, .navbar a {
+    /* float: left;
+    display: block; */
+    color: #f2f2f2!important;
+    /* text-align: center;
+    padding: 14px 16px; */
     text-decoration: none;
     font-size: 17px;
+}
+
+.navbar li .dropdown-item {
+    color: black!important;
+}
+
+.navbar button{
+    color: white;
+    border: 2px solid white;
 }
 
 .topnav .icon {
@@ -1143,10 +1159,10 @@ body {
 
 }
 
-.dropdown {
+/* .dropdown {
     float: left;
     overflow: hidden;
-}
+} */
 
 .dropdownProfile {
     float: right;
@@ -1162,7 +1178,7 @@ body {
     margin: 0;
 }
 
-.dropdown .dropbtn {
+/* .dropdown .dropbtn {
     display: unset;
     font-size: 16px;
     border: none;
@@ -1172,9 +1188,9 @@ body {
     background-color: inherit;
     font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
     margin: 5px;
-}
+} */
 
-.dropdown-content {
+/* .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
@@ -1194,28 +1210,28 @@ body {
     text-align: left;
     font-size: 16px;
     font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
-}
+} */
 
-.topnav a:hover,
+/* .topnav a:hover,
 .dropdown:hover .dropbtn {
-    background-color: #555;
-    color: white;
-}
+    background-color: #555!important;
+    color: white!important;
+} */
 
-.dropdown-content a:hover {
+/* .dropdown-content a:hover {
     background-color: #ddd;
     color: black;
-}
+} */
 
-.dropdown:hover .dropdown-content {
-    display: block;
-}
+/* .dropdown:hover .dropdown-content {
+    display: block!important;
+} */
 
 /* Responsive navigation for mobile */
 @media screen and (max-width: 961px) {
-    .topnav a:not(:first-child), .dropdown .dropbtn {
+    /* .topnav a:not(:first-child), .dropdown .dropbtn {
         display: none;
-    }
+    } */
     .topnav a.icon {
         /* float: right; */
         display: block;
@@ -1235,17 +1251,17 @@ body {
         display: block;
         text-align: left;
     }
-    .topnav.responsive .dropdown {
+    /* .topnav.responsive .dropdown {
         float: none;
-    }
-    .topnav.responsive .dropdown-content {
+    } */
+    /* .topnav.responsive .dropdown-content {
         position: relative;
-    }
-    .topnav.responsive .dropdown .dropbtn {
+    } */
+    /* .topnav.responsive .dropdown .dropbtn {
         display: block;
         width: 100%;
         text-align: left;
-    }
+    } */
 }
 
 #DownloadButton {

@@ -55,6 +55,11 @@ include_once('../src/includes/ListTruckDirectories.php'); // List available truc
 	<link rel="icon" type="image/png" sizes="32x32" href="assets/Favicons/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="assets/Favicons/favicon-16x16.png">
 
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Optionally, Bootstrap JS (for modals, dropdowns, etc.) -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 	<!-- Application title and main stylesheet -->
 	<title>E-Compass</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -71,14 +76,17 @@ include_once('../src/includes/ListTruckDirectories.php'); // List available truc
 	<div id="row_usr">
 		<div id="right_row">
 			<!-- Welcome message and username display -->
-			<h1 style="font-weight:100; font-size: 1.8rem;" id="WelcomeBack">
-				Welcome Back,
-				<h1 style="font-weight:100; font-size: 1.8rem;" id="ConcatName"></h1>
-			</h1>
+			<div class="my-4">
+				<h1 class="display-5 fw-light" id="WelcomeBack">
+					Welcome Back, <span id="ConcatName"></span>
+				</h1>
+			</div>
 			<!-- Prompt to open a parameter file -->
-			<h1 id="PleaseOpenMessage" style="font-weight:100; font-size: 1.2rem;">
-				Please open a combilift parameters file(.clp file).
-			</h1>
+			<p id="PleaseOpenMessage" class="lead">
+				Please open a Combilift parameters file (.clp file).
+			</p>
+
+
 		</div>
 	</div>
 
@@ -90,11 +98,17 @@ include_once('../src/includes/ListTruckDirectories.php'); // List available truc
 		 * Show a warning if the user is using Internet Explorer.
 		 */
 		if (window.document.documentMode != undefined) {
+			// const AlertBox = document.createElement('div');
+			// const AlertBoxText = document.createElement('p');
+			// AlertBox.appendChild(AlertBoxText);
+			// AlertBox.setAttribute('style', 'background:red; color:white; font-weight:800; bottom:0; position:fixed; width:100%; padding:10px;');
+			// AlertBoxText.innerHTML = 'This browser needs to be updated - ecompass may not work properly on this browser';
+			// document.getElementById('bottom').appendChild(AlertBox);
+
 			const AlertBox = document.createElement('div');
-			const AlertBoxText = document.createElement('p');
-			AlertBox.appendChild(AlertBoxText);
-			AlertBox.setAttribute('style', 'background:red; color:white; font-weight:800; bottom:0; position:fixed; width:100%; padding:10px;');
-			AlertBoxText.innerHTML = 'This browser needs to be updated - ecompass may not work properly on this browser';
+			AlertBox.className = 'alert alert-danger fixed-bottom mb-0 text-center fw-bold';
+			AlertBox.role = 'alert';
+			AlertBox.innerHTML = 'This browser needs to be updated - eCompass may not work properly on this browser';
 			document.getElementById('bottom').appendChild(AlertBox);
 		}
 

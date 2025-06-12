@@ -1,109 +1,105 @@
-<!--
-    WebHeader.html
-    ----------------------------------------------------------------------------
-    Main navigation header for the eCompass web application.
-    Provides access to parameter menus, user profile, logo, file actions, tools,
-    help resources, and search functionality. Includes responsive/mobile support.
-    ----------------------------------------------------------------------------
--->
-<div class="topnav" id="myTopnav">
+<!-- Bootstrap Navbar Header -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+
     <!-- Parameters Menu Toggle -->
-    <button id="MenuLink" onclick="ParametersMenuToggle()">Parameters Menu</button>
-
-    <!-- User Profile Dropdown -->
-    <!--
-    profile.html
-    ----------------------------------------------------------------------------
-    Contains the user profile dropdown for the eCompass web application.
-    Displays the logged-in user's name, access level, API version, and a logout option.
-    Uses FontAwesome for the user icon.
-    ----------------------------------------------------------------------------
--->
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
-
-    <div class="dropdown">
-        <button class="dropbtn" id="HeaderUserButtonReal">
-            <i style="font-size: 30px;" class='fa fa-user-circle'></i>
-        </button>
-        <div class="dropdown-content">
-            <button id="DownloadButton">
-                <p id="FixedUsernameText">Username</p>
-                <p id="UsernameLocal"></p>
-            </button>
-            <button id="DownloadButton">
-                <p id="FixedAccessLevelText">AccessLevel</p>
-                <p id="AccessLevel"></p>
-            </button>
-            <button id="DownloadButton">
-                <p id="FixedAPIText">API Version</p>
-                <p id="APIVersion"></p>
-            </button>
-            <button id="DownloadButton"
-                onclick="location.href=`http://support.combilift.net/wp-login.php?action=logout`;">
-                <p id="FixedLogoutText">Logout</p>
-            </button>
-        </div>
-    </div>
+    <button class="btn btn-outline-primary me-2" id="MenuLink" onclick="ParametersMenuToggle()">
+      Parameters Menu
+    </button>
 
     <!-- Logo Area -->
-    <div id="LogoArea">
-        <img id="LogoHead" src="../assets/ecompassLogo.png">
-    </div>
+    <a class="navbar-brand mx-3" href="#">
+      <img src="../assets/ecompassLogo.png" alt="eCompass Logo" id="LogoHead" style="height:40px;">
+    </a>
 
-    <!-- File Dropdown Menu -->
-    <div class="dropdown">
-        <button class="dropbtn" id="HeaderFileButton">File
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-            <!-- newFile() -->
-            <a id="NewFileButton">New</a>
-            <!-- readParameters() -->
-            <button id="OpenFileButton">Open</button>
-            <!-- OpenNewFile() -->
-            <a id="OpenInNewTab">Open new file in new tab</a>
-            <a onclick="location.href = 'Download.php';" id="SaveFileButton">Save</a>
-            <!-- closeFileDialog() -->
-            <a id="CloseFileButton">Close</a>
-        </div>
-    </div>
+    <!-- Responsive Navbar Toggle (for mobile) -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <!-- Tools Dropdown Menu -->
-    <div class="dropdown">
-        <button class="dropbtn" id="HeaderToolsButton">Tools
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-            <a onclick="ErrorAlertDialog()" id="ErrorButton">Errors</a>
-            <a onclick="FileActionsDialog()" id="FileActionsButton">File Actions</a>
-            <a onclick="SpecialBlockDialog()" id="SpecialBlocksButton">Special Blocks</a>
-            <a href="https://knowledgebase6.wpengine.com/elogs" id="LogViewerButton">eLogs - Log Viewer</a>
-            <a onclick="window.open('https://knowledgebase6.wpengine.com/knowledge-base/', '_blank');"
-                id="KnowledgeBaseButton">Knowledge Base</a>
-        </div>
-    </div>
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-    <!-- Help Dropdown Menu -->
-    <div class="dropdown">
-        <button class="dropbtn" id="HeaderHelpButton">Help
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-            <a href="https://knowledgebase6.wpengine.com/" id="SupportButton">Combilift Technical Support</a>
-            <a onclick="location.href= 'https://combilift.com/contact/';" id="ContactSupportButton">Contact Support</a>
-            <a onclick="location.href = 'https://combilift.com/about-us/';" id="AboutUsButton">About Us</a>
-        </div>
-    </div>
+        <!-- File Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="HeaderFileButton" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            File
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="HeaderFileButton">
+            <li><a class="dropdown-item" id="NewFileButton" href="#">New</a></li>
+            <li><button class="dropdown-item" id="OpenFileButton">Open</button></li>
+            <li><a class="dropdown-item" id="OpenInNewTab" href="#">Open new file in new tab</a></li>
+            <li><a class="dropdown-item" id="SaveFileButton" href="Download.php">Save</a></li>
+            <li><a class="dropdown-item" id="CloseFileButton" href="#">Close</a></li>
+          </ul>
+        </li>
 
-    <!-- Search Button -->
-    <div class="dropdown">
-        <button class="dropbtn" onclick="SearchDialog()" id="SearchIconButton" style="font-size:20px; margin:3px;">
+        <!-- Tools Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="HeaderToolsButton" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Tools
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="HeaderToolsButton">
+            <li><a class="dropdown-item" id="ErrorButton" href="#" onclick="ErrorAlertDialog()">Errors</a></li>
+            <li><a class="dropdown-item" id="FileActionsButton" href="#" onclick="FileActionsDialog()">File Actions</a></li>
+            <li><a class="dropdown-item" id="SpecialBlocksButton" href="#" onclick="SpecialBlockDialog()">Special Blocks</a></li>
+            <li><a class="dropdown-item" id="LogViewerButton" href="https://knowledgebase6.wpengine.com/elogs">eLogs - Log Viewer</a></li>
+            <li><a class="dropdown-item" id="KnowledgeBaseButton" href="https://knowledgebase6.wpengine.com/knowledge-base/" target="_blank">Knowledge Base</a></li>
+          </ul>
+        </li>
+
+        <!-- Help Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="HeaderHelpButton" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Help
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="HeaderHelpButton">
+            <li><a class="dropdown-item" id="SupportButton" href="https://knowledgebase6.wpengine.com/">Combilift Technical Support</a></li>
+            <li><a class="dropdown-item" id="ContactSupportButton" href="https://combilift.com/contact/">Contact Support</a></li>
+            <li><a class="dropdown-item" id="AboutUsButton" href="https://combilift.com/about-us/">About Us</a></li>
+          </ul>
+        </li>
+
+        <!-- Search Button -->
+        <li class="nav-item">
+          <button class="btn btn-outline-secondary ms-2" onclick="SearchDialog()" id="SearchIconButton">
             <i class="fa fa-search"></i>
-        </button>
-    </div>
+          </button>
+        </li>
+      </ul>
 
-    <!-- Mobile Menu Toggle -->
-    <a href="javascript:void(0);" class="icon" id="MobileMenuButtonForText" onclick="MobileMenuFunction()">&#9776;</a>
-</div>
-<!--Web Header-->
+      <!-- User Profile Dropdown (right-aligned) -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="HeaderUserButtonReal" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-user-circle fa-2x me-1"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="HeaderUserButtonReal">
+            <li>
+              <span class="dropdown-item-text">
+                <strong id="FixedUsernameText">Username:</strong>
+                <span id="UsernameLocal"></span>
+              </span>
+            </li>
+            <li>
+              <span class="dropdown-item-text">
+                <strong id="FixedAccessLevelText">Access Level:</strong>
+                <span id="AccessLevel"></span>
+              </span>
+            </li>
+            <li>
+              <span class="dropdown-item-text">
+                <strong id="FixedAPIText">API Version:</strong>
+                <span id="APIVersion"></span>
+              </span>
+            </li>
+            <li>
+              <a class="dropdown-item text-danger" id="FixedLogoutText" href="http://support.combilift.net/wp-login.php?action=logout">Logout</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

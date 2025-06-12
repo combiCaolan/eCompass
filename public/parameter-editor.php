@@ -34,18 +34,23 @@
     <!-- External resources: FontAwesome, jQuery, jQuery UI -->
     <!-- <script src='https://kit.fontawesome.com/a076d05399.js'></script> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> -->
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 
     <!-- Temporary: Local jQuery UI framework and duplicate jQuery for compatibility -->
     <meta charset="utf-8">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
     <!-- <script src="../assets/js/framework/jquery-ui.js"></script> -->
 
     <!-- Favicon links for various devices -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/Favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/Favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/Favicons/favicon-16x16.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Optionally, Bootstrap JS (for modals, dropdowns, etc.) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Application title and main stylesheet -->
     <title>E-Compass</title>
@@ -58,78 +63,80 @@
 </head>
 
 <body>
-    <?php include_once('../src/includes/DialogTemplates.html'); ?>
-
-    <div id="LoadingScreen">
-        <div class="loader"></div>
-    </div>
-
-    <!-- Mobile Device Alert -->
-    <div id="MobileAlert">
-        <h1>Device Screen too small</h1>
-        <p>eCompass is designed to work on a bigger resolution.</p>
-        <p>Please use a larger resolution.</p>
-        <p>If viewing in a mobile device, choose view "Desktop Site" in the browser settings.</p>
-    </div>
-
-    <div id="Container">
+    <div class="container-fluid">
         <?php include_once('../src/includes/MainHeader.html'); ?>
 
-        <!-- Tree navigation for parameter sections -->
-        <ul class="tree">
-            <?php
-            // Define tree sections as an array for maintainability
-            $treeSections = [
-                ['A', 'DropDownMachineDetails', 'TruckDetailsID'],
-                ['B', 'FileDetails', 'FileDetailsID'],
-                ['C', 'Software', 'SoftwareID'],
-                ['D', 'Service', 'ServiceID'],
-                ['E', 'DropDownMoCAS', 'MoCASID'],
-                ['F', 'DropDownParameters', 'ParametersID', '&#x25b2;'],
-                ['G', 'GDrop', 'FactoryID', '&#x25bc;', 'GTreeTab'],
-                ['H', 'HDrop', 'DeveloperID', '&#x25bc;', 'HTreeTab'],
-                ['I', 'IDrop', 'NotAssignedID', '&#x25bc;', 'ITreeTab'],
-                ['J', 'JDrop', 'SpecialID', '&#x25bc;', 'JTreeTab'],
-            ];
-            foreach ($treeSections as $section) {
-                $letter = $section[0];
-                $buttonId = $section[1];
-                $labelId = $section[2];
-                $arrow = $section[3] ?? '&#x25bc;';
-                // $extraClass = $section[4] ?? '';
-                echo "<li id='Treetab'" . ($letter === 'A' ? " style='margin-top:81px;'" : "") . ">";
-                echo "<input type='button' style='float:right;' id='{$buttonId}' onclick=\"DropDownUni('{$letter}','{$buttonId}');\"> </button>";
-                echo "<p onclick=\"DropDownUni('{$letter}','{$buttonId}');\" id='{$labelId}'></span>";
-                echo "</li>";
-                echo "<div id='{$letter}'></div>";
-            }
-            ?>
-        </ul>
+        <?php include_once('../src/includes/DialogTemplates.html'); ?>
 
-        <!-- Main parameter viewer/editor area -->
-        <div id="viewer">
-            <div id="topDefine">
-                <table id="topDefineTable"></table>
-                <table id="topDefineDescription"></table>
+        <div id="LoadingScreen">
+            <div class="loader"></div>
+        </div>
+
+        <!-- Mobile Device Alert -->
+        <div id="MobileAlert">
+            <h1>Device Screen too small</h1>
+            <p>eCompass is designed to work on a bigger resolution.</p>
+            <p>Please use a larger resolution.</p>
+            <p>If viewing in a mobile device, choose view "Desktop Site" in the browser settings.</p>
+        </div>
+
+        <div class="container-fluid" style="margin-top:60px">
+            <div class="row">
+                <!-- Sidebar/Tree (if present) -->
+                <div class="col-lg-3 d-none d-lg-block">
+                    <ul class="tree list-group">
+                <?php
+                // Define tree sections as an array for maintainability
+                $treeSections = [
+                    ['A', 'DropDownMachineDetails', 'TruckDetailsID'],
+                    ['B', 'FileDetails', 'FileDetailsID'],
+                    ['C', 'Software', 'SoftwareID'],
+                    ['D', 'Service', 'ServiceID'],
+                    ['E', 'DropDownMoCAS', 'MoCASID'],
+                    ['F', 'DropDownParameters', 'ParametersID', '&#x25b2;'],
+                    ['G', 'GDrop', 'FactoryID', '&#x25bc;', 'GTreeTab'],
+                    ['H', 'HDrop', 'DeveloperID', '&#x25bc;', 'HTreeTab'],
+                    ['I', 'IDrop', 'NotAssignedID', '&#x25bc;', 'ITreeTab'],
+                    ['J', 'JDrop', 'SpecialID', '&#x25bc;', 'JTreeTab'],
+                ];
+                foreach ($treeSections as $section) {
+                    $letter = $section[0];
+                    $buttonId = $section[1];
+                    $labelId = $section[2];
+                    $arrow = $section[3] ?? '&#x25bc;';
+                    echo "<li class='list-group-item' id='Treetab'" . ($letter === 'A' ? " " : "") . ">";
+                    echo "<button type='button' class='btn btn-sm btn-outline-secondary float-end' id='{$buttonId}' onclick=\"DropDownUni('{$letter}','{$buttonId}');\">{$arrow}</button>";
+                    echo "<span onclick=\"DropDownUni('{$letter}','{$buttonId}');\" id='{$labelId}'></span>";
+                    echo "</li>";
+                    echo "<div id='{$letter}'></div>";
+                }
+                ?>
+            </ul>
+                </div>
+                <!-- Main Viewer -->
+                <div class="col-12 col-lg-9">
+                    <div id="viewer" class="card shadow-sm my-3">
+                        <div class="card-header bg-primary text-white">
+                            Parameter Viewer
+                        </div>
+                        <div class="card-body">
+                            <div id="topDefine">
+                                <table id="topDefineTable" class="table table-bordered"></table>
+                                <table id="topDefineDescription" class="table"></table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card my-3">
+                <div class="card-header fw-bold">User Logs</div>
+                <div class="card-body" id="log-area-output"></div>
+            </div>
+                </div>
             </div>
         </div>
-        
-        <div id="log-area">
-            <p id="logs-title">User Logs</p>
-            <div id="log-area-output">
-                
-            </div>
-        </div>
 
-        <!-- Error reporting area -->
-        <div id="ErrorReport">
-            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-        </div>
-    </div>
+        <?php include_once('../src/includes/ListTruckDirectories.php'); ?>
 
-    <?php include_once('../src/includes/ListTruckDirectories.php'); ?>
-
-    <!--
+        <!--
     JsContents.html
     ----------------------------------------------------------------------------
     Includes all main JavaScript files and styles required for the eCompass
@@ -139,96 +146,97 @@
     ----------------------------------------------------------------------------
 -->
 
-    <!-- Set available APIs (example: API 100) -->
-    <script>AvailableAPI = ['100'];</script>
+        <!-- Set available APIs (example: API 100) -->
+        <script>AvailableAPI = ['100'];</script>
 
-    <!-- FontAwesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- FontAwesome for icons -->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- Core application scripts and modules -->
-    <script src="../assets/js/special-blocks.js"></script>
-    <script src="../assets/js/description-dictionary.js"></script>
-    <script src="../assets/js/add-missing-parameters.js"></script>
-    <!--<script src="assets/js/ListTruckDir.js"></script>-->
-    <script type="module" src="../assets/js/Parameter-Types/RegularParameter.js"></script>
-    <script type="module" src="../assets/js/Parameter-Types/dropdown.js"></script>
-    <script src="../assets/js/LanguageLogic/dynamic-language.js"></script>
-    <script type="module" src="../assets/js/post-load.js"></script>
-    <!-- <script src="../assets/js/Compare.js"></script> -->
-    <script src="../assets/js/Dialog.js"></script>
-    <!--<script src="assets/js/Javascript-Style/MenuShowHideLogic.js"></script>-->
-    <!-- <script src="../assets/js/Parameter-Types/HydInOut.js"></script> -->
-    <script type="module" src="../assets/js/main.js"></script>
-    <script src="../assets/js/Parameter-Manipulation/remove-parameter.js"></script>
-    <script src="../assets/js/Parameter-Manipulation/add-parameters.js"></script>
-    <!-- <script src="../assets/js/Parameter-Types/password.js"></script> -->
-    <script type="module" src="../assets/js/Parameter-Manipulation/UpdateParameters/parameter-change.js"></script>
-    <script type="module" src="../assets/js/Parameter-Types/bit900.js"></script>
-    <script type="module" src="../assets/js/Parameter-Types/bit1000.js"></script>
-    <script type="module" src="../assets/js/Parameter-Types/SerialNumberLogic.js"></script>
-    <script type="module" src="../assets/js/parameters-view.js"></script>
-    <script>
-        var intervalId = window.setInterval(function () {
-            var logArea = document.getElementById('log-area-output');
-            var changes = sessionStorage.getItem('UserMadeChanges');
-            if (!changes) {
-                logArea.innerHTML = "<ul><li>No changes recorded.</li></ul>";
-                return;
+        <!-- Core application scripts and modules -->
+        <script src="../assets/js/special-blocks.js"></script>
+        <script src="../assets/js/description-dictionary.js"></script>
+        <script src="../assets/js/add-missing-parameters.js"></script>
+        <!--<script src="assets/js/ListTruckDir.js"></script>-->
+        <script type="module" src="../assets/js/Parameter-Types/RegularParameter.js"></script>
+        <script type="module" src="../assets/js/Parameter-Types/dropdown.js"></script>
+        <script src="../assets/js/LanguageLogic/dynamic-language.js"></script>
+        <script type="module" src="../assets/js/post-load.js"></script>
+        <!-- <script src="../assets/js/Compare.js"></script> -->
+        <script src="../assets/js/Dialog.js"></script>
+        <!--<script src="assets/js/Javascript-Style/MenuShowHideLogic.js"></script>-->
+        <!-- <script src="../assets/js/Parameter-Types/HydInOut.js"></script> -->
+        <script type="module" src="../assets/js/main.js"></script>
+        <script src="../assets/js/Parameter-Manipulation/remove-parameter.js"></script>
+        <script src="../assets/js/Parameter-Manipulation/add-parameters.js"></script>
+        <!-- <script src="../assets/js/Parameter-Types/password.js"></script> -->
+        <script type="module" src="../assets/js/Parameter-Manipulation/UpdateParameters/parameter-change.js"></script>
+        <script type="module" src="../assets/js/Parameter-Types/bit900.js"></script>
+        <script type="module" src="../assets/js/Parameter-Types/bit1000.js"></script>
+        <script type="module" src="../assets/js/Parameter-Types/SerialNumberLogic.js"></script>
+        <script type="module" src="../assets/js/parameters-view.js"></script>
+        <script>
+            var intervalId = window.setInterval(function () {
+                var logArea = document.getElementById('log-area-output');
+                var changes = sessionStorage.getItem('UserMadeChanges');
+                if (!changes) {
+                    logArea.innerHTML = "<ul><li>No changes recorded.</li></ul>";
+                    return;
+                }
+                var lines = changes.split('\n').filter(line => line.trim() !== '');
+                var ul = document.createElement('ul');
+                lines.forEach(function (line) {
+                    var li = document.createElement('li');
+                    li.innerHTML = line + '&nbsp;&nbsp;  <a id="undobtn">&#8617;</a>';
+                    ul.appendChild(li);
+                });
+                logArea.innerHTML = '';
+                logArea.appendChild(ul);
+            }, 1000);
+        </script>
+        <script>
+            /*START OF COLLAPSEDIV.JS*/
+
+            // Toggle a div and update the toggle button's arrow direction
+            function DropDownUni(DivID, DivToToggle) {
+                const div = document.getElementById(DivID);
+                const toggle = document.getElementById(DivToToggle);
+                if (div && toggle) {
+                    $("#" + DivID).slideToggle();
+                    toggle.value = (div.style.display === 'none') ? '\u25B2' : '\u25BC';
+                }
             }
-            var lines = changes.split('\n').filter(line => line.trim() !== '');
-            var ul = document.createElement('ul');
-            lines.forEach(function (line) {
-                var li = document.createElement('li');
-                li.innerHTML = line + '&nbsp;&nbsp;  <a id="undobtn">&#8617;</a>';
-                ul.appendChild(li);
-            });
-            logArea.innerHTML = '';
-            logArea.appendChild(ul);
-        }, 1000);
-    </script>
-    <script>
-        /*START OF COLLAPSEDIV.JS*/
 
-        // Toggle a div and update the toggle button's arrow direction
-        function DropDownUni(DivID, DivToToggle) {
-            const div = document.getElementById(DivID);
-            const toggle = document.getElementById(DivToToggle);
-            if (div && toggle) {
-                $("#" + DivID).slideToggle();
-                toggle.value = (div.style.display === 'none') ? '\u25B2' : '\u25BC';
+            // Universal dropdown for parameter divs
+            function UniversalDropDown(ID) {
+                $("#ParametersDiv" + ID).slideToggle();
             }
-        }
 
-        // Universal dropdown for parameter divs
-        function UniversalDropDown(ID) {
-            $("#ParametersDiv" + ID).slideToggle();
-        }
+            /*END OF COLLAPSEDIV.JS*/
 
-        /*END OF COLLAPSEDIV.JS*/
+        </script>
+        <script type="module" src="../assets/js/Parameter-Types/FixedParameters.js"></script>
+        <script type="module" src="../assets/js/parameters-menu.js"></script>
+        <script type="module" src="../assets/js/Parameter-Manipulation/UpdateParameters/update-parameters.js"></script>
+        <script src="../assets/js/Parameter-Manipulation/UpdateParameters/change-build-date.js"></script>
+        <!-- <script src="../assets/js/LanguageLogic/implement.js"></script> -->
+        <script src="../assets/js/LanguageLogic/set-elements-for-language.js"></script>
+        <!-- <script src="../assets/js/Api-Logic/Api-Change.js"></script> -->
+        <script type="module" src="../assets/js/menu-button-functions.js"></script>
+        <script src="../assets/js/Error.js"></script>
+        <script src="../assets/js/menu-logic.js"></script>
 
-    </script>
-    <script type="module" src="../assets/js/Parameter-Types/FixedParameters.js"></script>
-    <script type="module" src="../assets/js/parameters-menu.js"></script>
-    <script type="module" src="../assets/js/Parameter-Manipulation/UpdateParameters/update-parameters.js"></script>
-    <script src="../assets/js/Parameter-Manipulation/UpdateParameters/change-build-date.js"></script>
-    <!-- <script src="../assets/js/LanguageLogic/implement.js"></script> -->
-    <script src="../assets/js/LanguageLogic/set-elements-for-language.js"></script>
-    <!-- <script src="../assets/js/Api-Logic/Api-Change.js"></script> -->
-    <script type="module" src="../assets/js/menu-button-functions.js"></script>
-    <script src="../assets/js/Error.js"></script>
-    <script src="../assets/js/menu-logic.js"></script>
+        <script type="module">
+            // Initialize the tree view and perform integrity checks on startup
 
-    <script type="module">
-        // Initialize the tree view and perform integrity checks on startup
+            import { treeViewClick } from '../assets/js/parameters-view.js';
+            import { IntegrityCheckOnStartup } from '../assets/js/post-load.js';
 
-        import { treeViewClick } from '../assets/js/parameters-view.js';
-        import { IntegrityCheckOnStartup } from '../assets/js/post-load.js';
+            treeViewClick(document.getElementById('2'), 2);
+            IntegrityCheckOnStartup();
+        </script>
 
-        treeViewClick(document.getElementById('2'), 2);
-        IntegrityCheckOnStartup();
-    </script>
-
-    <!--
+        <!--
     The following scripts are commented out but may be used for additional features:
     <script src="assets/js/framework/jquery-1.12.4.js"></script>
     <script src="assets/js/framework/jquery-ui.js"></script>
@@ -242,13 +250,14 @@
     <script src="assets/js/PostLoad/reloadOrigParState.js"></script>
 -->
 
-    <script>
-        // Ensure language and bit labels are set after all resources are loaded
-        window.onload = function () {
-            SetLanguage();
-            updateBitLabels();
-        };
-    </script>
+        <script>
+            // Ensure language and bit labels are set after all resources are loaded
+            window.onload = function () {
+                SetLanguage();
+                updateBitLabels();
+            };
+        </script>
+    </div>
 </body>
 
 </html>
