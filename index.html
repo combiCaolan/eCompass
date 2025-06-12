@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <script type="module">
+    import { onStartup } from './assets/js/InitialStart/on-startup.js';
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+
+    async function fetchAndStoreUserData(retry = false) {
+        // Dummy fetch to set session cookie if needed
+        await fetch('assets/api/wordpress-api.php', { credentials: 'include' });
+
+        // Now do the real fetch
+        const response = await fetch('assets/api/wordpress-api.php', { credentials: 'include' });
+        if (!response.ok) {
+            if (!retry) {
+                setTimeout(() => fetchAndStoreUserData(true), 500);
+                return;
+            } else {
+                alert('Not logged in or API error');
+                return;
+            }
+        }
+        const user_data = await response.json();
+        
+        // Wait for 1 second
+        await sleep(1000);
+
+        localStorage.setItem('Language', user_data.language);
+        localStorage.setItem('ServerPath', user_data.server_path);
+        sessionStorage.setItem('loggedinusername', user_data.full_name);
+        sessionStorage.setItem('loggedinemail', user_data.logged_user_email);
+        sessionStorage.setItem('AccessLevel', user_data.access_level);
+        console.log(user_data);
+        onStartup(user_data);
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchAndStoreUserData);
+</script>
+</body>
+
+</html>

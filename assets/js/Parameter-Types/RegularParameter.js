@@ -1,12 +1,17 @@
 import sessionStorageService from "../modules/sessionStorageService.js";
 import { parameterchange } from "../Parameter-Manipulation/UpdateParameters/parameter-change.js";
+
 /**
- * Renders the regular parameter view with editable and read-only fields.
+ * Renders the regular parameter view with editable and read-only fields, Bootstrap style.
  * @param {HTMLElement} value - The DOM element representing the parameter (for label/title).
  * @param {string|number} object - The parameter ID.
- * @param {Array} lineArr - The parameter data array (e.g. [IndexNumber, Current, Default, Factory, Min, Max, ..., Scale, ...]).
+ * @param {Array} lineArr - The parameter data array.
  */
 export function RegularParameter(value, object, lineArr) {
+    // Clear previous content
+    const topDefineDescription = document.getElementById('topDefineDescription');
+    topDefineDescription.innerHTML = '';
+
     // Find and set units
     let unitForIndex = 'no units';
     const unitsDirectory = (sessionStorage.getItem('UnitsDirectory') || '').split('\n');
@@ -18,60 +23,64 @@ export function RegularParameter(value, object, lineArr) {
         }
     }
 
-    // Title
-    const title = document.createElement("p");
-    title.innerHTML = value.innerHTML;
-    title.id = 'WorkSpaceTitle';
-    document.getElementById('topDefineDescription').appendChild(title);
+    // Bootstrap Card Container
+    const card = document.createElement('div');
+    // card.className = 'card my-3';
+
+    // Card Header (Title)
+    const cardHeader = document.createElement('div');
+    // cardHeader.className = 'card-header bg-primary text-white';
+    cardHeader.innerHTML = value.innerHTML;
+    card.appendChild(cardHeader);
+
+    // Card Body
+    const cardBody = document.createElement('div');
+    cardBody.className = 'card-body';
 
     // Description
-    const descriptionArea = document.createElement('tr');
     const descriptionText = document.createElement('p');
+    descriptionText.className = 'text-muted';
+    descriptionText.id = 'description';
     if (typeof MainDescriptionsDict !== 'undefined' && MainDescriptionsDict[object]) {
         descriptionText.innerHTML = MainDescriptionsDict[object].replace('#' + object, '');
     }
-    descriptionText.id = 'description';
-    descriptionArea.appendChild(descriptionText);
-    document.getElementById('topDefineDescription').appendChild(descriptionArea);
+    cardBody.appendChild(descriptionText);
 
-    // Export checkbox
+    // Export checkbox (Bootstrap switch)
     const exportDiv = document.createElement('div');
-    const switchParameterLabel = document.createElement("label");
-    switchParameterLabel.id = 'Export';
-    switchParameterLabel.innerHTML = LanguageDict["ExportSelectedParamters"];
-    exportDiv.appendChild(switchParameterLabel);
-
+    exportDiv.className = 'form-check form-switch mb-3';
     const switchParameter = document.createElement("input");
     switchParameter.type = 'checkbox';
+    switchParameter.className = 'form-check-input';
     switchParameter.id = "SwitchParameterCheckbox";
     switchParameter.checked = !removedParametersCounters.includes(String(lineArr[0]));
     switchParameter.onchange = function () {
         exportonchange(lineArr[0], this);
+        topDefineDescription.style.opacity = this.checked ? "1" : "0.4";
     };
-    switchParameter.style = "text-align:center; font-size:18px;";
+    const switchParameterLabel = document.createElement("label");
+    switchParameterLabel.className = 'form-check-label ms-2';
+    switchParameterLabel.htmlFor = "SwitchParameterCheckbox";
+    switchParameterLabel.innerHTML = LanguageDict["ExportSelectedParamters"];
     exportDiv.appendChild(switchParameter);
-
-    document.getElementById('topDefineDescription').style.opacity = switchParameter.checked ? "1" : "0.4";
-    document.getElementById('topDefineDescription').appendChild(exportDiv);
+    exportDiv.appendChild(switchParameterLabel);
+    cardBody.appendChild(exportDiv);
 
     // Helper to create value fields (Current, Max, Min, Default, Factory)
     function createValueField(labelText, value, id, onChangeType, editable, unit, scale, index) {
-        const unitLabel = document.createElement("label");
-        if (unit !== 'no units') unitLabel.innerHTML = '&nbsp;&nbsp;' + unit;
-        unitLabel.style = 'float:left;';
+        const formGroup = document.createElement('div');
+        formGroup.className = 'mb-3 row align-items-center';
 
-        const div = document.createElement("div");
-        // div.style = editable
-        //     ? 'margin:10px; padding:15px;'
-        //     : 'margin:10px; padding:15px; background:whitesmoke;';
-        document.getElementById('topDefineDescription').appendChild(div);
-
-        // const table = document.createElement("table");
-        // const tr = document.createElement("tr");
-        const label = document.createElement("p");
-        // label.style = 'float:left;';
-        label.setAttribute('id','ReadResult');
+        // Label
+        const label = document.createElement('label');
+        label.className = 'col-sm-3 col-form-label fw-bold';
         label.innerHTML = labelText;
+        label.htmlFor = id;
+        formGroup.appendChild(label);
+
+        // Input wrapper
+        const inputWrapper = document.createElement('div');
+        inputWrapper.className = 'col-sm-9 d-flex align-items-center';
 
         let input;
         if (editable) {
@@ -80,7 +89,7 @@ export function RegularParameter(value, object, lineArr) {
             input.value = scale !== 1 ? value / scale : value;
             input.setAttribute("scale", scale !== 1 ? "true" : "false");
             input.type = 'number';
-            input.style = 'float:left; text-align:right; margin-left:10px;';
+            input.className = 'form-control w-auto me-2';
             input.id = id;
             input.onchange = function () {
                 parameterchange(
@@ -94,23 +103,23 @@ export function RegularParameter(value, object, lineArr) {
                 );
             };
         } else {
-            input = document.createElement("label");
-            input.innerHTML = scale !== 1 ? '<br>' + value / scale : value;
-            input.setAttribute("scale", scale !== 1 ? "true" : "false");
-            input.type = 'number';
-            input.style = 'float:left;';
+            input = document.createElement("span");
+            input.className = 'form-control-plaintext me-2';
+            input.innerHTML = scale !== 1 ? value / scale : value;
         }
 
-        const parInd = document.createElement(editable ? 'p' : 'label');
-        parInd.innerHTML = '&nbsp;&nbsp;&nbsp;';
-        // parInd.style = editable ? 'float:right;' : 'float:left;';
+        inputWrapper.appendChild(input);
 
-        // div.appendChild(table);
-        // table.appendChild(tr);
-        div.appendChild(label);
-        div.appendChild(parInd);
-        parInd.appendChild(input);
-        parInd.appendChild(unitLabel);
+        // Unit label
+        if (unit !== 'no units') {
+            const unitLabel = document.createElement("span");
+            unitLabel.className = 'ms-2 text-secondary';
+            unitLabel.innerHTML = unit;
+            inputWrapper.appendChild(unitLabel);
+        }
+
+        formGroup.appendChild(inputWrapper);
+        cardBody.appendChild(formGroup);
     }
 
     // Render Current Value
@@ -176,12 +185,18 @@ export function RegularParameter(value, object, lineArr) {
     // Permissions
     if (typeof writePermissionDict !== 'undefined' && Number(writePermissionDict[object]) > Number(sessionStorageService.get('AccessLevel'))) {
         try {
-            document.getElementById('WorkSpaceCurrentValue').setAttribute('disabled', 'disabled');
-            document.getElementById('WorkSpaceCurrentValue').onclick = null;
+            const currentValueInput = document.getElementById('WorkSpaceCurrentValue');
+            if (currentValueInput) {
+                currentValueInput.setAttribute('disabled', 'disabled');
+                currentValueInput.onclick = null;
+            }
         } catch (err) {
             // No input available
         }
     }
+
+    card.appendChild(cardBody);
+    topDefineDescription.appendChild(card);
 
     $('#topDefineDescription').fadeIn();
 }

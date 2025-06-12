@@ -14,8 +14,9 @@ export function SerialNumberFunction(lineArr, object) {
     if (!serialElem) return;
 
     // Title
-    const title = document.createElement('p');
+    const title = document.createElement('h5');
     title.id = 'WorkSpaceTitle';
+    title.className = 'mb-3';
     title.innerHTML = serialElem.innerHTML;
     topDefineTable.appendChild(title);
 
@@ -30,47 +31,57 @@ export function SerialNumberFunction(lineArr, object) {
         }
     }
 
-    const trDescription = document.createElement('tr');
     const descriptionDiv = document.createElement('div');
+    descriptionDiv.className = 'mb-3';
     const descriptionP = document.createElement('p');
     descriptionP.id = 'description';
+    descriptionP.className = 'text-muted';
     descriptionP.innerHTML = descriptionText;
     descriptionDiv.appendChild(descriptionP);
-    trDescription.appendChild(descriptionDiv);
-    topDefineTable.appendChild(trDescription);
+    topDefineTable.appendChild(descriptionDiv);
 
-    // Serial number input or display
-    const serialLabel = document.createElement('p');
+    // Serial number input or display (Bootstrap form-group)
+    const formGroup = document.createElement('div');
+    formGroup.className = 'mb-3';
+
+    const serialLabel = document.createElement('label');
     serialLabel.id = 'ReadTitle';
-    serialLabel.innerHTML = `${LanguageDict["TruckSerialNumber"]}<br/>`;
+    serialLabel.className = 'form-label fw-bold';
+    serialLabel.innerHTML = LanguageDict["TruckSerialNumber"];
+
+    formGroup.appendChild(serialLabel);
 
     if (Number(writePermissionDict[serialId]) <= Number(sessionStorageService.get('AccessLevel'))) {
         const serialInput = document.createElement('input');
         serialInput.id = 'SerialInput';
         serialInput.type = 'number';
-        serialInput.style.float = 'left';
+        serialInput.className = 'form-control w-auto d-inline-block ms-2';
         serialInput.style.textAlign = 'right';
         serialInput.value = lineArr[3];
         serialInput.onchange = () => updateSerialNumber(lineArr);
 
-        topDefineTable.appendChild(serialLabel);
-        topDefineTable.appendChild(serialInput);
+        formGroup.appendChild(serialInput);
     } else {
-        const serialValue = document.createElement('p');
+        const serialValue = document.createElement('span');
         serialValue.id = 'ReadResult';
+        serialValue.className = 'ms-2';
         serialValue.innerHTML = lineArr[3];
-        topDefineTable.appendChild(serialLabel);
-        topDefineTable.appendChild(serialValue);
+        formGroup.appendChild(serialValue);
     }
 
-    // Optionally, add a container for further UI if needed
+    topDefineTable.appendChild(formGroup);
+
+    // Optionally, add a Bootstrap card for further UI if needed
     const serialDiv = document.createElement('div');
-    serialDiv.style.margin = '10px';
-    serialDiv.style.padding = '15px';
+    serialDiv.className = 'card my-3';
+    const serialCardBody = document.createElement('div');
+    serialCardBody.className = 'card-body p-2';
     const serialTable = document.createElement('table');
+    serialTable.className = 'table table-sm mb-0';
     const serialTR = document.createElement('tr');
     serialTable.appendChild(serialTR);
-    serialDiv.appendChild(serialTable);
+    serialCardBody.appendChild(serialTable);
+    serialDiv.appendChild(serialCardBody);
     topDefineTable.appendChild(serialDiv);
 }
 
@@ -105,7 +116,6 @@ function updateSerialNumber(lineArr) {
     // Highlight the input box to indicate change
     const serialInput = document.getElementById('SerialInput');
     if (serialInput) {
-        serialInput.style.backgroundColor = 'blue';
-        serialInput.style.color = 'white';
+        serialInput.classList.add('bg-primary', 'text-white');
     }
 }

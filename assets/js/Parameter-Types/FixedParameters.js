@@ -86,7 +86,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 	//Update Mode
 	if (LineNumber == 1) {
 
-		Table = document.getElementById('topDefineDescription');
+		let Table = document.getElementById('topDefineDescription');
 
 		TH = document.createElement('p');
 		TH.setAttribute('id', 'WorkSpaceTitle');

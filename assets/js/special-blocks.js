@@ -55,7 +55,7 @@ function updateParametersAndLog(newParams, actionMsg) {
 /**
  * Handler for setting defaults.
  */
-export function SBSetDefaultsHandler() {
+export function SBSetDefaults() {
     if (!confirm(LanguageDict['FileActionsDefaultCheckMsg'])) return;
     const paramStr = sessionStorage.getItem('Parameters');
     const paramArr = parseParameters(paramStr);

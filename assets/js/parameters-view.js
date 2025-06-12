@@ -41,32 +41,49 @@ export function showParameterNotPresent(lineNumber, htmlObject) {
     const container = document.getElementById('topDefineDescription');
     container.innerHTML = '';
 
-    const workSpaceTitle = document.createElement('p');
-    workSpaceTitle.id = 'WorkSpaceTitle';
-    workSpaceTitle.innerHTML = htmlObject.innerHTML || 'unknown';
+    // Bootstrap card container
+    const card = document.createElement('div');
+    card.className = 'card my-4';
 
+    // Card header (parameter title)
+    const cardHeader = document.createElement('div');
+    cardHeader.className = 'card-header bg-warning text-dark fw-bold';
+    cardHeader.innerHTML = htmlObject.innerHTML || 'Unknown Parameter';
+    card.appendChild(cardHeader);
+
+    // Card body
+    const cardBody = document.createElement('div');
+    cardBody.className = 'card-body';
+
+    // Description
     const description = document.createElement('p');
     description.id = 'description';
+    description.className = 'text-muted';
     if (typeof MainDescriptionsDict !== 'undefined' && MainDescriptionsDict[htmlObject.id]) {
         description.innerHTML = MainDescriptionsDict[htmlObject.id].replace('#' + htmlObject.id, '');
     }
+    cardBody.appendChild(description);
 
-    const parameterMsg = document.createElement('p');
-    parameterMsg.value = 'This Parameter is not present on this file';
+    // Parameter not present message
+    const parameterMsg = document.createElement('div');
+    parameterMsg.className = 'alert alert-info my-3';
+    parameterMsg.innerText = 'This parameter is not present in this file.';
+    cardBody.appendChild(parameterMsg);
 
-    const addParameterButton = document.createElement('input');
+    // Add parameter button
+    const addParameterButton = document.createElement('button');
     addParameterButton.id = 'AddParameterButton';
-    addParameterButton.type = 'submit';
-    addParameterButton.value = `Add "${htmlObject.innerHTML}" to this file?`;
+    addParameterButton.type = 'button';
+    addParameterButton.className = 'btn btn-primary';
+    addParameterButton.innerText = `Add "${htmlObject.innerHTML}" to this file?`;
     addParameterButton.onclick = function () {
         addParameterToClp(lineNumber, htmlObject);
         // location.reload();
     };
+    cardBody.appendChild(addParameterButton);
 
-    container.appendChild(workSpaceTitle);
-    container.appendChild(description);
-    container.appendChild(parameterMsg);
-    container.appendChild(addParameterButton);
+    card.appendChild(cardBody);
+    container.appendChild(card);
 }
 
 // Build a dictionary of user parameters from sessionStorage

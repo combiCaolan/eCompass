@@ -1,12 +1,9 @@
-// import sessionStorageService from './modules/sessionStorageService.js';
-
 import sessionStorageService from "../modules/sessionStorageService.js";
 
 let AccessLevelForUser = Number(sessionStorageService.get('AccessLevel'));
 
-
 /**
- * Handles dropdown parameter display and updates.
+ * Handles dropdown parameter display and updates, Bootstrap style.
  */
 export function dropDownFunction(parameterLine, object) {
     // Clear previous description
@@ -19,24 +16,20 @@ export function dropDownFunction(parameterLine, object) {
     const constantElem = document.getElementById('constant' + numberToFind);
     if (constantElem && constantElem.innerHTML !== '') constantElem.innerHTML = '';
 
-    // Title
-    const title = document.createElement('p');
-    title.id = 'WorkSpaceTitle';
-    
-    try{
-        title.innerHTML = object.innerHTML;
-        document.getElementById('topDefineTable').appendChild(title);
-    }catch(err){
-        title.innerHTML = 'undefined';
-        document.getElementById('topDefineTable').appendChild(title);
-    }
+    // Bootstrap Card Container
+    const card = document.createElement('div');
+    // card.className = 'card my-3';
 
-    // Find OptionIndex
-    let optionIndex = null;
-    parameterMain.split('\n').forEach(line => {
-        const parts = line.split(',');
-        if (parts[0] == numberToFind) optionIndex = parts[2];
-    });
+    // Card Header (Title)
+    const cardHeader = document.createElement('div');
+    // cardHeader.className = 'card-header bg-primary text-white';
+    cardHeader.id = 'WorkSpaceTitle';
+    cardHeader.innerHTML = object?.innerHTML || 'undefined';
+    card.appendChild(cardHeader);
+
+    // Card Body
+    const cardBody = document.createElement('div');
+    cardBody.className = 'card-body';
 
     // Truck image for parameter 2
     if (numberToFind === 2) {
@@ -48,40 +41,46 @@ export function dropDownFunction(parameterLine, object) {
             const truckImage = document.createElement('img');
             truckImage.src = imgUrl;
             truckImage.id = 'TruckImage';
-            document.getElementById('topDefineTable').appendChild(truckImage);
+            truckImage.className = 'img-fluid mb-3';
+            cardBody.appendChild(truckImage);
         }
     }
 
     // Description
-    const descriptionDiv = document.createElement('div');
     const description = document.createElement('p');
     description.id = 'description';
+    description.className = 'text-muted';
     if (typeof MainDescriptionsDict !== 'undefined' && MainDescriptionsDict[numberToFind]) {
         description.innerHTML = MainDescriptionsDict[numberToFind].replace('#' + numberToFind, '');
     }
-    descriptionDiv.appendChild(description);
-    const tr = document.createElement('tr');
-    tr.appendChild(descriptionDiv);
+    cardBody.appendChild(description);
 
-    // Export checkbox
+    // Export checkbox (Bootstrap switch)
     const exportDiv = document.createElement('div');
-    const exportLabel = document.createElement('label');
-    exportLabel.id = 'Export';
-    exportLabel.innerHTML = LanguageDict["ExportSelectedParamters"];
-    exportDiv.appendChild(exportLabel);
-
+    exportDiv.className = 'form-check form-switch mb-3';
     const exportCheckbox = document.createElement('input');
     exportCheckbox.type = 'checkbox';
+    exportCheckbox.className = 'form-check-input';
     exportCheckbox.id = 'SwitchParameterCheckbox';
-    exportCheckbox.style = "text-align:center; font-size:18px;";
     exportCheckbox.checked = !removedParametersCounters.includes(String(parameterLine[0]));
     exportCheckbox.onchange = function () {
         exportonchange(parameterLine[0], this);
+        descElem.style.opacity = this.checked ? "1" : "0.4";
     };
+    const exportLabel = document.createElement('label');
+    exportLabel.className = 'form-check-label ms-2';
+    exportLabel.htmlFor = 'SwitchParameterCheckbox';
+    exportLabel.innerHTML = LanguageDict["ExportSelectedParamters"];
     exportDiv.appendChild(exportCheckbox);
+    exportDiv.appendChild(exportLabel);
+    cardBody.appendChild(exportDiv);
 
-    // Set opacity based on removal state
-    descElem.style.opacity = exportCheckbox.checked ? "1" : "0.4";
+    // Find OptionIndex
+    let optionIndex = null;
+    parameterMain.split('\n').forEach(line => {
+        const parts = line.split(',');
+        if (parts[0] == numberToFind) optionIndex = parts[2];
+    });
 
     // Dropdown options
     let dropDownOptionsDict = {};
@@ -90,15 +89,19 @@ export function dropDownFunction(parameterLine, object) {
     while (i < dropDownLines.length) {
         if (dropDownLines[i][0] === '#' && Number(dropDownLines[i].replace('#', '')) === Number(optionIndex)) {
             // Current Value dropdown
-            const currentTag = document.createElement('p');
-            currentTag.id = 'ReadResult';
-            currentTag.innerHTML = LanguageDict["CurrentValue"];
-            tr.appendChild(currentTag);
+            const formGroup = document.createElement('div');
+            formGroup.className = 'mb-3';
+
+            const currentLabel = document.createElement('label');
+            currentLabel.className = 'form-label fw-bold';
+            currentLabel.htmlFor = 'CurrentDropDownValue';
+            currentLabel.innerHTML = LanguageDict["CurrentValue"];
+            formGroup.appendChild(currentLabel);
 
             const dropDown = document.createElement('select');
             dropDown.id = 'CurrentDropDownValue';
+            dropDown.className = 'form-select w-auto d-inline-block ms-2';
             dropDown.onchange = () => dropDownOnChange(parameterLine);
-            tr.appendChild(dropDown);
 
             i++;
             while (i < dropDownLines.length && dropDownLines[i][0] !== '#') {
@@ -115,6 +118,8 @@ export function dropDownFunction(parameterLine, object) {
                 dropDown.appendChild(option);
                 i++;
             }
+            formGroup.appendChild(dropDown);
+            cardBody.appendChild(formGroup);
         }
         i++;
     }
@@ -123,13 +128,18 @@ export function dropDownFunction(parameterLine, object) {
     if (numberToFind !== 2) {
         if (Number(sessionStorageService.get('AccessLevel')) == '8') {
             // Default
-            const defaultTag = document.createElement('p');
-            defaultTag.id = 'ReadResult';
-            defaultTag.innerHTML = LanguageDict["DefaultValue"];
-            tr.appendChild(defaultTag);
+            const defaultGroup = document.createElement('div');
+            defaultGroup.className = 'mb-3';
+
+            const defaultLabel = document.createElement('label');
+            defaultLabel.className = 'form-label fw-bold';
+            defaultLabel.htmlFor = 'DefaultSelectTag';
+            defaultLabel.innerHTML = LanguageDict["DefaultValue"];
+            defaultGroup.appendChild(defaultLabel);
 
             const defaultSelect = document.createElement('select');
             defaultSelect.id = 'DefaultSelectTag';
+            defaultSelect.className = 'form-select w-auto d-inline-block ms-2';
             defaultSelect.onchange = () => defaultDropDownOnChange(parameterLine);
             Object.entries(dropDownOptionsDict).forEach(([val, label]) => {
                 const option = document.createElement('option');
@@ -138,16 +148,22 @@ export function dropDownFunction(parameterLine, object) {
                 if (val == parameterLine[2]) option.selected = true;
                 defaultSelect.appendChild(option);
             });
-            tr.appendChild(defaultSelect);
+            defaultGroup.appendChild(defaultSelect);
+            cardBody.appendChild(defaultGroup);
 
             // Factory
-            const factoryTag = document.createElement('p');
-            factoryTag.id = 'ReadResult';
-            factoryTag.innerHTML = LanguageDict["FactoryValue"];
-            tr.appendChild(factoryTag);
+            const factoryGroup = document.createElement('div');
+            factoryGroup.className = 'mb-3';
+
+            const factoryLabel = document.createElement('label');
+            factoryLabel.className = 'form-label fw-bold';
+            factoryLabel.htmlFor = 'FactorySelectTag';
+            factoryLabel.innerHTML = LanguageDict["FactoryValue"];
+            factoryGroup.appendChild(factoryLabel);
 
             const factorySelect = document.createElement('select');
             factorySelect.id = 'FactorySelectTag';
+            factorySelect.className = 'form-select w-auto d-inline-block ms-2';
             factorySelect.onchange = () => factoryDropDownOnChange(parameterLine);
             Object.entries(dropDownOptionsDict).forEach(([val, label]) => {
                 const option = document.createElement('option');
@@ -156,23 +172,21 @@ export function dropDownFunction(parameterLine, object) {
                 if (val == parameterLine[3]) option.selected = true;
                 factorySelect.appendChild(option);
             });
-            tr.appendChild(factorySelect);
+            factoryGroup.appendChild(factorySelect);
+            cardBody.appendChild(factoryGroup);
         } else {
             // Read-only default/factory
             const defaultTag = document.createElement('p');
-            defaultTag.id = 'DropDownReadTitle';
-            defaultTag.innerHTML = 'Default Value : ' + dropDownOptionsDict[parameterLine[2]];
-            tr.appendChild(defaultTag);
+            defaultTag.className = 'text-secondary mb-1';
+            defaultTag.innerHTML = 'Default Value: <span class="fw-bold">' + dropDownOptionsDict[parameterLine[2]] + '</span>';
+            cardBody.appendChild(defaultTag);
 
             const factoryTag = document.createElement('p');
-            factoryTag.id = 'DropDownReadTitle';
-            factoryTag.innerHTML = 'Factory Value : ' + dropDownOptionsDict[parameterLine[3]];
-            tr.appendChild(factoryTag);
+            factoryTag.className = 'text-secondary mb-1';
+            factoryTag.innerHTML = 'Factory Value: <span class="fw-bold">' + dropDownOptionsDict[parameterLine[3]] + '</span>';
+            cardBody.appendChild(factoryTag);
         }
     }
-
-    descElem.appendChild(tr);
-    descElem.appendChild(exportDiv);
 
     // Permissions
     if (typeof writePermissionDict !== 'undefined' && Number(writePermissionDict[numberToFind]) > Number(sessionStorageService.get('AccessLevel'))) {
@@ -194,6 +208,10 @@ export function dropDownFunction(parameterLine, object) {
             }
         } catch (err) {}
     }
+
+    card.appendChild(cardBody);
+    descElem.appendChild(card);
+
     $('#topDefineDescription').fadeIn();
 }
 
@@ -264,69 +282,5 @@ export function dropDownOnChange(parameterLine) {
     const parameters = sessionStorage.getItem('Parameters').replace(parameterLine.join(','), newLine);
     sessionStorage.setItem('Parameters', parameters);
     ChangesMadePreDownload = true;
-    treeViewClick(document.getElementById(parameterLine[0]), parameterLine[0]);
-}
-
-/**
- * Handles change for the default value dropdown.
- */
-export function defaultDropDownOnChange(parameterLine) {
-    const newLine = [
-        parameterLine[0],
-        parameterLine[1],
-        document.getElementById('DefaultSelectTag').value.replace('\r', ''),
-        parameterLine[3],
-        parameterLine[4],
-        parameterLine[5],
-        parameterLine[6],
-        parameterLine[7],
-        parameterLine[8],
-        parameterLine[9],
-        parameterLine[10]
-    ].join(',');
-
-    const changeTo = document.getElementById('DefaultSelectTag').options[
-        document.getElementById('DefaultSelectTag').selectedIndex
-    ].innerHTML;
-
-    const currentParameterTitle = document.getElementById('WorkSpaceTitle').innerHTML;
-    const logLine = `${sessionStorage.getItem('loggedinusername')} changed ${currentParameterTitle} [Default Value] to ${changeTo}\n`;
-    const currentLogs = sessionStorage.getItem('UserMadeChanges');
-    sessionStorage.setItem('UserMadeChanges', currentLogs + logLine);
-
-    const parameters = sessionStorage.getItem('Parameters').replace(parameterLine.join(','), newLine);
-    sessionStorage.setItem('Parameters', parameters);
-    treeViewClick(document.getElementById(parameterLine[0]), parameterLine[0]);
-}
-
-/**
- * Handles change for the factory value dropdown.
- */
-export function factoryDropDownOnChange(parameterLine) {
-    const newLine = [
-        parameterLine[0],
-        parameterLine[1],
-        parameterLine[2],
-        document.getElementById('FactorySelectTag').value.replace('\r', ''),
-        parameterLine[4],
-        parameterLine[5],
-        parameterLine[6],
-        parameterLine[7],
-        parameterLine[8],
-        parameterLine[9],
-        parameterLine[10]
-    ].join(',');
-
-    const changeTo = document.getElementById('FactorySelectTag').options[
-        document.getElementById('FactorySelectTag').selectedIndex
-    ].innerHTML;
-
-    const currentParameterTitle = document.getElementById('WorkSpaceTitle').innerHTML;
-    const logLine = `${sessionStorage.getItem('loggedinusername')} changed ${currentParameterTitle} [Factory Value] to ${changeTo}\n`;
-    const currentLogs = sessionStorage.getItem('UserMadeChanges');
-    sessionStorage.setItem('UserMadeChanges', currentLogs + logLine);
-
-    const parameters = sessionStorage.getItem('Parameters').replace(parameterLine.join(','), newLine);
-    sessionStorage.setItem('Parameters', parameters);
     treeViewClick(document.getElementById(parameterLine[0]), parameterLine[0]);
 }

@@ -1,15 +1,20 @@
 // --- Utility Functions ---
 import sessionStorageService from "../modules/sessionStorageService.js";
 
-const userDataScript = document.getElementById('user-data');
-const userData = JSON.parse(userDataScript.textContent);
+export function init(){
+    const userDataScript = document.getElementById('user-data');
 
-localStorage.setItem('Language', userData.language);
-localStorage.setItem('ServerPath', userData.server_path);
-sessionStorage.setItem('loggedinusername', userData.full_name);
-sessionStorage.setItem('loggedinemail', userData.logged_user_email);
-sessionStorage.setItem('AccessLevel', userData.access_level);
+    console.log(userData);
 
+    const userData = JSON.parse(userDataScript.textContent);
+
+    localStorage.setItem('Language', userData.language);
+    localStorage.setItem('ServerPath', userData.server_path);
+    sessionStorage.setItem('loggedinusername', userData.full_name);
+    sessionStorage.setItem('loggedinemail', userData.logged_user_email);
+    sessionStorage.setItem('AccessLevel', userData.access_level);
+
+}
 
 
 /** Asynchronously fetch a file and return its text, or empty string on failure */
@@ -47,7 +52,7 @@ export function setDefaultApi() {
 
 // --- Main Startup Logic ---
 
-export async function onStartup() {
+export async function onStartup(data) {
     setDefaultApi();
     setDefaultLanguage();
 
@@ -202,4 +207,4 @@ export function parseSpecialDescriptionDict(text) {
 }
 
 // --- Run on startup ---
-onStartup();
+// onStartup();
