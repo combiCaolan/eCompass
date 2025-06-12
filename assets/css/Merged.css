@@ -1025,7 +1025,7 @@ div[id^="constant"]{
 .PreTreeButton,
 .SelectedThirdSubGroup,
 .BitTreeButton {
-    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    /* font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; */
     /* margin-top: 1px; */
     list-style-type: none;
     cursor: pointer;
@@ -1038,7 +1038,7 @@ div[id^="constant"]{
 }
 
 .SelectedThirdSubGroup {
-    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    /* font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; */
     /* margin-top: 1px; */
     list-style-type: none;
     cursor: pointer;
@@ -1052,7 +1052,7 @@ div[id^="constant"]{
 }
 
 .ThirdSubGroup {
-    font-size: 14px;
+    /* font-size: 14px; */
     font-style: normal;
 }
 

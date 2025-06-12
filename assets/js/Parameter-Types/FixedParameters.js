@@ -88,14 +88,14 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 
 		let Table = document.getElementById('topDefineDescription');
 
-		TH = document.createElement('p');
+		let TH = document.createElement('p');
 		TH.setAttribute('id', 'WorkSpaceTitle');
 		TH.innerHTML = HTMLObject.innerHTML;
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
 
 
-		TR = document.createElement('tr');
+		let TR = document.createElement('tr');
 		Table.appendChild(TR);
 		MoCASLeft_1 = document.createElement('td');
 		TR.appendChild(MoCASLeft_1);
