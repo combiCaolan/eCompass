@@ -58,15 +58,10 @@ function getParametersArray(key) {
  */
 function makeMenu() {
     // Build lookup for parameter locations
-    console.log(sessionStorageService.get('ParameterMain'));
-    console.log(getParametersArray('ParameterMain'));
     const parameterMainArr = getParametersArray('ParameterMain');
     const parametersLocationList = {};
     parameterMainArr.forEach(line => {
-        // if (line.length >= 2) 
         parametersLocationList[line[0]] = line[1];
-        console.log('yellow')
-        console.log(line);
     });
 
     // Build lookup for user's file parameters
@@ -110,7 +105,7 @@ function organiseMenu(parameterMainArr, parametresDirForUsersFile) {
     console.log(parameterMainArr);
     console.log(parametresDirForUsersFile);
     parameterMainArr.forEach(line => {
-        // if (!line.length) return;
+        if (!line.length) return;
         const [id, group, , label, , , , , , access] = line;
         const btn = document.createElement('button');
         btn.innerHTML = '- ' + label || '';
@@ -119,10 +114,6 @@ function organiseMenu(parameterMainArr, parametresDirForUsersFile) {
         // Main menu logic
         if (Number(id) < 89 && id !== '2' && id !== '4') {
             btn.className = 'PreTreeButton';
-            console.log('below');
-            console.log(parametresDirForUsersFile);
-            // btn.onclick = () => alert('hello world');
-            // console.log(parametresDirForUsersFile);
             btn.onclick = () => MenuParametersOnclick(parametresDirForUsersFile[id] || 'empty', btn);
             const div = document.createElement('div');
             div.id = 'constant' + id;
@@ -133,8 +124,6 @@ function organiseMenu(parameterMainArr, parametresDirForUsersFile) {
             }
         } else {
             btn.onclick = () => treeViewClick(btn, id);
-            // btn.setAttribute('onclick','treeViewClick(' + btn + ',' +  String(id) + ')')
-            // console.log(btn);
             if (id === '2' || id === '4') {
                 btn.className = 'PreTreeButton';
                 const div = document.createElement('div');

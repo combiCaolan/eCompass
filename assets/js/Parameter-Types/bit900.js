@@ -76,7 +76,7 @@ export function Bit999DisplayOptionsFunction(line, clickedButton) {
         const input = document.createElement('input');
         input.type = 'submit';
         input.id = 'Bitnineninenine' + bitCounter;
-        input.value = bitParts[2];
+        input.value = ' - ' + bitParts[2];
         input.className = 'ThirdSubGroup';
         if (bitParts[2]) input.name = bitParts[2].replace(/ /g, '');
         input.onclick = function () {

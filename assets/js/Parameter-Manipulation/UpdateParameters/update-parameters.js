@@ -1,4 +1,4 @@
-import { MenuParametersOnclick } from './Parameter-Types/FixedParameters.js';
+import { MenuParametersOnclick } from '../../Parameter-Types/FixedParameters.js';
 
 /**
  * Utility functions to update parameter values in sessionStorage.

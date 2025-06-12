@@ -35,8 +35,10 @@ if ($test_mode) {
     // Output user data as a JSON script tag
     echo '<script id="user-data" type="application/json">'.json_encode($user_data).'</script>';
 
+    sleep(1);
+
     // Load main JavaScript module
-    echo '<script type="module" src="assets/js/InitialStart/on-startup.js"></script>';
+    echo '<script type="module" src="assets/js/InitialStart/on-startup.js" defer></script>';
 
     // Optionally, return or exit to prevent running the rest of the code
     return;
