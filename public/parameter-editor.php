@@ -82,53 +82,57 @@
 
         <div class="container-fluid" style="margin-top:60px">
             <div class="row">
-                <!-- Sidebar/Tree (if present) -->
-                <div class="col-12 col-lg-3 order-1 order-lg-1 mb-3 mb-lg-0">
-                    <ul class="tree list-group">
-                        <?php
-                        // Define tree sections as an array for maintainability
-                        $treeSections = [
-                            ['A', 'DropDownMachineDetails', 'TruckDetailsID'],
-                            ['B', 'FileDetails', 'FileDetailsID'],
-                            ['C', 'Software', 'SoftwareID'],
-                            ['D', 'Service', 'ServiceID'],
-                            ['E', 'DropDownMoCAS', 'MoCASID'],
-                            ['F', 'DropDownParameters', 'ParametersID', '&#x25b2;'],
-                            ['G', 'GDrop', 'FactoryID', '&#x25bc;', 'GTreeTab'],
-                            ['H', 'HDrop', 'DeveloperID', '&#x25bc;', 'HTreeTab'],
-                            ['I', 'IDrop', 'NotAssignedID', '&#x25bc;', 'ITreeTab'],
-                            ['J', 'JDrop', 'SpecialID', '&#x25bc;', 'JTreeTab'],
-                        ];
-                        foreach ($treeSections as $section) {
-                            $letter = $section[0];
-                            $buttonId = $section[1];
-                            $labelId = $section[2];
-                            $arrow = $section[3] ?? '&#x25bc;';
-                            echo "<li class='list-group-item' id='Treetab'>";
-                            echo "<button type='button' class='btn btn-sm btn-outline-secondary float-end' id='{$buttonId}' onclick=\"DropDownUni('{$letter}','{$buttonId}');\">{$arrow}</button>";
-                            echo "<span onclick=\"DropDownUni('{$letter}','{$buttonId}');\" id='{$labelId}'></span>";
-                            echo "</li>";
-                            echo "<div id='{$letter}'></div>";
-                        }
-                        ?>
-                    </ul>
-                </div>
-                <!-- Viewer: Main area, below tree on mobile, right of tree on desktop -->
-                <div class="col-12 col-lg-9 order-2 order-lg-2">
-                    <div id="viewer" class="card shadow-sm my-3">
-                        <div class="card-header bg-primary text-white">
-                            Parameter Viewer
-                        </div>
-                        <div class="card-body">
-                            <div id="topDefine">
-                                <table id="topDefineTable" class="table table-bordered"></table>
-                                <table id="topDefineDescription" class="table"></table>
+                <div class="d-none d-lg-flex" id="split-pane" style="height: 90vh;">
+                    <!-- Sidebar/Tree (if present) -->
+                    <div id="tree-sidebar" style="min-width:200px; max-width:600px; width:300px;">
+                        <ul class="tree list-group">
+                            <?php
+                            // Define tree sections as an array for maintainability
+                            $treeSections = [
+                                ['A', 'DropDownMachineDetails', 'TruckDetailsID'],
+                                ['B', 'FileDetails', 'FileDetailsID'],
+                                ['C', 'Software', 'SoftwareID'],
+                                ['D', 'Service', 'ServiceID'],
+                                ['E', 'DropDownMoCAS', 'MoCASID'],
+                                ['F', 'DropDownParameters', 'ParametersID', '&#x25b2;'],
+                                ['G', 'GDrop', 'FactoryID', '&#x25bc;', 'GTreeTab'],
+                                ['H', 'HDrop', 'DeveloperID', '&#x25bc;', 'HTreeTab'],
+                                ['I', 'IDrop', 'NotAssignedID', '&#x25bc;', 'ITreeTab'],
+                                ['J', 'JDrop', 'SpecialID', '&#x25bc;', 'JTreeTab'],
+                            ];
+                            foreach ($treeSections as $section) {
+                                $letter = $section[0];
+                                $buttonId = $section[1];
+                                $labelId = $section[2];
+                                $arrow = $section[3] ?? '&#x25bc;';
+                                echo "<li class='list-group-item' id='Treetab'>";
+                                echo "<button type='button' class='btn btn-sm btn-outline-secondary float-end' id='{$buttonId}' onclick=\"DropDownUni('{$letter}','{$buttonId}');\">{$arrow}</button>";
+                                echo "<span onclick=\"DropDownUni('{$letter}','{$buttonId}');\" id='{$labelId}'></span>";
+                                echo "</li>";
+                                echo "<div id='{$letter}'></div>";
+                            }
+                            ?>
+                        </ul>
+                    </div>
+
+                    <div id="splitter" style="width:6px; cursor:col-resize; background:#ddd;"></div>
+                    <div id="viewer-pane" class="flex-grow-1 ms-2">
+                        <!-- Parameter viewer code here -->
+                        <div id="viewer" class="card shadow-sm my-3">
+                            <div class="card-header bg-primary text-white">
+                                Parameter Viewer
+                            </div>
+                            <div class="card-body">
+                                <div id="topDefine">
+                                    <table id="topDefineTable" class="table table-bordered"></table>
+                                    <table id="topDefineDescription" class="table"></table>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card my-3">
-                        <div class="card-header fw-bold">User Logs</div>
-                        <div class="card-body" id="log-area-output"></div>
+                        <div class="card my-3">
+                            <div class="card-header fw-bold">User Logs</div>
+                            <div class="card-body" id="log-area-output"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -145,6 +149,35 @@
     handling, and menu actions are loaded in the correct order.
     ----------------------------------------------------------------------------
 -->
+
+        <script>
+            // Add this after your DOM loads
+            const splitter = document.getElementById('splitter');
+            const sidebar = document.getElementById('tree-sidebar');
+            const viewer = document.getElementById('viewer-pane');
+            let isDragging = false;
+
+            splitter.addEventListener('mousedown', function (e) {
+                isDragging = true;
+                document.body.style.cursor = 'col-resize';
+            });
+
+            document.addEventListener('mousemove', function (e) {
+                if (!isDragging) return;
+                const minWidth = 200;
+                const maxWidth = 600;
+                let newWidth = e.clientX - sidebar.getBoundingClientRect().left;
+                newWidth = Math.max(minWidth, Math.min(maxWidth, newWidth));
+                sidebar.style.width = newWidth + 'px';
+            });
+
+            document.addEventListener('mouseup', function (e) {
+                if (isDragging) {
+                    isDragging = false;
+                    document.body.style.cursor = '';
+                }
+            });
+        </script>
 
         <!-- Set available APIs (example: API 100) -->
         <script>AvailableAPI = ['100'];</script>

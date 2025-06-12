@@ -1,3 +1,49 @@
+/* Add to your Merged.css */
+
+@media (max-width: 991.98px) {
+    #split-pane {
+        flex-direction: column !important;
+        height: auto !important;
+    }
+    #tree-sidebar {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        order: 1;
+    }
+    #splitter {
+        display: none !important;
+    }
+    #viewer-pane {
+        width: 100% !important;
+        min-width: 0 !important;
+        order: 2;
+        margin-left: 0 !important;
+    }
+}
+
+/* Add to your CSS file */
+#split-pane {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+#tree-sidebar {
+    background: #f8f9fa;
+    overflow: auto;
+    transition: width 0.2s;
+}
+#splitter {
+    background: #ddd;
+    width: 6px;
+    cursor: col-resize;
+    z-index: 10;
+}
+#viewer-pane {
+    overflow: auto;
+    min-width: 0;
+}
+
 /* -----------------------------------------------------------------------------
    MENU LEVEL CSS
    -----------------------------------------------------------------------------
@@ -12,7 +58,9 @@
 /* -----------------------------------------------------------------------------
    GENERAL FONT STYLES
 ----------------------------------------------------------------------------- */
+
 h1 {
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
     font-size: 24px;
     font-style: normal;
     font-variant: normal;
@@ -21,6 +69,7 @@ h1 {
 }
 
 h3 {
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-variant: normal;
@@ -29,11 +78,13 @@ h3 {
 }
 
 p {
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
     font-weight: 100;
     -webkit-font-smoothing: antialiased;
 }
 
 blockquote {
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
     font-size: 21px;
     font-style: normal;
     font-variant: normal;
@@ -42,6 +93,7 @@ blockquote {
 }
 
 pre {
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
     font-size: 13px;
     font-style: normal;
     font-variant: normal;
@@ -50,6 +102,7 @@ pre {
 }
 
 #HeadGroup {
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-variant: normal;
@@ -146,10 +199,10 @@ pre {
     display: none;
 }
 
-/* body {
+body {
     background: lightgray;
     font-family: sans-serif;
-} */
+}
 
 #right_row {
     text-align: center;
@@ -158,17 +211,17 @@ pre {
     font-variant-caps: all-small-caps;
 }
 
-/* select {
+select {
     outline: none;
     margin: 5px 0 5px 10px;
     padding: 1px;
     width: 50%;
-} */
+}
 
-/* input {
+input {
     padding: 1px;
     font-size: 15px;
-} */
+}
 
 /* Error lists */
 #MinErrorsList,
@@ -957,7 +1010,7 @@ div[id^="constant"]{
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 } */
 
-/* .TreeButton {
+.TreeButton {
     font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
     width: 200%;
     text-align: left;
@@ -966,13 +1019,13 @@ div[id^="constant"]{
     margin-bottom: 3px;
     font-size: 16px;
     font-weight: 500;
-} */
+}
 
 .ThirdSubGroup,
 .PreTreeButton,
 .SelectedThirdSubGroup,
 .BitTreeButton {
-    /* font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; */
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
     /* margin-top: 1px; */
     list-style-type: none;
     cursor: pointer;
@@ -985,7 +1038,7 @@ div[id^="constant"]{
 }
 
 .SelectedThirdSubGroup {
-    /* font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; */
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
     /* margin-top: 1px; */
     list-style-type: none;
     cursor: pointer;
@@ -999,12 +1052,12 @@ div[id^="constant"]{
 }
 
 .ThirdSubGroup {
-    /* font-size: 14px; */
+    font-size: 14px;
     font-style: normal;
 }
 
 .PreTreeButton {
-    /* font-size: 14px; */
+    font-size: 14px;
     font-style: normal;
     text-decoration: underline;
 }
