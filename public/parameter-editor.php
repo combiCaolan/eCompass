@@ -83,38 +83,38 @@
         <div class="container-fluid" style="margin-top:60px">
             <div class="row">
                 <!-- Sidebar/Tree (if present) -->
-                <div class="col-lg-3 d-none d-lg-block">
+                <div class="col-12 col-lg-3 order-1 order-lg-1 mb-3 mb-lg-0">
                     <ul class="tree list-group">
-                <?php
-                // Define tree sections as an array for maintainability
-                $treeSections = [
-                    ['A', 'DropDownMachineDetails', 'TruckDetailsID'],
-                    ['B', 'FileDetails', 'FileDetailsID'],
-                    ['C', 'Software', 'SoftwareID'],
-                    ['D', 'Service', 'ServiceID'],
-                    ['E', 'DropDownMoCAS', 'MoCASID'],
-                    ['F', 'DropDownParameters', 'ParametersID', '&#x25b2;'],
-                    ['G', 'GDrop', 'FactoryID', '&#x25bc;', 'GTreeTab'],
-                    ['H', 'HDrop', 'DeveloperID', '&#x25bc;', 'HTreeTab'],
-                    ['I', 'IDrop', 'NotAssignedID', '&#x25bc;', 'ITreeTab'],
-                    ['J', 'JDrop', 'SpecialID', '&#x25bc;', 'JTreeTab'],
-                ];
-                foreach ($treeSections as $section) {
-                    $letter = $section[0];
-                    $buttonId = $section[1];
-                    $labelId = $section[2];
-                    $arrow = $section[3] ?? '&#x25bc;';
-                    echo "<li class='list-group-item' id='Treetab'" . ($letter === 'A' ? " " : "") . ">";
-                    echo "<button type='button' class='btn btn-sm btn-outline-secondary float-end' id='{$buttonId}' onclick=\"DropDownUni('{$letter}','{$buttonId}');\">{$arrow}</button>";
-                    echo "<span onclick=\"DropDownUni('{$letter}','{$buttonId}');\" id='{$labelId}'></span>";
-                    echo "</li>";
-                    echo "<div id='{$letter}'></div>";
-                }
-                ?>
-            </ul>
+                        <?php
+                        // Define tree sections as an array for maintainability
+                        $treeSections = [
+                            ['A', 'DropDownMachineDetails', 'TruckDetailsID'],
+                            ['B', 'FileDetails', 'FileDetailsID'],
+                            ['C', 'Software', 'SoftwareID'],
+                            ['D', 'Service', 'ServiceID'],
+                            ['E', 'DropDownMoCAS', 'MoCASID'],
+                            ['F', 'DropDownParameters', 'ParametersID', '&#x25b2;'],
+                            ['G', 'GDrop', 'FactoryID', '&#x25bc;', 'GTreeTab'],
+                            ['H', 'HDrop', 'DeveloperID', '&#x25bc;', 'HTreeTab'],
+                            ['I', 'IDrop', 'NotAssignedID', '&#x25bc;', 'ITreeTab'],
+                            ['J', 'JDrop', 'SpecialID', '&#x25bc;', 'JTreeTab'],
+                        ];
+                        foreach ($treeSections as $section) {
+                            $letter = $section[0];
+                            $buttonId = $section[1];
+                            $labelId = $section[2];
+                            $arrow = $section[3] ?? '&#x25bc;';
+                            echo "<li class='list-group-item' id='Treetab'>";
+                            echo "<button type='button' class='btn btn-sm btn-outline-secondary float-end' id='{$buttonId}' onclick=\"DropDownUni('{$letter}','{$buttonId}');\">{$arrow}</button>";
+                            echo "<span onclick=\"DropDownUni('{$letter}','{$buttonId}');\" id='{$labelId}'></span>";
+                            echo "</li>";
+                            echo "<div id='{$letter}'></div>";
+                        }
+                        ?>
+                    </ul>
                 </div>
-                <!-- Main Viewer -->
-                <div class="col-12 col-lg-9">
+                <!-- Viewer: Main area, below tree on mobile, right of tree on desktop -->
+                <div class="col-12 col-lg-9 order-2 order-lg-2">
                     <div id="viewer" class="card shadow-sm my-3">
                         <div class="card-header bg-primary text-white">
                             Parameter Viewer
@@ -127,9 +127,9 @@
                         </div>
                     </div>
                     <div class="card my-3">
-                <div class="card-header fw-bold">User Logs</div>
-                <div class="card-body" id="log-area-output"></div>
-            </div>
+                        <div class="card-header fw-bold">User Logs</div>
+                        <div class="card-body" id="log-area-output"></div>
+                    </div>
                 </div>
             </div>
         </div>
