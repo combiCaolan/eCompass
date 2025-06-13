@@ -986,20 +986,20 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 
 
 				//create elements for the form
-				SerialNumberField = document.createElement('input');
-				ModelField = document.createElement('input');
-				UsernameField = document.createElement('input');
-				UseremailField = document.createElement('input');
-				AccessLevelField = document.createElement('input');
-				IndexField = document.createElement('input');
-				ModuleField = document.createElement('input');
-				TextareaField = document.createElement('textarea');
-				SubmitButton = document.createElement('input');
+				let SerialNumberField = document.createElement('input');
+				let ModelField = document.createElement('input');
+				let UsernameField = document.createElement('input');
+				let UseremailField = document.createElement('input');
+				let AccessLevelField = document.createElement('input');
+				let IndexField = document.createElement('input');
+				let ModuleField = document.createElement('input');
+				let TextareaField = document.createElement('textarea');
+				let SubmitButton = document.createElement('input');
 
 
 				//create element labels for the ones showing in page
-				SerialNumberField_label = document.createElement('label');
-				UsernameField_label = document.createElement('label');
+				let SerialNumberField_label = document.createElement('label');
+				let UsernameField_label = document.createElement('label');
 
 				//define the types for each element
 				SerialNumberField.type = 'text';
