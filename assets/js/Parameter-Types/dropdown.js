@@ -1,12 +1,135 @@
 import sessionStorageService from "../modules/sessionStorageService.js";
 
-let AccessLevelForUser = Number(sessionStorageService.get('AccessLevel'));
+// --- Data Helpers ---
 
-/**
- * Handles dropdown parameter display and updates, Bootstrap style.
- */
+function getOptionIndex(parameterMain, numberToFind) {
+    let optionIndex = null;
+    parameterMain.split('\n').forEach(line => {
+        const parts = line.split(',');
+        if (parts[0] == numberToFind) optionIndex = parts[2];
+    });
+    return optionIndex;
+}
+
+function getDropDownOptions(dropDownList, optionIndex) {
+    let options = [];
+    let i = 0;
+    const lines = dropDownList.split('\n');
+    while (i < lines.length) {
+        if (lines[i][0] === '#' && Number(lines[i].replace('#', '')) === Number(optionIndex)) {
+            i++;
+            while (i < lines.length && lines[i][0] !== '#') {
+                const [label, value] = lines[i].split(',');
+                options.push({ label, value });
+                i++;
+            }
+            break;
+        }
+        i++;
+    }
+    return options;
+}
+
+function getDropDownOptionsDict(options) {
+    const dict = {};
+    options.forEach(opt => {
+        dict[opt.value.replace(/\r|\n/g, '')] = opt.label;
+    });
+    return dict;
+}
+
+// --- UI Helpers ---
+
+function createCardHeader(title) {
+    const cardHeader = document.createElement('div');
+    // cardHeader.className = 'card-header bg-primary text-white';
+    cardHeader.id = 'WorkSpaceTitle';
+    cardHeader.innerHTML = title;
+    return cardHeader;
+}
+
+function createDescription(numberToFind) {
+    const description = document.createElement('p');
+    description.id = 'description';
+    // description.className = 'text-muted';
+    if (typeof MainDescriptionsDict !== 'undefined' && MainDescriptionsDict[numberToFind]) {
+        description.innerHTML = MainDescriptionsDict[numberToFind].replace('#' + numberToFind, '');
+    }
+    return description;
+}
+
+function createExportSwitch(parameterId, onChange) {
+    const exportDiv = document.createElement('div');
+    exportDiv.className = 'form-check form-switch mb-3';
+    const exportCheckbox = document.createElement('input');
+    exportCheckbox.type = 'checkbox';
+    exportCheckbox.className = 'form-check-input';
+    exportCheckbox.id = 'SwitchParameterCheckbox';
+    exportCheckbox.checked = !removedParametersCounters.includes(String(parameterId));
+    exportCheckbox.onchange = onChange;
+    const exportLabel = document.createElement('label');
+    exportLabel.className = 'form-check-label ms-2';
+    exportLabel.htmlFor = 'SwitchParameterCheckbox';
+    exportLabel.innerHTML = LanguageDict["ExportSelectedParamters"];
+    exportDiv.appendChild(exportCheckbox);
+    exportDiv.appendChild(exportLabel);
+    return exportDiv;
+}
+
+function createTruckImage(parameterLine) {
+    const imgUrl = `${localStorage.getItem('ServerPath')}/assets/truck-images/${parameterLine[3]}.png`;
+    const http = new XMLHttpRequest();
+    http.open('HEAD', imgUrl, false);
+    http.send();
+    if (http.status !== 404) {
+        const truckImage = document.createElement('img');
+        truckImage.src = imgUrl;
+        truckImage.id = 'TruckImage';
+        truckImage.className = 'img-fluid mb-3';
+        return truckImage;
+    }
+    return null;
+}
+
+function createDropdown(labelText, id, options, selectedValue, onChange) {
+    const formGroup = document.createElement('div');
+    formGroup.className = 'mb-3';
+
+    const label = document.createElement('label');
+    label.className = 'form-label fw-bold';
+    label.htmlFor = id;
+    label.innerHTML = labelText;
+    formGroup.appendChild(label);
+
+    const select = document.createElement('select');
+    select.id = id;
+    select.className = 'form-select w-auto d-inline-block ms-2';
+    select.onchange = onChange;
+
+    options.forEach(opt => {
+        const option = document.createElement('option');
+        option.value = opt.value;
+        option.innerHTML = opt.label;
+        if (String(opt.value).replace(/\r|\n/g, '') === String(selectedValue)) {
+            option.selected = true;
+        }
+        select.appendChild(option);
+    });
+
+    formGroup.appendChild(select);
+    return formGroup;
+}
+
+function createReadOnlyValue(label, value) {
+    const p = document.createElement('p');
+    p.className = 'text-secondary mb-1';
+    p.innerHTML = `${label}: <span class="fw-bold">${value}</span>`;
+    return p;
+}
+
+// --- Main UI Function ---
+
 export function dropDownFunction(parameterLine, object) {
-    // Clear previous description
     const descElem = document.getElementById('topDefineDescription');
     if (descElem) descElem.innerHTML = '';
 
@@ -16,180 +139,87 @@ export function dropDownFunction(parameterLine, object) {
     const constantElem = document.getElementById('constant' + numberToFind);
     if (constantElem && constantElem.innerHTML !== '') constantElem.innerHTML = '';
 
-    // Bootstrap Card Container
+    // Card
     const card = document.createElement('div');
     // card.className = 'card my-3';
+    card.appendChild(createCardHeader(object?.innerHTML || 'undefined'));
 
-    // Card Header (Title)
-    const cardHeader = document.createElement('div');
-    // cardHeader.className = 'card-header bg-primary text-white';
-    cardHeader.id = 'WorkSpaceTitle';
-    cardHeader.innerHTML = object?.innerHTML || 'undefined';
-    card.appendChild(cardHeader);
-
-    // Card Body
     const cardBody = document.createElement('div');
     cardBody.className = 'card-body';
 
     // Truck image for parameter 2
     if (numberToFind === 2) {
-        const imgUrl = `${localStorage.getItem('ServerPath')}/assets/truck-images/${parameterLine[3]}.png`;
-        const http = new XMLHttpRequest();
-        http.open('HEAD', imgUrl, false);
-        http.send();
-        if (http.status !== 404) {
-            const truckImage = document.createElement('img');
-            truckImage.src = imgUrl;
-            truckImage.id = 'TruckImage';
-            truckImage.className = 'img-fluid mb-3';
-            cardBody.appendChild(truckImage);
-        }
+        const truckImage = createTruckImage(parameterLine);
+        if (truckImage) cardBody.appendChild(truckImage);
     }
 
     // Description
-    const description = document.createElement('p');
-    description.id = 'description';
-    description.className = 'text-muted';
-    if (typeof MainDescriptionsDict !== 'undefined' && MainDescriptionsDict[numberToFind]) {
-        description.innerHTML = MainDescriptionsDict[numberToFind].replace('#' + numberToFind, '');
-    }
-    cardBody.appendChild(description);
+    cardBody.appendChild(createDescription(numberToFind));
 
-    // Export checkbox (Bootstrap switch)
-    const exportDiv = document.createElement('div');
-    exportDiv.className = 'form-check form-switch mb-3';
-    const exportCheckbox = document.createElement('input');
-    exportCheckbox.type = 'checkbox';
-    exportCheckbox.className = 'form-check-input';
-    exportCheckbox.id = 'SwitchParameterCheckbox';
-    exportCheckbox.checked = !removedParametersCounters.includes(String(parameterLine[0]));
-    exportCheckbox.onchange = function () {
+    // Export switch
+    cardBody.appendChild(createExportSwitch(parameterLine[0], function () {
         exportonchange(parameterLine[0], this);
         descElem.style.opacity = this.checked ? "1" : "0.4";
-    };
-    const exportLabel = document.createElement('label');
-    exportLabel.className = 'form-check-label ms-2';
-    exportLabel.htmlFor = 'SwitchParameterCheckbox';
-    exportLabel.innerHTML = LanguageDict["ExportSelectedParamters"];
-    exportDiv.appendChild(exportCheckbox);
-    exportDiv.appendChild(exportLabel);
-    cardBody.appendChild(exportDiv);
+    }));
 
-    // Find OptionIndex
-    let optionIndex = null;
-    parameterMain.split('\n').forEach(line => {
-        const parts = line.split(',');
-        if (parts[0] == numberToFind) optionIndex = parts[2];
-    });
+    // Find OptionIndex and options
+    const optionIndex = getOptionIndex(parameterMain, numberToFind);
+    const options = getDropDownOptions(dropDownList, optionIndex);
+    const dropDownOptionsDict = getDropDownOptionsDict(options);
 
-    // Dropdown options
-    let dropDownOptionsDict = {};
-    let i = 0;
-    const dropDownLines = dropDownList.split('\n');
-    while (i < dropDownLines.length) {
-        if (dropDownLines[i][0] === '#' && Number(dropDownLines[i].replace('#', '')) === Number(optionIndex)) {
-            // Current Value dropdown
-            const formGroup = document.createElement('div');
-            formGroup.className = 'mb-3';
-
-            const currentLabel = document.createElement('label');
-            currentLabel.className = 'form-label fw-bold';
-            currentLabel.htmlFor = 'CurrentDropDownValue';
-            currentLabel.innerHTML = LanguageDict["CurrentValue"];
-            formGroup.appendChild(currentLabel);
-
-            const dropDown = document.createElement('select');
-            dropDown.id = 'CurrentDropDownValue';
-            dropDown.className = 'form-select w-auto d-inline-block ms-2';
-            dropDown.onchange = () => dropDownOnChange(parameterLine);
-
-            i++;
-            while (i < dropDownLines.length && dropDownLines[i][0] !== '#') {
-                const [label, value] = dropDownLines[i].split(',');
-                const option = document.createElement('option');
-                option.value = value;
-                option.innerHTML = label;
-                if (numberToFind === 2 && Number(value) === Number(parameterLine[3])) {
-                    option.selected = true;
-                } else if (Number(value) === Number(parameterLine[1])) {
-                    option.selected = true;
-                }
-                dropDownOptionsDict[value.replace(/\r|\n/g, '')] = label;
-                dropDown.appendChild(option);
-                i++;
-            }
-            formGroup.appendChild(dropDown);
-            cardBody.appendChild(formGroup);
-        }
-        i++;
+    // Current Value dropdown
+    if (options.length > 0) {
+        let selectedValue = numberToFind === 2 ? parameterLine[3] : parameterLine[1];
+        cardBody.appendChild(
+            createDropdown(
+                LanguageDict["CurrentValue"],
+                'CurrentDropDownValue',
+                options,
+                selectedValue,
+                () => dropDownOnChange(parameterLine)
+            )
+        );
     }
 
     // Default & Factory dropdowns for admin
     if (numberToFind !== 2) {
-        if (Number(sessionStorageService.get('AccessLevel')) == '8') {
+        if (Number(sessionStorageService.get('AccessLevel')) === 8) {
             // Default
-            const defaultGroup = document.createElement('div');
-            defaultGroup.className = 'mb-3';
-
-            const defaultLabel = document.createElement('label');
-            defaultLabel.className = 'form-label fw-bold';
-            defaultLabel.htmlFor = 'DefaultSelectTag';
-            defaultLabel.innerHTML = LanguageDict["DefaultValue"];
-            defaultGroup.appendChild(defaultLabel);
-
-            const defaultSelect = document.createElement('select');
-            defaultSelect.id = 'DefaultSelectTag';
-            defaultSelect.className = 'form-select w-auto d-inline-block ms-2';
-            defaultSelect.onchange = () => defaultDropDownOnChange(parameterLine);
-            Object.entries(dropDownOptionsDict).forEach(([val, label]) => {
-                const option = document.createElement('option');
-                option.value = val;
-                option.innerHTML = label;
-                if (val == parameterLine[2]) option.selected = true;
-                defaultSelect.appendChild(option);
-            });
-            defaultGroup.appendChild(defaultSelect);
-            cardBody.appendChild(defaultGroup);
-
+            cardBody.appendChild(
+                createDropdown(
+                    LanguageDict["DefaultValue"],
+                    'DefaultSelectTag',
+                    options,
+                    parameterLine[2],
+                    () => defaultDropDownOnChange(parameterLine)
+                )
+            );
             // Factory
-            const factoryGroup = document.createElement('div');
-            factoryGroup.className = 'mb-3';
-
-            const factoryLabel = document.createElement('label');
-            factoryLabel.className = 'form-label fw-bold';
-            factoryLabel.htmlFor = 'FactorySelectTag';
-            factoryLabel.innerHTML = LanguageDict["FactoryValue"];
-            factoryGroup.appendChild(factoryLabel);
-
-            const factorySelect = document.createElement('select');
-            factorySelect.id = 'FactorySelectTag';
-            factorySelect.className = 'form-select w-auto d-inline-block ms-2';
-            factorySelect.onchange = () => factoryDropDownOnChange(parameterLine);
-            Object.entries(dropDownOptionsDict).forEach(([val, label]) => {
-                const option = document.createElement('option');
-                option.value = val;
-                option.innerHTML = label;
-                if (val == parameterLine[3]) option.selected = true;
-                factorySelect.appendChild(option);
-            });
-            factoryGroup.appendChild(factorySelect);
-            cardBody.appendChild(factoryGroup);
+            cardBody.appendChild(
+                createDropdown(
+                    LanguageDict["FactoryValue"],
+                    'FactorySelectTag',
+                    options,
+                    parameterLine[3],
+                    () => factoryDropDownOnChange(parameterLine)
+                )
+            );
         } else {
             // Read-only default/factory
-            const defaultTag = document.createElement('p');
-            defaultTag.className = 'text-secondary mb-1';
-            defaultTag.innerHTML = 'Default Value: <span class="fw-bold">' + dropDownOptionsDict[parameterLine[2]] + '</span>';
-            cardBody.appendChild(defaultTag);
-
-            const factoryTag = document.createElement('p');
-            factoryTag.className = 'text-secondary mb-1';
-            factoryTag.innerHTML = 'Factory Value: <span class="fw-bold">' + dropDownOptionsDict[parameterLine[3]] + '</span>';
-            cardBody.appendChild(factoryTag);
+            cardBody.appendChild(
+                createReadOnlyValue('Default Value', dropDownOptionsDict[parameterLine[2]])
+            );
+            cardBody.appendChild(
+                createReadOnlyValue('Factory Value', dropDownOptionsDict[parameterLine[3]])
+            );
         }
     }
 
     // Permissions
-    if (typeof writePermissionDict !== 'undefined' && Number(writePermissionDict[numberToFind]) > Number(sessionStorageService.get('AccessLevel'))) {
+    if (
+        typeof writePermissionDict !== 'undefined' &&
+        Number(writePermissionDict[numberToFind]) > Number(sessionStorageService.get('AccessLevel'))
+    ) {
         const dropDown = document.getElementById('CurrentDropDownValue');
         if (dropDown) {
             dropDown.disabled = true;
@@ -212,12 +242,13 @@ export function dropDownFunction(parameterLine, object) {
     card.appendChild(cardBody);
     descElem.appendChild(card);
 
-    $('#topDefineDescription').fadeIn();
+    if (window.$) {
+        $('#topDefineDescription').fadeIn();
+    }
 }
 
-/**
- * Handles change for the main dropdown.
- */
+// --- Event Handlers ---
+
 export function dropDownOnChange(parameterLine) {
     // Optionally add a reason for update for certain parameters
     if (Number(parameterLine[0]) >= 37 && Number(parameterLine[0]) <= 63) {

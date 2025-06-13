@@ -326,7 +326,7 @@ $timewindow_mix = $timewindow_mix + $timewindow_new_b11 + $timewindow_new_b12 + 
 						NewLine = ParameterLine[0] + ',' +  '1' + ',' + Hourmeter_str + ',' + '0' + ',' + Hourmeter_mix_str + ','+ TimeWindow_str + ','+ TimeWindow_mix_str + ','+ Validation_Code_str + ','+ ParameterLine[8] + ','+ ParameterLine[9] + ','+ ParameterLine[10];
 						NewSession = sessionStorage.getItem('Parameters').replace(OldLine,NewLine);
 						sessionStorage.setItem('Parameters',NewSession);
-						location.href = '../../public/parameter-editor.php';
+						location.href = '../../public/parameter-editor.html';
 						break;
 					}else{
 						counter++;

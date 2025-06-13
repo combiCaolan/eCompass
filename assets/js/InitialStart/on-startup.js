@@ -153,7 +153,7 @@ export async function onStartup(data) {
     sessionStorage.removeItem('ParameterMainTEMP');
 
     // Redirect to front page
-    location.href = '/public/select-file.php';
+    location.href = '/public/select-file.html';
 }
 
 // --- Helper Parsers (unchanged, but should ideally move to a separate module) ---

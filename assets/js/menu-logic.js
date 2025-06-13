@@ -52,7 +52,7 @@ function MenuLogic() {
         }
     }
 
-    if (currentPage === 'parameter-editor.php') {
+    if (currentPage === 'parameter-editor.html') {
         if (ErrorsPresent === false) {
             const SelectStyle = "background:darkgray; opacity:0.5;";
             document.getElementById('ErrorButton').setAttribute('style', SelectStyle);

@@ -40,7 +40,7 @@
 						console.log(NewLine);
 						NewSession = sessionStorage.getItem('Parameters').replace(OldLine,NewLine);
 						sessionStorage.setItem('Parameters',NewSession);
-						location.href = '../parameter-editor.php';
+						location.href = '../parameter-editor.html';
 						break;
 					}else{
 						counter++;

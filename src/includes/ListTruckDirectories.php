@@ -18,6 +18,7 @@ if ($handle = opendir('../src/truck-default-files')) {
             if ($entry !== 'index.php') {
                 // Add each valid entry to the JS TruckDefaultDir array
                 echo "<script> TruckDefaultDir.push('" . $entry . "')</script>";
+                echo"". $entry ."\n";
             }
         }
     }

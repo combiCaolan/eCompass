@@ -144,7 +144,7 @@ export function parametersMenuToggle() {
  * @param {string} [defaultFileName] 
  */
 export function readParameters(defaultFileName) {
-    if (currentPage === 'parameter-editor.php') {
+    if (currentPage === 'parameter-editor.html') {
         const confirmLeave = confirm(LanguageDict['GeneralFileLostWarning']);
         if (!confirmLeave) return;
     }
@@ -181,7 +181,7 @@ export function readParameters(defaultFileName) {
 
             console.log(userParametersFileDict);
 
-            location.href = 'parameter-editor.php';
+            location.href = 'parameter-editor.html';
         };
     };
     input.click();
@@ -403,7 +403,8 @@ export function newFile() {
 }
 
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('main-header-loaded', () => {
+  const header = document.querySelector('main-header');
   document.querySelectorAll('#OpenFileButton').forEach(btn => {
     console.log(btn);
     btn.addEventListener('click', readParameters);

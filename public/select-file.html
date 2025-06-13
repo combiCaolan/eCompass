@@ -1,18 +1,3 @@
-<?php
-// -----------------------------------------------------------------------------
-// frontpage.php
-// -----------------------------------------------------------------------------
-// Landing page for the eCompass web application.
-// - Verifies user authentication and loads available truck directories.
-// - Displays a welcome message and prompts the user to open a parameter file.
-// - Includes all necessary UI components and scripts for the front page.
-// -----------------------------------------------------------------------------
-
-// include_once('../src/includes/Verify.php');      // User verification and session setup
-header("Access-Control-Allow-Origin: *");
-include_once('../src/includes/ListTruckDirectories.php'); // List available truck directories
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -60,6 +45,14 @@ include_once('../src/includes/ListTruckDirectories.php'); // List available truc
 	<!-- Optionally, Bootstrap JS (for modals, dropdowns, etc.) -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+	<!-- components -->
+	<script src="../assets/js/components/dialog-component.js"></script>
+	<script src="../assets/js/components/main-header-component.js"></script>
+
+	<script>
+		TruckDefaultDir = ['AMSOE.clp', 'CS.clp', 'MR4.clp', 'SxE.clp'];
+	</script>
+
 	<!-- Application title and main stylesheet -->
 	<title>E-Compass</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -69,9 +62,9 @@ include_once('../src/includes/ListTruckDirectories.php'); // List available truc
 
 <body>
 	<!-- Include modal dialogs for user interactions -->
-	<?php include_once('../src/includes/DialogTemplates.html'); ?>
+	<dialog-component></dialog-component>
 	<!-- Main web header/navigation bar -->
-	<?php include_once('../src/includes/MainHeader.html'); ?>
+	<main-header></main-header>
 
 	<div id="row_usr">
 		<div id="right_row">

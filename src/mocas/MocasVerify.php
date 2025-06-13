@@ -44,7 +44,7 @@
 
             if (updated) {
                 sessionStorage.setItem('Parameters', lines.join('\n'));
-                location.href = '../../public/parameter-editor.php';
+                location.href = '../../public/parameter-editor.html';
             } else {
                 alert('Module not found in parameters.');
             }

@@ -268,7 +268,7 @@ echo "New record created successfully";
 					NewLine = ParameterLine[0] + ',' + HiLevel_str + ',' + '0' + ',' + '1' + ',' + Dispatch_str + ',' + TimeWindow_str + ',' + TimeWindow_mix_str + ',' + Validation_Code_str + ',' + ParameterLine[8] + ',' + ParameterLine[9] + ',' + ParameterLine[10];
 					NewSession = sessionStorage.getItem('Parameters').replace(OldLine, NewLine);
 					sessionStorage.setItem('Parameters', NewSession);
-					location.href = '../../public/parameter-editor.phpeditor.php';
+					location.href = '../../public/parameter-editor.html';
 					break;
 				} else {
 					counter++;
