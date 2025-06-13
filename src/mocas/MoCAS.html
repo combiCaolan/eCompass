@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MoCAS - Hourmeter Update (JS Version)</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      background: ghostwhite;
+      padding-top: 3%;
+    }
+    #TopBar {
+      top: 0;
+      z-index: 3;
+      background-color: rgb(13, 105, 56);
+      width: 100%;
+      position: fixed;
+    }
+    #LogoHead {
+      float: right;
+    }
+    #ActivationModule {
+      font-family: sans-serif;
+      margin: 10px;
+      font-size: 15px;
+    }
+    #Title, #returnButton {
+      font-family: sans-serif;
+      margin: 10px;
+    }
+    .output {
+      font-family: monospace;
+      margin: 10px;
+      background: #fff;
+      padding: 10px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px #0001;
+      max-width: 600px;
+    }
+    form {
+      margin: 10px;
+      background: #f8f8f8;
+      padding: 10px;
+      border-radius: 6px;
+      max-width: 600px;
+    }
+    label {
+      display: block;
+      margin-top: 8px;
+    }
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 4px;
+      margin-top: 2px;
+      box-sizing: border-box;
+    }
+    input[type="submit"] {
+      margin-top: 12px;
+      padding: 6px 16px;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div id="TopBar">
+    <img id="LogoHead" src="https://support.combilift.net/ecompass/assets/ecompassLogo.png" alt="Logo">
+  </div>
+  <h1 id="Title">MoCAS - Hourmeter Update (JS Version)</h1>
+  <div id="ActivationModule"></div>
+
+  <form id="mocasHourmeterForm">
+    <label>Serial Number: <input type="number" name="SerialNumber" required></label>
+    <label>Model: <input type="text" name="Model"></label>
+    <label>Username: <input type="text" name="Username"></label>
+    <label>User Email: <input type="email" name="Useremail"></label>
+    <label>Access Level: <input type="number" name="AccessLevel"></label>
+    <label>Module Index Number: <input type="number" name="IndexNumber" required></label>
+    <label>Module: <input type="text" name="Module"></label>
+    <label>Comments: <input type="text" name="Comments"></label>
+    <label>Hourmeter (sec): <input type="number" name="Hourmeter" required></label>
+    <label>Time Window (sec): <input type="number" name="TimeWindow" required></label>
+    <input type="submit" value="Calculate & Update">
+  </form>
+
+  <div class="output" id="output"></div>
+  <input type="button" id="returnButton" value="Return to editor" style="display:none;" />
+
+  <script>
+    // Bitmask constants
+    const BIT = Array.from({ length: 32 }, (_, i) => 1 << i);
+
+    function getBit(val, n) {
+      return val & BIT[n];
+    }
+
+    function computeValidationCode(serial, module_id) {
+      let code = 1;
+      const s = Array.from({ length: 6 }, (_, i) => getBit(serial, i));
+      const m = Array.from({ length: 4 }, (_, i) => getBit(module_id, i));
+      const serial_b0 = s[0], serial_b1 = s[1], serial_b2 = s[2], serial_b3 = s[3], serial_b4 = s[4], serial_b5 = s[5];
+      const module_b0 = m[0], module_b1 = m[1], module_b2 = m[2], module_b3 = m[3];
+
+      code += (serial_b4 >> 3);
+      code += (serial_b3 >> 1);
+      code += module_b3;
+      code += (module_b1 << 3);
+      code += (serial_b2 << 3);
+      code += (serial_b1 << 5);
+      code += (module_b2 << 5);
+      code += (module_b0 << 8);
+      code += (serial_b0 << 9);
+      code += (serial_b5 << 5);
+      code += (module_b0 << 11);
+      code += (module_b0 << 12);
+      code += BIT[13];
+      return code;
+    }
+
+    function computeHourmeterMix(hourmeter_new) {
+      let mix = 0;
+      const b = Array.from({ length: 11 }, (_, i) => getBit(hourmeter_new, i));
+      mix += (getBit(hourmeter_new, 10) >> 9);
+      mix += (getBit(hourmeter_new, 9) >> 7);
+      mix += (getBit(hourmeter_new, 8) >> 5);
+      mix += (getBit(hourmeter_new, 7) >> 3);
+      mix += (getBit(hourmeter_new, 6) >> 1);
+      mix += (getBit(hourmeter_new, 5) << 1);
+      mix += (getBit(hourmeter_new, 4) << 3);
+      mix += (getBit(hourmeter_new, 3) << 5);
+      mix += (getBit(hourmeter_new, 2) << 7);
+      mix += (getBit(hourmeter_new, 1) << 9);
+      return mix;
+    }
+
+    function computeTimewindowMix(timewindow_new) {
+      let mix = 0;
+      mix += getBit(timewindow_new, 0);
+      mix += (getBit(timewindow_new, 10) >> 9);
+      mix += (getBit(timewindow_new, 9) >> 7);
+      mix += (getBit(timewindow_new, 8) >> 5);
+      mix += (getBit(timewindow_new, 7) >> 3);
+      mix += (getBit(timewindow_new, 6) >> 1);
+      mix += (getBit(timewindow_new, 5) << 1);
+      mix += (getBit(timewindow_new, 4) << 3);
+      mix += (getBit(timewindow_new, 3) << 5);
+      mix += (getBit(timewindow_new, 2) << 7);
+      mix += (getBit(timewindow_new, 1) << 9);
+      // b11 to b15
+      for (let i = 11; i <= 15; i++) {
+        mix += getBit(timewindow_new, i);
+      }
+      return mix;
+    }
+
+    document.getElementById('mocasHourmeterForm').onsubmit = function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      const serial = Number(data.SerialNumber);
+      const module_id = Number(data.IndexNumber);
+      const module = data.Module;
+      const hourmeter_new = Number(data.Hourmeter);
+      const timewindow_new = Number(data.TimeWindow);
+
+      const validation_code = computeValidationCode(serial, module_id);
+      const hourmeter_mix = computeHourmeterMix(hourmeter_new);
+      const timewindow_mix = computeTimewindowMix(timewindow_new);
+
+      document.getElementById('output').innerHTML = `
+        <b>Serial Number:</b> ${serial}<br>
+        <b>Module:</b> ${module}<br>
+        <b>New hourmeter value in sec:</b> ${hourmeter_new}<br>
+        <b>Hourmeter time window in sec:</b> ${timewindow_new}<br>
+        <b>Validation Code:</b> ${validation_code}<br>
+      `;
+
+      window.Validation_Code = validation_code;
+      window.VarModuleID = module_id;
+      window.Hourmeter = hourmeter_new;
+      window.Hourmeter_mix = hourmeter_mix;
+      window.TimeWindow = timewindow_new;
+      window.TimeWindow_mix = timewindow_mix;
+
+      document.getElementById('returnButton').style.display = '';
+    };
+
+    document.getElementById('returnButton').onclick = function ChangeModules() {
+      const ToFind = String(window.VarModuleID);
+      const Validation_Code_str = String(window.Validation_Code);
+      const Hourmeter_str = String(window.Hourmeter);
+      const Hourmeter_mix_str = String(window.Hourmeter_mix);
+      const TimeWindow_str = String(window.TimeWindow);
+      const TimeWindow_mix_str = String(window.TimeWindow_mix);
+
+      let Parameters = sessionStorage.getItem('Parameters');
+      if (!Parameters) {
+        alert('No Parameters found in sessionStorage.');
+        return;
+      }
+      let lines = Parameters.split('\n');
+      let found = false;
+      for (let i = 0; i < lines.length; i++) {
+        let ParameterLine = lines[i].split(',');
+        if (ParameterLine[0] === ToFind) {
+          let NewLine = [
+            ParameterLine[0],
+            '1',
+            Hourmeter_str,
+            '0',
+            Hourmeter_mix_str,
+            TimeWindow_str,
+            TimeWindow_mix_str,
+            Validation_Code_str,
+            ParameterLine[8],
+            ParameterLine[9],
+            ParameterLine[10]
+          ].join(',');
+          lines[i] = NewLine;
+          found = true;
+          break;
+        }
+      }
+      if (found) {
+        sessionStorage.setItem('Parameters', lines.join('\n'));
+        window.location.href = '../../public/parameter-editor.html';
+      } else {
+        alert('Module ID not found in Parameters.');
+      }
+    };
+  </script>
+</body>
+</html>
