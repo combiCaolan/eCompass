@@ -1,5 +1,6 @@
 import sessionStorageService from "../modules/sessionStorageService.js";
 import { moCAS, hydFunctionsInputSetup, passwordList, hydFunctionIdList } from "../main.js";
+import { MocasUpdate } from '../Parameter-Manipulation/UpdateParameters/update-parameters.js'
 
 // Only require chai when running in a Node.js/testing environment
 if (typeof module !== 'undefined' && typeof require !== 'undefined') {
@@ -23,7 +24,7 @@ function ClearWorkSpace() {
 function AddFixedParameter(htmlObject) {
 	const workSpaceTitle = document.createElement('p');
 	workSpaceTitle.id = 'WorkSpaceTitle';
-	workSpaceTitle.innerHTML = htmlObject.innerHTML.replace('-','') || 'unkown';
+	workSpaceTitle.innerHTML = htmlObject.innerHTML.replace('-', '') || 'unkown';
 
 	const description = document.createElement('p');
 	description.id = 'description';
@@ -947,7 +948,9 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 
 			let MoCASDropDown = document.createElement('select');
 			MoCASDropDown.setAttribute('id', 'CurrentDropDownValue');
-			MoCASDropDown.setAttribute('onchange', 'MocasUpdate(`' + CheckLine + '`)');
+			MoCASDropDown.addEventListener('change', function () {
+				MocasUpdate(CheckLine);
+			});
 
 			let MoCASDropDownOptionOn = document.createElement('option');
 			MoCASDropDownOptionOn.innerHTML = LanguageDict['MocasOn'];
