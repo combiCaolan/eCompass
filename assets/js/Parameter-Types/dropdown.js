@@ -157,10 +157,10 @@ export function dropDownFunction(parameterLine, object) {
     cardBody.appendChild(createDescription(numberToFind));
 
     // Export switch
-    cardBody.appendChild(createExportSwitch(parameterLine[0], function () {
-        exportonchange(parameterLine[0], this);
-        descElem.style.opacity = this.checked ? "1" : "0.4";
-    }));
+    // cardBody.appendChild(createExportSwitch(parameterLine[0], function () {
+    //     exportonchange(parameterLine[0], this);
+    //     descElem.style.opacity = this.checked ? "1" : "0.4";
+    // }));
 
     // Find OptionIndex and options
     const optionIndex = getOptionIndex(parameterMain, numberToFind);

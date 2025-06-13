@@ -314,7 +314,7 @@ export function webDownloadFileWithChecks() {
         });
     }
 
-    location.href = 'Download.php';
+    location.href = 'Download.html';
     changesMadePreDownload = false;
 }
 
@@ -402,26 +402,25 @@ export function newFile() {
     $("#DefaultFileList").dialog();
 }
 
+// document.addEventListener('main-header-loaded', () => {
+//   const header = document.querySelector('main-header');
+//   if (!header) return;
 
-document.addEventListener('main-header-loaded', () => {
-  const header = document.querySelector('main-header');
-  document.querySelectorAll('#OpenFileButton').forEach(btn => {
-    console.log(btn);
-    btn.addEventListener('click', readParameters);
-  });
+//   header.querySelectorAll('#OpenFileButton').forEach(btn => {
+//     btn.addEventListener('click', readParameters);
+//   });
+//   header.querySelectorAll('#NewFileButton').forEach(btn => {
+//     btn.addEventListener('click', newFile);
+//   });
+//   header.querySelectorAll('#OpenInNewTab').forEach(btn => {
+//     btn.addEventListener('click', openNewFile);
+//   });
+//   header.querySelectorAll('#CloseFileButton').forEach(btn => {
+//     btn.addEventListener('click', closeFileDialog);
+//   });
+// });
 
-  document.querySelectorAll('#NewFileButton').forEach(btn => {
-    console.log(btn);
-    btn.addEventListener('click', newFile);
-  });
-
-  document.querySelectorAll('#OpenInNewTab').forEach(btn => {
-    console.log(btn);
-    btn.addEventListener('click', openNewFile);
-  });
-
-  document.querySelectorAll('#CloseFileButton').forEach(btn => {
-    console.log(btn);
-    btn.addEventListener('click', closeFileDialog);
-  });
-});
+window.readParameters = readParameters;
+window.newFile = newFile;
+window.openNewFile = openNewFile;
+window.closeFileDialog = closeFileDialog;

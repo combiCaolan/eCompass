@@ -46,26 +46,6 @@ export function RegularParameter(value, object, lineArr) {
     }
     cardBody.appendChild(descriptionText);
 
-    // Export checkbox (Bootstrap switch)
-    const exportDiv = document.createElement('div');
-    exportDiv.className = 'form-check form-switch mb-3';
-    const switchParameter = document.createElement("input");
-    switchParameter.type = 'checkbox';
-    switchParameter.className = 'form-check-input';
-    switchParameter.id = "SwitchParameterCheckbox";
-    switchParameter.checked = !removedParametersCounters.includes(String(lineArr[0]));
-    switchParameter.onchange = function () {
-        exportonchange(lineArr[0], this);
-        topDefineDescription.style.opacity = this.checked ? "1" : "0.4";
-    };
-    const switchParameterLabel = document.createElement("label");
-    switchParameterLabel.className = 'form-check-label ms-2';
-    switchParameterLabel.htmlFor = "SwitchParameterCheckbox";
-    switchParameterLabel.innerHTML = LanguageDict["ExportSelectedParamters"];
-    exportDiv.appendChild(switchParameter);
-    exportDiv.appendChild(switchParameterLabel);
-    cardBody.appendChild(exportDiv);
-
     // Helper to create value fields (Current, Max, Min, Default, Factory)
     function createValueField(labelText, value, id, onChangeType, editable, unit, scale, index) {
         const formGroup = document.createElement('div');
