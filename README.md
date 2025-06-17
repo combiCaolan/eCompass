@@ -1,112 +1,90 @@
 <img src='https://github.com/combiCaolan/eCompass/blob/main/assets/ecompassLogo.png'/>
 
-# eCompass
+# 👋 Welcome to eCompass!
 
-eCompass is a web-based application for managing, configuring, and activating parameters for Combilift vehicles. It provides a user-friendly interface for loading, editing, and saving parameter files, as well as activating special modules using MoCAS codes.
-
----
-
-## Features
-
-- Parameter file management (`.clp` files)
-- MoCAS module activation (e.g., Work Lights, Hourmeters)
-- Special parameter blocks (MoCAS, Full Passwords)
-- User management and access control
-- Multi-language parameter descriptions
-- Restore factory defaults
-- Dialog system for user interactions
+**eCompass** is your secure, web-based platform for managing, editing, and viewing equipment parameter files—built especially for Combilift staff and partners. We’ve designed eCompass to make your job easier, while keeping your data safe and access tightly controlled through WordPress authentication.
 
 ---
 
-## Project Structure
+## ✨ What Can eCompass Do for You?
 
-```
-eCompass/
-│
-├── assets/
-│   ├── css/
-│   ├── js/
-│   ├── icons/
-│   ├── Truck_Images/
-│   └── Combilift-Logo.png
-│
-├── includes/
-│   ├── Api-Make-Backend.php
-│   ├── Dialog.html
-│   ├── headContents.html
-│   └── ...
-│
-├── MoCAS/
-│
-├── Settings-files/
-│   ├── API-100/
-│   │   └── english/
-│   │       └── Description_Main.txt
-│   └── API-101/
-│       └── english/
-│           └── Description_Main.txt
-│
-├── SpecialBlocks/
-│
-├── Truck_Default_Files/
-│
-├── Download.php
-├── Download1.php
-├── editor.php
-├── frontpage.php
-├── index.php
-├── README.md
-└── UnsupportedBrowserCheck.js```
+- **Safe & Simple Login:** Log in with your WordPress account—no extra passwords to remember.
+- **Easy File Management:** View, edit, and organize equipment parameter files from anywhere.
+- **Always Up-to-Date:** eCompass automatically fetches fresh data when you’re online, and works offline by showing the most recent data it saved.
+- **Your Access, Your Role:** Only see or edit what you’re allowed to—thanks to WordPress role management.
+- **Modern, Intuitive Interface:** Enjoy a smooth experience on desktop, tablet, or mobile.
 
 ---
 
-## Getting Started
+## 🚦 Getting Started
 
 ### Prerequisites
 
-- Web server with PHP (e.g., Apache, Nginx)
-- Modern web browser
+- [Node.js](https://nodejs.org/) (v14 or higher works best)
+- Access to your team’s WordPress login
 
-### Installation
+### Quick Start
 
-1. **Clone the repository:**
-   ```sh
-   git clone https://github.com/your-org/eCompass.git
-   ```
-2. **Deploy files to your web server's root directory.**
-3. **Access the app:**  
-   Open your browser and go to `http://localhost/eCompass/frontpage.php` (or your server’s URL).
-
----
-
-## Usage
-
-- **Load Parameter File:** Open a `.clp` file via the interface.
-- **Edit Parameters:** Make changes as needed.
-- **Activate Modules:** Use the Special Blocks dialog.
-- **Save:** Download or save the updated file.
+```bash
+git clone https://github.com/combiCaolan/eCompass.git
+cd eCompass
+npm install
+npm start
+```
+Now just open [http://localhost:3000](http://localhost:3000) in your browser!
 
 ---
 
-## Customization
+## 🔐 How Authentication Works
 
-- **Add Parameters:** Edit `Description_Main.txt` in the relevant `Settings-files` folder.
-- **Add Modules:** Update `SpecialBlocks/` and related JS logic.
-
----
-
-## Contributing
-
-Pull requests and issues are welcome!
+eCompass uses your WordPress login to keep things simple and secure. All user roles and permissions are managed through WordPress, so you can trust that only the right people have access to sensitive files.
 
 ---
 
-## License
+## 🗂️ Project Overview
 
-MIT License
+```
+eCompass/
+├── public/           # Static images and assets
+├── src/              # Main app code (components, hooks, utils)
+├── package.json      # Project settings and dependencies
+└── ...
+```
 
 ---
 
-## Contact
+## 🌍 Try eCompass Live
 
-For support, use the in-app dialog or email support@combilift.com.
+A live demo will be available soon at:  
+[https://combiCaolan.github.io/eCompass/](https://combiCaolan.github.io/eCompass/)
+
+---
+
+## 🤝 Want to Contribute?
+
+We’d love your help!  
+Here’s how to get started:
+
+1. Fork the repo and create a new branch:  
+   `git checkout -b my-feature`
+2. Make your changes and commit:  
+   `git commit -am 'Add my feature'`
+3. Push and open a pull request!
+
+For more info, see our [contributing guide](docs/contributing.md).
+
+---
+
+## 🛡️ Security
+
+If you spot a security issue, please contact the maintainers or your Combilift representative directly. Don’t post security issues publicly.
+
+---
+
+## 📚 Learn More
+
+Check out our [docs folder](docs/) for setup help, troubleshooting, and more!
+
+---
+
+**© Combilift. All rights reserved.**
