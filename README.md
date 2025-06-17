@@ -1,3 +1,5 @@
+<img src='https://github.com/combiCaolan/eCompass/blob/main/assets/ecompassLogo.png'/>
+
 # eCompass
 
 eCompass is a web-based application for managing, configuring, and activating parameters for Combilift vehicles. It provides a user-friendly interface for loading, editing, and saving parameter files, as well as activating special modules using MoCAS codes.
