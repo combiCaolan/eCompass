@@ -228,125 +228,118 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 		}
 	}
 
-	//Truck Build Date
-	if (LineNumber == 5) {
+// Helper: Format a UNIX timestamp as DD/MM/YYYY or 'NA'
+function formatDateField(seconds) {
+    const date = new Date(seconds * 1000);
+    if (date.getFullYear() === 1970 || seconds === 0) return 'NA';
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+}
 
-		let Table = document.getElementById('topDefineDescription');
+// Helper: Create a Bootstrap form group for a date field
+function createDateField(label, value) {
+    const group = document.createElement('div');
+    group.className = 'mb-3 row align-items-center';
 
-		let TH = document.createElement('p');
-		TH.setAttribute('id', 'WorkSpaceTitle');
-		TH.innerHTML = HTMLObject.innerHTML;
-		Table.appendChild(TH);
-		document.getElementById('topDefineDescription').appendChild(descriptionArea);
+    const labelElem = document.createElement('label');
+    labelElem.className = 'col-sm-4 col-form-label fw-bold';
+    labelElem.textContent = label;
 
-		//Build Date
-		let TR = document.createElement('tr');
-		Table.appendChild(TR);
-		let TDLeft = document.createElement('p');
-		TDLeft.setAttribute('id', 'ReadTitle');
-		TDLeft.innerHTML = LanguageDict["TruckBuildDate"];
-		TR.appendChild(TDLeft);
-		let TruckBuildDateText = document.createElement('p');
-		TruckBuildDateText.setAttribute('id', 'ReadResult');
-		let date = new Date(Line[3] * 1000);
-		if (date.getFullYear() == "1970") {
-			TruckBuildDateText.innerHTML = 'NA';
-		} else {
-			let month = Number(date.getMonth()) + 1;
-			TruckBuildDateText.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
-		}
-		TDLeft.appendChild(TruckBuildDateText);
+    const valueElem = document.createElement('div');
+    valueElem.className = 'col-sm-8';
+    valueElem.innerHTML = `<span class="form-control-plaintext">${value}</span>`;
 
-		let BottomTR = document.createElement('tr');
-		Table.appendChild(BottomTR);
-		if (Number(sessionStorageService.get('AccessLevel')) >= 8) {
-			let DateInput = document.createElement('input');
-			DateInput.setAttribute('type', 'date');
-			DateInput.setAttribute('id', 'UpdateBuildDate');
-			DateInput.setAttribute('style', 'margin:15px;');
-			BottomTR.appendChild(DateInput);
+    group.appendChild(labelElem);
+    group.appendChild(valueElem);
+    return group;
+}
 
-			let DateSubmit = document.createElement('input');
-			DateSubmit.setAttribute('type', 'submit');
-			DateSubmit.setAttribute('value', 'Update Truck Build Date');
-			DateSubmit.setAttribute('onclick', 'ChangeBuildDate()');
-			DateInput.setAttribute('style', 'margin:15px;');
-			BottomTR.appendChild(DateSubmit);
-		}
+// Helper: Create a Bootstrap form group for updating a date
+function createDateUpdateField(id, label, onClickHandler) {
+    const group = document.createElement('div');
+    group.className = 'mb-3 row align-items-center';
 
-		//Dealer Installation Date
-		TR = document.createElement('tr');
-		Table.appendChild(TR);
-		TDLeft = document.createElement('p');
-		TDLeft.setAttribute('id', 'ReadTitle');
-		TDLeft.innerHTML = LanguageDict["TruckDealerDate"];
-		TR.appendChild(TDLeft);
-		TruckBuildDateText = document.createElement('p');
-		TruckBuildDateText.setAttribute('id', 'ReadResult');
-		date = new Date(Line[4] * 1000);
-		if (date.getFullYear() == "1970") {
-			TruckBuildDateText.innerHTML = 'NA';
-		} else {
-			month = Number(date.getMonth()) + 1;
-			TruckBuildDateText.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
-		}
-		TDLeft.appendChild(TruckBuildDateText);
+    const labelElem = document.createElement('label');
+    labelElem.className = 'col-sm-4 col-form-label fw-bold';
+    labelElem.setAttribute('for', id);
+    labelElem.textContent = label;
 
-		BottomTR = document.createElement('tr');
-		Table.appendChild(BottomTR);
-		if (Number(sessionStorageService.get('AccessLevel')) >= 8) {
-			let DateInput = document.createElement('input');
-			DateInput.setAttribute('type', 'date');
-			DateInput.setAttribute('id', 'UpdateDealerDate');
-			DateInput.setAttribute('style', 'margin:15px;');
-			BottomTR.appendChild(DateInput);
+    const inputDiv = document.createElement('div');
+    inputDiv.className = 'col-sm-8 d-flex align-items-center gap-2';
 
-			let DateSubmit = document.createElement('input');
-			DateSubmit.setAttribute('type', 'submit');
-			DateSubmit.setAttribute('value', 'Update Truck Dealer Date');
-			DateSubmit.setAttribute('onclick', 'ChangeDealerDate()');
-			DateInput.setAttribute('style', 'margin:15px;');
-			BottomTR.appendChild(DateSubmit);
-		}
+    const input = document.createElement('input');
+    input.type = 'date';
+    input.className = 'form-control w-auto';
+    input.id = id;
 
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'btn btn-primary ms-2';
+    button.textContent = `Update ${label}`;
+    button.onclick = onClickHandler;
 
-		//Customer Installation Date
-		TR = document.createElement('tr');
-		Table.appendChild(TR);
-		TDLeft = document.createElement('p');
-		TDLeft.setAttribute('id', 'ReadTitle');
-		TDLeft.innerHTML = LanguageDict["TruckCustomerDate"];
-		TR.appendChild(TDLeft);
-		TruckBuildDateText = document.createElement('p');
-		TruckBuildDateText.setAttribute('id', 'ReadResult');
-		date = new Date(Line[5] * 1000);
-		if (date.getFullYear() == "1970") {
-			TruckBuildDateText.innerHTML = 'NA';
-		} else {
-			month = Number(date.getMonth()) + 1;
-			TruckBuildDateText.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
-		}
-		TDLeft.appendChild(TruckBuildDateText);
+    inputDiv.appendChild(input);
+    inputDiv.appendChild(button);
 
-		BottomTR = document.createElement('tr');
-		Table.appendChild(BottomTR);
-		if (Number(sessionStorageService.get('AccessLevel')) >= 8) {
-			let DateInput = document.createElement('input');
-			DateInput.setAttribute('type', 'date');
-			DateInput.setAttribute('id', 'UpdateCustomerDate');
-			DateInput.setAttribute('style', 'margin:15px;');
-			BottomTR.appendChild(DateInput);
+    group.appendChild(labelElem);
+    group.appendChild(inputDiv);
+    return group;
+}
 
-			let DateSubmit = document.createElement('input');
-			DateSubmit.setAttribute('type', 'submit');
-			DateSubmit.setAttribute('value', 'Update Truck Customer Date');
-			DateSubmit.setAttribute('onclick', 'ChangeCustomerDate()');
-			DateInput.setAttribute('style', 'margin:15px;');
-			BottomTR.appendChild(DateSubmit);
-		}
+// Modular section renderer for Truck Build Date
+function renderTruckBuildDateSection(Line, HTMLObject, container) {
+    container.innerHTML = '';
 
-		return;
-	}
+    // Title
+    const title = document.createElement('h5');
+    title.className = 'mb-3';
+    title.id = 'WorkSpaceTitle';
+    title.textContent = HTMLObject.innerHTML;
+    container.appendChild(title);
+
+    // Description (if you have one)
+    // const desc = document.createElement('p');
+    // desc.className = 'text-muted';
+    // desc.id = 'description';
+    // desc.textContent = MainDescriptionsDict[HTMLObject.id]?.replace('#' + HTMLObject.id, '') || '';
+    // container.appendChild(desc);
+
+    // Dates
+    container.appendChild(createDateField(LanguageDict["TruckBuildDate"], formatDateField(Line[3])));
+    container.appendChild(createDateField(LanguageDict["TruckDealerDate"], formatDateField(Line[4])));
+    container.appendChild(createDateField(LanguageDict["TruckCustomerDate"], formatDateField(Line[5])));
+
+    // If user can update, show update fields
+    if (Number(sessionStorageService.get('AccessLevel')) >= 8) {
+        container.appendChild(
+            createDateUpdateField(
+                'UpdateBuildDate',
+                LanguageDict["TruckBuildDate"],
+                () => ChangeBuildDate()
+            )
+        );
+        container.appendChild(
+            createDateUpdateField(
+                'UpdateDealerDate',
+                LanguageDict["TruckDealerDate"],
+                () => ChangeDealerDate()
+            )
+        );
+        container.appendChild(
+            createDateUpdateField(
+                'UpdateCustomerDate',
+                LanguageDict["TruckCustomerDate"],
+                () => ChangeCustomerDate()
+            )
+        );
+    }
+}
+
+// Usage in your MenuParametersOnclick:
+if (LineNumber == 5) {
+    const container = document.getElementById('topDefineDescription');
+    renderTruckBuildDateSection(Line, HTMLObject, container);
+    return;
+}
 
 	//Parameter File Version
 	if (LineNumber == 6) {

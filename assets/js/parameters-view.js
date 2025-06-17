@@ -87,14 +87,14 @@ export function showParameterNotPresent(lineNumber, htmlObject) {
 }
 
 // Build a dictionary of user parameters from sessionStorage
-// let userParametersFileDict = {};
-// const parametersArr = (sessionStorage.getItem('Parameters') || '').split('\n');
-// parametersArr.forEach(line => {
-//     if (line) {
-//         const parts = line.split(',');
-//         userParametersFileDict[parts[0]] = line;
-//     }
-// });
+let userParametersFileDict = {};
+const parametersArr = (sessionStorage.getItem('Parameters') || '').split('\n');
+parametersArr.forEach(line => {
+    if (line) {
+        const parts = line.split(',');
+        userParametersFileDict[parts[0]] = line;
+    }
+});
 
 /**
  * Handles clicking on a parameter in the tree view.
@@ -108,12 +108,12 @@ export function treeViewClick(value, objectId, msg) {
         if (selectedElem) selectedElem.setAttribute('class', selectedClass);
     } catch (err) {}
 
-    const objectElem = document.getElementById(objectId);
-    if (objectElem && objectElem.getAttribute('class') !== 'BitTreeButton') {
-        if (!pre64.includes(objectId)) {
-            objectElem.setAttribute('class', 'SelectedThirdSubGroup');
-        }
-    }
+    // const objectElem = document.getElementById(objectId);
+    // if (objectElem && objectElem.getAttribute('class') !== 'BitTreeButton') {
+    //     if (!pre64.includes(objectId)) {
+    //         objectElem.setAttribute('class', 'SelectedThirdSubGroup');
+    //     }
+    // }
 
     document.getElementById('topDefineTable').innerHTML = '';
     document.getElementById('topDefineDescription').innerHTML = '';

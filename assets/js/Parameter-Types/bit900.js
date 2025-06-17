@@ -2,6 +2,7 @@ import sessionStorageService from "../modules/sessionStorageService.js";
 
 /**
  * Displays bit options for a Bit999 parameter, allowing the user to select and update bit values.
+ * Bootstrap-friendly version.
  * @param {string} line - The parameter line (CSV string).
  * @param {HTMLElement} clickedButton - The button that was clicked.
  */
@@ -38,46 +39,55 @@ export function Bit999DisplayOptionsFunction(line, clickedButton) {
     }
     if (bitLine === null) return;
 
-    // Title and Description
-    const title = document.createElement('p');
-    title.id = 'WorkSpaceTitle';
-    title.innerHTML = clickedButton.innerHTML;
+    // Title and Description (Bootstrap)
+    // const title = document.createElement('h5');
+    // title.id = 'WorkSpaceTitle';
+    // title.className = 'mb-2';
+    // title.innerHTML = clickedButton.innerHTML;
 
     const description = document.createElement('p');
+    description.className = 'text-muted mb-3';
+    description.setAttribute('id','description');
     description.innerHTML = MainDescriptionsDict[index] !== undefined
         ? MainDescriptionsDict[index].replace('#' + index, '')
         : "This parameter's description is not present";
 
-    // Export checkbox (not appended by default)
-    const exportDiv = document.createElement('div');
-    const switchParameterLabel = document.createElement("label");
-    switchParameterLabel.innerHTML = LanguageDict["Export"];
-    const switchParameter = document.createElement("input");
-    switchParameter.type = 'checkbox';
-    switchParameter.id = "SwitchParameterCheckbox";
-    switchParameter.checked = !removedParametersCounters.includes(String(line));
-    descElem.style.opacity = switchParameter.checked ? 1 : 0.4;
-    switchParameter.onchange = function () {
-        exportonchange(line.split(',')[0], this);
-    };
-    switchParameter.style = "text-align:center; font-size:18px;";
-    exportDiv.appendChild(switchParameterLabel);
-    exportDiv.appendChild(switchParameter);
+    // Export checkbox (Bootstrap form-check)
+    // const exportDiv = document.createElement('div');
+    // exportDiv.className = 'form-check form-switch mb-3';
+    // const switchParameter = document.createElement("input");
+    // switchParameter.type = 'checkbox';
+    // switchParameter.className = 'form-check-input';
+    // switchParameter.id = "SwitchParameterCheckbox";
+    // switchParameter.checked = !removedParametersCounters.includes(String(line));
+    // descElem.style.opacity = switchParameter.checked ? 1 : 0.4;
+    // switchParameter.onchange = function () {
+    //     exportonchange(line.split(',')[0], this);
+    // };
+    // const switchParameterLabel = document.createElement("label");
+    // switchParameterLabel.className = 'form-check-label ms-2';
+    // switchParameterLabel.setAttribute('for', 'SwitchParameterCheckbox');
+    // switchParameterLabel.innerHTML = LanguageDict["Export"];
+    // exportDiv.appendChild(switchParameter);
+    // exportDiv.appendChild(switchParameterLabel);
 
-    // Option list
+    // Option list (Bootstrap list-group)
     const unorderedList = document.createElement('ul');
     unorderedList.id = 'Bit999DropDownDiv';
+    unorderedList.className = 'list-group mb-3';
 
     let bitCounter = 1;
     let lineIdx = bitLine;
     while (bit999Dir[lineIdx] && bit999Dir[lineIdx][0] !== '#') {
         const bitParts = bit999Dir[lineIdx].split(',');
         const listItem = document.createElement('li');
-        const input = document.createElement('input');
-        input.type = 'submit';
+        listItem.className = 'list-group-item p-1';
+
+        const input = document.createElement('button');
+        input.type = 'button';
         input.id = 'Bitnineninenine' + bitCounter;
-        input.value = ' - ' + bitParts[2];
-        input.className = 'ThirdSubGroup';
+        input.textContent = ' - ' + bitParts[2];
+        input.className = 'btn btn-outline-primary btn-sm ThirdSubGroup w-100 text-start';
         if (bitParts[2]) input.name = bitParts[2].replace(/ /g, '');
         input.onclick = function () {
             BitDropDown999(
@@ -98,6 +108,10 @@ export function Bit999DisplayOptionsFunction(line, clickedButton) {
         bitCounter++;
     }
 
+    // Compose and append
+    // constantElem.appendChild(title);
+    constantElem.appendChild(description);
+    // constantElem.appendChild(exportDiv);
     constantElem.appendChild(unorderedList);
     $('#topDefineDescription').fadeIn();
 }
@@ -105,6 +119,7 @@ export function Bit999DisplayOptionsFunction(line, clickedButton) {
 /**
  * Handles the selection of a bit option for Bit999 parameters.
  * Updates the parameter value in sessionStorage and refreshes the UI.
+ * Bootstrap-friendly version.
  */
 export function BitDropDown999(
     parentParameterIndex,
@@ -120,29 +135,30 @@ export function BitDropDown999(
     // Deselect all previously selected
     try {
         Array.from(document.getElementsByClassName('SelectedThirdSubGroup')).forEach(elem => {
-            elem.className = 'ThirdSubGroup';
+            elem.className = 'btn btn-outline-primary btn-sm ThirdSubGroup w-100 text-start';
         });
     } catch (err) {}
 
     // Highlight selected
     const whichNumber = Number(bitButtonCounter) - 1;
-    // alert("parentParameterIndex:" + String(parentParameterIndex));
-    // alert("whichNumber:" + String(whichNumber))
     document.getElementById("constant" + parentParameterIndex)
-        .childNodes[0].childNodes[(whichNumber-1)].className = 'SelectedThirdSubGroup';
+        .querySelectorAll('.list-group-item')[whichNumber - 1]
+        .querySelector('button').className = 'btn btn-primary btn-sm SelectedThirdSubGroup w-100 text-start';
 
     // Clear UI
     document.getElementById('topDefineDescription').innerHTML = '';
     document.getElementById('topDefineTable').innerHTML = '';
 
-    // Title and Description
-    const title = document.createElement('p');
+    // Title and Description (Bootstrap)
+    const title = document.createElement('h5');
     title.id = 'WorkSpaceTitle';
+    title.className = 'mb-2';
     title.innerHTML = parameterBitName;
     document.getElementById('topDefineTable').appendChild(title);
 
     const description = document.createElement('p');
     description.id = 'description';
+    description.className = 'text-muted mb-3';
     description.innerHTML = SpecialDescriptionsDict[Number(parentParameterIndex + '.' + bitButtonCounter)];
     document.getElementById('topDefineDescription').appendChild(description);
 
@@ -162,34 +178,37 @@ export function BitDropDown999(
     }
 
     // Labels
-    const currentValueLabel = document.createElement('p');
-    currentValueLabel.id = 'ReadResult';
+    const currentValueLabel = document.createElement('label');
+    currentValueLabel.className = 'form-label mt-2';
     currentValueLabel.innerHTML = LanguageDict["CurrentValue"];
-    document.getElementById('topDefineDescription').appendChild(currentValueLabel);
 
-    const defaultValueLabel = document.createElement('p');
-    defaultValueLabel.id = 'ReadResult';
+    const defaultValueLabel = document.createElement('label');
+    defaultValueLabel.className = 'form-label mt-2';
     defaultValueLabel.innerHTML = LanguageDict["DefaultValue"];
 
-    const factoryValueLabel = document.createElement('p');
-    factoryValueLabel.id = 'ReadResult';
+    const factoryValueLabel = document.createElement('label');
+    factoryValueLabel.className = 'form-label mt-2';
     factoryValueLabel.innerHTML = LanguageDict["FactoryValue"];
 
-    // Build dropdowns or readonly fields
+    // Build dropdowns or readonly fields (Bootstrap)
     const optionsDict = {};
     let dropDown, defaultValue, factoryValue;
-    if (Number(writePermissionDict[parentParameterIndex]) <= Number(sessionStorageService.get('AccessLevel'))) {
+    const canEdit = Number(writePermissionDict[parentParameterIndex]) <= Number(sessionStorageService.get('AccessLevel'));
+    if (canEdit) {
         dropDown = document.createElement('select');
         defaultValue = document.createElement('select');
         factoryValue = document.createElement('select');
+        dropDown.className = 'form-select mb-2 w-auto d-inline-block';
+        defaultValue.className = 'form-select mb-2 w-auto d-inline-block';
+        factoryValue.className = 'form-select mb-2 w-auto d-inline-block';
         dropDown.id = 'CurrentBitDropValue';
         defaultValue.id = 'DefaultBitDropValue';
         factoryValue.id = 'FactoryBitDropValue';
     } else {
-        dropDown = document.createElement('p');
-        defaultValue = document.createElement('p');
-        factoryValue = document.createElement('p');
-        dropDown.id = defaultValue.id = factoryValue.id = 'ReadResult';
+        dropDown = document.createElement('span');
+        defaultValue = document.createElement('span');
+        factoryValue = document.createElement('span');
+        dropDown.className = defaultValue.className = factoryValue.className = 'form-control-plaintext mb-2';
     }
 
     // Populate dropdowns
@@ -199,7 +218,7 @@ export function BitDropDown999(
         const [optionText, optionValue] = [parts[0], parts[1]];
         optionsDict[optionValue] = optionText;
 
-        if (Number(writePermissionDict[parentParameterIndex]) <= Number(sessionStorageService.get('AccessLevel'))) {
+        if (canEdit) {
             const makeOption = (val, txt) => {
                 const opt = document.createElement('option');
                 opt.value = val;
@@ -217,11 +236,9 @@ export function BitDropDown999(
         idx++;
     }
 
-    defaultValue.style = factoryValue.style = 'margin:10px;';
-
     // Set values or text
     const getBitVal = (arr, bit) => Array.isArray(arr) ? arr[bit] : arr.split(',')[bit];
-    if (Number(writePermissionDict[parentParameterIndex]) <= Number(sessionStorageService.get('AccessLevel'))) {
+    if (canEdit) {
         dropDown.value = getBitVal(bitResults, bit);
         defaultValue.value = getBitVal(defaultBitResults, bit);
         factoryValue.value = getBitVal(factoryBitResults, bit);
@@ -232,6 +249,7 @@ export function BitDropDown999(
     }
 
     // Append to UI
+    document.getElementById('topDefineDescription').appendChild(currentValueLabel);
     document.getElementById('topDefineDescription').appendChild(dropDown);
     document.getElementById('topDefineDescription').appendChild(defaultValueLabel);
     document.getElementById('topDefineDescription').appendChild(defaultValue);
@@ -239,7 +257,7 @@ export function BitDropDown999(
     document.getElementById('topDefineDescription').appendChild(factoryValue);
 
     // Set onchange handlers if editable
-    if (Number(writePermissionDict[parentParameterIndex]) <= Number(sessionStorageService.get('AccessLevel'))) {
+    if (canEdit) {
         dropDown.onchange = () => BitDropDownChange999(bitResults, bit, parentParameterIndex, "Current");
         defaultValue.onchange = () => BitDropDownChange999(defaultBitResults, bit, parentParameterIndex, "Default");
         factoryValue.onchange = () => BitDropDownChange999(factoryBitResults, bit, parentParameterIndex, "Factory");

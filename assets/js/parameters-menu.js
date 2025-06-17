@@ -107,9 +107,18 @@ function organiseMenu(parameterMainArr, parametresDirForUsersFile) {
     parameterMainArr.forEach(line => {
         if (!line.length) return;
         const [id, group, , label, , , , , , access] = line;
-        const btn = document.createElement('button');
-        btn.innerHTML = '- ' + label || '';
+        const ul = document.createElement('ul');
+        ul.setAttribute('class','section-nav');
+        const btn = document.createElement('li');
+        btn.setAttribute('class','toc-entry toc-h2');
+        // btn.innerHTML = '- ' + label || '';
+        let a = document.createElement('a');
+        // <a href="#placement">Placement</a>
+        a.innerHTML = '- ' + label || '';
+        a.setAttribute('href','#' + label);
+        btn.appendChild(a);
         btn.id = id;
+        ul.appendChild(btn);
 
         // Main menu logic
         if (Number(id) < 89 && id !== '2' && id !== '4') {
@@ -119,7 +128,8 @@ function organiseMenu(parameterMainArr, parametresDirForUsersFile) {
             div.id = 'constant' + id;
             const parent = document.getElementById(group);
             if (parent) {
-                parent.appendChild(btn);
+                parent.appendChild(ul);
+                // parent.appendChild(btn);
                 parent.appendChild(div);
             }
         } else {
@@ -147,9 +157,10 @@ function organiseMenu(parameterMainArr, parametresDirForUsersFile) {
                 } else {
                     for (let i = 1; i < groups.length; i++) {
                         if (!document.getElementById(groups[i])) {
-                            const sortingDiv = document.createElement('div');
+                            const sortingDiv = document.createElement('ul');
                             sortingDiv.id = groups[i];
-                            sortingDiv.className = 'MenuLevel' + (groups.length - 1);
+                            // sortingDiv.className = '';
+                            sortingDiv.className = 'section-nav MenuLevel' + (groups.length - 1);
                             const hideBtn = document.createElement('button');
                             hideBtn.className = 'PreTreeButton';
                             hideBtn.id = 'HeadTitle' + groups[i];
@@ -164,7 +175,7 @@ function organiseMenu(parameterMainArr, parametresDirForUsersFile) {
                         if (i === groups.length - 1) {
                             const div = document.createElement('div');
                             div.id = 'constant' + id;
-                            btn.className = (line[2] === '999' || line[2] === '1000') ? 'BitTreeButton' : 'ThirdSubGroup';
+                            // btn.className = (line[2] === '999' || line[2] === '1000') ? 'BitTreeButton' : 'ThirdSubGroup';
                             try {
                                 document.getElementById(groups[i]).appendChild(btn);
                                 document.getElementById(groups[i]).appendChild(div);
