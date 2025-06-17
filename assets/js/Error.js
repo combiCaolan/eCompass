@@ -56,10 +56,13 @@ export function checkParameterErrors(parametersStr, readPermissionDict, accessLe
     return { minError, maxError, errorsPresent };
 }
 
-// Example usage:
-const { minError, maxError, errorsPresent } = checkParameterErrors(
-    sessionStorage.getItem('Parameters'),
-    ReadPermissionDict,
-    AccessLevelForUser
-);
-// You can now use minError, maxError, errorsPresent as needed.
+// At the top of your script (outside any function)
+window.errorsPresent = false; // or just: let errorsPresent = false;
+
+// When you call the function:
+// const { minError, maxError, errorsPresent } = checkParameterErrors(
+//     sessionStorage.getItem('Parameters'),
+//     ReadPermissionDict,
+//     AccessLevelForUser
+// );
+window.ErrorsPresent = errorsPresent; // or just: errorsPresent = errorsPresent;

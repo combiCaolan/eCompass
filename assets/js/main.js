@@ -2,7 +2,16 @@
 import ParameterManager from './modules/parameterManager.js';
 import sessionStorageService from './modules/sessionStorageService.js';
 import uiService from './modules/uiService.js';
+import { checkParameterErrors } from './error.js';
+// import { ReadPermissionDict } from './error.js';
 
+
+// const { minError, maxError, errorsPresent } = checkParameterErrors(
+//     sessionStorage.getItem('Parameters'),
+//     ReadPermissionDict,
+//     AccessLevelForUser
+// );
+// window.errorsPresent = errorsPresent;
 
 // Redirect if parameters are missing
 if (!sessionStorageService.get('Parameters')) {

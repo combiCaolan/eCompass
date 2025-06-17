@@ -1,5 +1,5 @@
 #GTreetab, #GTreeTab, #HTreeTab, #ITreeTab, #JTreeTab{
-    background: linear-gradient(to bottom, rgb(13, 105, 56) 0%, rgb(7, 53, 28) 100%) !important;
+    background: rgb(13, 105, 56);
     color: white;
 }
 
@@ -55,10 +55,10 @@
    Styles for different menu nesting levels in the parameter tree.
    Each level increases the left margin and border for visual hierarchy.
 ----------------------------------------------------------------------------- */
-.MenuLevel1 { margin-left: 15px; border-left: 2px dotted darkgray; }
-.MenuLevel2 { margin-left: 25px; border-left: 2px dotted darkgray; }
-.MenuLevel3 { margin-left: 35px; border-left: 2px dotted darkgray; }
-.MenuLevel4 { margin-left: 45px; border-left: 2px dotted darkgray; }
+.MenuLevel1 { margin-left: 15px; border-left: 2px dotted darkgray; list-style: none; }
+.MenuLevel2 { margin-left: 25px; border-left: 2px dotted darkgray;  list-style: none; }
+.MenuLevel3 { margin-left: 35px; border-left: 2px dotted darkgray;  list-style: none; }
+.MenuLevel4 { margin-left: 45px; border-left: 2px dotted darkgray;  list-style: none; }
 
 /* -----------------------------------------------------------------------------
    GENERAL FONT STYLES
@@ -885,7 +885,8 @@ div[id^="constant"]{
     height: 200px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     margin: 10px;
-    position: absolute;
+    /* position: absolute; */
+    float: right;
     right: 0;
 }
 
@@ -1304,4 +1305,8 @@ body {
 
 .navbar-expand-lg .navbar-nav .dropdown-menu {
     min-width: 254px;
+}
+
+a{
+    color: black!important;
 }

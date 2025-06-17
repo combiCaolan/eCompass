@@ -70,19 +70,6 @@ export function SerialNumberFunction(lineArr, object) {
     }
 
     topDefineTable.appendChild(formGroup);
-
-    // Optionally, add a Bootstrap card for further UI if needed
-    // const serialDiv = document.createElement('div');
-    // serialDiv.className = 'card my-3';
-    // const serialCardBody = document.createElement('div');
-    // serialCardBody.className = 'card-body p-2';
-    // const serialTable = document.createElement('table');
-    // serialTable.className = 'table table-sm mb-0';
-    // const serialTR = document.createElement('tr');
-    // serialTable.appendChild(serialTR);
-    // serialCardBody.appendChild(serialTable);
-    // serialDiv.appendChild(serialCardBody);
-    // topDefineTable.appendChild(serialDiv);
 }
 
 /**

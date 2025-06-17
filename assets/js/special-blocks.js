@@ -81,5 +81,5 @@ export function SBSetFactoryHandler() {
 // ...repeat for MakeDefaultFileActions, MakeFactoryFileActions, etc.
 
 // --- Example: Attach to window for legacy code or UI ---
-window.SBSetDefaults = SBSetDefaultsHandler;
+window.SBSetDefaults = SBSetDefaults;
 window.SBSetFactory = SBSetFactoryHandler;

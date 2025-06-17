@@ -1,3 +1,5 @@
+import { checkParameterErrors } from './error.js';
+
 /**
  * MenuLogic.js
  * 

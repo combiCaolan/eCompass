@@ -1,9 +1,11 @@
+import { UpdateFactoryValue } from "./update-parameters";
+
 /**
  * Utility functions to update build, dealer, and customer dates.
  * Converts date input to epoch seconds and updates corresponding values.
  */
 
-function ChangeBuildDate() {
+export function ChangeBuildDate() {
     const input = document.getElementById('UpdateBuildDate');
     if (input && input.value !== "") {
         const epochTime = Math.floor(new Date(input.value).getTime() / 1000);
@@ -14,7 +16,7 @@ function ChangeBuildDate() {
     }
 }
 
-function ChangeDealerDate() {
+export function ChangeDealerDate() {
     const input = document.getElementById('UpdateDealerDate');
     if (input && input.value !== "") {
         const epochTime = Math.floor(new Date(input.value).getTime() / 1000);
@@ -25,7 +27,7 @@ function ChangeDealerDate() {
     }
 }
 
-function ChangeCustomerDate() {
+export function ChangeCustomerDate() {
     const input = document.getElementById('UpdateCustomerDate');
     if (input && input.value !== "") {
         const epochTime = Math.floor(new Date(input.value).getTime() / 1000);
