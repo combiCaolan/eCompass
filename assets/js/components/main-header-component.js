@@ -1,6 +1,6 @@
 class MainHeaderComponent extends HTMLElement {
   connectedCallback() {
-    fetch('../src/includes/MainHeader.html')
+    fetch('/assets/js/components/MainHeader.html')
       .then(response => response.text())
       .then(html => {
         this.innerHTML = html;

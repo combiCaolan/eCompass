@@ -1,6 +1,6 @@
 class DialogComponent extends HTMLElement {
   connectedCallback() {
-    fetch('../src/includes/DialogTemplates.html')
+    fetch('../js/components/DialogTemplates.html')
       .then(response => response.text())
       .then(html => {
         this.innerHTML = html;

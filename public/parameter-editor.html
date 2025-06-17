@@ -67,26 +67,27 @@
 
 <body>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
 
     <div class="container-fluid">
@@ -95,11 +96,11 @@
         <!-- Main web header/navigation bar -->
         <main-header></main-header>
 
-        <br/>
+        <br />
 
         <div class="container-fluid">
             <div class="row">
-                <div class="d-none d-lg-flex" id="split-pane" style="height: 90vh;">
+                <div class="d-flex flex-column flex-lg-row" id="split-pane" style="height: 90vh;">
                     <!-- Sidebar/Tree (if present) -->
                     <div id="tree-sidebar" style="min-width:200px; max-width:600px; width:300px;">
                         <ul class="tree list-group">
@@ -164,10 +165,134 @@
                     </div>
                     <div id="splitter" style="width:6px; cursor:col-resize; background:#ddd;"></div>
                     <div id="viewer-pane" class="flex-grow-1 ms-2">
+
+                        <!-- Action Buttons -->
+                        <div class="mb-3 d-flex gap-2">
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#errorsModal">
+                                <i class="fa fa-exclamation-triangle me-1"></i> Show Errors
+                            </button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#fileActionsModal">
+                                <i class="fa fa-file me-1"></i> File Actions
+                            </button>
+                        </div>
+
+                        <!-- Show Errors Modal -->
+                        <div class="modal fade" id="errorsModal" tabindex="-1" aria-labelledby="errorsModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-danger text-white">
+                                        <h5 class="modal-title" id="errorsModalLabel"><i
+                                                class="fa fa-exclamation-triangle me-2"></i>Parameter Errors</h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="errorsModalBody">
+                                            <!-- Errors will be injected here -->
+                                            <div class="text-muted">No errors detected.</div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- File Actions Modal -->
+                        <div class="modal fade" id="fileActionsModal" tabindex="-1"
+                            aria-labelledby="fileActionsModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-primary text-white">
+                                        <h5 class="modal-title" id="fileActionsModalLabel"><i
+                                                class="fa fa-file me-2"></i>File Actions</h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body d-flex flex-column gap-3">
+                                        <button class="btn btn-outline-success d-flex align-items-center gap-2"
+                                            id="downloadFileBtn">
+                                            <i class="fa fa-download"></i> Download File
+                                        </button>
+                                        <button class="btn btn-outline-warning d-flex align-items-center gap-2"
+                                            id="uploadFileBtn">
+                                            <i class="fa fa-upload"></i> Upload File
+                                        </button>
+                                        <button class="btn btn-outline-info d-flex align-items-center gap-2"
+                                            id="backupFileBtn">
+                                            <i class="fa fa-save"></i> Backup File
+                                        </button>
+                                        <button class="btn btn-outline-danger d-flex align-items-center gap-2"
+                                            id="deleteFileBtn">
+                                            <i class="fa fa-trash"></i> Delete File
+                                        </button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            // Show Errors Modal: Populate errors dynamically
+                            document.addEventListener('DOMContentLoaded', function () {
+                                var errorsModal = document.getElementById('errorsModal');
+                                errorsModal.addEventListener('show.bs.modal', function () {
+                                    // Example: Replace with your real error fetching logic
+                                    let errors = window.errorsPresent ? window.errorsPresent : null;
+                                    let minErrors = window.minError || [];
+                                    let maxErrors = window.maxError || [];
+                                    let html = '';
+
+                                    if ((minErrors && minErrors.length) || (maxErrors && maxErrors.length)) {
+                                        html += '<ul class="list-group">';
+                                        if (minErrors && minErrors.length) {
+                                            html += '<li class="list-group-item list-group-item-danger"><strong>Below Minimum:</strong> ' + minErrors.join(', ') + '</li>';
+                                        }
+                                        if (maxErrors && maxErrors.length) {
+                                            html += '<li class="list-group-item list-group-item-warning"><strong>Above Maximum:</strong> ' + maxErrors.join(', ') + '</li>';
+                                        }
+                                        html += '</ul>';
+                                    } else {
+                                        html = '<div class="alert alert-success mb-0">No parameter errors detected.</div>';
+                                    }
+                                    document.getElementById('errorsModalBody').innerHTML = html;
+                                });
+
+                                // File Actions: Add your logic here
+                                document.getElementById('downloadFileBtn').onclick = function () {
+                                    alert('Download File action triggered!');
+                                    // Implement your download logic here
+                                };
+                                document.getElementById('uploadFileBtn').onclick = function () {
+                                    alert('Upload File action triggered!');
+                                    // Implement your upload logic here
+                                };
+                                document.getElementById('backupFileBtn').onclick = function () {
+                                    alert('Backup File action triggered!');
+                                    // Implement your backup logic here
+                                };
+                                document.getElementById('deleteFileBtn').onclick = function () {
+                                    if (confirm('Are you sure you want to delete this file?')) {
+                                        alert('Delete File action triggered!');
+                                        // Implement your delete logic here
+                                    }
+                                };
+                            });
+                        </script>
+
+
                         <!-- Breadcrumbs component -->
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">eCompass</a></li>
                                 <li class="breadcrumb-item"><a href="#">Library</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Data</li>
                             </ol>
@@ -244,19 +369,14 @@
         <script type="module" src="../assets/js/special-blocks.js"></script>
         <script src="../assets/js/description-dictionary.js"></script>
         <script src="../assets/js/add-missing-parameters.js"></script>
-        <!--<script src="assets/js/ListTruckDir.js"></script>-->
         <script type="module" src="../assets/js/Parameter-Types/RegularParameter.js"></script>
         <script type="module" src="../assets/js/Parameter-Types/dropdown.js"></script>
         <script src="../assets/js/LanguageLogic/dynamic-language.js"></script>
         <script type="module" src="../assets/js/post-load.js"></script>
-        <!-- <script src="../assets/js/Compare.js"></script> -->
         <script src="../assets/js/Dialog.js"></script>
-        <!--<script src="assets/js/Javascript-Style/MenuShowHideLogic.js"></script>-->
-        <!-- <script src="../assets/js/Parameter-Types/HydInOut.js"></script> -->
         <script type="module" src="../assets/js/main.js"></script>
         <script src="../assets/js/Parameter-Manipulation/remove-parameter.js"></script>
         <script src="../assets/js/Parameter-Manipulation/add-parameters.js"></script>
-        <!-- <script src="../assets/js/Parameter-Types/password.js"></script> -->
         <script type="module" src="../assets/js/Parameter-Manipulation/UpdateParameters/parameter-change.js"></script>
         <script type="module" src="../assets/js/Parameter-Types/bit900.js"></script>
         <script type="module" src="../assets/js/Parameter-Types/bit1000.js"></script>
@@ -306,9 +426,7 @@
         <script type="module" src="../assets/js/parameters-menu.js"></script>
         <script type="module" src="../assets/js/Parameter-Manipulation/UpdateParameters/update-parameters.js"></script>
         <script type="module" src="../assets/js/Parameter-Manipulation/UpdateParameters/change-build-date.js"></script>
-        <!-- <script src="../assets/js/LanguageLogic/implement.js"></script> -->
         <script src="../assets/js/LanguageLogic/set-elements-for-language.js"></script>
-        <!-- <script src="../assets/js/Api-Logic/Api-Change.js"></script> -->
 
         <script type="module" src="../assets/js/error.js"></script>
         <script type="module" src="../assets/js/menu-logic.js"></script>
