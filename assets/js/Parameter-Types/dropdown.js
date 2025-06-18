@@ -167,6 +167,9 @@ export function dropDownFunction(parameterLine, object) {
     const options = getDropDownOptions(dropDownList, optionIndex);
     const dropDownOptionsDict = getDropDownOptionsDict(options);
 
+    // alert(dropDownOptionsDict);
+    console.log(dropDownOptionsDict);
+
     // Current Value dropdown
     if (options.length > 0) {
         let selectedValue = numberToFind === 2 ? parameterLine[3] : parameterLine[1];
@@ -176,11 +179,10 @@ export function dropDownFunction(parameterLine, object) {
                 'CurrentDropDownValue',
                 options,
                 selectedValue,
-                () => dropDownOnChange(parameterLine)
+                function (event) { dropDownOnChange(parameterLine, event); } // Explicit onchange handler
             )
         );
     }
-
     // Default & Factory dropdowns for admin
     if (numberToFind !== 2) {
         if (Number(sessionStorageService.get('AccessLevel')) === 8) {
@@ -236,7 +238,7 @@ export function dropDownFunction(parameterLine, object) {
                 defaultSelect.disabled = true;
                 defaultSelect.onclick = null;
             }
-        } catch (err) {}
+        } catch (err) { }
     }
 
     card.appendChild(cardBody);
@@ -245,6 +247,25 @@ export function dropDownFunction(parameterLine, object) {
     if (window.$) {
         $('#topDefineDescription').fadeIn();
     }
+}
+
+export function defaultDropDownOnChange(ParameterLine) {
+    alert('start change');
+    console.log(ParameterLine);
+    let NewLine = ParameterLine[0] + ',' + ParameterLine[1] + ',' + document.getElementById('DefaultSelectTag').value.replace('\r', '') + ',' + ParameterLine[3] + ',' + ParameterLine[4] + ',' + ParameterLine[5] + ',' + ParameterLine[6] + ',' + ParameterLine[7] + ',' + ParameterLine[8] + ',' + ParameterLine[9] + ',' + ParameterLine[10];
+
+    let ChangeTo = document.getElementById('CurrentDropDownValue').options[document.getElementById('DefaultSelectTag').selectedIndex].innerHTML;
+
+    let CurrentParameterTitle = document.getElementById('WorkSpaceTitle').innerHTML;
+    let LogLine = sessionStorage.getItem('loggedinusername') + ' changed ' + CurrentParameterTitle + ' [Default Value] to ' + ChangeTo + '\n';
+    let CurrentLogs = sessionStorage.getItem('UserMadeChanges');
+    sessionStorage.setItem('UserMadeChanges', CurrentLogs + LogLine);
+
+
+    let New = sessionStorage.getItem('Parameters').replace(ParameterLine, NewLine);
+    sessionStorage.setItem('Parameters', New);
+    treeViewClick(document.getElementById(Number(ParameterLine[0])), ParameterLine[0]);
+    alert('end change');
 }
 
 // --- Event Handlers ---
@@ -313,5 +334,12 @@ export function dropDownOnChange(parameterLine) {
     const parameters = sessionStorage.getItem('Parameters').replace(parameterLine.join(','), newLine);
     sessionStorage.setItem('Parameters', parameters);
     ChangesMadePreDownload = true;
-    treeViewClick(document.getElementById(parameterLine[0]), parameterLine[0]);
+
+    // Fetch the updated line from sessionStorage
+    const updatedParameters = sessionStorage.getItem('Parameters').split('\n');
+    const updatedLine = updatedParameters.find(line => line.startsWith(parameterLine[0] + ','));
+    const updatedParameterLine = updatedLine ? updatedLine.split(',') : parameterLine;
+
+    // Now re-render using the updatedParameterLine
+    treeViewClick(document.getElementById(parameterLine[0]), parameterLine[0], updatedParameterLine);
 }

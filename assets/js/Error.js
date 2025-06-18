@@ -57,12 +57,12 @@ export function checkParameterErrors(parametersStr, readPermissionDict, accessLe
 }
 
 // At the top of your script (outside any function)
-window.errorsPresent = false; // or just: let errorsPresent = false;
+// window.errorsPresent = false; // or just: let errorsPresent = false;
 
 // When you call the function:
-// const { minError, maxError, errorsPresent } = checkParameterErrors(
+// const errorsPresent = checkParameterErrors(
 //     sessionStorage.getItem('Parameters'),
 //     ReadPermissionDict,
 //     AccessLevelForUser
 // );
-window.ErrorsPresent = errorsPresent; // or just: errorsPresent = errorsPresent;
+window.checkParameterErrors = checkParameterErrors; // or just: errorsPresent = errorsPresent;

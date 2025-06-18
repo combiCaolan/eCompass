@@ -229,339 +229,380 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 		}
 	}
 
-// Helper: Format a UNIX timestamp as DD/MM/YYYY or 'NA'
-function formatDateField(seconds) {
-    const date = new Date(seconds * 1000);
-    if (date.getFullYear() === 1970 || seconds === 0) return 'NA';
-    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-}
+	// Helper: Format a UNIX timestamp as DD/MM/YYYY or 'NA'
+	function formatDateField(seconds) {
+		const date = new Date(seconds * 1000);
+		if (date.getFullYear() === 1970 || seconds === 0) return 'NA';
+		return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+	}
 
-// Helper: Create a Bootstrap form group for a date field
-function createDateField(label, value) {
-    const group = document.createElement('div');
-    group.className = 'mb-3 row align-items-center';
+	// Helper: Create a Bootstrap form group for a date field
+	function createDateField(label, value) {
+		const group = document.createElement('div');
+		group.className = 'mb-3 row align-items-center';
 
-    const labelElem = document.createElement('label');
-    labelElem.className = 'col-sm-4 col-form-label fw-bold';
-    labelElem.textContent = label;
+		const labelElem = document.createElement('label');
+		labelElem.className = 'col-sm-4 col-form-label fw-bold';
+		labelElem.textContent = label;
 
-    const valueElem = document.createElement('div');
-    valueElem.className = 'col-sm-8';
-    valueElem.innerHTML = `<span class="form-control-plaintext">${value}</span>`;
+		const valueElem = document.createElement('div');
+		valueElem.className = 'col-sm-8';
+		valueElem.innerHTML = `<span class="form-control-plaintext">${value}</span>`;
 
-    group.appendChild(labelElem);
-    group.appendChild(valueElem);
-    return group;
-}
+		group.appendChild(labelElem);
+		group.appendChild(valueElem);
+		return group;
+	}
 
-// Helper: Create a Bootstrap form group for updating a date
-function createDateUpdateField(id, label, onClickHandler) {
-    const group = document.createElement('div');
-    group.className = 'mb-3 row align-items-center';
+	// Helper: Create a Bootstrap form group for updating a date
+	function createDateUpdateField(id, label, onClickHandler) {
+		const group = document.createElement('div');
+		group.className = 'mb-3 row align-items-center';
 
-    const labelElem = document.createElement('label');
-    labelElem.className = 'col-sm-4 col-form-label fw-bold';
-    labelElem.setAttribute('for', id);
-    labelElem.textContent = label;
+		const labelElem = document.createElement('label');
+		labelElem.className = 'col-sm-4 col-form-label fw-bold';
+		labelElem.setAttribute('for', id);
+		labelElem.textContent = label;
 
-    const inputDiv = document.createElement('div');
-    inputDiv.className = 'col-sm-8 d-flex align-items-center gap-2';
+		const inputDiv = document.createElement('div');
+		inputDiv.className = 'col-sm-8 d-flex align-items-center gap-2';
 
-    const input = document.createElement('input');
-    input.type = 'date';
-    input.className = 'form-control w-auto';
-    input.id = id;
+		const input = document.createElement('input');
+		input.type = 'date';
+		input.className = 'form-control w-auto';
+		input.id = id;
 
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'btn btn-primary ms-2';
-    button.textContent = `Update ${label}`;
-    button.onclick = onClickHandler;
+		const button = document.createElement('button');
+		button.type = 'button';
+		button.className = 'btn btn-primary ms-2';
+		button.textContent = `Update ${label}`;
+		button.onclick = onClickHandler;
 
-    inputDiv.appendChild(input);
-    inputDiv.appendChild(button);
+		inputDiv.appendChild(input);
+		inputDiv.appendChild(button);
 
-    group.appendChild(labelElem);
-    group.appendChild(inputDiv);
-    return group;
-}
+		group.appendChild(labelElem);
+		group.appendChild(inputDiv);
+		return group;
+	}
 
-// Modular section renderer for Truck Build Date
-function renderTruckBuildDateSection(Line, HTMLObject, container) {
-    container.innerHTML = '';
+	// Modular section renderer for Truck Build Date
+	function renderTruckBuildDateSection(Line, HTMLObject, container) {
+		container.innerHTML = '';
 
-    // Title
-    const title = document.createElement('h5');
-    title.className = 'mb-3';
-    title.id = 'WorkSpaceTitle';
-    title.textContent = HTMLObject.innerHTML;
-    container.appendChild(title);
+		// Title
+		const title = document.createElement('h5');
+		title.className = 'mb-3';
+		title.id = 'WorkSpaceTitle';
+		title.textContent = HTMLObject.innerHTML;
+		container.appendChild(title);
 
-    // Description (if you have one)
-    // const desc = document.createElement('p');
-    // desc.className = 'text-muted';
-    // desc.id = 'description';
-    // desc.textContent = MainDescriptionsDict[HTMLObject.id]?.replace('#' + HTMLObject.id, '') || '';
-    // container.appendChild(desc);
+		// Description (if you have one)
+		// const desc = document.createElement('p');
+		// desc.className = 'text-muted';
+		// desc.id = 'description';
+		// desc.textContent = MainDescriptionsDict[HTMLObject.id]?.replace('#' + HTMLObject.id, '') || '';
+		// container.appendChild(desc);
 
-    // Dates
-    container.appendChild(createDateField(LanguageDict["TruckBuildDate"], formatDateField(Line[3])));
-    container.appendChild(createDateField(LanguageDict["TruckDealerDate"], formatDateField(Line[4])));
-    container.appendChild(createDateField(LanguageDict["TruckCustomerDate"], formatDateField(Line[5])));
+		// Dates
+		container.appendChild(createDateField(LanguageDict["TruckBuildDate"], formatDateField(Line[3])));
+		container.appendChild(createDateField(LanguageDict["TruckDealerDate"], formatDateField(Line[4])));
+		container.appendChild(createDateField(LanguageDict["TruckCustomerDate"], formatDateField(Line[5])));
 
-    // If user can update, show update fields
-    if (Number(sessionStorageService.get('AccessLevel')) >= 8) {
-        container.appendChild(
-            createDateUpdateField(
-                'UpdateBuildDate',
-                LanguageDict["TruckBuildDate"],
-                () => ChangeBuildDate()
-            )
-        );
-        container.appendChild(
-            createDateUpdateField(
-                'UpdateDealerDate',
-                LanguageDict["TruckDealerDate"],
-                () => ChangeDealerDate()
-            )
-        );
-        container.appendChild(
-            createDateUpdateField(
-                'UpdateCustomerDate',
-                LanguageDict["TruckCustomerDate"],
-                () => ChangeCustomerDate()
-            )
-        );
-    }
-}
+		// If user can update, show update fields
+		if (Number(sessionStorageService.get('AccessLevel')) >= 8) {
+			container.appendChild(
+				createDateUpdateField(
+					'UpdateBuildDate',
+					LanguageDict["TruckBuildDate"],
+					() => ChangeBuildDate()
+				)
+			);
+			container.appendChild(
+				createDateUpdateField(
+					'UpdateDealerDate',
+					LanguageDict["TruckDealerDate"],
+					() => ChangeDealerDate()
+				)
+			);
+			container.appendChild(
+				createDateUpdateField(
+					'UpdateCustomerDate',
+					LanguageDict["TruckCustomerDate"],
+					() => ChangeCustomerDate()
+				)
+			);
+		}
+	}
 
-// Usage in your MenuParametersOnclick:
-if (LineNumber == 5) {
-    const container = document.getElementById('topDefineDescription');
-    renderTruckBuildDateSection(Line, HTMLObject, container);
-    return;
-}
+	// Usage in your MenuParametersOnclick:
+	if (LineNumber == 5) {
+		const container = document.getElementById('topDefineDescription');
+		renderTruckBuildDateSection(Line, HTMLObject, container);
+		return;
+	}
 
 	//Parameter File Version
 	if (LineNumber == 6) {
+		const container = document.getElementById('topDefineDescription');
+		container.innerHTML = '';
 
-		let Table = document.getElementById('topDefineDescription');
+		// Card wrapper
+		const card = document.createElement('div');
+		card.className = 'card my-3 shadow-sm';
 
-		let TH = document.createElement('p');
-		TH.setAttribute('id', 'WorkSpaceTitle');
-		TH.innerHTML = HTMLObject.innerHTML;
-		Table.appendChild(TH);
-		document.getElementById('topDefineDescription').appendChild(descriptionArea);
+		// Card body
+		const cardBody = document.createElement('div');
+		cardBody.className = 'card-body';
 
-		let TR = document.createElement('tr');
-		Table.appendChild(TR);
+		// Title
+		const title = document.createElement('h5');
+		title.className = 'card-title mb-3';
+		title.id = 'WorkSpaceTitle';
+		title.textContent = HTMLObject.innerHTML;
+		cardBody.appendChild(title);
 
+		// Description (if you want to add it)
+		// cardBody.appendChild(descriptionArea); // Uncomment if you want to show the description
 
-		let TDLeft = document.createElement('p');
-		TDLeft.setAttribute('id', 'ReadTitle');
-		TDLeft.innerHTML = LanguageDict["ApiVersion"];
-		TR.appendChild(TDLeft);
-		let ParameterFileVersionText = document.createElement('p');
-		ParameterFileVersionText.setAttribute('id', 'ReadResult');
-		ParameterFileVersionText.innerHTML = Line[3];
-		TR.appendChild(ParameterFileVersionText);
+		// API Version row
+		const apiVersionRow = document.createElement('div');
+		apiVersionRow.className = 'row mb-2 align-items-center';
+
+		const apiVersionLabel = document.createElement('div');
+		apiVersionLabel.className = 'col-6 fw-bold';
+		apiVersionLabel.textContent = LanguageDict["ApiVersion"];
+
+		const apiVersionValue = document.createElement('div');
+		apiVersionValue.className = 'col-6';
+		apiVersionValue.textContent = Line[3];
+
+		apiVersionRow.appendChild(apiVersionLabel);
+		apiVersionRow.appendChild(apiVersionValue);
+		cardBody.appendChild(apiVersionRow);
+
+		card.appendChild(cardBody);
+		container.appendChild(card);
 		return;
 	}
 
 	//File Cloned Info // File Exported Info
 	if (LineNumber == 7 || LineNumber == 8) {
 
-		let Table = document.getElementById('topDefineDescription');
+		const container = document.getElementById('topDefineDescription');
+		container.innerHTML = '';
 
-		let TH = document.createElement('p');
-		TH.setAttribute('id', 'WorkSpaceTitle');
-		TH.innerHTML = HTMLObject.innerHTML;
-		Table.appendChild(TH);
-		document.getElementById('topDefineDescription').appendChild(descriptionArea);
+		// Card wrapper
+		const card = document.createElement('div');
+		card.className = 'card my-3 shadow-sm';
 
-		let TR = document.createElement('tr');
-		Table.appendChild(TR);
-		let TDLeft = document.createElement('p');
-		TDLeft.setAttribute('id', 'ReadTitle');
-		TDLeft.innerHTML = LanguageDict["Timestamp"];
-		TR.appendChild(TDLeft);
-		let TDRight = document.createElement('p');
-		TDRight.setAttribute('id', 'ReadResult');
-		let date = new Date(Line[1] * 1000);
-		if (date.getFullYear() == '1970') {
-			TDRight.innerHTML = 'NA';
-		} else {
-			let month = Number(date.getMonth()) + 1;
-			TDRight.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
-		}
-		TR.appendChild(TDRight);
+		// Card body
+		const cardBody = document.createElement('div');
+		cardBody.className = 'card-body';
 
+		// Title
+		const title = document.createElement('h5');
+		title.className = 'card-title mb-3';
+		title.id = 'WorkSpaceTitle';
+		title.textContent = HTMLObject.innerHTML;
+		cardBody.appendChild(title);
+
+		// Timestamp row
+		const timestampRow = document.createElement('div');
+		timestampRow.className = 'row mb-2 align-items-center';
+		const timestampLabel = document.createElement('div');
+		timestampLabel.className = 'col-6 fw-bold';
+		timestampLabel.textContent = LanguageDict["Timestamp"];
+		const date = new Date(Line[1] * 1000);
+		const timestampValue = document.createElement('div');
+		timestampValue.className = 'col-6';
+		timestampValue.textContent = (date.getFullYear() == 1970) ? 'NA' : `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+		timestampRow.appendChild(timestampLabel);
+		timestampRow.appendChild(timestampValue);
+		cardBody.appendChild(timestampRow);
+
+		// Hourmeter rows (if access level > 6)
 		if (Number(sessionStorageService.get('AccessLevel')) > 6) {
+			// Keyswitch Hourmeter
+			const keyswitchRow = document.createElement('div');
+			keyswitchRow.className = 'row mb-2 align-items-center';
+			const keyswitchLabel = document.createElement('div');
+			keyswitchLabel.className = 'col-6 fw-bold';
+			keyswitchLabel.textContent = LanguageDict["KeyswitchHourmeter"];
+			const keyswitchValue = document.createElement('div');
+			keyswitchValue.className = 'col-6';
+			keyswitchValue.textContent = `${String(Line[2] / 3600).split('.')[0]} hr`;
+			keyswitchRow.appendChild(keyswitchLabel);
+			keyswitchRow.appendChild(keyswitchValue);
+			cardBody.appendChild(keyswitchRow);
 
-			let DefaultTR = document.createElement('tr');
-			Table.appendChild(DefaultTR);
-			let DefaultLeft = document.createElement('p');
-			DefaultLeft.setAttribute('id', 'ReadTitle');
-			DefaultLeft.innerHTML = LanguageDict["KeyswitchHourmeter"];
-			DefaultTR.appendChild(DefaultLeft);
-			let DefaultRight = document.createElement('p');
-			DefaultRight.setAttribute('id', 'ReadResult');
-			DefaultRight.innerHTML = String(Line[2] / 3600).split('.')[0] + ' hr';
-			DefaultTR.appendChild(DefaultRight);
+			// Interlock Hourmeter
+			const interlockRow = document.createElement('div');
+			interlockRow.className = 'row mb-2 align-items-center';
+			const interlockLabel = document.createElement('div');
+			interlockLabel.className = 'col-6 fw-bold';
+			interlockLabel.textContent = LanguageDict["InterlockHourmeter"];
+			const interlockValue = document.createElement('div');
+			interlockValue.className = 'col-6';
+			interlockValue.textContent = `${String(Line[3] / 3600).split('.')[0]} hr`;
+			interlockRow.appendChild(interlockLabel);
+			interlockRow.appendChild(interlockValue);
+			cardBody.appendChild(interlockRow);
 
+			// Traction Hourmeter
+			const tractionRow = document.createElement('div');
+			tractionRow.className = 'row mb-2 align-items-center';
+			const tractionLabel = document.createElement('div');
+			tractionLabel.className = 'col-6 fw-bold';
+			tractionLabel.textContent = LanguageDict["TractionHourmeter"];
+			const tractionValue = document.createElement('div');
+			tractionValue.className = 'col-6';
+			tractionValue.textContent = `${String(Line[4] / 3600).split('.')[0]} hr`;
+			tractionRow.appendChild(tractionLabel);
+			tractionRow.appendChild(tractionValue);
+			cardBody.appendChild(tractionRow);
 
-			let FactoryTR = document.createElement('tr');
-			Table.appendChild(FactoryTR);
-			let FactoryLeft = document.createElement('p');
-			FactoryLeft.setAttribute('id', 'ReadTitle');
-			FactoryLeft.innerHTML = LanguageDict["InterlockHourmeter"];
-			FactoryTR.appendChild(FactoryLeft);
-			let FactoryRight = document.createElement('p');
-			FactoryRight.setAttribute('id', 'ReadResult');
-			FactoryRight.innerHTML = String(Line[3] / 3600).split('.')[0] + ' hr';
-			FactoryTR.appendChild(FactoryRight);
+			// Hydraulic Hourmeter
+			const hydraulicRow = document.createElement('div');
+			hydraulicRow.className = 'row mb-2 align-items-center';
+			const hydraulicLabel = document.createElement('div');
+			hydraulicLabel.className = 'col-6 fw-bold';
+			hydraulicLabel.textContent = LanguageDict["HydraulicHourmeter"];
+			const hydraulicValue = document.createElement('div');
+			hydraulicValue.className = 'col-6';
+			hydraulicValue.textContent = `${String(Line[5] / 3600).split('.')[0]} hr`;
+			hydraulicRow.appendChild(hydraulicLabel);
+			hydraulicRow.appendChild(hydraulicValue);
+			cardBody.appendChild(hydraulicRow);
 
-
-			let MinTR = document.createElement('tr');
-			Table.appendChild(MinTR);
-			let MinLeft = document.createElement('p');
-			MinLeft.setAttribute('id', 'ReadTitle');
-			MinLeft.innerHTML = LanguageDict["TractionHourmeter"];
-			MinTR.appendChild(MinLeft);
-			let MinRight = document.createElement('p');
-			MinRight.setAttribute('id', 'ReadResult');
-			MinRight.innerHTML = String(Line[4] / 3600).split('.')[0] + ' hr';
-			MinTR.appendChild(MinRight);
-
-
-			let MaxTR = document.createElement('tr');
-			Table.appendChild(MaxTR);
-			let MaxLeft = document.createElement('p');
-			MaxLeft.setAttribute('id', 'ReadTitle');
-			MaxLeft.innerHTML = LanguageDict["HydraulicHourmeter"];
-			MaxTR.appendChild(MaxLeft);
-			let MaxRight = document.createElement('p');
-			MaxRight.setAttribute('id', 'ReadResult');
-			MaxRight.innerHTML = String(Line[5] / 3600).split('.')[0] + ' hr';
-			MaxTR.appendChild(MaxRight);
-
+			// Active User (if LineNumber == 7)
 			if (LineNumber == 7) {
-				let ActiveUserTr = document.createElement('tr');
-				Table.appendChild(ActiveUserTr);
-				let ActiveuserLeft = document.createElement('p');
-				ActiveuserLeft.setAttribute('id', 'ReadTitle');
-				ActiveuserLeft.innerHTML = LanguageDict["ActiveUser"];
-				ActiveUserTr.appendChild(ActiveuserLeft);
+				const activeUserRow = document.createElement('div');
+				activeUserRow.className = 'row mb-2 align-items-center';
+				const activeUserLabel = document.createElement('div');
+				activeUserLabel.className = 'col-6 fw-bold';
+				activeUserLabel.textContent = LanguageDict["ActiveUser"];
+				const activeUserValue = document.createElement('div');
+				activeUserValue.className = 'col-6';
 
-				let ActiveUserText = 'unkown';
-
-				if (Line[9] == 0) {
-					let ActiveUserText = 'Generic Operator';
-				} else if (Line[9] == 1) {
-					let ActiveUserText = 'Novice Operator';
-				} else if (Line[9] == 2) {
-					let ActiveUserText = 'Standard Operator';
-				} else if (Line[9] == 3) {
-					let ActiveUserText = 'Experienced Operator';
-				} else if (Line[9] == 4) {
-					let ActiveUserText = 'Service';
-				} else if (Line[9] == 5) {
-					let ActiveUserText = 'Manager';
-				} else if (Line[9] == 6) {
-					let ActiveUserText = 'Dealer';
-				} else if (Line[9] == 7) {
-					let ActiveUserText = 'Combilift';
-				} else if (Line[9] == 8) {
-					let ActiveUserText = 'Developer';
+				let activeUserText = 'unknown';
+				switch (Number(Line[9])) {
+					case 0: activeUserText = 'Generic Operator'; break;
+					case 1: activeUserText = 'Novice Operator'; break;
+					case 2: activeUserText = 'Standard Operator'; break;
+					case 3: activeUserText = 'Experienced Operator'; break;
+					case 4: activeUserText = 'Service'; break;
+					case 5: activeUserText = 'Manager'; break;
+					case 6: activeUserText = 'Dealer'; break;
+					case 7: activeUserText = 'Combilift'; break;
+					case 8: activeUserText = 'Developer'; break;
 				}
-
-				let ActiveUserRight = document.createElement('p');
-				ActiveUserRight.setAttribute('id', 'ReadResult');
-				ActiveUserRight.innerHTML = ActiveUserText;
-				ActiveUserTr.appendChild(ActiveUserRight);
+				activeUserValue.textContent = activeUserText;
+				activeUserRow.appendChild(activeUserLabel);
+				activeUserRow.appendChild(activeUserValue);
+				cardBody.appendChild(activeUserRow);
 			}
 		}
 
-		return;
+		card.appendChild(cardBody);
+		container.appendChild(card);
 	}
 
 	//First Service // Standard Service // Full Service
 	if (LineNumber == 9 || LineNumber == 10 || LineNumber == 11) {
 
-		let Table = document.getElementById('topDefineDescription');
+		const container = document.getElementById('topDefineDescription');
+		container.innerHTML = '';
 
-		let TH = document.createElement('p');
-		TH.setAttribute('id', 'WorkSpaceTitle');
-		TH.innerHTML = HTMLObject.innerHTML;
-		Table.appendChild(TH);
-		document.getElementById('topDefineDescription').appendChild(descriptionArea);
+		// Card wrapper
+		const card = document.createElement('div');
+		card.className = 'card my-3 shadow-sm';
 
-		let TR = document.createElement('tr');
-		Table.appendChild(TR);
-		let TDLeft = document.createElement('p');
-		TDLeft.setAttribute('id', 'ReadTitle');
-		TDLeft.innerHTML = LanguageDict["Timestamp"];
-		TR.appendChild(TDLeft);
-		let TDRight = document.createElement('p');
-		TDRight.setAttribute('id', 'ReadResult');
-		let date = new Date(Line[1] * 1000);
-		if (date.getFullYear() == '1970') {
-			TDRight.innerHTML = 'NA';
-		} else {
-			month = Number(date.getMonth()) + 1;
-			TDRight.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
-		}
-		TR.appendChild(TDRight);
+		// Card body
+		const cardBody = document.createElement('div');
+		cardBody.className = 'card-body';
 
+		// Title
+		const title = document.createElement('h5');
+		title.className = 'card-title mb-3';
+		title.id = 'WorkSpaceTitle';
+		title.textContent = HTMLObject.innerHTML;
+		cardBody.appendChild(title);
+
+		// Description (if you want to add it)
+		// cardBody.appendChild(descriptionArea); // Uncomment if you want to show the description
+
+		// Timestamp row
+		const timestampRow = document.createElement('div');
+		timestampRow.className = 'row mb-2 align-items-center';
+		const timestampLabel = document.createElement('div');
+		timestampLabel.className = 'col-6 fw-bold';
+		timestampLabel.textContent = LanguageDict["Timestamp"];
+		const date = new Date(Line[1] * 1000);
+		const timestampValue = document.createElement('div');
+		timestampValue.className = 'col-6';
+		timestampValue.textContent = (date.getFullYear() == 1970) ? 'NA' : `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+		timestampRow.appendChild(timestampLabel);
+		timestampRow.appendChild(timestampValue);
+		cardBody.appendChild(timestampRow);
+
+		// Hourmeter rows (if access level > 6)
 		if (Number(sessionStorageService.get('AccessLevel')) > 6) {
-			let DefaultTR = document.createElement('tr');
-			Table.appendChild(DefaultTR);
-			let DefaultLeft = document.createElement('p');
-			DefaultLeft.setAttribute('id', 'ReadTitle');
-			DefaultLeft.innerHTML = LanguageDict["KeyswitchHourmeter"];
-			DefaultTR.appendChild(DefaultLeft);
-			let DefaultRight = document.createElement('p');
-			DefaultRight.setAttribute('id', 'ReadResult');
-			DefaultRight.innerHTML = String(Line[2] / 3600).split('.')[0] + ' hr';
-			DefaultTR.appendChild(DefaultRight);
+			// Keyswitch Hourmeter
+			const keyswitchRow = document.createElement('div');
+			keyswitchRow.className = 'row mb-2 align-items-center';
+			const keyswitchLabel = document.createElement('div');
+			keyswitchLabel.className = 'col-6 fw-bold';
+			keyswitchLabel.textContent = LanguageDict["KeyswitchHourmeter"];
+			const keyswitchValue = document.createElement('div');
+			keyswitchValue.className = 'col-6';
+			keyswitchValue.textContent = `${String(Line[2] / 3600).split('.')[0]} hr`;
+			keyswitchRow.appendChild(keyswitchLabel);
+			keyswitchRow.appendChild(keyswitchValue);
+			cardBody.appendChild(keyswitchRow);
 
+			// Interlock Hourmeter
+			const interlockRow = document.createElement('div');
+			interlockRow.className = 'row mb-2 align-items-center';
+			const interlockLabel = document.createElement('div');
+			interlockLabel.className = 'col-6 fw-bold';
+			interlockLabel.textContent = LanguageDict["InterlockHourmeter"];
+			const interlockValue = document.createElement('div');
+			interlockValue.className = 'col-6';
+			interlockValue.textContent = `${String(Line[3] / 3600).split('.')[0]} hr`;
+			interlockRow.appendChild(interlockLabel);
+			interlockRow.appendChild(interlockValue);
+			cardBody.appendChild(interlockRow);
 
-			let FactoryTR = document.createElement('tr');
-			Table.appendChild(FactoryTR);
-			let FactoryLeft = document.createElement('p');
-			FactoryLeft.setAttribute('id', 'ReadTitle');
-			FactoryLeft.innerHTML = LanguageDict["InterlockHourmeter"];
-			FactoryTR.appendChild(FactoryLeft);
-			let FactoryRight = document.createElement('p');
-			FactoryRight.setAttribute('id', 'ReadResult');
-			FactoryRight.setAttribute('id', 'ReadResult');
-			FactoryRight.innerHTML = String(Line[3] / 3600).split('.')[0] + ' hr';
-			FactoryTR.appendChild(FactoryRight);
+			// Traction Hourmeter
+			const tractionRow = document.createElement('div');
+			tractionRow.className = 'row mb-2 align-items-center';
+			const tractionLabel = document.createElement('div');
+			tractionLabel.className = 'col-6 fw-bold';
+			tractionLabel.textContent = LanguageDict["TractionHourmeter"];
+			const tractionValue = document.createElement('div');
+			tractionValue.className = 'col-6';
+			tractionValue.textContent = `${String(Line[4] / 3600).split('.')[0]} hr`;
+			tractionRow.appendChild(tractionLabel);
+			tractionRow.appendChild(tractionValue);
+			cardBody.appendChild(tractionRow);
 
-
-			let MinTR = document.createElement('tr');
-			Table.appendChild(MinTR);
-			let MinLeft = document.createElement('p');
-			MinLeft.setAttribute('id', 'ReadTitle');
-			MinLeft.innerHTML = LanguageDict["TractionHourmeter"];
-			MinTR.appendChild(MinLeft);
-			let MinRight = document.createElement('p');
-			MinRight.setAttribute('id', 'ReadResult');
-			MinRight.innerHTML = String(Line[4] / 3600).split('.')[0] + ' hr';
-			MinTR.appendChild(MinRight);
-
-
-			let MaxTR = document.createElement('tr');
-			Table.appendChild(MaxTR);
-			let MaxLeft = document.createElement('p');
-			MaxLeft.setAttribute('id', 'ReadTitle');
-			MaxLeft.innerHTML = LanguageDict["HydraulicHourmeter"];
-			MaxTR.appendChild(MaxLeft);
-			let MaxRight = document.createElement('p');
-			MaxRight.setAttribute('id', 'ReadResult');
-			MaxRight.innerHTML = String(Line[5] / 3600).split('.')[0] + ' hr';
-			MaxTR.appendChild(MaxRight);
+			// Hydraulic Hourmeter
+			const hydraulicRow = document.createElement('div');
+			hydraulicRow.className = 'row mb-2 align-items-center';
+			const hydraulicLabel = document.createElement('div');
+			hydraulicLabel.className = 'col-6 fw-bold';
+			hydraulicLabel.textContent = LanguageDict["HydraulicHourmeter"];
+			const hydraulicValue = document.createElement('div');
+			hydraulicValue.className = 'col-6';
+			hydraulicValue.textContent = `${String(Line[5] / 3600).split('.')[0]} hr`;
+			hydraulicRow.appendChild(hydraulicLabel);
+			hydraulicRow.appendChild(hydraulicValue);
+			cardBody.appendChild(hydraulicRow);
 		}
+
+		card.appendChild(cardBody);
+		container.appendChild(card);
 		return;
 	}
 
@@ -569,99 +610,69 @@ if (LineNumber == 5) {
 	//Steer Rear Right (SRR) Controller Info // Steer Rear Left (SRL) Controller Info  // Steer Front Right (SFR) Controller Info  // Steer Front Left (SFL) Controller Info 
 	if (LineNumber == 12 || LineNumber == 13 || LineNumber == 14 || LineNumber == 15 || LineNumber == 16 || LineNumber == 17 || LineNumber == 18 || LineNumber == 19 || LineNumber == 20) {
 
-		let Table = document.getElementById('topDefineDescription');
+		const container = document.getElementById('topDefineDescription');
+		container.innerHTML = '';
 
-		let TH = document.createElement('p');
-		TH.setAttribute('id', 'WorkSpaceTitle');
-		TH.innerHTML = HTMLObject.innerHTML;
-		Table.appendChild(TH);
-		document.getElementById('topDefineDescription').appendChild(descriptionArea);
+		// Title
+		const title = document.createElement('h5');
+		title.className = 'mb-3';
+		title.id = 'WorkSpaceTitle';
+		title.textContent = HTMLObject.innerHTML;
+		container.appendChild(title);
+		container.appendChild(descriptionArea);
 
-		if (LineNumber == 12 || LineNumber == 13 || LineNumber == 14 || LineNumber == 15 || LineNumber == 16) {
-			let DefaultTR = document.createElement('tr');
-			Table.appendChild(DefaultTR);
-			let DefaultLeft = document.createElement('p');
-			DefaultLeft.setAttribute('id', 'ReadTitle');
-			DefaultLeft.innerHTML = LanguageDict["VCLVersion"];
-			DefaultTR.appendChild(DefaultLeft);
-			let DefaultRight = document.createElement('p');
-			DefaultRight.setAttribute('id', 'ReadResult');
-			DefaultRight.innerHTML = Line[2];
-			DefaultRight.setAttribute('id', 'ReadResult');
-			DefaultTR.appendChild(DefaultRight);
+		// Card wrapper
+		const card = document.createElement('div');
+		card.className = 'card my-3 shadow-sm';
+		const cardBody = document.createElement('div');
+		cardBody.className = 'card-body';
+
+		// Helper to create a row
+		function createInfoRow(label, value) {
+			const row = document.createElement('div');
+			row.className = 'row mb-2 align-items-center';
+			const labelDiv = document.createElement('div');
+			labelDiv.className = 'col-6 fw-bold';
+			labelDiv.textContent = label;
+			const valueDiv = document.createElement('div');
+			valueDiv.className = 'col-6';
+			valueDiv.textContent = value;
+			row.appendChild(labelDiv);
+			row.appendChild(valueDiv);
+			return row;
 		}
 
-		let MinTR = document.createElement('tr');
-		Table.appendChild(MinTR);
-		let MinLeft = document.createElement('p');
-		MinLeft.setAttribute('id', 'ReadTitle');
-		MinLeft.innerHTML = LanguageDict["OSVersion"];
-		MinTR.appendChild(MinLeft);
-		let MinRight = document.createElement('p');
-		MinRight.setAttribute('id', 'ReadResult');
-		MinRight.innerHTML = Line[4];
-		MinRight.setAttribute('id', 'ReadResult');
-		MinTR.appendChild(MinRight);
-
-
-		let MaxTR = document.createElement('tr');
-		Table.appendChild(MaxTR);
-		let MaxLeft = document.createElement('p');
-		MaxLeft.setAttribute('id', 'ReadTitle');
-		MaxLeft.innerHTML = LanguageDict["OSBuild"];
-		MaxTR.appendChild(MaxLeft);
-		let MaxRight = document.createElement('p');
-		MaxRight.setAttribute('id', 'ReadResult');
-		MaxRight.innerHTML = Line[5];
-		MaxRight.setAttribute('id', 'ReadResult');
-		MaxTR.appendChild(MaxRight);
-
-
-		let UnitsTR = document.createElement('tr');
-		Table.appendChild(UnitsTR);
-		let UnitsLeft = document.createElement('p');
-		UnitsLeft.setAttribute('id', 'ReadTitle');
-		UnitsLeft.innerHTML = LanguageDict["ModelNumber"];
-		UnitsTR.appendChild(UnitsLeft);
-		let UnitsRight = document.createElement('p');
-		UnitsRight.setAttribute('id', 'ReadResult');
-		UnitsRight.innerHTML = Line[6];
-		UnitsRight.setAttribute('id', 'ReadResult');
-		UnitsTR.appendChild(UnitsRight);
-
-
-		let ScaleTR = document.createElement('tr');
-		Table.appendChild(ScaleTR);
-		let ScaleLeft = document.createElement('p');
-		ScaleLeft.setAttribute('id', 'ReadTitle');
-		if (LineNumber == 12) {
-			ScaleLeft.innerHTML = LanguageDict['SerialNumber'];
-		} else {
-			ScaleLeft.innerHTML = LanguageDict["OSBuild"];
+		// VCL Version (if applicable)
+		if ([12, 13, 14, 15, 16].includes(LineNumber)) {
+			cardBody.appendChild(createInfoRow(LanguageDict["VCLVersion"], Line[2]));
 		}
-		ScaleTR.appendChild(ScaleLeft);
-		let ScaleRight = document.createElement('p');
-		ScaleRight.setAttribute('id', 'ReadResult');
-		ScaleRight.innerHTML = Line[7];
-		ScaleRight.setAttribute('id', 'ReadResult');
-		ScaleTR.appendChild(ScaleRight);
 
-		let TR = document.createElement('tr');
-		Table.appendChild(TR);
-		let TDLeft = document.createElement('p');
-		TDLeft.setAttribute('id', 'ReadTitle');
-		TDLeft.innerHTML = LanguageDict["Timestamp"];
-		TR.appendChild(TDLeft);
-		let TDRight = document.createElement('p');
-		TDRight.setAttribute('id', 'ReadResult');
-		let date = new Date(Line[1] * 1000);
-		if (Line[1] == 0) {
-			TDRight.innerHTML = 'NA';
-		} else {
-			let month = Number(date.getMonth()) + 1;
-			TDRight.innerHTML = date.getDate() + '/' + month + '/' + date.getFullYear();
-		}
-		TR.appendChild(TDRight);
+		// OS Version
+		cardBody.appendChild(createInfoRow(LanguageDict["OSVersion"], Line[4]));
+
+		// OS Build
+		cardBody.appendChild(createInfoRow(LanguageDict["OSBuild"], Line[5]));
+
+		// Model Number
+		cardBody.appendChild(createInfoRow(LanguageDict["ModelNumber"], Line[6]));
+
+		// Serial Number or OS Build (depending on LineNumber)
+		cardBody.appendChild(
+			createInfoRow(
+				LineNumber == 12 ? LanguageDict['SerialNumber'] : LanguageDict["OSBuild"],
+				Line[7]
+			)
+		);
+
+		// Timestamp
+		const date = new Date(Line[1] * 1000);
+		const timestamp = (Line[1] == 0)
+			? 'NA'
+			: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+		cardBody.appendChild(createInfoRow(LanguageDict["Timestamp"], timestamp));
+
+		card.appendChild(cardBody);
+		container.appendChild(card);
 
 
 		return;
@@ -774,142 +785,132 @@ if (LineNumber == 5) {
 	//Set Hourmeters
 	if (LineNumber == 32 || LineNumber == 33 || LineNumber == 34 || LineNumber == 35 || LineNumber == 36) {
 
-		let Table = document.getElementById('topDefineDescription');
+		const container = document.getElementById('topDefineDescription');
 
-		let TH = document.createElement('p');
-		TH.setAttribute('id', 'WorkSpaceTitle');
-		TH.innerHTML = HTMLObject.innerHTML;
-		Table.appendChild(TH);
-		document.getElementById('topDefineDescription').appendChild(descriptionArea);
+		// Title
+		const title = document.createElement('h5');
+		title.className = 'mb-3';
+		title.id = 'WorkSpaceTitle';
+		title.textContent = HTMLObject.innerHTML;
+		container.appendChild(title);
+		container.appendChild(descriptionArea);
 
+		// Bootstrap Card for the form
+		const card = document.createElement('div');
+		card.className = 'card my-3 shadow-sm';
+		const cardBody = document.createElement('div');
+		cardBody.className = 'card-body';
 
-		let TR = document.createElement('tr');
-		Table.appendChild(TR);
-		let MoCASLeft_2 = document.createElement('td');
-		TR.appendChild(MoCASLeft_2);
+		// Form
+		const form = document.createElement('form');
+		form.setAttribute('action', 'MoCAS/MoCAS_hourmeter.php');
+		form.setAttribute('method', 'POST');
+		form.setAttribute('name', 'MocasVerifyForm');
 
-		if (Number(sessionStorage.getItem('AccessLevel')) >= 8) {
-			let CheckLine = Line.toString();
+		// Helper to create a Bootstrap form group
+		function createFormGroup(labelText, inputElem, labelFor) {
+			const group = document.createElement('div');
+			group.className = 'mb-3 row align-items-center';
 
-			let FormDiv_2 = document.createElement('div');
-			FormDiv_2.setAttribute('id', 'MocasDivArea');
-			let Form_2 = document.createElement('form');
-			Form_2.setAttribute('action', 'MoCAS/MoCAS_hourmeter.php');
-			Form_2.setAttribute('method', 'POST');
-			Form_2.setAttribute('name', 'MocasVerifyForm');
+			const label = document.createElement('label');
+			label.className = 'col-sm-4 col-form-label fw-bold';
+			label.textContent = labelText;
+			if (labelFor) label.setAttribute('for', labelFor);
 
-			//create elements for the form
-			let SerialNumberField_2 = document.createElement('input');
-			let ModelField_2 = document.createElement('input');
-			let UsernameField_2 = document.createElement('input');
-			let UseremailField_2 = document.createElement('input');
-			let AccessLevelField_2 = document.createElement('input');
-			let IndexField_2 = document.createElement('input');
-			let ModuleField_2 = document.createElement('input');
-			let TimeWindow_2 = document.createElement('input');
-			let TextareaField_2 = document.createElement('textarea');
-			let SubmitButton_2 = document.createElement('input');
+			const col = document.createElement('div');
+			col.className = 'col-sm-8';
+			col.appendChild(inputElem);
 
-			let Hourmeter_2 = document.createElement('input');
-
-			//create element labels for the ones showing in page
-			let SerialNumberField_label_2 = document.createElement('label');
-			let UsernameField_label_2 = document.createElement('label');
-			let TimeWindow_label_2 = document.createElement('label');
-			let Hourmeter_label_2 = document.createElement('label');
-
-			//define the types for each element
-			SerialNumberField_2.type = 'text';
-			ModelField_2.type = 'text';
-			UsernameField_2.type = 'text';
-			UseremailField_2.type = 'text';
-			AccessLevelField_2.type = 'text';
-			IndexField_2.type = 'text';
-			ModuleField_2.type = 'text';
-			TimeWindow_2.type = 'text';
-			// TextareaField_2.type = 'text';
-			SubmitButton_2.type = 'submit';
-
-			Hourmeter_2.type = 'text';
-
-
-			//create element names for POST
-			SerialNumberField_2.setAttribute('name', 'SerialNumber');
-			ModelField_2.setAttribute('name', 'Model');
-			UsernameField_2.setAttribute('name', 'Username');
-			UseremailField_2.setAttribute('name', 'Useremail');
-			AccessLevelField_2.setAttribute('name', 'AccessLevel');
-			IndexField_2.setAttribute('name', 'IndexNumber');
-			ModuleField_2.setAttribute('name', 'Module');
-			TimeWindow_2.setAttribute('name', 'TimeWindow');
-			TextareaField_2.setAttribute('name', 'Comments');
-
-			Hourmeter_2.setAttribute('name', 'Hourmeter');
-
-
-			SerialNumberField_label_2.innerHTML = "<BR>Machine Serial Number<BR>";
-			UsernameField_label_2.innerHTML = "<BR>Username<BR>";
-			TimeWindow_label_2.innerHTML = "<BR>Update time window in seconds (ksw hourmeter)<BR>";
-			Hourmeter_label_2.innerHTML = "<BR>New Hourmeter value in seconds<BR>";
-
-
-			SerialNumberField_2.setAttribute('value', userParametersFileDict[4].split(',')[3]);
-			ModelField_2.setAttribute('value', userParametersFileDict[2].split(',')[3]);
-			UsernameField_2.setAttribute('value', sessionStorage.getItem('loggedinusername'));
-			UseremailField_2.setAttribute('value', sessionStorage.getItem('loggedinemail'));
-			AccessLevelField_2.setAttribute('value', sessionStorage.getItem('AccessLevel'));
-			IndexField_2.setAttribute('value', LineNumber);
-			ModuleField_2.setAttribute('value', document.getElementById('WorkSpaceTitle').innerHTML);
-			TimeWindow_2.setAttribute('value', CheckLine.split(',')[5]);
-
-			Hourmeter_2.setAttribute('value', CheckLine.split(',')[2]);
-
-
-			SerialNumberField_2.setAttribute('readonly', 'readonly');
-			ModelField_2.setAttribute('readonly', 'readonly');
-			UsernameField_2.setAttribute('readonly', 'readonly');
-			AccessLevelField_2.setAttribute('readonly', 'readonly');
-			IndexField_2.setAttribute('readonly', 'readonly');
-			ModuleField_2.setAttribute('readonly', 'readonly');
-
-			UseremailField_2.setAttribute('style', 'display:none;');
-			ModelField_2.setAttribute('style', 'display:none;');
-			IndexField_2.setAttribute('style', 'display:none;');
-			ModuleField_2.setAttribute('style', 'display:none;');
-			AccessLevelField_2.setAttribute('style', 'display:none;');
-
-			SerialNumberField_2.setAttribute('id', 'MocasFormSerialInput');
-			UsernameField_2.setAttribute('id', 'MocasFormUsernameInput');
-			TimeWindow_2.setAttribute('id', 'MocasFormTimeWindowInput');
-			Hourmeter_2.setAttribute('id', 'MocasFormHourmeterInput');
-			TextareaField_2.setAttribute('id', 'MocasFormTEXTInput');
-			SubmitButton_2.setAttribute('id', 'MocasFormInputSubmit');
-
-			TextareaField_2.setAttribute('placeholder', LanguageDict['Comments']);
-
-			Form_2.appendChild(ModelField_2);
-			Form_2.appendChild(IndexField_2);
-			Form_2.appendChild(ModuleField_2);
-			Form_2.appendChild(SerialNumberField_label_2);
-			Form_2.appendChild(SerialNumberField_2);
-			Form_2.appendChild(UsernameField_label_2);
-			Form_2.appendChild(UsernameField_2);
-			Form_2.appendChild(UseremailField_2);
-			Form_2.appendChild(AccessLevelField_2);
-			Form_2.appendChild(TimeWindow_label_2);
-			Form_2.appendChild(TimeWindow_2);
-			Form_2.appendChild(Hourmeter_label_2);
-			Form_2.appendChild(Hourmeter_2);
-			Form_2.appendChild(TextareaField_2);
-			SubmitButton_2.setAttribute('value', LanguageDict['GetActivationCode']);
-			Form_2.appendChild(SubmitButton_2);
-
-			FormDiv_2.appendChild(Form_2);
-			document.getElementById('topDefineDescription').appendChild(FormDiv_2);
-
-			return;
-
+			group.appendChild(label);
+			group.appendChild(col);
+			return group;
 		}
+
+		// Create and configure all fields
+		const SerialNumberField = document.createElement('input');
+		SerialNumberField.type = 'text';
+		SerialNumberField.className = 'form-control';
+		SerialNumberField.id = 'MocasFormSerialInput';
+		SerialNumberField.name = 'SerialNumber';
+		SerialNumberField.value = userParametersFileDict[4].split(',')[3];
+		SerialNumberField.readOnly = true;
+
+		const ModelField = document.createElement('input');
+		ModelField.type = 'hidden';
+		ModelField.name = 'Model';
+		ModelField.value = userParametersFileDict[2].split(',')[3];
+
+		const UsernameField = document.createElement('input');
+		UsernameField.type = 'text';
+		UsernameField.className = 'form-control';
+		UsernameField.id = 'MocasFormUsernameInput';
+		UsernameField.name = 'Username';
+		UsernameField.value = sessionStorage.getItem('loggedinusername');
+		UsernameField.readOnly = true;
+
+		const UseremailField = document.createElement('input');
+		UseremailField.type = 'hidden';
+		UseremailField.name = 'Useremail';
+		UseremailField.value = sessionStorage.getItem('loggedinemail');
+
+		const AccessLevelField = document.createElement('input');
+		AccessLevelField.type = 'hidden';
+		AccessLevelField.name = 'AccessLevel';
+		AccessLevelField.value = sessionStorage.getItem('AccessLevel');
+
+		const IndexField = document.createElement('input');
+		IndexField.type = 'hidden';
+		IndexField.name = 'IndexNumber';
+		IndexField.value = LineNumber;
+
+		const ModuleField = document.createElement('input');
+		ModuleField.type = 'hidden';
+		ModuleField.name = 'Module';
+		ModuleField.value = document.getElementById('WorkSpaceTitle').innerHTML;
+
+		const TimeWindowField = document.createElement('input');
+		TimeWindowField.type = 'text';
+		TimeWindowField.className = 'form-control';
+		TimeWindowField.id = 'MocasFormTimeWindowInput';
+		TimeWindowField.name = 'TimeWindow';
+		TimeWindowField.value = CheckLine.split(',')[5];
+
+		const HourmeterField = document.createElement('input');
+		HourmeterField.type = 'text';
+		HourmeterField.className = 'form-control';
+		HourmeterField.id = 'MocasFormHourmeterInput';
+		HourmeterField.name = 'Hourmeter';
+		HourmeterField.value = CheckLine.split(',')[2];
+
+		const TextareaField = document.createElement('textarea');
+		TextareaField.className = 'form-control';
+		TextareaField.id = 'MocasFormTEXTInput';
+		TextareaField.name = 'Comments';
+		TextareaField.placeholder = LanguageDict['Comments'];
+
+		const SubmitButton = document.createElement('input');
+		SubmitButton.type = 'submit';
+		SubmitButton.className = 'btn btn-primary mt-3';
+		SubmitButton.id = 'MocasFormInputSubmit';
+		SubmitButton.value = LanguageDict['GetActivationCode'];
+
+		// Add fields to form using Bootstrap groups
+		form.appendChild(ModelField);
+		form.appendChild(IndexField);
+		form.appendChild(ModuleField);
+		form.appendChild(UseremailField);
+		form.appendChild(AccessLevelField);
+
+		form.appendChild(createFormGroup("Machine Serial Number", SerialNumberField, 'MocasFormSerialInput'));
+		form.appendChild(createFormGroup("Username", UsernameField, 'MocasFormUsernameInput'));
+		form.appendChild(createFormGroup("Update time window in seconds (ksw hourmeter)", TimeWindowField, 'MocasFormTimeWindowInput'));
+		form.appendChild(createFormGroup("New Hourmeter value in seconds", HourmeterField, 'MocasFormHourmeterInput'));
+		form.appendChild(createFormGroup(LanguageDict['Comments'], TextareaField, 'MocasFormTEXTInput'));
+		form.appendChild(SubmitButton);
+
+		cardBody.appendChild(form);
+		card.appendChild(cardBody);
+		container.appendChild(card);
 
 	}
 
@@ -925,10 +926,19 @@ if (LineNumber == 5) {
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
 
-		let TR = document.createElement('tr');
-		Table.appendChild(TR);
-		let MoCASLeft = document.createElement('td');
-		TR.appendChild(MoCASLeft);
+		// let TR = document.createElement('tr');
+		// Table.appendChild(TR);
+		// let MoCASLeft = document.createElement('td');
+		// TR.appendChild(MoCASLeft);
+
+		userParametersFileDict = {};
+		const parametersArr = (sessionStorage.getItem('Parameters') || '').split('\n');
+		parametersArr.forEach(line => {
+			if (line) {
+				const parts = line.split(',');
+				userParametersFileDict[parts[0]] = line;
+			}
+		});
 
 		if (Number(userParametersFileDict[Number(LineNumber)].split(',')[2]) == 1 && Number(userParametersFileDict[Number(LineNumber)].split(',')[9]) <= Number(sessionStorage.getItem('AccessLevel'))) {
 			try {
@@ -937,15 +947,30 @@ if (LineNumber == 5) {
 			catch (err) {
 			}
 			let CheckLine = Line.toString();
+
 			let MoCASDropDownDiv = document.createElement('div');
 			MoCASDropDownDiv.setAttribute('id', 'DropDownDivOption');
+			MoCASDropDownDiv.className = 'mb-3'; // Bootstrap margin-bottom
 
+			// Use Bootstrap form-group and label
+			let formGroup = document.createElement('div');
+			formGroup.className = 'form-group';
+
+			let label = document.createElement('label');
+			label.setAttribute('for', 'CurrentDropDownValue');
+			label.className = 'form-label fw-bold'; // Bootstrap label
+			label.innerHTML = LanguageDict['MoCASStatus'] || 'MoCAS Status';
+			formGroup.appendChild(label);
+
+			// Bootstrap select
 			let MoCASDropDown = document.createElement('select');
 			MoCASDropDown.setAttribute('id', 'CurrentDropDownValue');
+			MoCASDropDown.className = 'form-select w-auto d-inline-block'; // Bootstrap select
 			MoCASDropDown.addEventListener('change', function () {
 				MocasUpdate(CheckLine);
 			});
 
+			// Options
 			let MoCASDropDownOptionOn = document.createElement('option');
 			MoCASDropDownOptionOn.innerHTML = LanguageDict['MocasOn'];
 			MoCASDropDownOptionOn.value = '1';
@@ -958,10 +983,22 @@ if (LineNumber == 5) {
 			MoCASDropDown.appendChild(MoCASDropDownOptionOff);
 
 			MoCASDropDown.value = CheckLine.split(',')[1];
-			//console.log('current value ' + CheckLine.split(',')[1]);
 
-			MoCASDropDownDiv.appendChild(MoCASDropDown);
-			document.getElementById('topDefineDescription').appendChild(MoCASDropDownDiv);
+			// Add select to form group
+			formGroup.appendChild(MoCASDropDown);
+
+			// Add form group to main div
+			MoCASDropDownDiv.appendChild(formGroup);
+
+			// Optionally, wrap in a Bootstrap card for better appearance
+			let card = document.createElement('div');
+			card.className = 'card my-3';
+			let cardBody = document.createElement('div');
+			cardBody.className = 'card-body';
+			cardBody.appendChild(MoCASDropDownDiv);
+			card.appendChild(cardBody);
+
+			document.getElementById('topDefineDescription').appendChild(card);
 			return;
 		} else {
 			if (Number(userParametersFileDict[Number(LineNumber)].split(',')[2]) == 0 && Number(sessionStorage.getItem('AccessLevel')) >= 8) {
@@ -1003,7 +1040,7 @@ if (LineNumber == 5) {
 				AccessLevelField.type = 'text';
 				IndexField.type = 'text';
 				ModuleField.type = 'text';
-				TextareaField.type = 'text';
+				// TextareaField.type = 'text';
 				SubmitButton.type = 'submit';
 
 				//create element names for POST	

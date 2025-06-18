@@ -95,18 +95,19 @@ parametersArr.forEach(line => {
         userParametersFileDict[parts[0]] = line;
     }
 });
+console.log(userParametersFileDict);
 
 /**
  * Handles clicking on a parameter in the tree view.
  */
-export function treeViewClick(value, objectId, msg) {
+export function treeViewClick(value, objectId, parameterLineOverride) {
     const pre64 = ['2', '4'];
     try {
         const parentId = document.getElementById(objectId).parentNode.id;
         const selectedClass = parentId[0] === 'G' ? 'ThirdSubGroup' : 'PreTreeButton';
         const selectedElem = document.getElementsByClassName('SelectedThirdSubGroup')[0];
         if (selectedElem) selectedElem.setAttribute('class', selectedClass);
-    } catch (err) {}
+    } catch (err) { }
 
     // const objectElem = document.getElementById(objectId);
     // if (objectElem && objectElem.getAttribute('class') !== 'BitTreeButton') {
@@ -119,15 +120,15 @@ export function treeViewClick(value, objectId, msg) {
     document.getElementById('topDefineDescription').innerHTML = '';
 
     // Refresh userParametersFileDict if msg is undefined
-    if (typeof msg === 'undefined') {
-        userParametersFileDict = {};
-        (sessionStorageService.get('Parameters') || '').split('\n').forEach(line => {
-            if (line) {
-                const parts = line.split(',');
-                userParametersFileDict[parts[0]] = line;
-            }
-        });
-    }
+    // if (typeof msg === 'undefined') {
+    //     userParametersFileDict = {};
+    //     (sessionStorageService.get('Parameters') || '').split('\n').forEach(line => {
+    //         if (line) {
+    //             const parts = line.split(',');
+    //             userParametersFileDict[parts[0]] = line;
+    //         }
+    //     });
+    // }
 
     if (!userParametersFileDict[objectId]) {
         showParameterNotPresent(objectId, value);
@@ -140,10 +141,23 @@ export function treeViewClick(value, objectId, msg) {
             $('#topDefineDescription').fadeIn();
             return;
         }
-    } catch (err) {}
+    } catch (err) { }
+
+    // Build a dictionary of user parameters from sessionStorage
+    userParametersFileDict = {};
+    const parametersArr = (sessionStorage.getItem('Parameters') || '').split('\n');
+    parametersArr.forEach(line => {
+        if (line) {
+            const parts = line.split(',');
+            userParametersFileDict[parts[0]] = line;
+        }
+    });
+    console.log(userParametersFileDict);
 
     // Custom Bits Require Line in this format
-    let lineArr = userParametersFileDict[objectId].split(',');
+    let lineArr = parameterLineOverride || userParametersFileDict[objectId].split(',');
+    console.log({ 'parameterLineOverride': parameterLineOverride, 'userParametersFileDict[objectId].split(",")': userParametersFileDict[objectId].split(',') });
+    // alert(lineArr);
     let indexNumber = lineArr[0];
 
     // Serial Number

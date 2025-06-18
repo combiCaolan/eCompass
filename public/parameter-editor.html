@@ -341,12 +341,20 @@
                                     let maxErrors = window.maxError || [];
                                     let html = '';
 
-                                    if ((minErrors && minErrors.length) || (maxErrors && maxErrors.length)) {
+                                    // errors = checkParameterErrors();
+                                    // errors.minError = ['1', '2', '3']
+                                    errors = {
+                                        minError: ["101", "103"],
+                                        maxError: ["102", "104"],
+                                        errorsPresent: true
+                                    };
+
+                                    if ((errors.minError && errors.minError.length) || (errors.maxErrors && errors.maxErrors.length)) {
                                         html += '<ul class="list-group">';
-                                        if (minErrors && minErrors.length) {
-                                            html += '<li class="list-group-item list-group-item-danger"><strong>Below Minimum:</strong> ' + minErrors.join(', ') + '</li>';
-                                        }
-                                        if (maxErrors && maxErrors.length) {
+                                        // if (errors.minErrors.length > 0) {
+                                        html += '<li class="list-group-item list-group-item-danger"><strong>Below Minimum:</strong> ' + minErrors.join(', ') + '</li>';
+                                        // }
+                                        if (errors.maxErrors && errors.maxErrors.length) {
                                             html += '<li class="list-group-item list-group-item-warning"><strong>Above Maximum:</strong> ' + maxErrors.join(', ') + '</li>';
                                         }
                                         html += '</ul>';
@@ -538,6 +546,31 @@
                 SetLanguage();
                 updateBitLabels();
             };
+
+
+            // Array to store clicked element identifiers
+            const clickedElements = [];
+            const caolan = clickedElements.slice((clickedElements.length - 5), clickedElements.length)
+
+            // Listen for all clicks on the page
+            document.addEventListener('click', function (event) {
+                // Compose a unique description of the clicked element
+                const element = event.target;
+                // Prefer id > class > tag + text as identifier
+                let identifier = '';
+                if (element.id) {
+                    identifier = `#${element.id}`;
+                } else if (element.className) {
+                    identifier = `.${element.className.toString().replace(/\s+/g, '.')}`;
+                } else {
+                    identifier = `<${element.tagName.toLowerCase()}> ${element.textContent.trim()}`;
+                }
+                // Add to array if not already present
+                if (!clickedElements.includes(identifier)) {
+                    clickedElements.push(identifier);
+                    // console.log('Clicked elements:', clickedElements);
+                }
+            });
         </script>
     </div>
 </body>
