@@ -193,7 +193,8 @@ export function dropDownFunction(parameterLine, object) {
                     'DefaultSelectTag',
                     options,
                     parameterLine[2],
-                    () => defaultDropDownOnChange(parameterLine)
+                    // () => defaultDropDownOnChange(parameterLine)
+                    function (event) { defaultDropDownOnChange(parameterLine, event); }
                 )
             );
             // Factory
@@ -250,22 +251,42 @@ export function dropDownFunction(parameterLine, object) {
 }
 
 export function defaultDropDownOnChange(ParameterLine) {
-    alert('start change');
-    console.log(ParameterLine);
-    let NewLine = ParameterLine[0] + ',' + ParameterLine[1] + ',' + document.getElementById('DefaultSelectTag').value.replace('\r', '') + ',' + ParameterLine[3] + ',' + ParameterLine[4] + ',' + ParameterLine[5] + ',' + ParameterLine[6] + ',' + ParameterLine[7] + ',' + ParameterLine[8] + ',' + ParameterLine[9] + ',' + ParameterLine[10];
+    // Build the new line with the updated default value
+    const newLine = [
+        parameterLine[0],
+        parameterLine[1],
+        document.getElementById('DefaultSelectTag').value.replace('\r', ''),
+        parameterLine[3],
+        parameterLine[4],
+        parameterLine[5],
+        parameterLine[6],
+        parameterLine[7],
+        parameterLine[8],
+        parameterLine[9],
+        parameterLine[10]
+    ].join(',');
 
-    let ChangeTo = document.getElementById('CurrentDropDownValue').options[document.getElementById('DefaultSelectTag').selectedIndex].innerHTML;
+    // Get the label for the new default value
+    const changeTo = document.getElementById('DefaultSelectTag').options[
+        document.getElementById('DefaultSelectTag').selectedIndex
+    ].innerHTML;
 
-    let CurrentParameterTitle = document.getElementById('WorkSpaceTitle').innerHTML;
-    let LogLine = sessionStorage.getItem('loggedinusername') + ' changed ' + CurrentParameterTitle + ' [Default Value] to ' + ChangeTo + '\n';
-    let CurrentLogs = sessionStorage.getItem('UserMadeChanges');
-    sessionStorage.setItem('UserMadeChanges', CurrentLogs + LogLine);
+    const currentParameterTitle = document.getElementById('WorkSpaceTitle').innerHTML;
+    const logLine = `${sessionStorage.getItem('loggedinusername')} changed ${currentParameterTitle} [Default Value] to ${changeTo}\n`;
+    const currentLogs = sessionStorage.getItem('UserMadeChanges');
+    sessionStorage.setItem('UserMadeChanges', currentLogs + logLine);
 
+    // Replace the old line with the new line in Parameters
+    const parameters = sessionStorage.getItem('Parameters').replace(parameterLine.join(','), newLine);
+    sessionStorage.setItem('Parameters', parameters);
 
-    let New = sessionStorage.getItem('Parameters').replace(ParameterLine, NewLine);
-    sessionStorage.setItem('Parameters', New);
-    treeViewClick(document.getElementById(Number(ParameterLine[0])), ParameterLine[0]);
-    alert('end change');
+    // Fetch the updated line from sessionStorage
+    const updatedParameters = sessionStorage.getItem('Parameters').split('\n');
+    const updatedLine = updatedParameters.find(line => line.startsWith(parameterLine[0] + ','));
+    const updatedParameterLine = updatedLine ? updatedLine.split(',') : parameterLine;
+
+    // Re-render using the updated parameter line
+    treeViewClick(document.getElementById(parameterLine[0]), parameterLine[0], updatedParameterLine);
 }
 
 // --- Event Handlers ---

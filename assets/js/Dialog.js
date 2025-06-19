@@ -8,7 +8,7 @@
 // import { SBSetDefaults } from "./special-blocks";
 
 // Hide all menus (placeholder for future logic)
-function HideAllMenus() {}
+// function HideAllMenus() {}
 
 // Dynamically build the truck default file lists for loading and opening in new tab
 (function buildTruckDefaultFileLists() {

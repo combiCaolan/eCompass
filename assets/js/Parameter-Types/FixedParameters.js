@@ -294,7 +294,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 		const title = document.createElement('h5');
 		title.className = 'mb-3';
 		title.id = 'WorkSpaceTitle';
-		title.textContent = HTMLObject.innerHTML;
+		title.textContent = HTMLObject.childNodes[0].innerHTML | "";
 		container.appendChild(title);
 
 		// Description (if you have one)
@@ -394,7 +394,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 
 		// Card wrapper
 		const card = document.createElement('div');
-		card.className = 'card my-3 shadow-sm';
+		card.className = 'caFd my-3 shadow-sm';
 
 		// Card body
 		const cardBody = document.createElement('div');
@@ -404,7 +404,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 		const title = document.createElement('h5');
 		title.className = 'card-title mb-3';
 		title.id = 'WorkSpaceTitle';
-		title.textContent = HTMLObject.innerHTML;
+		title.textContent = HTMLObject.childNodes[0].innerHTML;
 		cardBody.appendChild(title);
 
 		// Timestamp row
@@ -526,7 +526,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 		const title = document.createElement('h5');
 		title.className = 'card-title mb-3';
 		title.id = 'WorkSpaceTitle';
-		title.textContent = HTMLObject.innerHTML;
+		title.textContent = HTMLObject.childNodes[0].innerHTML | "";
 		cardBody.appendChild(title);
 
 		// Description (if you want to add it)
@@ -617,7 +617,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 		const title = document.createElement('h5');
 		title.className = 'mb-3';
 		title.id = 'WorkSpaceTitle';
-		title.textContent = HTMLObject.innerHTML;
+		title.textContent = HTMLObject.childNodes[0].innerHTML | "";
 		container.appendChild(title);
 		container.appendChild(descriptionArea);
 
@@ -686,7 +686,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 
 		let TH = document.createElement('p');
 		TH.setAttribute('id', 'WorkSpaceTitle');
-		TH.innerHTML = HTMLObject.innerHTML;
+		TH.innerHTML = HTMLObject.childNodes[0].innerHTML | "";
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
 
@@ -743,7 +743,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 
 		let TH = document.createElement('p');
 		TH.setAttribute('id', 'WorkSpaceTitle');
-		TH.innerHTML = HTMLObject.innerHTML;
+		TH.innerHTML = HTMLObject.childNodes[0].innerHTML | "";
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
 
@@ -791,7 +791,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 		const title = document.createElement('h5');
 		title.className = 'mb-3';
 		title.id = 'WorkSpaceTitle';
-		title.textContent = HTMLObject.innerHTML;
+		title.textContent = 'CAOLAN';//HTMLObject.innerHTML;
 		container.appendChild(title);
 		container.appendChild(descriptionArea);
 
@@ -922,7 +922,7 @@ export function MenuParametersOnclick(Line, HTMLObject) {
 
 		let TH = document.createElement('p');
 		TH.setAttribute('id', 'WorkSpaceTitle');
-		TH.innerHTML = HTMLObject.innerHTML;
+		TH.innerHTML = HTMLObject.childNodes[0].innerHTML || 'not available';
 		Table.appendChild(TH);
 		document.getElementById('topDefineDescription').appendChild(descriptionArea);
 
